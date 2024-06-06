@@ -45,8 +45,8 @@
     <Folder Include="Areas\Admin\Views\" />
     <Folder Include="Areas\Masters\Data\" />
     <Folder Include="Areas\Masters\Models\" />
-    <Folder Include="Areas\SystemAdmin\Data\" />
     <Folder Include="Areas\SystemAdmin\Models\" />
+    <Folder Include="Areas\SystemAdmin\Data\" />
   </ItemGroup>
 
   <ItemGroup>
