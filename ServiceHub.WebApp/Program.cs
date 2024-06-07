@@ -85,7 +85,7 @@ else
     app.UseHsts();
 }
 app.UseResponseCaching();
-//app.UseHttpsRedirection();
+app.UseHttpsRedirection();
 app.UseStaticFiles();
 app.UseSession();
 app.UseCookiePolicy();

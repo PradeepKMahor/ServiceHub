@@ -4,36 +4,94 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
-         <link rel="manifest" href="~/manifest.json" crossorigin="use-credentials" />
+    <link rel="manifest" href="~/manifest.json" crossorigin="use-credentials" />
 
     <title> Service Hub </title>
 
-    <partial name="AdminLTE/_Styles" />
+    <partial name="_Styles" />
     <!--Render Styles-->
     @await RenderSectionAsync("Styles", required: false)
     <!--Render Styles-->
 </head>
 <body class="hold-transition sidebar-mini">
     <div class="wrapper">
-        <partial name="AdminLTE/_TopNavigation" />
-        <partial name="AdminLTE/_MainNavigation" />
+        <partial name="_TopNavigation" />
+        @*         <partial name="_MainNavigation" />
+        *@
+        <!-- Main Sidebar Container -->
+        <aside class="main-sidebar sidebar-dark-primary elevation-4" style="background-color:#035d7b!important">
+            <!-- Brand Logo -->
+            <a href="~/Home/Index" class="brand-link">
+                <img src="~/AdminLTEv3_2_0/dist/img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3" style="opacity: .8">
+                <span class="brand-text font-weight-light">Service-Hub</span>
+            </a>
 
+            <!-- Sidebar -->
+            <div class="sidebar">
+
+                <!-- Sidebar Menu -->
+                <nav class="mt-2">
+                    <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+
+                        <li class="nav-item">
+                            <a asp-area="Masters" asp-controller="Home" asp-action="HomeIndex" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Masters
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-area="Admin" asp-controller="Home" asp-action="Index" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Admin
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-area="SystemAdmin" asp-controller="Home" asp-action="Index" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    System Admin
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="@Url.Action("CategoriesIndex","Categories")" class="nav-link">
+                                <i class="nav-icon fas fa-th"></i>
+                                <p>
+                                    Categories index
+                                    <span class="right badge badge-danger">New</span>
+                                </p>
+                            </a>
+                        </li>
+
+                    </ul>
+                </nav>
+                <!-- /.sidebar-menu -->
+            </div>
+            <!-- /.sidebar -->
+        </aside>
         <div class="content-wrapper">
             @*<div class="content-header">
-                    <div class="container-fluid">
-                         <div class="row mb-2">
-                            <div class="col-sm-6">
-                                <h1 class="m-0 text-dark">Starter Page</h1>
-                            </div>
-                            <div class="col-sm-6">
-                                <ol class="breadcrumb float-sm-right">
-                                    <li class="breadcrumb-item"><a href="#">Home</a></li>
-                                    <li class="breadcrumb-item active">Starter Page</li>
-                                </ol>
-                            </div>
-                        </div>
-                    </div>
-                </div>*@
+            <div class="container-fluid">
+            <div class="row mb-2">
+            <div class="col-sm-6">
+            <h1 class="m-0 text-dark">Starter Page</h1>
+            </div>
+            <div class="col-sm-6">
+            <ol class="breadcrumb float-sm-right">
+            <li class="breadcrumb-item"><a href="#">Home</a></li>
+            <li class="breadcrumb-item active">Starter Page</li>
+            </ol>
+            </div>
+            </div>
+            </div>
+            </div>*@
             <div class="content">
                 <nav aria-label="breadcrumb">
                     @await RenderSectionAsync("BreadCrumbs", required: false)
@@ -49,12 +107,12 @@
                 <p>Sidebar content</p>
             </div>
         </aside>
-        <partial name="AdminLTE/_Footer" />
+        <partial name="_Footer" />
     </div>
-    <partial name="AdminLTE/_Scripts" />
+    <partial name="_Scripts" />
 
-    @await Html.PartialAsync("AdminLTE/_notificationPartial")
-    @await Html.PartialAsync("AdminLTE/_RestrictIEScriptPartial")
+    @await Html.PartialAsync("_notificationPartial")
+    @await Html.PartialAsync("_RestrictIEScriptPartial")
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
