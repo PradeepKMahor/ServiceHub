@@ -96,8 +96,8 @@ strong {
 }
 
     .card .card-toolbar {
-        /*        padding-left: 20px;
-*/ border-bottom: 1px solid #f1f1f1;
+/*        padding-left: 20px;
+*/        border-bottom: 1px solid #f1f1f1;
     }
 
     .card .card-header {
@@ -105,7 +105,7 @@ strong {
         border-bottom: 1px solid #f1f1f1;
         padding: 20px 25px;
         position: relative;
-        /*height: 80px;*/ /*Remove By Pradeep*/
+        height:80px;
     }
 
         .card .card-header h5 {
@@ -242,15 +242,15 @@ p.text-muted {
     transition: all .3s ease-in-out;
 }
 
-.card-tpl + a:hover, .card-tpl:hover {
-    transform: scale(1.02);
-    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
-}
+    .card-tpl + a:hover, .card-tpl:hover {
+        transform: scale(1.02);
+        box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
+    }
 
-.card-tpl + a:hover {
-    transform: scale(1.02);
-    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
-}
+    .card-tpl + a:hover {
+        transform: scale(1.02);
+        box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
+    }
 
 .card-tile i {
     width: 40px;
@@ -262,7 +262,6 @@ p.text-muted {
     align-items: center;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
 }
-
 @media screen and (max-width: 375px) {
     .card-tpl i {
         width: 80px;
@@ -385,7 +384,7 @@ p.text-muted {
 }
 
 .m-b-10 {
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
 .m-l-10 {
@@ -742,14 +741,6 @@ p.text-muted {
     color: #1de9b6;
 }
 
-.bg-c-brown {
-    background: brown;
-}
-
-.text-c-brown {
-    color: brown;
-}
-
 .bg-c-yellow {
     background: #f4c22b;
 }
@@ -990,16 +981,8 @@ p.text-muted {
     height: 20px;
 }
 
-.wid-15 {
-    width: 15px;
-}
-
-.hei-20 {
-    height: 20px;
-}
-
-.hei-25 {
-    height: 25px;
+.wid-25 {
+    width: 25px;
 }
 
 .hei-25 {
@@ -1254,36 +1237,26 @@ p.text-muted {
 }
 
 .theme-light-orange {
-    background: linear-gradient(17deg, #ffa07a4d 0%, #ffa07a4d 100%)
+    background: linear-gradient(17deg, #ffa07a4d 0%, #ffa07a4d 100%)    
 }
-
-.theme-dark-grey {
-    background: linear-gradient(17deg, #b5b8b7b0 0%, #b5b8b7b0 100%)
-}
-
 .theme-light-green {
     background: linear-gradient(17deg, #90ee9042 0%, #90ee9042 100%)
 }
-
 .theme-light-yellow {
     background: linear-gradient(17deg, #ffffe0b0 0%, #ffffe0b0 100%)
 }
-
 .theme-light-blue {
     background: linear-gradient(17deg, #add8e64d 0%, #add8e64d 100%)
 }
-
 .theme-light-grey {
     background: linear-gradient(17deg, #d3d3d354 0%, #d3d3d354 100%)
 }
-
 .theme-light-cyan {
     background: linear-gradient(17deg, #e0ffff99 0%, #e0ffff99 100%)
 }
-
 .theme-light-purple {
     background: linear-gradient(17deg, #bfa3dd57 0%, #bfa3dd57 100%)
-}
+} 
 /*====== background theme ends ======*/
 
 /*====== text colotr starts ======*/
@@ -1338,6 +1311,7 @@ p.text-muted {
 
 /*====== text colotr ends ======*/
 
+
 :required {
     border: 1px solid #ffc000;
 }
@@ -1349,6 +1323,7 @@ p.text-muted {
     :required + .select2-container--default .select2-selection--multiple {
         border: 1.5px solid #ffc000 !important;
     }
+
 
 /*:required:valid {
         border: 2px solid green;
@@ -1393,6 +1368,8 @@ p.text-muted {
         }
 
 /* Pre-loader css end */
+
+
 
 /* Pre-loader css start */
 .loader-bg {
@@ -1467,6 +1444,8 @@ p.text-muted {
 }
 /* Pre-loader css end */
 
+
+
 /* tab */
 .tab-content {
     box-shadow: unset;
@@ -1490,6 +1469,7 @@ p.text-muted {
     padding-left: 15px;
     padding-right: 15px
 }
+
 
 .dt-met {
     margin-bottom: 0px;
@@ -1521,6 +1501,7 @@ p.text-muted {
 .td-icon {
     width: 1%;
 }
+
 
 /**====== Toolbar css end ======**/
 /**  =====================
@@ -1609,13 +1590,14 @@ p.text-muted {
 
 /**====== Switches css end ======**/
 
-/* radio */
+ /* radio */
 .radio-all {
     background-color: azure;
     padding: 7px;
     margin-left: 10px;
     margin-right: 15px;
 }
+
 
 .radio {
     padding: 10px 0;
@@ -1637,8 +1619,7 @@ p.text-muted {
             .radio input[type=radio] + .cr:after, .radio input[type=radio] + .cr:before {
                 content: "";
                 display: inline-block;
-                margin-right: 5px;
-                margin-left: 10px;
+                margin-right: 10px;
                 border-radius: 50%;
                 vertical-align: bottom;
                 background: #fff;
@@ -1738,7 +1719,7 @@ p.text-muted {
 .custom-controls-stacked .radio input[type=radio] + .cr:after {
     top: 15px;
 }
-
+ 
 /* radio End*/
 
 .lnk-bgcolor a {
@@ -1755,34 +1736,34 @@ p.text-muted {
 }
 
 /* Icon style for SWP*/
-/* Not Planned
+/* Not Planned 
     <i class="	fas fa-user-times f-20 grayColor " aria-hidden="true"></i>
 */
 .grayColor {
     color: #77889954;
 }
-/* Planned
+/* Planned 
     <i class="	fas fa-user-check f-20 deepskyblueColor " aria-hidden="true"></i>
 */
 .deepskyblueColor {
     color: deepskyblue;
 }
 
-/* Planned and employee present
+/* Planned and employee present 
      <i class="	fas fa-user-check f-20 greenColor " aria-hidden="true"></i>
 */
 .greenColor {
     color: green;
 }
 
-/* Not planned but employee present
+/* Not planned but employee present 
      <i class="	fas fa-user-check f-20 orangeColor " aria-hidden="true"></i>
 */
 .orangeColor {
     color: orange;
 }
 
-/* Planned but employee absent
+/* Planned but employee absent 
     <i class="	fas fa-user-times f-20 redColor " aria-hidden="true"></i>
 */
 .redColor {
@@ -1790,6 +1771,9 @@ p.text-muted {
 }
 
 /*End  Icon style for SWP*/
+
+
+
 
 /* cursor style */
 
@@ -1949,81 +1933,9 @@ p.text-muted {
     text-align: center !important;
 }
 
-.card-button-style {
-    position: absolute;
-    z-index: 20;
-    cursor: pointer;
-}
-
-.outline-info-style {
-    color: #17a2b8;
-}
-
-/* Card title ellipsis and tooltip */
-
-.card.card-tpl h5 {
-    overflow: hidden;
-    text-overflow: ellipsis !important;
-    white-space: nowrap;
-    width: calc(100% - 10px) !important;
-}
-
-.card.card-tpl h5 {
-    position: relative;
-}
-
-.card.card-tpl h7 {
-    overflow: hidden;
-    text-overflow: ellipsis !important;
-    width: calc(100% - 10px) !important;
-}
-
-.card.card-tpl div.col:has(h7) {
-    overflow: hidden;
-    text-overflow: ellipsis !important;
-    height: 35px;
-}
-
-.card.card-tpl[data-title]:hover:after {
-    opacity: 1;
-    transition: all 0.1s ease 0.5s;
-    visibility: visible;
-}
-
-.card.card-tpl[data-title]:after {
-    content: attr(data-title);
-    position: absolute;
-    top: -1.8em;
-    left: 5%;
-    padding: 4px 4px 4px 8px;
-    color: #3e3d3d;
-    white-space: nowrap;
-    -moz-border-radius: 5px;
-    -webkit-border-radius: 5px;
-    border-radius: 5px;
-    -moz-box-shadow: 0px 0px 4px #666;
-    -webkit-box-shadow: 0px 0px 4px #666;
-    box-shadow: 0px 0px 4px #666;
-    background-image: -moz-linear-gradient(top, #f0eded, #fffdf0);
-    background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #f0eded), color-stop(1, #fffdf0));
-    background-image: -webkit-linear-gradient(top, #f0eded, #fffdf0);
-    background-image: -moz-linear-gradient(top, #f0eded, #fffdf0);
-    background-image: -ms-linear-gradient(top, #f0eded, #fffdf0);
-    background-image: -o-linear-gradient(top, #f0eded, #fffdf0);
-    opacity: 0;
-    z-index: 99999;
-    visibility: hidden;
-}
-
-.card[data-title] {
-    position: relative;
-}
-
-/*End*/
-
 /* Only use for RAP-Reporting Filter */
 
-#filterGet {
+#filterGet{
     background-color: #456275;
     color: #ffc107 !important
 }
@@ -2075,1372 +1987,3 @@ p.text-muted {
         margin-top: -30px !important;
     }
 }
-
-/*-------------- Blinker : Start ------------------*/
-
-.btn-primary.btn-glow-blink {
-    -webkit-animation: btn-primary-glowing 3000ms infinite;
-    -moz-animation: btn-primary-glowing 3000ms infinite;
-    -o-animation: btn-primary-glowing 3000ms infinite;
-    animation: btn-primary-glowing 3000ms infinite;
-}
-
-@-webkit-keyframes btn-primary-glowing {
-    0% {
-        background-color: #1b83dc;
-        -webkit-box-shadow: 0 0 3px #1b83dc;
-    }
-
-    50% {
-        background-color: #1875c6;
-        -webkit-box-shadow: 0 0 40px #81baec;
-    }
-
-    100% {
-        background-color: #1b83dc;
-        -webkit-box-shadow: 0 0 3px #1b83dc;
-    }
-}
-
-@-moz-keyframes btn-primary-glowing {
-    0% {
-        background-color: #1b83dc;
-        -webkit-box-shadow: 0 0 3px #1b83dc;
-    }
-
-    50% {
-        background-color: #1875c6;
-        -webkit-box-shadow: 0 0 40px #81baec;
-    }
-
-    100% {
-        background-color: #1b83dc;
-        -webkit-box-shadow: 0 0 3px #1b83dc;
-    }
-}
-
-@-o-keyframes btn-primary-glowing {
-    0% {
-        background-color: #1b83dc;
-        -webkit-box-shadow: 0 0 3px #1b83dc;
-    }
-
-    50% {
-        background-color: #1875c6;
-        -webkit-box-shadow: 0 0 40px #81baec;
-    }
-
-    100% {
-        background-color: #1b83dc;
-        -webkit-box-shadow: 0 0 3px #1b83dc;
-    }
-}
-
-@keyframes btn-primary-glowing {
-    0% {
-        background-color: #1b83dc;
-        -webkit-box-shadow: 0 0 3px #1b83dc;
-    }
-
-    50% {
-        background-color: #1875c6;
-        -webkit-box-shadow: 0 0 40px #81baec;
-    }
-
-    100% {
-        background-color: #1b83dc;
-        -webkit-box-shadow: 0 0 3px #1b83dc;
-    }
-}
-
-/*-------------- Blinker : End ------------------*/
-
-/*-------------- sweet-alert lead text : start ------------------*/
-
-.lead {
-    font-weight: 500 !important;
-    color: black !important;
-}
-/*-------------- sweet-alert lead text :  : End ------------------*/
-
-/* Create a custom checkbox */
-
-.checkboxlabel label {
-    padding-left: 5px;
-    cursor: pointer;
-    vertical-align: top;
-}
-
-.checkBox-Blue {
-    /*accent-color: #0689ac;*/
-    accent-color: #17a2b8;
-    height: 20px; /* not needed */
-    width: 20px; /* not needed */
-}
-
-.checkBox-DarkBlue {
-    /*accent-color: #0689ac;*/
-    accent-color: #1b6ec2;
-    height: 20px; /* not needed */
-    width: 20px; /* not needed */
-}
-/* End a custom checkbox */
-
-@media (-webkit-min-device-pixel-ratio: 1.25) {
-    .card .card-header h5 {
-        font-size: 1.15em;
-        line-height: 1.4;
-    }
-
-    .card h7 {
-        font-size: 12px;
-        line-height: 1.1;
-    }
-
-    .card-tpl i {
-        width: 30px;
-        height: 30px;
-    }
-
-    .card .card-block,
-    .card .card-body {
-        padding: 8px 10px;
-    }
-
-    .form-control {
-        font-size: 0.85rem;
-    }
-
-    .form-group {
-        font-size: 0.8rem;
-    }
-
-    .app-card-header {
-        font-size: 1rem;
-    }
-
-    .btn {
-        font-size: 0.8rem;
-    }
-}
-
-@media (-webkit-min-device-pixel-ratio: 1.5) {
-    .card .card-header h5 {
-        font-size: 13px;
-        line-height: 1.1;
-    }
-
-    .card h7 {
-        font-size: 10px;
-        line-height: 1.1;
-    }
-
-    .card-tpl i {
-        width: 30px;
-        height: 30px;
-    }
-
-    .card .card-block,
-    .card .card-body {
-        padding: 8px 10px;
-    }
-
-    .form-control {
-        font-size: 0.7rem;
-    }
-
-    .form-group {
-        font-size: 0.7rem;
-    }
-
-    .app-card-header {
-        font-size: 0.8rem;
-    }
-
-    .btn {
-        font-size: 0.7rem;
-    }
-}
-
-.not-allowed {
-    pointer-events: none !important;
-}
-
-.btn-outline-success {
-    width: 85px;
-}
-
-.scroll {
-    height: 560px;
-    overflow: scroll;
-    overflow-x: hidden;
-    overflow-y: auto;
-}
-
-a.hover:hover {
-    text-decoration: underline;
-    cursor: pointer;
-}
-
-.level0 td:first-child {
-    font-weight: bold;
-    width: 50%;
-    color: black;
-}
-
-.level1 td:first-child {
-    padding-left: 40px;
-}
-
-.level2 td:first-child {
-    padding-left: 80px;
-}
-
-.level3 td:first-child {
-    padding-left: 120px;
-}
-
-.level4 td:first-child {
-    padding-left: 180px;
-}
-
-.level5 td:first-child {
-    padding-left: 200px;
-}
-
-.closed td:first-child::before {
-    content: "+";
-}
-
-.open td:first-child::before {
-    content: "- ";
-}
-
-.branch {
-    color: black;
-    width: 50%;
-}
-
-    .branch.hover:hover {
-        text-decoration: underline;
-    }
-
-.leaf {
-    color: cornflowerblue;
-    width: 50%;
-}
-
-.leafIcon {
-    color: #338e5b;
-    font-size: 22px;
-}
-
-.exeproc {
-    color: blue;
-    font-size: 17px;
-}
-
-.level0 {
-    font-weight: bold;
-    background-color: aliceblue;
-}
-
-.level1 {
-    padding-left: 40px;
-}
-
-.level2 {
-    padding-left: 80px;
-}
-
-.level3 {
-    padding-left: 120px;
-}
-
-.collapsed {
-    display: none;
-}
-
-    .collapsed + tr {
-        display: table-row !important;
-    }
-
-.svg-pan-zoom-control {
-    cursor: pointer;
-    fill: black;
-    fill-opacity: 0.333;
-}
-
-    .svg-pan-zoom-control:hover {
-        fill-opacity: 0.8;
-    }
-
-.svg-pan-zoom-control-background {
-    fill: white;
-    fill-opacity: 0.5;
-}
-
-.svg-pan-zoom-control-background {
-    fill-opacity: 0.8;
-}
-
-.st1 {
-    fill: none
-}
-
-.st2 {
-    fill: none;
-    stroke: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 1
-}
-
-.st3 {
-    fill: #00ffff;
-    font-family: Calibri;
-    font-size: 0.194687em
-}
-
-.st4 {
-    fill: #ffffff
-}
-
-.st5 {
-    stroke: #000000;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 1
-}
-
-.st6 {
-    marker-end: url(#mrkr13-13);
-    stroke: #000000;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 1
-}
-
-.st7 {
-    fill: #000000;
-    fill-opacity: 1;
-    stroke: #000000;
-    stroke-opacity: 1;
-}
-
-.st8 {
-    fill: #ffffff;
-    stroke: none;
-    stroke-linecap: butt;
-    stroke-width: 7
-}
-
-.st9 {
-    fill: #000000;
-    font-family: Calibri;
-    font-size: 0.389351em
-}
-
-.st10 {
-    stroke: #000000;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 1
-}
-
-.st11 {
-    fill: #000000;
-    stroke: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 1
-}
-
-.st12 {
-    fill: #000000;
-    font-family: Calibri;
-    font-size: 0.129776em
-}
-
-.st13 {
-    stroke: #0000ff;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 1
-}
-
-.st14 {
-    fill: #000000;
-    font-family: Calibri;
-    font-size: 0.227119em
-}
-
-.st15 {
-    fill: #000000;
-    font-family: Calibri;
-    font-size: 0.29203em
-}
-
-.st16 {
-    fill: #000000;
-    font-family: Calibri;
-    font-size: 0.194687em
-}
-
-.st17 {
-    fill: #000000;
-    font-family: Calibri;
-    font-size: 0.259575em
-}
-
-.st18 {
-    fill: none;
-    stroke: #000000;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st19 {
-    fill: #00ff00;
-    font-family: Calibri;
-    font-size: 0.421806em
-}
-
-.st20 {
-    stroke: #ff0000;
-    stroke-dasharray: 0,0.453543;
-    stroke-linecap: butt;
-    stroke-width: 0.113386
-}
-
-.st21 {
-    fill: #000000;
-    font-family: Calibri;
-    font-size: 0.0833359em
-}
-
-.st22 {
-    fill: #cccccc;
-    stroke: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st23 {
-    stroke: #7f673f;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st24 {
-    fill: #7f673f;
-    font-family: Calibri;
-    font-size: 0.395714em
-}
-
-.st25 {
-    font-size: 1em
-}
-
-.st26 {
-    fill: none;
-    stroke: #7f673f;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st27 {
-    fill: #00ffff;
-    font-family: Calibri;
-    font-size: 0.32975em
-}
-
-.st28 {
-    fill: #7f673f;
-    stroke: #7f673f;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st29 {
-    stroke: #7f673f;
-    stroke-linecap: butt;
-    stroke-width: 0.28809
-}
-
-.st30 {
-    fill: #7f673f;
-    font-family: Calibri;
-    font-size: 0.32975em
-}
-
-.st31 {
-    stroke: #00ffff;
-    stroke-dasharray: 5,3.75;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st32 {
-    fill: none;
-    stroke: #ffff00;
-    stroke-dasharray: 5,3.75;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st33 {
-    fill: none;
-    stroke: #ffff00;
-    stroke-dasharray: 5,2.7686;
-    stroke-linecap: butt;
-    stroke-width: 0.692151
-}
-
-.st34 {
-    stroke: #00ff00;
-    stroke-dasharray: 5,3.75;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st35 {
-    stroke: #ffff00;
-    stroke-dasharray: 5,3.75;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st36 {
-    stroke: #ffff00;
-    stroke-dasharray: 5,2.7686;
-    stroke-linecap: butt;
-    stroke-width: 0.692151
-}
-
-.st37 {
-    stroke: #577f3f;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st38 {
-    fill: #577f3f;
-    font-family: Calibri;
-    font-size: 0.395714em
-}
-
-.st39 {
-    fill: none;
-    stroke: #577f3f;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st40 {
-    fill: none;
-    stroke: #577f3f;
-    stroke-linecap: butt;
-    stroke-width: 0.75
-}
-
-.st41 {
-    fill: #577f3f;
-    stroke: #577f3f;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st42 {
-    fill: #577f3f;
-    font-family: Calibri;
-    font-size: 0.32975em
-}
-
-.st43 {
-    fill: none;
-    stroke: #0000ff;
-    stroke-linecap: butt;
-    stroke-width: 0.75
-}
-
-.st44 {
-    fill: none;
-    stroke: #0000ff;
-    stroke-linecap: butt;
-    stroke-width: 0.566929
-}
-
-.st45 {
-    fill: none;
-    stroke: #0000ff;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st46 {
-    fill: #00ff00;
-    font-family: Calibri;
-    font-size: 0.395599em
-}
-
-.st47 {
-    stroke: #00ff00;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st48 {
-    fill: none;
-    stroke: #00ff00;
-    stroke-linecap: butt;
-    stroke-width: 0.75
-}
-
-.st49 {
-    stroke: #8c8c8c;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st50 {
-    fill: #00ffff;
-    font-family: Calibri;
-    font-size: 0.51915em
-}
-
-.st51 {
-    fill: #00ffff;
-    font-family: Calibri;
-    font-size: 0.389351em
-}
-
-.st52 {
-    fill: #ffffff;
-    stroke: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st53 {
-    stroke: #ff0000;
-    stroke-dasharray: 5,3.75;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st54 {
-    stroke: #000000;
-    stroke-dasharray: 5,3.75;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st55 {
-    fill: none;
-    stroke: #000000;
-    stroke-linecap: butt;
-    stroke-width: 0.75
-}
-
-.st56 {
-    stroke: #000000;
-    stroke-linecap: butt;
-    stroke-width: 1.45119
-}
-
-.st57 {
-    fill: #000000;
-    font-family: Century Gothic;
-    font-size: 0.417938em
-}
-
-.st58 {
-    stroke: #000000;
-    stroke-linecap: butt;
-    stroke-width: 0.75
-}
-
-.st59 {
-    fill: #000000;
-    font-family: Calibri;
-    font-size: 0.494476em
-}
-
-.st60 {
-    fill: #000000;
-    font-family: Calibri;
-    font-size: 0.395599em
-}
-
-.st61 {
-    fill: none;
-    stroke: #000000;
-    stroke-linecap: butt;
-    stroke-width: 2.97638
-}
-
-.st62 {
-    fill: #00ff00;
-    font-family: Calibri;
-    font-size: 0.324463em
-}
-
-.st63 {
-    fill: none;
-    stroke: #00ff00;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st64 {
-    fill: #00ff00;
-    font-family: Calibri;
-    font-size: 0.259575em
-}
-
-.st65 {
-    fill: #00ff00;
-    font-family: Calibri;
-    font-size: 0.23362em
-}
-
-.st66 {
-    fill: #000000;
-    font-family: Calibri;
-    font-size: 0.20em
-}
-
-.st67 {
-    fill: #000000;
-    font-family: Calibri;
-    font-size: 0.51915em
-}
-
-.st68 {
-    fill: none;
-    stroke: #a56d52;
-    stroke-linecap: butt;
-    stroke-width: 0.75
-}
-
-.st69 {
-    stroke: #a56d52;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st70 {
-    fill: #000000;
-    font-family: Century Gothic;
-    font-size: 0.251976em
-}
-
-.st71 {
-    fill: #000000;
-    font-family: Century Gothic;
-    font-size: 0.806305em
-}
-
-.st72 {
-    fill: #000000;
-    font-family: Century Gothic;
-    font-size: 0.383995em
-}
-
-.st73 {
-    fill: #000000;
-    font-family: Century Gothic;
-    font-size: 0.382988em
-}
-
-.st74 {
-    fill: #000000;
-    font-family: Century Gothic;
-    font-size: 1.25983em
-}
-
-.st75 {
-    stroke: #000000;
-    stroke-dasharray: 18,3,7,3.62835;
-    stroke-linecap: butt;
-    stroke-width: 0.907087
-}
-
-.st76 {
-    fill: #000000;
-    font-family: Century Gothic;
-    font-size: 0.324165em
-}
-
-.st77 {
-    fill: none;
-    stroke: #ff827f;
-    stroke-linecap: butt;
-    stroke-width: 0.75
-}
-
-.st78 {
-    fill: none;
-    stroke: #000000;
-    stroke-dasharray: 5,3.75;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st79 {
-    fill: #000000;
-    font-family: Calibri;
-    font-size: 0.324463em
-}
-
-.st80 {
-    fill: #ffffff;
-    stroke: #000000;
-    stroke-dasharray: 14,3,5,3.75;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st81 {
-    fill: #ffe27f;
-    stroke: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st82 {
-    fill: #00bfff;
-    stroke: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st83 {
-    fill: none;
-    stroke: #ff0000;
-    stroke-linecap: butt;
-    stroke-width: 0.453543
-}
-
-.st84 {
-    stroke: #ff0000;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st85 {
-    fill: #000000;
-    font-family: Calibri;
-    font-size: 0.350418em
-}
-
-.st86 {
-    fill: #000000;
-    font-family: Calibri;
-    font-size: 0.438034em
-}
-
-.st87 {
-    fill: #ff0000;
-    stroke: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st88 {
-    fill: #00ff00;
-    font-family: Calibri;
-    font-size: 0.438034em
-}
-
-.st89 {
-    fill: none;
-    stroke: #ff0000;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st90 {
-    fill: none;
-    stroke: #ff0000;
-    stroke-linecap: butt;
-    stroke-width: 0.75
-}
-
-.st91 {
-    fill: none;
-    stroke: #ff7f00;
-    stroke-linecap: butt;
-    stroke-width: 0.75
-}
-
-.st92 {
-    fill: none;
-    stroke: #ff7f00;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st93 {
-    fill: #ff7f00;
-    stroke: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st94 {
-    stroke: #9cff7f;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st95 {
-    fill: #ff0000;
-    stroke: #ff0000;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st96 {
-    stroke: #ff0000;
-    stroke-linecap: butt;
-    stroke-width: 1.13386
-}
-
-.st97 {
-    stroke: #3fff00;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st98 {
-    fill: #00ff00;
-    stroke: #00ff00;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st99 {
-    stroke: #9cff7f;
-    stroke-linecap: butt;
-    stroke-width: 0.75
-}
-
-.st100 {
-    fill: none;
-    stroke: #9cff7f;
-    stroke-linecap: butt;
-    stroke-width: 0.75
-}
-
-.st101 {
-    fill: #9cff7f;
-    stroke: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st102 {
-    fill: none;
-    stroke: #00bfff;
-    stroke-linecap: butt;
-    stroke-width: 0.75
-}
-
-.st103 {
-    fill: #000000;
-    font-family: Century Gothic;
-    font-size: 1.00788em
-}
-
-.st104 {
-    stroke: #004aa5;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st105 {
-    fill: #004aa5;
-    stroke: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st106 {
-    stroke: #ff0000;
-    stroke-linecap: butt;
-    stroke-width: 0.708661
-}
-
-.st107 {
-    fill: #000000;
-    font-family: Century Gothic;
-    font-size: 0.544258em
-}
-
-.st108 {
-    fill: none;
-    stroke: #ff0000;
-    stroke-linecap: butt;
-    stroke-width: 0.979654
-}
-
-.st109 {
-    fill: #a53100;
-    font-family: Calibri;
-    font-size: 0.648926em
-}
-
-.st110 {
-    fill: none;
-    stroke: #ff00ff;
-    stroke-linecap: butt;
-    stroke-width: 0.75
-}
-
-.st111 {
-    fill: none;
-    stroke: #000000;
-    stroke-linecap: butt;
-    stroke-width: 0.113386
-}
-
-.st112 {
-    fill: none;
-    stroke: #000000;
-    stroke-dasharray: 3,1.5;
-    stroke-linecap: butt;
-    stroke-width: 0.75
-}
-
-.st113 {
-    stroke: #000000;
-    stroke-linecap: butt;
-    stroke-width: 0.907087
-}
-
-.st114 {
-    fill: #ffffff;
-    stroke: #000000;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75
-}
-
-.st115 {
-    fill: #000000;
-    font-family: Century Gothic;
-    font-size: 0.881882em
-}
-
-.st116 {
-    fill: #000000;
-    font-family: Century Gothic;
-    font-size: 0.755905em
-}
-
-.st117 {
-    fill: #00ff00;
-    stroke: none;
-    stroke-linecap: round;
-    stroke-linejoin: round;
-    stroke-width: 0.75;
-}
-
-.st118 {
-    fill: #000000;
-    font-family: Calibri;
-    font-size: 0.648926em
-}
-
-.st119 {
-    fill: none;
-    fill-rule: evenodd;
-    font-size: 12px;
-    overflow: visible;
-    stroke-linecap: square;
-    stroke-miterlimit: 3
-}
-
-.dT {
-    fill: #000000;
-    font-family: Calibri;
-    font-size: 0.50em
-}
-
-.deskContainer {
-    fill: yellow;
-    stroke: #004aa5;
-    stroke-linecap: butt;
-    stroke-width: 0.25;
-}
-
-.reservedEmptyDesk {
-    fill: #FF66FF;
-}
-
-.reservedBookedDesk {
-    fill: #FFCCFF;
-}
-
-.emptyDesk {
-    fill: #FFC000;
-}
-
-.bookedDesk {
-    fill: #FFFF99;
-}
-
-.deskContainer-selected {
-    fill: greenyellow;
-    stroke: #004aa5;
-    stroke-linecap: butt;
-    stroke-width: 0.25;
-}
-
-.highlightpath {
-    fill: red;
-}
-
-/*Start scrollbar */
-.scrollbar-deep-purple::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-    background-color: #F5F5F5;
-    border-radius: 10px;
-}
-
-.scrollbar-deep-purple::-webkit-scrollbar {
-    width: 12px;
-    background-color: #F5F5F5;
-}
-
-.scrollbar-deep-purple::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-    background-color: #512da8;
-}
-
-.scrollbar-deep-purple {
-    scrollbar-color: #512da8 #F5F5F5;
-}
-
-.scrollbar-cyan::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-    background-color: #F5F5F5;
-    border-radius: 10px;
-}
-
-.scrollbar-cyan::-webkit-scrollbar {
-    width: 12px;
-    background-color: #F5F5F5;
-}
-
-.scrollbar-cyan::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-    background-color: #00bcd4;
-}
-
-.scrollbar-cyan {
-    scrollbar-color: #00bcd4 #F5F5F5;
-}
-
-.scrollbar-dusty-grass::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-    background-color: #F5F5F5;
-    border-radius: 10px;
-}
-
-.scrollbar-dusty-grass::-webkit-scrollbar {
-    width: 12px;
-    background-color: #F5F5F5;
-}
-
-.scrollbar-dusty-grass::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-    background-image: -webkit-linear-gradient(330deg, #d4fc79 0%, #96e6a1 100%);
-    background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
-}
-
-.scrollbar-ripe-malinka::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-    background-color: #F5F5F5;
-    border-radius: 10px;
-}
-
-.scrollbar-ripe-malinka::-webkit-scrollbar {
-    width: 12px;
-    background-color: #F5F5F5;
-}
-
-.scrollbar-ripe-malinka::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
-    background-image: -webkit-linear-gradient(330deg, #f093fb 0%, #f5576c 100%);
-    background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
-}
-
-.bordered-deep-purple::-webkit-scrollbar-track {
-    -webkit-box-shadow: none;
-    border: 1px solid #512da8;
-}
-
-.bordered-deep-purple::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: none;
-}
-
-.bordered-cyan::-webkit-scrollbar-track {
-    -webkit-box-shadow: none;
-    border: 1px solid #00bcd4;
-}
-
-.bordered-cyan::-webkit-scrollbar-thumb {
-    -webkit-box-shadow: none;
-}
-
-.square::-webkit-scrollbar-track {
-    border-radius: 0 !important;
-}
-
-.square::-webkit-scrollbar-thumb {
-    border-radius: 0 !important;
-}
-
-.thin::-webkit-scrollbar {
-    width: 6px;
-}
-
-.example-1 {
-    position: relative;
-    overflow-y: scroll;
-}
-/*End scrollbar */
-
-.app-navbar-menu a:hover {
-    /*font-weight: bold;*/
-    text-decoration: none;
-    color: white;
-}
-
-.alerts-border {
-    border: 1px #ff0000 solid;
-    animation: blink 1s;
-    animation-iteration-count: 9999;
-}
-
-@keyframes blink {
-    50% {
-        /*border-color: #fff;*/
-        box-shadow: 1px 1px 1px red;
-    }
-}
-
-optgroup {
-    color: teal !important;
-    font-size: 16px !important;
-}
-
-@property --angle {
-    syntax: '<angle>';
-    initial-value: 90deg;
-    inherits: true;
-}
-
-@property --gradX {
-    syntax: '<percentage>';
-    initial-value: 50%;
-    inherits: true;
-}
-
-@property --gradY {
-    syntax: '<percentage>';
-    initial-value: 0%;
-    inherits: true;
-}
-/*Start card-border-animation*/
-:root {
-    --d: 1500ms;
-    --angle: 90deg;
-    --gradX: 100%;
-    --gradY: 50%;
-    --c1: #0c688b;
-    --c2: rgba(168, 239, 255, 0.1);
-}
-
-.card-border-animation {
-    border: 0.35rem solid;
-    border-image: conic-gradient(from var(--angle), var(--c2), var(--c1) 0.1turn, var(--c1) 0.15turn, var(--c2) 0.25turn) 30;
-    animation: borderRotate var(--d) linear infinite forwards;
-}
-
-@keyframes borderRotate {
-    100% {
-        --angle: 420deg;
-    }
-}
-
-@keyframes borderRadial {
-    20% {
-        --gradX: 100%;
-        --gradY: 50%;
-    }
-
-    40% {
-        --gradX: 100%;
-        --gradY: 100%;
-    }
-
-    60% {
-        --gradX: 50%;
-        --gradY: 100%;
-    }
-
-    80% {
-        --gradX: 0%;
-        --gradY: 50%;
-    }
-
-    100% {
-        --gradX: 50%;
-        --gradY: 0%;
-    }
-}
-/*End card-border-animation*/

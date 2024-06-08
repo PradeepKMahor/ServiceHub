@@ -1,11 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ServiceHub.WebApp.Controllers;
 
 namespace ServiceHub.WebApp.Areas.Masters.Controllers
 {
     [Area("Masters")]
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
-        public IActionResult HomeIndex()
+        public IActionResult Index()
         {
             return View();
         }

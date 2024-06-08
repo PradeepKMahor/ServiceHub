@@ -51,20 +51,20 @@ builder.Services.AddSession(options =>
 
 #endregion Session
 
-//builder.Services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
-//              .AddRazorPagesOptions(options =>
-//              {
-//                  options.Conventions.AuthorizeAreaFolder("Identity", $"/Account/Manage");
-//                  options.Conventions.AuthorizeAreaPage("Identity", $"/Account/Logout");
-//              });
-//builder.Services.ConfigureApplicationCookie(options =>
-//{
-//    options.LoginPath = $"/Identity/Account/Login";
+builder.Services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+              .AddRazorPagesOptions(options =>
+              {
+                  options.Conventions.AuthorizeAreaFolder("Identity", $"/Account/Manage");
+                  options.Conventions.AuthorizeAreaPage("Identity", $"/Account/Logout");
+              });
+builder.Services.ConfigureApplicationCookie(options =>
+{
+    options.LoginPath = $"/Identity/Account/Login";
 
-//    options.LogoutPath = $"/Identity/Account/Logout";
+    options.LogoutPath = $"/Identity/Account/Logout";
 
-//    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
-//});
+    options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
+});
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -98,8 +98,8 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapAreaControllerRoute(name: "Identity", areaName: "Identity", pattern: "Identity/{action=Index}/{id?}");
     endpoints.MapAreaControllerRoute(name: "Admin", areaName: "Admin", pattern: "Admin/{controller=Admin}/{action=Index}/{id?}");
-    endpoints.MapAreaControllerRoute(name: "Masters", areaName: "Masters", pattern: "Masters/{controller=Home}/{action=Index}/{id?}");
-    endpoints.MapAreaControllerRoute(name: "SystemAdmin", areaName: "SystemAdmin", pattern: "SystemAdmin/{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapAreaControllerRoute(name: "Masters", areaName: "Masters", pattern: "Masters/{controller=Masters}/{action=Index}/{id?}");
+    endpoints.MapAreaControllerRoute(name: "SystemAdmin", areaName: "SystemAdmin", pattern: "SystemAdmin/{controller=SystemAdmin}/{action=Index}/{id?}");
 
     endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
     endpoints.MapRazorPages();

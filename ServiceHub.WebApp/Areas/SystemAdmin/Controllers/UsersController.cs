@@ -2,10 +2,11 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ServiceHub.Domain.Context;
+using ServiceHub.WebApp.Controllers;
 
 namespace ServiceHub.WebApp.Areas.SystemAdmin.Controllers
 {
-    public class UsersController : Controller
+    public class UsersController : BaseController
     {
         private readonly UserManager<IdentityUser> _userManager;
 
