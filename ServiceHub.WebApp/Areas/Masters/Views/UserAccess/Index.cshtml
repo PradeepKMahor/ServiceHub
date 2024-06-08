@@ -7,7 +7,7 @@
 @section BreadCrumbs
 {
     <ol class="breadcrumb">
-        <li class="breadcrumb-item "><a asp-action="HomeIndex" asp-controller="Home" asp-area="Masters">Masters</a></li>
+        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
 
         <li class="breadcrumb-item active" aria-current="page">User Access</li>
     </ol>
@@ -32,12 +32,9 @@
             { *@
 
             <a class="btn btn-outline-primary btn-sm border-white"
-               data-jqueryselector="openmodal"
-               data-modalcontainer="modalcontainer"
-               data-modalpopupwidth="rightw35"
-               data-url='@Url.Action("BankCreate", "Masters", new { Area = "LC" })'
-               data-modaltitle="Bank"
-               data-modalheader="Bank">
+               asp-action="CreateUser"
+               asp-area="Masters"
+               asp-controller="UserAccess">
                 <i class="fas fa-plus"></i>&nbsp; User Access
             </a>
 
@@ -82,7 +79,7 @@
                     <td>Service-Hub</td>
                     <td>System Admin</td>
                     <td>Active</td>
-                    <td>
+                    <td class="center">
                         <div class="row text-center pl-1 ml-1 pr-1 mr-1">
 
                             <a href="/Admin/CourseMaster/Upsert/${data.id}"
@@ -120,16 +117,16 @@
         $(document).ready(function () {
             // localLoadDataTable();
             $('#tbGrid').DataTable({
-                "dom": 'Bfrtip',
+                // "dom": 'Bfrtip',
                 "lengthChange": false,
                 //"buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-                "buttons": {
-                    buttons: [
-                        { extend: 'excel', className: 'btn shadow m-1 btn-info' },
-                        { extend: 'print', className: 'btn shadow m-1 btn-info' },
-                        { extend: 'colvis', className: 'btn shadow m-1 btn-info' }
-                    ]
-                },
+                // "buttons": {
+                //     buttons: [
+                //         { extend: 'excel', className: 'btn shadow m-1 btn-info' },
+                //         { extend: 'print', className: 'btn shadow m-1 btn-info' },
+                //         { extend: 'colvis', className: 'btn shadow m-1 btn-info' }
+                //     ]
+                // },
                 // "dom": 'Qfrtip', for advance Search
                 "autoWidth": false,
                 "responsive": true,

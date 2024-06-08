@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceHub.WebApp", "Servic
 EndProject
 Project("{00D1A9C2-B5F0-4AF3-8072-F6C62B433612}") = "ServiceHubDb", "ServiceHubDb\ServiceHubDb.sqlproj", "{822CB5E9-97F1-4DFE-8D61-A85014AAA4E5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHub.DataAccess", "ServiceHub.DataAccess\ServiceHub.DataAccess.csproj", "{2BCBDF6A-651A-4BFD-9C58-E49B91EA213E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceHub.DataAccess", "ServiceHub.DataAccess\ServiceHub.DataAccess.csproj", "{2BCBDF6A-651A-4BFD-9C58-E49B91EA213E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ServiceHub.Domain", "ServiceHub.Domain\ServiceHub.Domain.csproj", "{A1819BEB-D73C-4AD9-B37B-B0A324AE4A83}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ServiceHub.Domain", "ServiceHub.Domain\ServiceHub.Domain.csproj", "{A1819BEB-D73C-4AD9-B37B-B0A324AE4A83}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
