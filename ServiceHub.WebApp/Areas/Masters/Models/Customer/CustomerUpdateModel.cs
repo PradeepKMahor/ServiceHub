@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ServiceHub.WebApp.Areas.Masters.Models
 {
-    public class UserAccessUpdateModel
+    public class CustomerUpdateModel
     {
         [Display(Name = "User Id")]
         public string UserId { get; set; }
