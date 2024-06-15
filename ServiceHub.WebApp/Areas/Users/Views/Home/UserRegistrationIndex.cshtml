@@ -1,1 +1,175 @@
-﻿<h1>User Registration</h1>
+﻿@model ServiceHub.WebApp.Areas.Users.Models.UserRegistration.UserRegistrationCreateViewModel
+
+
+
+@{
+    ViewData["Title"] = "User Registration ";
+    var title = "User Registration ";
+    var Varid = "";
+}
+@Html.AntiForgeryToken()
+<h1 class="text-center">User Registration</h1>
+
+<div class="container-fluid " style="max-width:800px;">
+
+
+    @* <div class="row d-flex justify-content-center align-items-center h-100"> *@
+    <div class="">
+        <div class="card rounded-3">
+            @* <img id="preview" src="~/images\avatar5.png"
+            height="100"
+            class="img-circle elevation-2"
+            alt="Sample photo"> *@
+            <div class="card-body p-4 p-md-5">
+                @*                     <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Registration Info</h3>
+                *@
+                <form class="px-md-2">
+                    <div class="text-center">
+                        <img id="preview" style="width:150px!important; " src="~/images\avatar5.png" alt="User Avatar"
+                             class="profile-user-img img-fluid img-circle">
+                        <hr />
+                    </div>
+                    @* class=" mr-3 img-circle" *@
+                    <div class="col-12">
+
+                        <div class="row">
+                            <div class=" col-12 col-md-6  ">
+                                <div class="form-group">
+                                    <label asp-for="FirstName" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <input asp-for="FirstName" class="form-control capitalize" required />
+                                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col-12 col-md-6  ">
+                                <div class="form-group">
+                                    <label asp-for="LastName" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <input asp-for="LastName" class="form-control capitalize" required />
+                                        <span asp-validation-for="LastName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col-12 col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="Username" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <input asp-for="Username" class="form-control capitalize" required />
+                                        <span asp-validation-for="Username" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="row">
+                            <div class=" col-12 col-md-6  ">
+                                <div class="form-group">
+                                    <label asp-for="ContactNo" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <input asp-for="ContactNo" class="form-control capitalize" required />
+                                        <span asp-validation-for="ContactNo" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col-12 col-md-6  ">
+                                <div class="form-group">
+                                    <label asp-for="EmailId" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <input asp-for="EmailId" class="form-control capitalize" required />
+                                        <span asp-validation-for="EmailId" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class=" col-12 col-md-6  ">
+                                <div class="form-group">
+                                    <label asp-for="ValidFromDate" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <input asp-for="ValidFromDate" class="form-control capitalize" required />
+                                        <span asp-validation-for="ValidFromDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col-12 col-md-6  ">
+                                <div class="form-group">
+                                    <label asp-for="ValidToDate" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <input asp-for="ValidToDate" class="form-control capitalize" required />
+                                        <span asp-validation-for="ValidToDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class=" col-12 col-md-12  ">
+                                <div class="form-group">
+                                    <label asp-for="UploadProfilePic" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <input asp-for="UploadProfilePic" type="file" class="form-control capitalize" required />
+                                        @*                                             <input type="file" id="filetag">
+                                        *@
+                                        <span asp-validation-for="UploadProfilePic" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="from-group m-2 pb-2">
+
+                            <div class="col-12 ">
+                                @*                         Edit   : <partial name="_EditAndBackToListBtn" model="@Convert.ToInt32(1)" />
+                                Create :<partial name="_CreateAndBackToListBtn" />
+                                *@
+                                @* @if (Model.StudentInquiry.Id != 0)
+                                {
+
+                                //Edit btn and back to list
+                                <partial name="_EditAndBackToListBtn" model="@Convert.ToInt32(Varid)" />
+                                }
+                                else
+                                {
+
+                                // Create btn and back to list
+                                <partial name="_CreateAndBackToListBtn" />
+                                } *@
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-lg mb-1">Submit</button>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+@* </div> *@
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+
+        $(document).ready(function () {
+            var fileTag = document.getElementById("UploadProfilePic"),
+                preview = document.getElementById("preview");
+
+            fileTag.addEventListener("change", function () {
+                changeImage(this);
+            });
+
+            function changeImage(input) {
+                var reader;
+
+                if (input.files && input.files[0]) {
+                    reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        preview.setAttribute('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        });
+    </script>
+
+}

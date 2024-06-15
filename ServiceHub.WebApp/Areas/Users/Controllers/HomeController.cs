@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using ServiceHub.WebApp.Areas.Users.Models.UserRegistration;
 
 namespace ServiceHub.WebApp.Areas.Users.Controllers
 {
@@ -12,7 +13,8 @@ namespace ServiceHub.WebApp.Areas.Users.Controllers
 
         public IActionResult UserRegistrationIndex()
         {
-            return View();
+            var userRegistrationCreateViewModel = new UserRegistrationCreateViewModel();
+            return View(userRegistrationCreateViewModel);
         }
     }
 }

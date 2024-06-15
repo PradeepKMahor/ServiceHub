@@ -17,14 +17,17 @@ builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<DataContext>();
+
 builder.Services.AddControllersWithViews();
+
 builder.Services.AddProgressiveWebApp(new PwaOptions
 {
-    RegisterServiceWorker = true,
+    RegisterServiceWorker = false,
     RegisterWebmanifest = false,  // (Manually register in Layout file)
-    Strategy = ServiceWorkerStrategy.NetworkFirst,
+    Strategy = ServiceWorkerStrategy.Minimal,
     OfflineRoute = "Offline.html"
 });
+
 builder.Services.AddHealthChecks();
 builder.Services.AddResponseCaching();
 
