@@ -44,6 +44,7 @@
 		<Folder Include="Areas\Masters\Data\" />
 		<Folder Include="Areas\SystemAdmin\Models\" />
 		<Folder Include="Areas\SystemAdmin\Data\" />
+		<Folder Include="Areas\Users\Data\" />
 		<Folder Include="Views\Shared\AdminLTE\" />
 	</ItemGroup>
 
