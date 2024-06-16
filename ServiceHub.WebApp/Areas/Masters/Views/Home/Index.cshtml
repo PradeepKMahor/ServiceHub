@@ -26,6 +26,28 @@
         <div class="col-md-4 col-xl-3">
             <div class="card card-tpl">
                 <div class="card-header header-flex">
+                    <h5>User Management</h5>
+                    @*                     <span class="f-14 f-w-700"> &#10148; </span>
+                    *@
+                </div>
+                <div class="card-block card-tile">
+                    <a href="@Url.Action("Index", "UserManagement", new { Area = "Users" })">
+                        <div class="row align-items-center justify-content-center stretched-link">
+                            <div class="col">
+                                <h7 class="mb-2 f-w-300"> </h7>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-chart-bar f-20 text-white theme-teal"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-xl-3">
+            <div class="card card-tpl">
+                <div class="card-header header-flex">
                     <h5>Assesses</h5>
                     <span class="f-14 f-w-700"> &#10148; </span>
                 </div>
