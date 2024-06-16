@@ -125,7 +125,14 @@
                                         <div class="form-group">
                                             <label asp-for="UserType" class="col-12 control-label"></label>
                                             <div class="col-12">
-                                                <input asp-for="UserType" class="form-control capitalize" required />
+                                                @* <input asp-for="UserType" class="form-control capitalize" required /> *@
+                                                <select asp-for="UserType" class="form-control" required>
+                                                    <option> </option>
+                                                    <option>Admin</option>
+                                                    <option>Customer</option>
+                                                    <option>Technician</option>
+                                                    <option>Audit</option>
+                                                </select>
                                                 <span asp-validation-for="UserType" class="text-danger"></span>
                                             </div>
                                         </div>
@@ -134,7 +141,14 @@
                                         <div class="form-group">
                                             <label asp-for="ActiveStatus" class="col-12 control-label"></label>
                                             <div class="col-12">
-                                                <input asp-for="ActiveStatus" class="form-control capitalize" required />
+                                                @*                                                 <input asp-for="ActiveStatus" class="form-control capitalize" required />
+                                                *@
+                                                <select asp-for="ActiveStatus" class="form-control" required>
+                                                    <option> </option>
+                                                    <option>Active</option>
+                                                    <option>DeActive</option>
+
+                                                </select>
                                                 <span asp-validation-for="ActiveStatus" class="text-danger"></span>
                                             </div>
                                         </div>
