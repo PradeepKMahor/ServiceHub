@@ -10,5 +10,50 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
         {
             return View();
         }
+
+        public IActionResult AssessesIndex()
+        {
+            return View();
+        }
+
+        public IActionResult ProductServicesIndex()
+        {
+            return View();
+        }
+
+        public IActionResult ServiceConfigIndex()
+        {
+            return View();
+        }
+
+        public IActionResult UsersCustomerIndex()
+        {
+            return View();
+        }
+
+        public IActionResult CustomerProductProfileIndex()
+        {
+            return View();
+        }
+
+        public IActionResult UsersClientIndex()
+        {
+            return View();
+        }
+
+        public IActionResult ProductIndex()
+        {
+            return View();
+        }
+
+        public IActionResult ServiceCauseIndex()
+        {
+            return View();
+        }
+
+        public IActionResult SOPsIndex()
+        {
+            return View();
+        }
     }
 }

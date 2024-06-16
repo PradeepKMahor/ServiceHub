@@ -22,7 +22,7 @@ builder.Services.AddControllersWithViews();
 
 builder.Services.AddProgressiveWebApp(new PwaOptions
 {
-    RegisterServiceWorker = false,
+    RegisterServiceWorker = true,
     RegisterWebmanifest = false,  // (Manually register in Layout file)
     Strategy = ServiceWorkerStrategy.Minimal,
     OfflineRoute = "Offline.html"
@@ -31,18 +31,18 @@ builder.Services.AddProgressiveWebApp(new PwaOptions
 builder.Services.AddHealthChecks();
 builder.Services.AddResponseCaching();
 
-#region Session
+//#region Session
 
-#if DEBUG
-builder.Services.AddDistributedMemoryCache();
-#else
-builder.Services.AddStackExchangeRedisCache(options =>
-{
-    options.Configuration = Configuration.GetConnectionString("RedisCache");
-    options.InstanceName = "redis";
-});
+//#if DEBUG
+//builder.Services.AddDistributedMemoryCache();
+//#else
+//builder.Services.AddStackExchangeRedisCache(options =>
+//{
+//    options.Configuration = Configuration.GetConnectionString("RedisCache");
+//    options.InstanceName = "redis";
+//});
 
-#endif
+//#endif
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);
@@ -52,7 +52,7 @@ builder.Services.AddSession(options =>
     options.Cookie.SecurePolicy = CookieSecurePolicy.Always;
 });
 
-#endregion Session
+//#endregion Session
 
 builder.Services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
               .AddRazorPagesOptions(options =>
