@@ -42,6 +42,7 @@
 		<Folder Include="Areas\Admin\Data\" />
 		<Folder Include="Areas\Admin\Models\" />
 		<Folder Include="Areas\Masters\Data\" />
+		<Folder Include="Areas\ServiceRequests\Data\" />
 		<Folder Include="Areas\SystemAdmin\Models\" />
 		<Folder Include="Areas\SystemAdmin\Data\" />
 		<Folder Include="Areas\Users\Data\" />
