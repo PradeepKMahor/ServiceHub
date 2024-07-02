@@ -79,37 +79,6 @@
                 <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
         </div>
-
-
-
-        <!-- ./col -->
-    </div>
-</section>
-<hr />
-<div class="col-sm-12">
-    <div class="row">
-        <div class="col-md-4 col-xl-3">
-            <div class="card card-tpl">
-                <div class="card-header header-flex">
-                    <h5>Masters</h5>
-                    @*                     <span class="f-14 f-w-700"> &#10148; </span>
-                    *@
-                </div>
-                <div class="card-block card-tile">
-                    <a href="@Url.Action("Index", "Home", new { Area = "Masters" })">
-                        <div class="row align-items-center justify-content-center stretched-link">
-                            <div class="col">
-                                <h7 class="mb-2 f-w-300"> </h7>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-chart-bar f-20 text-white theme-teal"></i>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
-
         <div class="col-md-4 col-xl-3">
             <div class="card card-tpl">
                 <div class="card-header header-flex">
@@ -133,13 +102,62 @@
         </div>
 
 
+
+        <!-- ./col -->
+    </div>
+</section>
+<hr />
+<div class="col-sm-12">
+    <div class="row">
+        @* <div class="col-md-4 col-xl-3">
+        <div class="card card-tpl">
+        <div class="card-header header-flex">
+        <h5>Masters</h5>
+
+        </div>
+        <div class="card-block card-tile">
+        <a href="@Url.Action("Index", "Home", new { Area = "Masters" })">
+        <div class="row align-items-center justify-content-center stretched-link">
+        <div class="col">
+        <h7 class="mb-2 f-w-300"> </h7>
+        </div>
+        <div class="col-auto">
+        <i class="fas fa-chart-bar f-20 text-white theme-teal"></i>
+        </div>
+        </div>
+        </a>
+        </div>
+        </div>
+        </div>
+        *@
+        @* <div class="col-md-4 col-xl-3">
+        <div class="card card-tpl">
+        <div class="card-header header-flex">
+        <h5>Service Requests</h5>
+
+        </div>
+        <div class="card-block card-tile">
+        <a href="@Url.Action("Index", "ServiceRequest", new { Area = "ServiceRequests" })">
+        <div class="row align-items-center justify-content-center stretched-link">
+        <div class="col">
+        <h7 class="mb-2 f-w-300"> </h7>
+        </div>
+        <div class="col-auto">
+        <i class="fas fa-chart-bar f-20 text-white theme-teal"></i>
+        </div>
+        </div>
+        </a>
+        </div>
+        </div>
+        </div> *@
+
     </div>
 
 </div>
 
 <div class="col-sm-12">
     <div class="row">
-        <div class="col-md-4 col-xl-4">
+        <div class="col-md-6 col-xl-4">
             <div class="card card-tpl">
                 <div class="card-header header-flex" style="height:auto;">
                     <h5>CMR</h5>
@@ -147,73 +165,75 @@
                 </div>
                 <div class="card-block card-tile"
                      style="min-height: 250px!important; height: 250px!important; max-height: 250px!important; max-width: 100%; display: block;">
-                    <table id="tbGrid" class="table table-hover table-bordered table-responcive  " style="width:100%">
-                        <thead class="bg-info text-white">
-                            <tr role="row">
-                                <th>
-                                    SRN
-                                </th>
-                                <th>Customer</th>
-                                <th>ERD</th>
-                                <th>Technician</th>
+                    <div class="table-responsive" style="overflow:auto;height: 250px!important;">
+                        <table id="tbGrid" class="table table-sm table-hover table-bordered" style="width:100%">
+                            <thead class="bg-info text-white">
+                                <tr role="row">
+                                    <th>
+                                        SRN
+                                    </th>
+                                    <th>Customer</th>
+                                    <th>ERD</th>
+                                    <th>Technician</th>
 
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>  <a href="#">CMR-P000001</a></td>
-                                <td>ABC Pvt. LTD</td>
-                                <td>05/May/2024</td>
-                                <td>John Doe</td>
-                            </tr>
-                            <tr>
-                                <td>  <a href="#">CMR-P000002</a></td>
-                                <td>ABC Pvt. LTD</td>
-                                <td>05/May/2024</td>
-                                <td>John Doe</td>
-                            </tr>
-                            <tr>
-                                <td>  <a href="#">CMR-P000003</a></td>
-                                <td>ABC Pvt. LTD</td>
-                                <td>05/May/2024</td>
-                                <td>Jack</td>
-                            </tr>
-                            <tr>
-                                <td>  <a href="#">CMR-P000004</a></td>
-                                <td>ABC Pvt. LTD</td>
-                                <td>05/May/2024</td>
-                                <td>John Doe</td>
-                            </tr>
-                            <tr>
-                                <td>  <a href="#">CMR-P000005</a></td>
-                                <td>ABC Pvt. LTD</td>
-                                <td>05/May/2024</td>
-                                <td>Jack</td>
-                            </tr>
-                            <tr>
-                                <td>  <a href="#">CMR-P000006</a></td>
-                                <td>ABC Pvt. LTD</td>
-                                <td>05/May/2024</td>
-                                <td>Jack</td>
-                            </tr>
-                            <tr>
-                                <td>  <a href="#">CMR-P000007</a></td>
-                                <td>ABC Pvt. LTD</td>
-                                <td>05/May/2024</td>
-                                <td>Jack</td>
-                            </tr>
-                            <tr>
-                                <td>  <a href="#">CMR-P000008</a></td>
-                                <td>ABC Pvt. LTD</td>
-                                <td>05/May/2024</td>
-                                <td>Jack</td>
-                            </tr>
-                        </tbody>
-                    </table>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>  <a href="#">CMR-P000001</a></td>
+                                    <td>ABC Pvt. LTD</td>
+                                    <td>05/May/2024</td>
+                                    <td>John Doe</td>
+                                </tr>
+                                <tr>
+                                    <td>  <a href="#">CMR-P000002</a></td>
+                                    <td>ABC Pvt. LTD</td>
+                                    <td>05/May/2024</td>
+                                    <td>John Doe</td>
+                                </tr>
+                                <tr>
+                                    <td>  <a href="#">CMR-P000003</a></td>
+                                    <td>ABC Pvt. LTD</td>
+                                    <td>05/May/2024</td>
+                                    <td>Jack</td>
+                                </tr>
+                                <tr>
+                                    <td>  <a href="#">CMR-P000004</a></td>
+                                    <td>ABC Pvt. LTD</td>
+                                    <td>05/May/2024</td>
+                                    <td>John Doe</td>
+                                </tr>
+                                <tr>
+                                    <td>  <a href="#">CMR-P000005</a></td>
+                                    <td>ABC Pvt. LTD</td>
+                                    <td>05/May/2024</td>
+                                    <td>Jack</td>
+                                </tr>
+                                <tr>
+                                    <td>  <a href="#">CMR-P000006</a></td>
+                                    <td>ABC Pvt. LTD</td>
+                                    <td>05/May/2024</td>
+                                    <td>Jack</td>
+                                </tr>
+                                <tr>
+                                    <td>  <a href="#">CMR-P000007</a></td>
+                                    <td>ABC Pvt. LTD</td>
+                                    <td>05/May/2024</td>
+                                    <td>Jack</td>
+                                </tr>
+                                <tr>
+                                    <td>  <a href="#">CMR-P000008</a></td>
+                                    <td>ABC Pvt. LTD</td>
+                                    <td>05/May/2024</td>
+                                    <td>Jack</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-xl-4">
+        <div class="col-md-6 col-xl-4">
             <div class="card card-tpl">
                 <div class="card-header header-flex" style="height:auto;">
                     <h5>Status</h5>
@@ -229,7 +249,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-xl-4">
+        <div class="col-md-6 col-xl-4">
             <div class="card card-tpl">
                 <div class="card-header header-flex" style="height:auto;">
                     <h5>SLAs</h5>
@@ -259,7 +279,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-xl-4">
+        <div class="col-md-6 col-xl-4">
             <div class="card card-tpl">
                 <div class="card-header header-flex" style="height:auto;">
                     <h5>
@@ -286,15 +306,13 @@
                             </div>
 
                         </div>
-                        <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
-                        </div>
+
                         <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-xl-4">
+        <div class="col-md-6 col-xl-4">
             <div class="card card-tpl">
                 <div class="card-header header-flex" style="height:auto;">
                     <h5>Defect Types</h5>
@@ -310,7 +328,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-4 col-xl-4">
+        <div class="col-md-6 col-xl-4">
             <div class="card card-tpl">
                 <div class="card-header header-flex" style="height:auto;">
                     <h5>Product With Most Requests</h5>
