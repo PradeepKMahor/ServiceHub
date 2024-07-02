@@ -106,7 +106,7 @@ app.UseEndpoints(endpoints =>
     endpoints.MapAreaControllerRoute(name: "Users", areaName: "Users", pattern: "Users/{controller=Users}/{action=Index}/{id?}");
     endpoints.MapAreaControllerRoute(name: "ServiceRequests", areaName: "ServiceRequests", pattern: "ServiceRequests/{controller=ServiceRequests}/{action=Index}/{id?}");
 
-    endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=Index}/{id?}");
+    endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=CMRIndex}/{id?}");
     endpoints.MapRazorPages();
 });
 

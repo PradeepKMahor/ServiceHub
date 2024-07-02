@@ -15,6 +15,25 @@ namespace ServiceHub.WebApp.Controllers
 
         public IActionResult Index()
         {
+            return RedirectToAction("CMRIndex", "Home");
+            Notify("Success", "Data updated successfully", "toaster", NotificationType.success);
+            return View();
+        }
+
+        public IActionResult CMRIndex()
+        {
+            Notify("Success", "Data updated successfully", "toaster", NotificationType.success);
+            return View();
+        }
+
+        public IActionResult PMRIndex()
+        {
+            Notify("Success", "Data updated successfully", "toaster", NotificationType.success);
+            return View();
+        }
+
+        public IActionResult WMRIndex()
+        {
             Notify("Success", "Data updated successfully", "toaster", NotificationType.success);
             return View();
         }

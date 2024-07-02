@@ -25,8 +25,8 @@ h3,
 h4,
 h5,
 h6 {
-    color: #111;
-    font-weight: 400;
+    /* color: #111;
+    font-weight: 400;*/
 }
 
 h1 {
@@ -96,8 +96,8 @@ strong {
 }
 
     .card .card-toolbar {
-/*        padding-left: 20px;
-*/        border-bottom: 1px solid #f1f1f1;
+        /*        padding-left: 20px;
+*/ border-bottom: 1px solid #f1f1f1;
     }
 
     .card .card-header {
@@ -105,7 +105,7 @@ strong {
         border-bottom: 1px solid #f1f1f1;
         padding: 20px 25px;
         position: relative;
-        height:80px;
+        height: 80px;
     }
 
         .card .card-header h5 {
@@ -242,15 +242,15 @@ p.text-muted {
     transition: all .3s ease-in-out;
 }
 
-    .card-tpl + a:hover, .card-tpl:hover {
-        transform: scale(1.02);
-        box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
-    }
+.card-tpl + a:hover, .card-tpl:hover {
+    transform: scale(1.02);
+    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
+}
 
-    .card-tpl + a:hover {
-        transform: scale(1.02);
-        box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
-    }
+.card-tpl + a:hover {
+    transform: scale(1.02);
+    box-shadow: 8px 8px 8px rgba(0, 0, 0, 0.5);
+}
 
 .card-tile i {
     width: 40px;
@@ -262,6 +262,7 @@ p.text-muted {
     align-items: center;
     box-shadow: 0 5px 10px 0 rgba(0, 0, 0, 0.2);
 }
+
 @media screen and (max-width: 375px) {
     .card-tpl i {
         width: 80px;
@@ -1237,26 +1238,32 @@ p.text-muted {
 }
 
 .theme-light-orange {
-    background: linear-gradient(17deg, #ffa07a4d 0%, #ffa07a4d 100%)    
+    background: linear-gradient(17deg, #ffa07a4d 0%, #ffa07a4d 100%)
 }
+
 .theme-light-green {
     background: linear-gradient(17deg, #90ee9042 0%, #90ee9042 100%)
 }
+
 .theme-light-yellow {
     background: linear-gradient(17deg, #ffffe0b0 0%, #ffffe0b0 100%)
 }
+
 .theme-light-blue {
     background: linear-gradient(17deg, #add8e64d 0%, #add8e64d 100%)
 }
+
 .theme-light-grey {
     background: linear-gradient(17deg, #d3d3d354 0%, #d3d3d354 100%)
 }
+
 .theme-light-cyan {
     background: linear-gradient(17deg, #e0ffff99 0%, #e0ffff99 100%)
 }
+
 .theme-light-purple {
     background: linear-gradient(17deg, #bfa3dd57 0%, #bfa3dd57 100%)
-} 
+}
 /*====== background theme ends ======*/
 
 /*====== text colotr starts ======*/
@@ -1590,7 +1597,7 @@ p.text-muted {
 
 /**====== Switches css end ======**/
 
- /* radio */
+/* radio */
 .radio-all {
     background-color: azure;
     padding: 7px;
@@ -1719,7 +1726,7 @@ p.text-muted {
 .custom-controls-stacked .radio input[type=radio] + .cr:after {
     top: 15px;
 }
- 
+
 /* radio End*/
 
 .lnk-bgcolor a {
@@ -1736,34 +1743,34 @@ p.text-muted {
 }
 
 /* Icon style for SWP*/
-/* Not Planned 
+/* Not Planned
     <i class="	fas fa-user-times f-20 grayColor " aria-hidden="true"></i>
 */
 .grayColor {
     color: #77889954;
 }
-/* Planned 
+/* Planned
     <i class="	fas fa-user-check f-20 deepskyblueColor " aria-hidden="true"></i>
 */
 .deepskyblueColor {
     color: deepskyblue;
 }
 
-/* Planned and employee present 
+/* Planned and employee present
      <i class="	fas fa-user-check f-20 greenColor " aria-hidden="true"></i>
 */
 .greenColor {
     color: green;
 }
 
-/* Not planned but employee present 
+/* Not planned but employee present
      <i class="	fas fa-user-check f-20 orangeColor " aria-hidden="true"></i>
 */
 .orangeColor {
     color: orange;
 }
 
-/* Planned but employee absent 
+/* Planned but employee absent
     <i class="	fas fa-user-times f-20 redColor " aria-hidden="true"></i>
 */
 .redColor {
@@ -1935,7 +1942,7 @@ p.text-muted {
 
 /* Only use for RAP-Reporting Filter */
 
-#filterGet{
+#filterGet {
     background-color: #456275;
     color: #ffc107 !important
 }
