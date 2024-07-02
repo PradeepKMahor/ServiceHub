@@ -4,7 +4,7 @@ using System.Diagnostics;
 
 namespace ServiceHub.WebApp.Controllers
 {
-    public class HomeController : Controller
+    public class HomeController : BaseController
     {
         private readonly ILogger<HomeController> _logger;
 
@@ -15,6 +15,7 @@ namespace ServiceHub.WebApp.Controllers
 
         public IActionResult Index()
         {
+            Notify("Success", "Data updated successfully", "toaster", NotificationType.success);
             return View();
         }
 

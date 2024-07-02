@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace ServiceHub.WebApp.Areas.Users.Models.UserRegistration
+namespace ServiceHub.WebApp.Areas.ServiceRequests.Models
 {
     public class ServiceRequestCreateViewModel
     {
@@ -67,7 +67,39 @@ namespace ServiceHub.WebApp.Areas.Users.Models.UserRegistration
         public string AssignTo { get; set; } = string.Empty;
 
         [Required]
+        [Display(Name = "Requested By Contact")]
+        public string RequestedByContact { get; set; } = string.Empty;
+
+        //[Required]
         [Display(Name = "Upload photo")]
-        public string UploadPhoto { get; set; } = string.Empty;
+        public string SrUploadPhoto1 { get; set; } = string.Empty;
+
+        //[Required]
+        [Display(Name = "Upload photo")]
+        public string SrUploadPhoto2 { get; set; } = string.Empty;
+
+        //[Required]
+        [Display(Name = "Upload photo")]
+        public string SrUploadPhoto3 { get; set; } = string.Empty;
+
+        [Required]
+        [Display(Name = "Upload photo")]
+        public string SrUploadPhoto4 { get; set; } = string.Empty;
+
+        //[Required]
+        [Display(Name = "Upload photo")]
+        public string SrResolutionUploadPhoto1 { get; set; } = string.Empty;
+
+        //[Required]
+        [Display(Name = "Upload photo")]
+        public string SrResolutionUploadPhoto2 { get; set; } = string.Empty;
+
+        //[Required]
+        [Display(Name = "Upload photo")]
+        public string SrResolutionUploadPhoto3 { get; set; } = string.Empty;
+
+        //[Required]
+        [Display(Name = "Upload photo")]
+        public string SrResolutionUploadPhoto4 { get; set; } = string.Empty;
     }
 }

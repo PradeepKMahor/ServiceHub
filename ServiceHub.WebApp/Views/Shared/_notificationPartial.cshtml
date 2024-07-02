@@ -13,13 +13,16 @@
         // if (!msg){
         //     msg = $("#results").text();
         // }
+
         if (msg)
             msg = $.parseJSON(msg);
         else
             msg = @(TempData["Message"] != null ? Html.Raw(TempData["Message"]) : Html.Raw("undefined"));
 
+
+
         //console.log('1');
-        //console.log(msg);
+        console.log(msg);
         /*
         if (typeof(msg) == "undefined") {
 
@@ -35,6 +38,7 @@
         }
         */
         if (typeof (msg) != "undefined") {
+
             return showToastrMessage(msg);
         }
     }
@@ -48,7 +52,7 @@
                 "positionClass": "toast-top-right",
                 "preventDuplicates": false,
                 "onclick": null,
-                "showDuration": "200",
+                "showDuration": "300",
                 "hideDuration": "500",
                 "timeOut": "3000",
                 "extendedTimeOut": "500",
@@ -61,11 +65,12 @@
             return pMsg;
         }
     }
+
     function notify(pMsgType, pMessage, pTitle) {
         var objMsg = {
             type: pMsgType,
             message: pMessage,
-            title: pTitle.replace("danger", "Error")
+            title: pTitle
         };
         showToastrMessage(objMsg);
     }

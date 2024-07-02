@@ -1,0 +1,370 @@
+﻿@model ServiceHub.WebApp.Areas.ServiceRequests.Models.ServiceRequestCreateViewModel
+
+@{
+    ViewData["Title"] = "New Service Request ";
+    var title = "New Service Request ";
+    var Varid = "";
+}
+@Html.AntiForgeryToken()
+
+@section BreadCrumbs
+{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="ServiceRequest">Dashboard</a></li>
+        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="ServiceRequest" asp-area="ServiceRequests">Service Request List</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">New Service Request</li>
+    </ol>
+
+}
+@* @section Styles {
+    <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
+} *@
+<div class="container-fluid ">
+    @* <div class="row d-flex justify-content-center align-items-center h-100"> *@
+
+    <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
+        <div class="app-h4 app-card-header mb-2">
+            <p>New Service Request</p>
+        </div>
+        <div class="card-toolbar">
+            <div role="toolbar">
+                <div class="card rounded-3">
+                    <div class="card-body ">
+                        <form asp-controller="ServiceRequest"
+                              asp-area="ServiceRequests"
+                              asp-action="CreateServiceRequest"
+                              id="formServiceRequests">
+                            <input type="hidden" asp-for="SrResolutionUploadPhoto1">
+                            <input type="hidden" asp-for="SrResolutionUploadPhoto2">
+                            <input type="hidden" asp-for="SrResolutionUploadPhoto3">
+                            <input type="hidden" asp-for="SrResolutionUploadPhoto4">
+                            <input type="hidden" asp-for="SrUploadPhoto1">
+                            <input type="hidden" asp-for="SrUploadPhoto2">
+                            <input type="hidden" asp-for="SrUploadPhoto3">
+                            <input type="hidden" asp-for="SrUploadPhoto4">
+                            <div class="col-12">
+                                <div class="row">
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="SerialNo" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                <input asp-for="SerialNo" class="form-control capitalize" required />
+                                                <span asp-validation-for="SerialNo" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="Product" class="col-12 control-label"></label>
+                                            <div class="col-12">
+
+                                                <select asp-for="Product" class="form-control" required>
+                                                    <option> </option>
+                                                    <option>Product 1</option>
+                                                    <option>Product 2</option>
+                                                    <option>Product 3</option>
+                                                    <option>Product 4</option>
+                                                </select>
+                                                <span asp-validation-for="Product" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="ServiceCause" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                <select asp-for="ServiceCause" class="form-control" required>
+                                                    <option> </option>
+                                                    <option>ServiceCause 1</option>
+                                                    <option>ServiceCause 2</option>
+                                                    <option>ServiceCause 3</option>
+                                                    <option>ServiceCause 4</option>
+                                                </select>
+                                                <span asp-validation-for="ServiceCause" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="Priority" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                <select asp-for="Priority" class="form-control" required>
+                                                    <option> </option>
+                                                    <option>Priority 1</option>
+                                                    <option>Priority 2</option>
+                                                    <option>Priority 3</option>
+                                                    <option>Priority 4</option>
+                                                </select>
+                                                <span asp-validation-for="Priority" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="AssignTo" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                <select asp-for="AssignTo" class="form-control" required>
+                                                    <option> </option>
+                                                    <option>Technician 1  1</option>
+                                                    <option>Technician 2</option>
+                                                    <option>Technician 3</option>
+                                                    <option>Technician 4</option>
+                                                </select>
+                                                <span asp-validation-for="AssignTo" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="ServiceRequestNo" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                <input asp-for="ServiceRequestNo" class="form-control capitalize" required />
+                                                <span asp-validation-for="ServiceRequestNo" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="RequestDate" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                <input asp-for="RequestDate" class="form-control capitalize" required />
+                                                <span asp-validation-for="RequestDate" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="AssignedDate" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                <input asp-for="AssignedDate" class="form-control capitalize" required />
+                                                <span asp-validation-for="AssignedDate" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="RequestedBy" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                <input asp-for="RequestedBy" class="form-control capitalize" required />
+                                                <span asp-validation-for="RequestedBy" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="CompletedDate" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                <input asp-for="CompletedDate" class="form-control capitalize" required />
+                                                <span asp-validation-for="CompletedDate" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="CustomerName" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                <input asp-for="CustomerName" class="form-control capitalize" required />
+                                                <span asp-validation-for="CustomerName" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="RequestedByContact" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                <input asp-for="RequestedByContact" class="form-control capitalize" required />
+                                                <span asp-validation-for="RequestedByContact" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+
+
+                                </div>
+                                <div class="row">
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="ProductSOP" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                @* <input asp-for="UserType" class="form-control capitalize" required /> *@
+                                                <select asp-for="ProductSOP" class="form-control" required>
+                                                    <option> </option>
+                                                    <option>ProductSOP 1</option>
+                                                    <option>ProductSOP 2</option>
+                                                    <option>ProductSOP 3</option>
+                                                    <option>ProductSOP 4</option>
+                                                </select>
+                                                <span asp-validation-for="ProductSOP" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="RequestedByContact" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                <input asp-for="RequestedByContact" class="form-control capitalize" required />
+                                                <span asp-validation-for="RequestedByContact" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="ProductSOP" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                @* <input asp-for="UserType" class="form-control capitalize" required /> *@
+                                                <select asp-for="ProductSOP" class="form-control" required>
+                                                    <option> </option>
+                                                    <option>ProductSOP 1</option>
+                                                    <option>ProductSOP 2</option>
+                                                    <option>ProductSOP 3</option>
+                                                    <option>ProductSOP 4</option>
+                                                </select>
+                                                <span asp-validation-for="ProductSOP" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+
+
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label asp-for="CustomerAddress" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                <textarea asp-for="CustomerAddress" class="form-control capitalize" rows="3" required></textarea>
+                                                <span asp-validation-for="CustomerAddress" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group">
+                                            <label asp-for="OtherUserComments" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                <textarea asp-for="OtherUserComments" rows="3" class="form-control capitalize" required>
+                                                </textarea>
+                                                <span asp-validation-for="OtherUserComments" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row border p-1">
+
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="SrUploadPhoto1" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                <img id="SrUploadPhoto1"
+                                                     style="width:150px!important; "
+                                                     src="~/images\UploadImg.png" alt="UploadPhoto"
+                                                     class="profile-user-img img-fluid img-squar">
+                                                <span asp-validation-for="SrUploadPhoto1" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="SrUploadPhoto2" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                <img id="SrUploadPhoto2"
+                                                     style="width:150px!important; "
+                                                     src="~/images\UploadImg.png" alt="UploadPhoto"
+                                                     class="profile-user-img img-fluid img-squar">
+                                                <span asp-validation-for="SrUploadPhoto2" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="SrUploadPhoto3" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                <img id="SrUploadPhoto3"
+                                                     style="width:150px!important; "
+                                                     src="~/images\UploadImg.png" alt="UploadPhoto"
+                                                     class="profile-user-img img-fluid img-squar">
+                                                <span asp-validation-for="SrUploadPhoto3" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-xl-3 col-md-6 col-sm-12">
+                                        <div class="form-group">
+                                            <label asp-for="SrUploadPhoto4" class="col-12 control-label"></label>
+                                            <div class="col-12">
+                                                <img id="SrUploadPhoto4"
+                                                     style="width:150px!important; "
+                                                     src="~/images\UploadImg.png" alt="UploadPhoto"
+                                                     class="profile-user-img img-fluid img-squar">
+                                                <span asp-validation-for="SrUploadPhoto4" class="text-danger"></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="from-group m-2 pb-2">
+
+                                    <div class="col-12 ">
+                                        @*                         Edit   : <partial name="_EditAndBackToListBtn" model="@Convert.ToInt32(1)" />
+                                        Create :<partial name="_CreateAndBackToListBtn" />
+                                        *@
+                                        @* @if (Model.StudentInquiry.Id != 0)
+                                        {
+
+                                        //Edit btn and back to list
+                                        <partial name="_EditAndBackToListBtn" model="@Convert.ToInt32(Varid)" />
+                                        }
+                                        else
+                                        {
+
+                                        // Create btn and back to list
+                                        <partial name="_CreateAndBackToListBtn" />
+                                        } *@
+                                    </div>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn btn-success btn-md  mb-1 " style="float:right">Submit</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@* </div> *@
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+
+        $(document).ready(function () {
+            var fileTag = document.getElementById("UploadProfilePic"),
+                preview = document.getElementById("preview");
+
+            fileTag.addEventListener("change", function () {
+                changeImage(this);
+            });
+
+            function changeImage(input) {
+                var reader;
+
+                if (input.files && input.files[0]) {
+                    reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        preview.setAttribute('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        });
+    </script>
+
+}

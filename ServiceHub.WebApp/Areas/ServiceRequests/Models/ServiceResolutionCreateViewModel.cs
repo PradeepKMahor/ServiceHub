@@ -2,7 +2,7 @@
 using System.ComponentModel.DataAnnotations;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
-namespace ServiceHub.WebApp.Areas.Users.Models.UserRegistration
+namespace ServiceHub.WebApp.Areas.ServiceRequests.Models
 {
     public class ServiceResolutionCreateViewModel
     {

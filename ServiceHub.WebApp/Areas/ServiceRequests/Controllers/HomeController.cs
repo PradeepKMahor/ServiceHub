@@ -10,8 +10,7 @@ namespace ServiceHub.WebApp.Areas.ServiceRequests.Controllers
     {
         public IActionResult Index()
         {
-            var serviceRequestViewModel = new ServiceRequestViewModel();
-            return View(serviceRequestViewModel);
+            return View();
         }
     }
 }
