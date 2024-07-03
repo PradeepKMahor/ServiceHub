@@ -13,27 +13,27 @@ namespace ServiceHub.WebApp.Areas.Masters.Models
         public FilterDataModel FilterDataModel { get; set; }
 
         [Display(Name = "CID")]
-        public string CID { get; set; }
+        public string CID { get; set; } = string.Empty;
 
         [Display(Name = "Customer Name")]
-        public string CustomerName { get; set; }
+        public string CustomerName { get; set; } = string.Empty;
 
         [Display(Name = "Status")]
-        public string Status { get; set; }
+        public string Status { get; set; } = string.Empty;
 
         [Display(Name = "Supervisor name")]
-        public string SupervisorName { get; set; }
+        public string SupervisorName { get; set; } = string.Empty;
 
         [Display(Name = "Contact")]
-        public string Contact { get; set; }
+        public string Contact { get; set; } = string.Empty;
 
         [Display(Name = "Valid end date")]
-        public string ValidEndDate { get; set; }
+        public string ValidEndDate { get; set; } = string.Empty;
 
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         [Display(Name = "IsActive")]
-        public string IsActive { get; set; }
+        public string IsActive { get; set; } = string.Empty;
     }
 }

@@ -11,6 +11,11 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
             return View();
         }
 
+        public IActionResult UserIndex()
+        {
+            return View();
+        }
+
         public IActionResult AssessesIndex()
         {
             return View();

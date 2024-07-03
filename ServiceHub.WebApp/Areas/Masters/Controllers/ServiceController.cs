@@ -4,7 +4,7 @@ using ServiceHub.WebApp.Controllers;
 namespace ServiceHub.WebApp.Areas.Masters.Controllers
 {
     [Area("Masters")]
-    public class ServiceController : BaseController
+    public class ServiceConfigurationController : BaseController
     {
         public IActionResult Index()
         {

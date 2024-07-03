@@ -14,11 +14,6 @@
 
 @section Styles {
     <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
-    <style>
-        #tbGrid.table td, #tbGrid.table th {
-            padding: 0.2rem !important;
-        }
-    </style>
 }
 
 <div class="col-sm-12">
@@ -27,11 +22,11 @@
             <div class="card card-tpl">
                 <div class="card-header header-flex">
                     <h5>User Management</h5>
-                    @*                     <span class="f-14 f-w-700"> &#10148; </span>
-                    *@
+                    <span class="f-14 f-w-700"> &#10148; </span>
+
                 </div>
                 <div class="card-block card-tile">
-                    <a href="@Url.Action("Index", "UserManagement", new { Area = "Users" })">
+                    <a href="@Url.Action("UserIndex", "Home", new { Area = "Masters" })">
                         <div class="row align-items-center justify-content-center stretched-link">
                             <div class="col">
                                 <h7 class="mb-2 f-w-300"> </h7>
@@ -68,11 +63,11 @@
         <div class="col-md-4 col-xl-3">
             <div class="card card-tpl">
                 <div class="card-header header-flex">
-                    <h5>Product / Services</h5>
+                    <h5>Products</h5>
                     <span class="f-14 f-w-700"> &#10148; </span>
                 </div>
                 <div class="card-block card-tile">
-                    <a href="@Url.Action("ProductServicesIndex", "Home", new { Area = "Masters" })">
+                    <a href="@Url.Action("Index", "Products", new { Area = "Masters" })">
                         <div class="row align-items-center justify-content-center stretched-link">
                             <div class="col">
                                 <h7 class="mb-2 f-w-300"> </h7>
@@ -92,7 +87,7 @@
                     <span class="f-14 f-w-700"> &#10148; </span>
                 </div>
                 <div class="card-block card-tile">
-                    <a href="@Url.Action("ServiceConfigIndex", "Home", new { Area = "Masters" })">
+                    <a href="@Url.Action("Index", "ServiceConfiguration", new { Area = "Masters" })">
                         <div class="row align-items-center justify-content-center stretched-link">
                             <div class="col">
                                 <h7 class="mb-2 f-w-300"> </h7>

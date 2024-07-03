@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Assesses Page";
+    ViewData["Title"] = "Users Page";
 }
 
 @section BreadCrumbs
@@ -7,7 +7,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
 
-        <li class="breadcrumb-item active" aria-current="page">Product Services</li>
+        <li class="breadcrumb-item active" aria-current="page">User Management</li>
     </ol>
 
 }
@@ -23,10 +23,10 @@
         <div class="col-md-3 col-xl-3">
             <div class="card card-tpl">
                 <div class="card-header">
-                    <h5>Product</h5>
+                    <h5>Users Customer</h5>
                 </div>
                 <div class="card-block card-tile">
-                    <a asp-area="Masters" asp-controller="Product" asp-action="ProductIndex">
+                    <a asp-area="Masters" asp-controller="UsersCustomer" asp-action="Index">
                         <div class="row align-items-center justify-content-center stretched-link">
                             <div class="col">
                                 <h3 class="mb-2 f-w-300"></h3>
@@ -42,10 +42,10 @@
         <div class="col-md-3 col-xl-3">
             <div class="card card-tpl">
                 <div class="card-header">
-                    <h5>Sub Product</h5>
+                    <h5>Users Client</h5>
                 </div>
                 <div class="card-block card-tile">
-                    <a asp-area="Masters" asp-controller="Product" asp-action="SubProductIndex">
+                    <a asp-area="Masters" asp-controller="UsersClient" asp-action="Index">
                         <div class="row align-items-center justify-content-center stretched-link">
                             <div class="col">
                                 <h3 class="mb-2 f-w-300"></h3>
@@ -58,25 +58,7 @@
                 </div>
             </div>
         </div>
-        <div class="col-md-3 col-xl-3">
-            <div class="card card-tpl">
-                <div class="card-header">
-                    <h5>Root Cause Analysis</h5>
-                </div>
-                <div class="card-block card-tile">
-                    <a asp-area="Masters" asp-controller="Product" asp-action="RootCauseAnalysisIndex">
-                        <div class="row align-items-center justify-content-center stretched-link">
-                            <div class="col">
-                                <h3 class="mb-2 f-w-300"></h3>
-                            </div>
-                            <div class="col-auto">
-                                <i class="fas fa-user-tie f-20 text-white theme-dark-green"></i>
-                            </div>
-                        </div>
-                    </a>
-                </div>
-            </div>
-        </div>
+
 
     </div>
 

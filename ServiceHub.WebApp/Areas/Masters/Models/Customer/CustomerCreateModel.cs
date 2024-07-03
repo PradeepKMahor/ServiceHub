@@ -7,24 +7,24 @@ namespace ServiceHub.WebApp.Areas.Masters.Models
     {
         [Required]
         [Display(Name = "User Name")]
-        public string UserName { get; set; }
+        public string UserName { get; set; } = string.Empty;
 
         [Required]
         [Display(Name = "Email")]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         [Required]
         [Display(Name = "Clint Name")]
-        public string ClintName { get; set; }
+        public string ClintName { get; set; } = string.Empty;
 
         [Display(Name = "Search")]
-        public string RoleId { get; set; }
+        public string RoleId { get; set; } = string.Empty;
 
         [Required]
         [Display(Name = "Role Name")]
-        public string RoleName { get; set; }
+        public string RoleName { get; set; } = string.Empty;
 
         [Display(Name = "IsActive")]
-        public string IsActive { get; set; }
+        public string IsActive { get; set; } = string.Empty;
     }
 }
