@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ServiceHub.WebApp.Areas.Users.Models.UserRegistration;
 
 namespace ServiceHub.WebApp.Areas.Users.Controllers
 {

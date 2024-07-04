@@ -9,9 +9,13 @@
 
 	<ItemGroup>
 		<Compile Remove="Areas\Identity\Data\**" />
+		<Compile Remove="Areas\Users\**" />
 		<Content Remove="Areas\Identity\Data\**" />
+		<Content Remove="Areas\Users\**" />
 		<EmbeddedResource Remove="Areas\Identity\Data\**" />
+		<EmbeddedResource Remove="Areas\Users\**" />
 		<None Remove="Areas\Identity\Data\**" />
+		<None Remove="Areas\Users\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -45,7 +49,6 @@
 		<Folder Include="Areas\ServiceRequests\Data\" />
 		<Folder Include="Areas\SystemAdmin\Models\" />
 		<Folder Include="Areas\SystemAdmin\Data\" />
-		<Folder Include="Areas\Users\Data\" />
 		<Folder Include="Views\Shared\AdminLTE\" />
 	</ItemGroup>
 

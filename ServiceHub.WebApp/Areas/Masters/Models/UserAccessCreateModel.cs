@@ -1,7 +1,6 @@
-﻿using ServiceHub.WebApp.Models;
-using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace ServiceHub.WebApp.Areas.Masters.Models
+namespace ServiceHub.WebApp.Models
 {
     public class UserAccessCreateModel
     {

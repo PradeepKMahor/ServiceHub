@@ -1,5 +1,5 @@
 ﻿@{
-    ViewData["Title"] = "Assesses Page";
+    ViewData["Title"] = "Product / Services Page";
 }
 
 @section BreadCrumbs
@@ -7,7 +7,7 @@
     <ol class="breadcrumb">
         <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
 
-        <li class="breadcrumb-item active" aria-current="page">Product Services</li>
+        <li class="breadcrumb-item active" aria-current="page">Product & Services</li>
     </ol>
 
 }
@@ -26,7 +26,7 @@
                     <h5>Product</h5>
                 </div>
                 <div class="card-block card-tile">
-                    <a asp-area="Masters" asp-controller="Product" asp-action="ProductIndex">
+                    <a asp-area="Masters" asp-controller="Products" asp-action="Index">
                         <div class="row align-items-center justify-content-center stretched-link">
                             <div class="col">
                                 <h3 class="mb-2 f-w-300"></h3>
@@ -45,7 +45,7 @@
                     <h5>Sub Product</h5>
                 </div>
                 <div class="card-block card-tile">
-                    <a asp-area="Masters" asp-controller="Product" asp-action="SubProductIndex">
+                    <a asp-area="Masters" asp-controller="Products" asp-action="SubProductIndex">
                         <div class="row align-items-center justify-content-center stretched-link">
                             <div class="col">
                                 <h3 class="mb-2 f-w-300"></h3>
@@ -64,7 +64,7 @@
                     <h5>Root Cause Analysis</h5>
                 </div>
                 <div class="card-block card-tile">
-                    <a asp-area="Masters" asp-controller="Product" asp-action="RootCauseAnalysisIndex">
+                    <a asp-area="Masters" asp-controller="Products" asp-action="RootCauseAnalysisIndex">
                         <div class="row align-items-center justify-content-center stretched-link">
                             <div class="col">
                                 <h3 class="mb-2 f-w-300"></h3>

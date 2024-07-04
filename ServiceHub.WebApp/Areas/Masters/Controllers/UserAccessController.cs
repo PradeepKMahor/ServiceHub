@@ -1,7 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ServiceHub.WebApp.Models;
-using ServiceHub.WebApp.Areas.Masters.Models;
 using ServiceHub.WebApp.Controllers;
+using ServiceHub.WebApp.Models;
 
 namespace ServiceHub.WebApp.Areas.Masters.Controllers
 {

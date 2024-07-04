@@ -1,4 +1,4 @@
-﻿@model ServiceHub.WebApp.Areas.Users.Models.UserManagement.UserCustomerCreateViewModel
+﻿@model ServiceHub.WebApp.Models.UserCustomerCreateViewModel
 
 @{
     ViewData["Title"] = "New User ";
@@ -10,10 +10,13 @@
 @section BreadCrumbs
 {
     <ol class="breadcrumb">
-        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Master</a></li>
-        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="UserManagement" asp-area="Users">User Management</a></li>
+        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
+        <li class="breadcrumb-item "><a asp-action="UserIndex" asp-controller="Home" asp-area="Masters">User Management</a></li>
+        <li class="breadcrumb-item ">
+            <a asp-action="Index" asp-controller="UsersCustomer" asp-area="Masters">Users Customer list</a>
+        </li>
 
-        <li class="breadcrumb-item active" aria-current="page">New Application User Registration</li>
+        <li class="breadcrumb-item active" aria-current="page">Create Users Customer </li>k
     </ol>
 
 }
@@ -48,10 +51,10 @@
 
                                     <div class=" col-6 col-md-4  ">
                                         <div class="form-group">
-                                            <label asp-for="FirstName" class="col-12 control-label"></label>
+                                            <label asp-for="MiddleName" class="col-12 control-label"></label>
                                             <div class="col-12">
-                                                <input asp-for="FirstName" class="form-control capitalize" required />
-                                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                                                <input asp-for="MiddleName" class="form-control capitalize" required />
+                                                <span asp-validation-for="MiddleName" class="text-danger"></span>
                                             </div>
                                         </div>
                                     </div>
@@ -73,8 +76,6 @@
                                             </div>
                                         </div>
                                     </div>
-
-
                                     <div class=" col-6 col-md-4  ">
                                         <div class="form-group">
                                             <label asp-for="ContactNo" class="col-12 control-label"></label>

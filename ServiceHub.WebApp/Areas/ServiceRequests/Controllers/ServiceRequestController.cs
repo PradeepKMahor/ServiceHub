@@ -1,10 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.VisualStudio.TextTemplating;
-using ServiceHub.WebApp.Areas.ServiceRequests.Models;
 using ServiceHub.WebApp.Controllers;
 using ServiceHub.WebApp.Models;
-using System.Net;
 
 namespace ServiceHub.WebApp.Areas.ServiceRequests.Controllers
 {

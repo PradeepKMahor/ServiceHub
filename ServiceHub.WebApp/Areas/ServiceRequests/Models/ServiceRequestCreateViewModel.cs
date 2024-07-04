@@ -1,8 +1,6 @@
-﻿using Azure.Core;
-using System.ComponentModel.DataAnnotations;
-using static System.Runtime.InteropServices.JavaScript.JSType;
+﻿using System.ComponentModel.DataAnnotations;
 
-namespace ServiceHub.WebApp.Areas.ServiceRequests.Models
+namespace ServiceHub.WebApp.Models
 {
     public class ServiceRequestCreateViewModel
     {

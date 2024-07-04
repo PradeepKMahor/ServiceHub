@@ -2,8 +2,15 @@
 
 namespace ServiceHub.WebApp.Models
 {
-    public class UserRegistrationViewModel
+    public class UserCustomerViewModel
     {
+        public UserCustomerViewModel()
+        {
+            this.FilterDataModel = new FilterDataModel();
+        }
+
+        public FilterDataModel FilterDataModel { get; set; }
+
         [Display(Name = "UserID")]
         public string UserId { get; set; } = string.Empty;
 
@@ -21,6 +28,18 @@ namespace ServiceHub.WebApp.Models
 
         [Display(Name = "Email Id")]
         public string EmailId { get; set; } = string.Empty;
+
+        [Display(Name = "Parent Org.")]
+        public string ParentOrg { get; set; } = string.Empty;
+
+        [Display(Name = "User Type")]
+        public string UserType { get; set; } = string.Empty;
+
+        [Display(Name = "Supervisor Name")]
+        public string SupervisorName { get; set; } = string.Empty;
+
+        [Display(Name = "Admin Name")]
+        public string AdminName { get; set; } = string.Empty;
 
         [Display(Name = "Valid From Date")]
         public DateTime? ValidFromDate { get; set; }

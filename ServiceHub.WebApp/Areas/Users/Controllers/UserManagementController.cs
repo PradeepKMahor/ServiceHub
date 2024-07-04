@@ -1,6 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ServiceHub.WebApp.Areas.Masters.Models;
-using ServiceHub.WebApp.Areas.Users.Models.UserManagement;
 using ServiceHub.WebApp.Controllers;
 using ServiceHub.WebApp.Models;
 
@@ -17,13 +15,13 @@ namespace ServiceHub.WebApp.Areas.Users.Controllers
 
         public IActionResult CreateUser()
         {
-            var userCreateViewModel = new UserCreateViewModel();
+            var userCreateViewModel = new UserCustomerCreateViewModel();
             return View(userCreateViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateUser(UserCreateViewModel userCreateViewModel)
+        public IActionResult CreateUser(UserCustomerCreateViewModel userCreateViewModel)
         {
             try
             {

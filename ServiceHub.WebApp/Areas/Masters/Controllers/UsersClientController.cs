@@ -1,6 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using ServiceHub.WebApp.Areas.Masters.Models;
 using ServiceHub.WebApp.Controllers;
+using ServiceHub.WebApp.Models;
 
 namespace ServiceHub.WebApp.Areas.Masters.Controllers
 {
@@ -9,8 +9,13 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
     {
         public IActionResult Index()
         {
-            var customerViewModel = new CustomerViewModel();
             return View();
+        }
+
+        public IActionResult CreateClientUserIndex()
+        {
+            var userRegistrationCreateViewModel = new UserRegistrationCreateViewModel();
+            return View(userRegistrationCreateViewModel);
         }
     }
 }
