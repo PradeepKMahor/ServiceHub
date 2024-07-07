@@ -46,18 +46,12 @@ namespace ServiceHub.WebApp.Models
             /// <summary>
             /// Set the ID property of the dt-tag tr node to this value
             /// </summary>
-            public virtual string DT_RowId
-            {
-                get { return null; }
-            }
+            public virtual string? DT_RowId => null;
 
             /// <summary>
             /// Add this class to the dt-tag tr node
             /// </summary>
-            public virtual string DT_RowClass
-            {
-                get { return null; }
-            }
+            public virtual string? DT_RowClass => null;
 
             /// <summary>
             /// Add this data property to the row's dt-tag tr node allowing abstract data to be
@@ -65,10 +59,7 @@ namespace ServiceHub.WebApp.Models
             /// method to set the data, which can also then be used for later retrieval (for example
             /// on a click event).
             /// </summary>
-            public virtual object DT_RowData
-            {
-                get { return null; }
-            }
+            public virtual object? DT_RowData => null;
         }
 
         /// <summary>
@@ -88,7 +79,7 @@ namespace ServiceHub.WebApp.Models
             /// <summary>
             /// An array defining all columns in the table.
             /// </summary>
-            public DTColumn[] Columns { get; set; }
+            public DTColumn[]? Columns { get; set; }
 
             /// <summary>
             /// An array defining how many columns are being ordering upon - i.e. if the array
@@ -119,15 +110,9 @@ namespace ServiceHub.WebApp.Models
             /// <summary>
             /// Custom column that is used to further sort on the first Order column.
             /// </summary>
-            public string SortOrder
-            {
-                get
-                {
-                    return Columns != null && Order != null && Order.Length > 0
+            public string? SortOrder => Columns != null && Order != null && Order.Length > 0
                         ? (Columns[Order[0].Column].Data + (Order[0].Dir == DTOrderDir.DESC ? " " + Order[0].Dir : string.Empty))
                         : null;
-                }
-            }
 
             public string GenericSearch { get; set; }
 

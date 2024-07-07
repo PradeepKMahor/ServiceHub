@@ -4,13 +4,7 @@ using Microsoft.Extensions.Logging;
 using ServiceHub.DataAccess.Helpers;
 using ServiceHub.DataAccess.Models;
 using ServiceHub.Domain.Context;
-using System;
-using System.Buffers.Text;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServiceHub.DataAccess.Base
 {
@@ -34,26 +28,36 @@ namespace ServiceHub.DataAccess.Base
 
         public virtual async Task<Tout> ExecAsync(BaseSp baseSp, Tin tInput)
         {
-            var tOutput = new Tout();
+            Tout? tOutput = new();
 
-            var conn = _context.Database.GetDbConnection();
+            System.Data.Common.DbConnection conn = _context.Database.GetDbConnection();
             await conn.OpenAsync();
 
-            using (var command = conn.CreateCommand())
+            using (System.Data.Common.DbCommand command = conn.CreateCommand())
             {
                 command.CommandText = CommandText;
                 command.CommandType = CommandType.StoredProcedure;
                 if (_context.Database.GetCommandTimeout() != null)
+                {
                     command.CommandTimeout = _context.Database.GetCommandTimeout().Value;
+                }
 
                 if (baseSp != null)
+                {
                     command.Parameters.AddRange(Helper.FillSqlParameter(baseSp).ToArray());
-                if (tInput != null)
-                    command.Parameters.AddRange(Helper.FillSqlParameter(tInput, false).ToArray());
-                if (tOutput != null)
-                    command.Parameters.AddRange(Helper.FillSqlParameterOutput<Tout>().ToArray());
+                }
 
-                int rowCount = await command.ExecuteNonQueryAsync();
+                if (tInput != null)
+                {
+                    command.Parameters.AddRange(Helper.FillSqlParameter(tInput, false).ToArray());
+                }
+
+                if (tOutput != null)
+                {
+                    command.Parameters.AddRange(Helper.FillSqlParameterOutput<Tout>().ToArray());
+                }
+
+                _ = await command.ExecuteNonQueryAsync();
 
                 tOutput = Helper.ConvertDbParameterToObject<Tout>(command.Parameters);
 
@@ -66,40 +70,53 @@ namespace ServiceHub.DataAccess.Base
 
         public virtual async Task<Tout> ExecCacheAsync(BaseSp baseSp, Tin tInput, string[] tags)
         {
-            var tOutput = new Tout();
+            Tout? tOutput = new();
             string sql = "";
             bool cacheInError = false;
 
-            var conn = _context.Database.GetDbConnection();
+            System.Data.Common.DbConnection conn = _context.Database.GetDbConnection();
 
-            using (var command = conn.CreateCommand())
+            using (System.Data.Common.DbCommand command = conn.CreateCommand())
             {
                 command.CommandText = CommandText;
                 command.CommandType = CommandType.StoredProcedure;
                 if (_context.Database.GetCommandTimeout() != null)
+                {
                     command.CommandTimeout = _context.Database.GetCommandTimeout().Value;
+                }
 
                 if (baseSp != null)
+                {
                     command.Parameters.AddRange(Helper.FillSqlParameter(baseSp).ToArray());
-                if (tInput != null)
-                    command.Parameters.AddRange(Helper.FillSqlParameter(tInput, false).ToArray());
+                }
 
-                if (_context.DisableCache == false)
+                if (tInput != null)
+                {
+                    command.Parameters.AddRange(Helper.FillSqlParameter(tInput, false).ToArray());
+                }
+
+                if (!_context.DisableCache)
+                {
                     sql = Helper.CommandAsSql(command);
+                }
 
                 if (tOutput != null)
-                    command.Parameters.AddRange(Helper.FillSqlParameterOutput<Tout>().ToArray());
-
-                if (_context.DisableCache == false)
                 {
-                    if (IsCachedByUser == false)
+                    command.Parameters.AddRange(Helper.FillSqlParameterOutput<Tout>().ToArray());
+                }
+
+                if (!_context.DisableCache)
+                {
+                    if (!IsCachedByUser)
+                    {
                         sql = sql.Replace("@UIUserId = " + baseSp.UIUserId.ToString() + ", ", "");
+                    }
 
                     sql += CacheKeySuffix == null ? "" : " " + string.Join("|", CacheKeySuffix);
 
                     try
                     {
-                        var cached = await _redisContext.Cache.GetObjectAsync<Tout>(sql);
+                        Tout cached = await _redisContext.Cache.GetObjectAsync<Tout>(sql);
 
                         if (cached != null)
                         {
@@ -115,13 +132,13 @@ namespace ServiceHub.DataAccess.Base
                 }
 
                 await conn.OpenAsync();
-                int rowCount = await command.ExecuteNonQueryAsync();
+                _ = await command.ExecuteNonQueryAsync();
 
                 tOutput = Helper.ConvertDbParameterToObject<Tout>(command.Parameters);
 
                 command.Dispose();
 
-                if (_context.DisableCache == false & cacheInError == false)
+                if (!_context.DisableCache && !cacheInError)
                 {
                     await _redisContext.Cache.SetObjectAsync<Tout>(sql, tOutput, tags, TimeSpan.FromMinutes(AbsoluteExpirationRelativeToNowMinute));
                 }
@@ -134,26 +151,36 @@ namespace ServiceHub.DataAccess.Base
 
         public virtual async Task<Tout> StorageValuedFunctionAsync(BaseSp baseSp, Tin tInput)
         {
-            var tOutput = new Tout();
+            Tout? tOutput = new();
 
-            var conn = _context.Database.GetDbConnection();
+            System.Data.Common.DbConnection conn = _context.Database.GetDbConnection();
             await conn.OpenAsync();
 
-            using (var command = conn.CreateCommand())
+            using (System.Data.Common.DbCommand command = conn.CreateCommand())
             {
                 command.CommandText = CommandText;
                 command.CommandType = CommandType.StoredProcedure;
                 if (_context.Database.GetCommandTimeout() != null)
+                {
                     command.CommandTimeout = _context.Database.GetCommandTimeout().Value;
+                }
 
                 if (baseSp != null)
+                {
                     command.Parameters.AddRange(Helper.FillSqlParameter(baseSp).ToArray());
-                if (tInput != null)
-                    command.Parameters.AddRange(Helper.FillSqlParameter(tInput, false).ToArray());
-                if (tOutput != null)
-                    command.Parameters.AddRange(Helper.FillSqlParameterReturnValue<Tout>().ToArray());
+                }
 
-                int rowCount = await command.ExecuteNonQueryAsync();
+                if (tInput != null)
+                {
+                    command.Parameters.AddRange(Helper.FillSqlParameter(tInput, false).ToArray());
+                }
+
+                if (tOutput != null)
+                {
+                    command.Parameters.AddRange(Helper.FillSqlParameterReturnValue<Tout>().ToArray());
+                }
+
+                _ = await command.ExecuteNonQueryAsync();
 
                 tOutput = Helper.ConvertDbParameterToObject<Tout>(command.Parameters);
                 command.Dispose();
@@ -165,40 +192,53 @@ namespace ServiceHub.DataAccess.Base
 
         public virtual async Task<Tout> StorageValuedFunctionCacheAsync(BaseSp baseSp, Tin tInput, string[] tags)
         {
-            var tOutput = new Tout();
+            Tout? tOutput = new();
             string sql = "";
             bool cacheInError = false;
 
-            var conn = _context.Database.GetDbConnection();
+            System.Data.Common.DbConnection conn = _context.Database.GetDbConnection();
 
-            using (var command = conn.CreateCommand())
+            using (System.Data.Common.DbCommand command = conn.CreateCommand())
             {
                 command.CommandText = CommandText;
                 command.CommandType = CommandType.StoredProcedure;
                 if (_context.Database.GetCommandTimeout() != null)
+                {
                     command.CommandTimeout = _context.Database.GetCommandTimeout().Value;
+                }
 
                 if (baseSp != null)
+                {
                     command.Parameters.AddRange(Helper.FillSqlParameter(baseSp).ToArray());
-                if (tInput != null)
-                    command.Parameters.AddRange(Helper.FillSqlParameter(tInput, false).ToArray());
+                }
 
-                if (_context.DisableCache == false)
+                if (tInput != null)
+                {
+                    command.Parameters.AddRange(Helper.FillSqlParameter(tInput, false).ToArray());
+                }
+
+                if (!_context.DisableCache)
+                {
                     sql = Helper.CommandAsSql(command);
+                }
 
                 if (tOutput != null)
-                    command.Parameters.AddRange(Helper.FillSqlParameterReturnValue<Tout>().ToArray());
-
-                if (_context.DisableCache == false)
                 {
-                    if (IsCachedByUser == false)
+                    command.Parameters.AddRange(Helper.FillSqlParameterReturnValue<Tout>().ToArray());
+                }
+
+                if (!_context.DisableCache)
+                {
+                    if (!IsCachedByUser)
+                    {
                         sql = sql.Replace("@UIUserId = " + baseSp.UIUserId.ToString() + ", ", "");
+                    }
 
                     sql += CacheKeySuffix == null ? "" : " " + string.Join("|", CacheKeySuffix);
 
                     try
                     {
-                        var cached = await _redisContext.Cache.GetObjectAsync<Tout>(sql);
+                        Tout cached = await _redisContext.Cache.GetObjectAsync<Tout>(sql);
 
                         if (cached != null)
                         {
@@ -214,13 +254,13 @@ namespace ServiceHub.DataAccess.Base
                 }
 
                 await conn.OpenAsync();
-                int rowCount = await command.ExecuteNonQueryAsync();
+                _ = await command.ExecuteNonQueryAsync();
 
                 tOutput = Helper.ConvertDbParameterToObject<Tout>(command.Parameters);
 
                 command.Dispose();
 
-                if (_context.DisableCache == false & cacheInError == false)
+                if (!_context.DisableCache && !cacheInError)
                 {
                     await _redisContext.Cache.SetObjectAsync<Tout>(sql, tOutput, tags, TimeSpan.FromMinutes(AbsoluteExpirationRelativeToNowMinute));
                 }

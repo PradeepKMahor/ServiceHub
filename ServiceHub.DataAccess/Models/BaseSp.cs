@@ -12,6 +12,6 @@ namespace ServiceHub.DataAccess.Models
         public short? UIEntityId { get; set; }
         public short? UIProfileId { get; set; }
         public Guid? UIUserId { get; set; }
-        public string UICultureInfoId { get; set; }
+        public string UICultureInfoId { get; set; } = string.Empty;
     }
 }

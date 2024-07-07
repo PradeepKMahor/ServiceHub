@@ -8,7 +8,7 @@ namespace ServiceHub.DataAccess.Models
 {
     public class CacheTable
     {
-        public string Name { get; set; }
+        public string Name { get; set; } = string.Empty;
 
         public List<CacheTableRow> CacheTableRows { get; set; }
 
@@ -21,9 +21,9 @@ namespace ServiceHub.DataAccess.Models
 
     public class CacheTableRow
     {
-        public string Root { get; set; }
+        public string Root { get; set; } = string.Empty;
         public short UIAppId { get; set; }
         public short UIEntityId { get; set; }
-        public string Key { get; set; }
+        public string Key { get; set; } = string.Empty;
     }
 }

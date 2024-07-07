@@ -1,13 +1,8 @@
-﻿using Microsoft.Data.SqlClient;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
+﻿using FastMember;
+using Microsoft.Data.SqlClient;
 using System.Data;
-using System.Linq;
+using System.Data.Common;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using FastMember;
 
 namespace ServiceHub.DataAccess.Helpers
 {
@@ -44,9 +39,9 @@ namespace ServiceHub.DataAccess.Helpers
         public static T ConvertDbDataReaderToObject<T>(this DbDataReader rd) where T : class, new()
         {
             Type type = typeof(T);
-            var accessor = TypeAccessor.Create(type);
-            var members = accessor.GetMembers();
-            var t = new T();
+            TypeAccessor accessor = TypeAccessor.Create(type);
+            MemberSet members = accessor.GetMembers();
+            T t = new();
 
             for (int i = 0; i < rd.FieldCount; i++)
             {
@@ -70,20 +65,22 @@ namespace ServiceHub.DataAccess.Helpers
         public static T ConvertDbParameterToObject<T>(this DbParameterCollection pars) where T : class, new()
         {
             Type type = typeof(T);
-            var accessor = TypeAccessor.Create(type);
-            var members = accessor.GetMembers();
-            var t = new T();
+            TypeAccessor accessor = TypeAccessor.Create(type);
+            MemberSet members = accessor.GetMembers();
+            T t = new();
 
             foreach (DbParameter par in pars)
             {
-                if (par.Direction == ParameterDirection.Output || par.Direction == ParameterDirection.ReturnValue)
+                if (par.Direction is ParameterDirection.Output or ParameterDirection.ReturnValue)
                 {
                     string fieldName = par.ParameterName.Replace("@", "");
 
                     if (members.Any(m => string.Equals(m.Name, fieldName, StringComparison.OrdinalIgnoreCase)))
                     {
                         if (par.Value != DBNull.Value)
+                        {
                             accessor[t, fieldName] = par.Value;
+                        }
                     }
                 }
             }
@@ -96,13 +93,13 @@ namespace ServiceHub.DataAccess.Helpers
         /// </summary>
         public static List<SqlParameter> FillSqlParameter<T>(T t, bool AddAllProperty = true) where T : class, new()
         {
-            var pars = new List<SqlParameter>();
+            List<SqlParameter> pars = new();
 
             PropertyInfo[] properties = typeof(T).GetProperties();
 
             foreach (PropertyInfo property in properties)
             {
-                if (AddAllProperty == false)
+                if (!AddAllProperty)
                 {
                     if (property.GetValue(t, null) != null && !string.IsNullOrEmpty(property.GetValue(t, null).ToString()))
                     {
@@ -132,13 +129,13 @@ namespace ServiceHub.DataAccess.Helpers
         /// </summary>
         public static List<SqlParameter> FillSqlParameterOutput<T>() where T : class, new()
         {
-            var pars = new List<SqlParameter>();
+            List<SqlParameter> pars = new();
 
             PropertyInfo[] properties = typeof(T).GetProperties();
 
             foreach (PropertyInfo property in properties)
             {
-                var sqlParameter = new SqlParameter
+                SqlParameter sqlParameter = new()
                 {
                     ParameterName = "@" + property.Name,
                     Direction = ParameterDirection.Output,
@@ -146,10 +143,14 @@ namespace ServiceHub.DataAccess.Helpers
                 };
 
                 if (property.PropertyType == typeof(string))
+                {
                     sqlParameter.Size = 4000;
+                }
 
                 if (property.PropertyType == typeof(object))
+                {
                     sqlParameter.Size = -1;
+                }
 
                 pars.Add(sqlParameter);
             }
@@ -162,13 +163,13 @@ namespace ServiceHub.DataAccess.Helpers
         /// </summary>
         public static List<SqlParameter> FillSqlParameterReturnValue<T>() where T : class, new()
         {
-            var pars = new List<SqlParameter>();
+            List<SqlParameter> pars = new();
 
             PropertyInfo[] properties = typeof(T).GetProperties();
 
             foreach (PropertyInfo property in properties)
             {
-                var sqlParameter = new SqlParameter
+                SqlParameter sqlParameter = new()
                 {
                     ParameterName = "@" + property.Name,
                     Direction = ParameterDirection.ReturnValue,
@@ -176,7 +177,9 @@ namespace ServiceHub.DataAccess.Helpers
                 };
 
                 if (property.PropertyType == typeof(string))
+                {
                     sqlParameter.Size = 4000;
+                }
 
                 pars.Add(sqlParameter);
             }
@@ -209,55 +212,12 @@ namespace ServiceHub.DataAccess.Helpers
 
         private static string ParameterValueForSql(SqlParameter sp)
         {
-            string retval;
-
-            switch (sp.SqlDbType)
+            string retval = sp.SqlDbType switch
             {
-                case SqlDbType.Char:
-                case SqlDbType.NChar:
-                case SqlDbType.NText:
-                case SqlDbType.NVarChar:
-                case SqlDbType.Text:
-                case SqlDbType.Time:
-                case SqlDbType.VarChar:
-                case SqlDbType.Xml:
-                case SqlDbType.Date:
-                case SqlDbType.DateTime:
-                case SqlDbType.DateTime2:
-                case SqlDbType.DateTimeOffset:
-                    if (sp.Value == DBNull.Value)
-                    {
-                        retval = "NULL";
-                    }
-                    else
-                    {
-                        retval = "'" + sp.Value.ToString().Replace("'", "''") + "'";
-                    }
-                    break;
-
-                case SqlDbType.Bit:
-                    if (sp.Value == DBNull.Value)
-                    {
-                        retval = "NULL";
-                    }
-                    else
-                    {
-                        retval = ((bool)sp.Value == false) ? "0" : "1";
-                    }
-                    break;
-
-                default:
-                    if (sp.Value == DBNull.Value)
-                    {
-                        retval = "NULL";
-                    }
-                    else
-                    {
-                        retval = sp.Value.ToString().Replace("'", "''");
-                    }
-                    break;
-            }
-
+                SqlDbType.Char or SqlDbType.NChar or SqlDbType.NText or SqlDbType.NVarChar or SqlDbType.Text or SqlDbType.Time or SqlDbType.VarChar or SqlDbType.Xml or SqlDbType.Date or SqlDbType.DateTime or SqlDbType.DateTime2 or SqlDbType.DateTimeOffset => sp.Value == DBNull.Value ? "NULL" : "'" + sp.Value.ToString().Replace("'", "''") + "'",
+                SqlDbType.Bit => sp.Value == DBNull.Value ? "NULL" : (!(bool)sp.Value) ? "0" : "1",
+                _ => sp.Value == DBNull.Value ? "NULL" : sp.Value.ToString().Replace("'", "''"),
+            };
             return retval;
         }
 
@@ -266,12 +226,9 @@ namespace ServiceHub.DataAccess.Helpers
             // Allow nullable types to be handled
             propertyType = Nullable.GetUnderlyingType(propertyType) ?? propertyType;
 
-            if (typeMap.ContainsKey(propertyType))
-            {
-                return typeMap[propertyType];
-            }
-
-            throw new ArgumentException($"{propertyType.FullName} is not a supported .NET class");
+            return typeMap.ContainsKey(propertyType)
+                ? typeMap[propertyType]
+                : throw new ArgumentException($"{propertyType.FullName} is not a supported .NET class");
         }
     }
 }

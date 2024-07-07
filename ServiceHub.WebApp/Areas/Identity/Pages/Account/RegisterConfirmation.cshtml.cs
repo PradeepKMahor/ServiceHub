@@ -1,11 +1,10 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.WebUtilities;
+using System.Text;
 
 namespace ServiceHub.WebApp.Areas.Identity.Pages.Account
 {
@@ -27,7 +26,7 @@ namespace ServiceHub.WebApp.Areas.Identity.Pages.Account
 
         public string EmailConfirmationUrl { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(string email, string returnUrl = null)
+        public async Task<IActionResult> OnGetAsync(string email, string? returnUrl = null)
         {
             if (email == null)
             {

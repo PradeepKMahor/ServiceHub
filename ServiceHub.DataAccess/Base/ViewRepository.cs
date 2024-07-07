@@ -1,17 +1,11 @@
 ﻿using CachingFramework.Redis.Contracts;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using ServiceHub.DataAccess.Helpers;
 using ServiceHub.DataAccess.Models;
 using ServiceHub.Domain.Context;
-using System;
-using System.Collections.Generic;
-using System.Data.Common;
 using System.Data;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Text;
-using System.Threading.Tasks;
-using Microsoft.EntityFrameworkCore;
+using System.Data.Common;
 
 namespace ServiceHub.DataAccess.Base
 {
@@ -35,22 +29,29 @@ namespace ServiceHub.DataAccess.Base
 
         public virtual T Get(BaseSp baseSp, ParameterSp parameterSp)
         {
-            var item = new T();
+            T item = new();
 
-            var conn = _context.Database.GetDbConnection();
+            DbConnection conn = _context.Database.GetDbConnection();
             conn.Open();
 
-            using (var command = conn.CreateCommand())
+            using (DbCommand command = conn.CreateCommand())
             {
                 command.CommandText = CommandText;
                 command.CommandType = CommandType.StoredProcedure;
                 if (_context.Database.GetCommandTimeout() != null)
+                {
                     command.CommandTimeout = _context.Database.GetCommandTimeout().Value;
+                }
 
                 if (baseSp != null)
+                {
                     command.Parameters.AddRange(Helper.FillSqlParameter(baseSp).ToArray());
+                }
+
                 if (parameterSp != null)
+                {
                     command.Parameters.AddRange(Helper.FillSqlParameter(parameterSp, false).ToArray());
+                }
 
                 DbDataReader reader = command.ExecuteReader();
 
@@ -71,22 +72,29 @@ namespace ServiceHub.DataAccess.Base
 
         public virtual async Task<T> GetAsync(BaseSp baseSp, ParameterSp parameterSp)
         {
-            var item = new T();
+            T item = new();
 
-            var conn = _context.Database.GetDbConnection();
+            DbConnection conn = _context.Database.GetDbConnection();
             await conn.OpenAsync();
 
-            using (var command = conn.CreateCommand())
+            using (DbCommand command = conn.CreateCommand())
             {
                 command.CommandText = CommandText;
                 command.CommandType = CommandType.StoredProcedure;
                 if (_context.Database.GetCommandTimeout() != null)
+                {
                     command.CommandTimeout = _context.Database.GetCommandTimeout().Value;
+                }
 
                 if (baseSp != null)
+                {
                     command.Parameters.AddRange(Helper.FillSqlParameter(baseSp).ToArray());
+                }
+
                 if (parameterSp != null)
+                {
                     command.Parameters.AddRange(Helper.FillSqlParameter(parameterSp, false).ToArray());
+                }
 
                 DbDataReader reader = await command.ExecuteReaderAsync();
 
@@ -107,34 +115,43 @@ namespace ServiceHub.DataAccess.Base
 
         public virtual async Task<T> GetCacheAsync(BaseSp baseSp, ParameterSp parameterSp, string[] tags)
         {
-            var item = new T();
+            T item = new();
             string sql = "";
             bool cacheInError = false;
 
-            var conn = _context.Database.GetDbConnection();
+            DbConnection conn = _context.Database.GetDbConnection();
 
-            using (var command = conn.CreateCommand())
+            using (DbCommand command = conn.CreateCommand())
             {
                 command.CommandText = CommandText;
                 command.CommandType = CommandType.StoredProcedure;
                 if (_context.Database.GetCommandTimeout() != null)
+                {
                     command.CommandTimeout = _context.Database.GetCommandTimeout().Value;
+                }
 
                 if (baseSp != null)
+                {
                     command.Parameters.AddRange(Helper.FillSqlParameter(baseSp).ToArray());
-                if (parameterSp != null)
-                    command.Parameters.AddRange(Helper.FillSqlParameter(parameterSp, false).ToArray());
+                }
 
-                if (_context.DisableCache == false)
+                if (parameterSp != null)
+                {
+                    command.Parameters.AddRange(Helper.FillSqlParameter(parameterSp, false).ToArray());
+                }
+
+                if (!_context.DisableCache)
                 {
                     sql = Helper.CommandAsSql(command);
 
-                    if (IsCachedByUser == false)
+                    if (!IsCachedByUser)
+                    {
                         sql = sql.Replace("@UIUserId = " + baseSp.UIUserId.ToString() + ", ", "");
+                    }
 
                     try
                     {
-                        var cached = await _redisContext.Cache.GetObjectAsync<T>(sql);
+                        T cached = await _redisContext.Cache.GetObjectAsync<T>(sql);
 
                         if (cached != null)
                         {
@@ -163,7 +180,7 @@ namespace ServiceHub.DataAccess.Base
                 reader.Dispose();
                 command.Dispose();
 
-                if (_context.DisableCache == false & cacheInError == false)
+                if (!_context.DisableCache && !cacheInError)
                 {
                     await _redisContext.Cache.SetObjectAsync<T>(sql, item, tags, TimeSpan.FromMinutes(AbsoluteExpirationRelativeToNowMinute));
                 }
@@ -176,22 +193,29 @@ namespace ServiceHub.DataAccess.Base
 
         public virtual async Task<IEnumerable<T>> GetAllAsync(BaseSp baseSp, ParameterSp parameterSp)
         {
-            var items = new List<T>();
+            List<T> items = [];
 
-            var conn = _context.Database.GetDbConnection();
+            DbConnection conn = _context.Database.GetDbConnection();
             await conn.OpenAsync();
 
-            using (var command = conn.CreateCommand())
+            using (DbCommand command = conn.CreateCommand())
             {
                 command.CommandText = CommandText;
                 command.CommandType = CommandType.StoredProcedure;
                 if (_context.Database.GetCommandTimeout() != null)
+                {
                     command.CommandTimeout = _context.Database.GetCommandTimeout().Value;
+                }
 
                 if (baseSp != null)
+                {
                     command.Parameters.AddRange(Helper.FillSqlParameter(baseSp).ToArray());
+                }
+
                 if (parameterSp != null)
+                {
                     command.Parameters.AddRange(Helper.FillSqlParameter(parameterSp, false).ToArray());
+                }
 
                 DbDataReader reader = await command.ExecuteReaderAsync();
 
@@ -199,7 +223,7 @@ namespace ServiceHub.DataAccess.Base
                 {
                     while (await reader.ReadAsync())
                     {
-                        var item = Helper.ConvertDbDataReaderToObject<T>(reader);
+                        T item = Helper.ConvertDbDataReaderToObject<T>(reader);
                         items.Add(item);
                     }
                 }
@@ -214,36 +238,45 @@ namespace ServiceHub.DataAccess.Base
 
         public virtual async Task<IEnumerable<T>> GetAllCacheAsync(BaseSp baseSp, ParameterSp parameterSp, string[] tags)
         {
-            var items = new List<T>();
+            List<T> items = [];
             string sql = "";
             bool cacheInError = false;
 
-            var conn = _context.Database.GetDbConnection();
+            DbConnection conn = _context.Database.GetDbConnection();
 
-            using (var command = conn.CreateCommand())
+            using (DbCommand command = conn.CreateCommand())
             {
                 command.CommandText = CommandText;
                 command.CommandType = CommandType.StoredProcedure;
                 if (_context.Database.GetCommandTimeout() != null)
+                {
                     command.CommandTimeout = _context.Database.GetCommandTimeout().Value;
+                }
 
                 if (baseSp != null)
+                {
                     command.Parameters.AddRange(Helper.FillSqlParameter(baseSp).ToArray());
-                if (parameterSp != null)
-                    command.Parameters.AddRange(Helper.FillSqlParameter(parameterSp, false).ToArray());
+                }
 
-                if (_context.DisableCache == false)
+                if (parameterSp != null)
+                {
+                    command.Parameters.AddRange(Helper.FillSqlParameter(parameterSp, false).ToArray());
+                }
+
+                if (!_context.DisableCache)
                 {
                     sql = Helper.CommandAsSql(command);
 
-                    if (IsCachedByUser == false)
+                    if (!IsCachedByUser)
+                    {
                         sql = sql.Replace("@UIUserId = " + baseSp.UIUserId.ToString() + ", ", "");
+                    }
 
                     sql += CacheKeySuffix == null ? "" : " " + string.Join("|", CacheKeySuffix);
 
                     try
                     {
-                        var cached = await _redisContext.Cache.GetObjectAsync<List<T>>(sql);
+                        List<T> cached = await _redisContext.Cache.GetObjectAsync<List<T>>(sql);
 
                         if (cached != null)
                         {
@@ -265,14 +298,14 @@ namespace ServiceHub.DataAccess.Base
                 {
                     while (await reader.ReadAsync())
                     {
-                        var item = Helper.ConvertDbDataReaderToObject<T>(reader);
+                        T item = Helper.ConvertDbDataReaderToObject<T>(reader);
                         items.Add(item);
                     }
                 }
                 reader.Dispose();
                 command.Dispose();
 
-                if (_context.DisableCache == false & cacheInError == false)
+                if (!_context.DisableCache && !cacheInError)
                 {
                     await _redisContext.Cache.SetObjectAsync(sql, items, tags, TimeSpan.FromMinutes(AbsoluteExpirationRelativeToNowMinute));
                 }
@@ -285,17 +318,19 @@ namespace ServiceHub.DataAccess.Base
 
         public virtual async Task<DataTable> GetDataTableAsync(string sqlQuery)
         {
-            var dt = new DataTable();
+            DataTable dt = new();
 
-            var conn = _context.Database.GetDbConnection();
+            DbConnection conn = _context.Database.GetDbConnection();
             await conn.OpenAsync();
 
-            using (var command = conn.CreateCommand())
+            using (DbCommand command = conn.CreateCommand())
             {
                 command.CommandText = sqlQuery;
                 command.CommandType = CommandType.Text;
                 if (_context.Database.GetCommandTimeout() != null)
+                {
                     command.CommandTimeout = _context.Database.GetCommandTimeout().Value;
+                }
 
                 DbDataReader reader = await command.ExecuteReaderAsync();
 
