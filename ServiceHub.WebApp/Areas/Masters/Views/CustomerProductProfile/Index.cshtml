@@ -1,6 +1,6 @@
 ﻿@model ServiceHub.WebApp.Models.CustomerProductProfileViewModel
 @{
-    ViewData["Title"] = "Product";
+    ViewData["Title"] = "Customer Product Profile list";
 }
 @Html.AntiForgeryToken()
 
@@ -8,9 +8,9 @@
 {
     <ol class="breadcrumb">
         <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
-        <li class="breadcrumb-item "><a asp-action="ProductServicesIndex" asp-controller="Home" asp-area="Masters">Product & Services</a></li>
+        <li class="breadcrumb-item "><a asp-action="UserIndex" asp-controller="Home" asp-area="Masters">User Management</a></li>
 
-        <li class="breadcrumb-item active" aria-current="page">Product list</li>
+        <li class="breadcrumb-item active" aria-current="page">Customer Product Profile list</li>
     </ol>
 
 }
@@ -25,7 +25,7 @@
 
 <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
     <div class="app-h4 app-card-header mb-2">
-        <p>Product list</p>
+        <p>Customer Product Profile list </p>
     </div>
     <div class="card-toolbar">
         <div role="toolbar">
