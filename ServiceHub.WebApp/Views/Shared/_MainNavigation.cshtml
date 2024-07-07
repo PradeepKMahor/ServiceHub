@@ -12,6 +12,13 @@
         <!-- Sidebar Menu -->
         <nav class="mt-2">
             <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
+                <a asp-area="Masters"
+                   asp-controller="UsersClient"
+                   asp-action="CreateClientUserIndex"
+                   class="nav-link  text-white">
+                    <i class="nav-icon text-white fa fa-sign-in"></i>
+                    Sign In
+                </a>
 
                 <li class="nav-item">
                     <a asp-area="Masters" asp-controller="Home" asp-action="Index" class="nav-link">
