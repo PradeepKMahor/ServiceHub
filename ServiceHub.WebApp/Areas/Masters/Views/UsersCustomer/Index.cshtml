@@ -10,7 +10,7 @@
         <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
         <li class="breadcrumb-item "><a asp-action="UserIndex" asp-controller="Home" asp-area="Masters">User Management</a></li>
 
-        <li class="breadcrumb-item active" aria-current="page">Users Customer list</li>
+        <li class="breadcrumb-item active" aria-current="page">Users-Customer list</li>
     </ol>
 
 }
@@ -25,25 +25,29 @@
 
 <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
     <div class="app-h4 app-card-header mb-2">
-        <p>Users Customer</p>
+        <p>Users-Customer</p>
     </div>
     <div class="card-toolbar">
         <div role="toolbar">
-            @*  @if (CurrentUserIdentity.ProfileActions.Any(p => p.ActionId == TCMPLApp.Domain.Models.LC.LCHelper.ActionCreateMasters))
-            { *@
-
-            <a class="btn btn-outline-primary btn-sm border-white"
-               asp-action="CreateCustomerUser"
-               asp-area="Masters"
-               asp-controller="UsersCustomer">
-                <i class="fas fa-plus"></i>&nbsp; New
-            </a>
-
+            <div class="d-flex flex-row">
+                <a asp-area="Masters"
+                   asp-controller="UsersCustomer"
+                   asp-action="CreateCustomerUser"
+                   class="nav-link">
+                    <i class="fas fa-plus " aria-hidden="true"></i>&nbsp;
+                    New User
+                </a>
+                <button name="ExcelDownload" id="idExcelDownload"
+                        title="Excel Download"
+                        class=" btn btn-sm btn-success mx-2 ml-auto">
+                    <i class="far fa-file-excel green-color "></i>
+                </button>
+            </div>
         </div>
     </div>
     <div class="card-block">
         <div class="row">
-            <div class="col-2">
+            <div class="col-3">
                 <div class="form-group">
                     <select asp-for="SearchByFirstLastName" class="form-control Select2 "
                             asp-items="ViewBag.FirstNameLastNameList" data-placeholder="First/Last Name">
@@ -51,7 +55,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-2">
+            <div class="col-3">
                 <div class="form-group">
                     <select asp-for="SearchByUsername" class="form-control Select2 "
                             asp-items="ViewBag.UsernameList" data-placeholder="Username">
@@ -61,6 +65,14 @@
             </div>
             <div class="col-2">
                 <div class="form-group">
+                    <select asp-for="SearchByParentOrg" class="form-control Select2 "
+                            asp-items="ViewBag.ParentOrgList" data-placeholder="Parent Org">
+                        <option selected></option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-1">
+                <div class="form-group">
                     <select asp-for="SearchByStatus" class="form-control chosen-select" data-placeholder="Status">
                         <option selected></option>
                         <option value="N">Active</option>
@@ -68,15 +80,8 @@
                     </select>
                 </div>
             </div>
-            <div class="col-2">
-                <div class="form-group">
-                    <select asp-for="SearchByUID" class="form-control Select2 "
-                            asp-items="ViewBag.UIDList" data-placeholder="UID">
-                        <option selected></option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-2">
+
+            <div class="col-1">
                 <div class="form-group">
                     <select asp-for="SearchByUserType" class="form-control chosen-select" data-placeholder="UserType">
                         <option selected></option>
@@ -87,7 +92,7 @@
                 </div>
             </div>
             <div class="col">
-                <button type="submit" class="btn btn-primary btn-sm  mx-2 ml-auto ">Go </button>
+                <button type="submit" class="btn btn-outline-primary btn-sm  btn-block mx-2 ml-auto ">Go </button>
             </div>
 
             <div class="col">
@@ -98,54 +103,49 @@
     </div>
     <div class="m-1"></div>
     <div class="bg-gray-active rounded ">
-
-        <table id="tbGrid" class="table table-hover table-bordered  " style="width:100%">
-            <thead class="bg-info text-white">
-                <tr role="row">
-                    <th>@Html.DisplayNameFor(model => model.UserId)</th>
-                    <th>@Html.DisplayNameFor(model => model.Username)</th>
-                    <th>@Html.DisplayNameFor(model => model.ActiveStatus)</th>
-                    <th>@Html.DisplayNameFor(model => model.ParentOrg)</th>
-                    <th>@Html.DisplayNameFor(model => model.UserType)</th>
-                    <th>@Html.DisplayNameFor(model => model.SupervisorName)</th>
-                    <th>@Html.DisplayNameFor(model => model.AdminName)</th>
-                    <th>@Html.DisplayNameFor(model => model.ContactNo)</th>
-                    <th>@Html.DisplayNameFor(model => model.ValidToDate)</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td>1001</td>
-                    <td>PradeepMahor</td>
-                    <td>Active</td>
-                    <td>Wipro</td>
-                    <td>Technion</td>
-                    <td>Avinash</td>
-                    <td>Sandeep</td>
-                    <td>8424037919</td>
-                    <td>29-Aug-2014</td>
-                    <td class="center">
-                        <div class="row text-center pl-1 ml-1 pr-1 mr-1">
-
+        <div class="table-responsive" style="overflow:auto;">
+            <table id="tbGrid" class="table table-hover table-bordered  " style="width:100%">
+                <thead class="bg-info text-white">
+                    <tr role="row">
+                        @*                     <th>@Html.DisplayNameFor(model => model.UserId)</th>
+                        *@
+                        <th>@Html.DisplayNameFor(model => model.Username)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+                        <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                        <th>@Html.DisplayNameFor(model => model.ActiveStatus)</th>
+                        <th>@Html.DisplayNameFor(model => model.ParentOrg)</th>
+                        <th>@Html.DisplayNameFor(model => model.UserType)</th>
+                        <th>@Html.DisplayNameFor(model => model.SupervisorName)</th>
+                        <th>@Html.DisplayNameFor(model => model.ContactNo)</th>
+                        <th>@Html.DisplayNameFor(model => model.ValidToDate)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        @*                     <td>1001</td>
+                        *@
+                        <td>
                             <a href="/Admin/CourseMaster/Upsert/${data.id}"
-                               class='btn btn-success btn-sm text-white  m-2'
+                               class=' '
                                style='cursor:pointer;  '>
-                                <i class='far fa-edit'></i>
-
+                                PradeepMahor001
                             </a>
+                        </td>
+                        <td>Pradeepkumar</td>
+                        <td>Mahor</td>
+                        <td>Active</td>
 
-                            <a onclick=Delete("/Admin/CourseMaster/Delete/${data.id}")
-                               class='btn btn-danger btn-sm text-white m-2'
-                               style='cursor:pointer;  '>
-                                <i class='far fa-trash-alt'></i>
-                            </a>
+                        <td>Dell</td>
+                        <td>Tech</td>
+                        <td>Sandeep</td>
 
-                        </div>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+                        <td>8424037919</td>
+                        <td>29-Aug-2014</td>
+
+                    </tr>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

@@ -18,8 +18,8 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
             var listUsername = TestList("Username ");
             ViewData["UsernameList"] = new SelectList(listUsername, "DataValueField", "DataTextField");
 
-            var listUID = TestList("UID ");
-            ViewData["UIDList"] = new SelectList(listUID, "DataValueField", "DataTextField");
+            var listParentOrg = TestList("Parent Org. ");
+            ViewData["ParentOrgList"] = new SelectList(listParentOrg, "DataValueField", "DataTextField");
 
             return View(userRegistrationViewModel);
         }

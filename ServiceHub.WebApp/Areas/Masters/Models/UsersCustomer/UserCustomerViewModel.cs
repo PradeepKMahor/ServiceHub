@@ -55,7 +55,7 @@ namespace ServiceHub.WebApp.Models
 
         public string SearchByFirstLastName { get; set; } = string.Empty;
         public string SearchByUsername { get; set; } = string.Empty;
-        public string SearchByUID { get; set; } = string.Empty;
+        public string SearchByParentOrg { get; set; } = string.Empty;
         public string SearchByStatus { get; set; } = string.Empty;
         public string SearchByUserType { get; set; } = string.Empty;
     }

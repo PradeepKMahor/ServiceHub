@@ -17,6 +17,18 @@ namespace ServiceHub.WebApp.Models
         [Display(Name = "User Name")]
         public string Username { get; set; } = string.Empty;
 
+        [Display(Name = "Parent Org.")]
+        public string ParentOrg { get; set; } = string.Empty;
+
+        [Display(Name = "User Type")]
+        public string UserType { get; set; } = string.Empty;
+
+        [Display(Name = "Supervisor Name")]
+        public string SupervisorName { get; set; } = string.Empty;
+
+        [Display(Name = "Admin Name")]
+        public string AdminName { get; set; } = string.Empty;
+
         [Display(Name = "Contact No")]
         public string ContactNo { get; set; } = string.Empty;
 
@@ -37,7 +49,7 @@ namespace ServiceHub.WebApp.Models
 
         public string SearchByFirstLastName { get; set; } = string.Empty;
         public string SearchByUsername { get; set; } = string.Empty;
-        public string SearchByUID { get; set; } = string.Empty;
+        public string SearchByParentOrg { get; set; } = string.Empty;
         public string SearchByStatus { get; set; } = string.Empty;
         public string SearchByUserType { get; set; } = string.Empty;
     }
