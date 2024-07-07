@@ -1,20 +1,19 @@
 ﻿@{
-    ViewData["Title"] = "Product / Services Page";
+    ViewData["Title"] = "Home Page";
 }
 
 @section BreadCrumbs
 {
     <ol class="breadcrumb">
-        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
-
-        <li class="breadcrumb-item active" aria-current="page">Product & Services</li>
+        @*         <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
+    *@
+        <li class="breadcrumb-item active" aria-current="page">  Reports </li>
     </ol>
 
 }
 
 @section Styles {
     <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
-
 }
 
 <div class="col-sm-12">
@@ -23,10 +22,10 @@
         <div class="col-md-3 col-xl-3">
             <div class="card card-tpl">
                 <div class="card-header">
-                    <h5>Product</h5>
+                    <h5> Report 1 </h5>
                 </div>
                 <div class="card-block card-tile">
-                    <a asp-area="Masters" asp-controller="Products" asp-action="Index">
+                    <a asp-area="Reports" asp-controller="Home" asp-action="">
                         <div class="row align-items-center justify-content-center stretched-link">
                             <div class="col">
                                 <h3 class="mb-2 f-w-300"></h3>
@@ -39,38 +38,60 @@
                 </div>
             </div>
         </div>
+
         <div class="col-md-3 col-xl-3">
             <div class="card card-tpl">
                 <div class="card-header">
-                    <h5>Sub Product</h5>
+                    <h5>Role Master</h5>
                 </div>
                 <div class="card-block card-tile">
-                    <a asp-area="Masters" asp-controller="Products" asp-action="SubProductIndex">
+                    <a asp-area="Reports" asp-controller="Product" asp-action="Index">
                         <div class="row align-items-center justify-content-center stretched-link">
                             <div class="col">
                                 <h3 class="mb-2 f-w-300"></h3>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-user-tie f-20 text-white theme-dark-green"></i>
+                                <i class="fas fa-dollar-sign f-20 text-white theme-dark-orange"></i>
                             </div>
                         </div>
                     </a>
                 </div>
             </div>
         </div>
+
         <div class="col-md-3 col-xl-3">
             <div class="card card-tpl">
                 <div class="card-header">
-                    <h5>Root Cause Analysis</h5>
+                    <h5>Tag Master</h5>
                 </div>
                 <div class="card-block card-tile">
-                    <a asp-area="Masters" asp-controller="Products" asp-action="RootCauseAnalysisIndex">
+                    <a asp-area="Reports" asp-controller="Service" asp-action="Index">
                         <div class="row align-items-center justify-content-center stretched-link">
                             <div class="col">
                                 <h3 class="mb-2 f-w-300"></h3>
                             </div>
                             <div class="col-auto">
-                                <i class="fas fa-user-tie f-20 text-white theme-dark-green"></i>
+                                <i class="fas fa-file-signature"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-3 col-xl-3">
+            <div class="card card-tpl">
+                <div class="card-header">
+                    <h5>Access grants</h5>
+                </div>
+                <div class="card-block card-tile">
+                    <a asp-area="Reports" asp-controller="Service" asp-action="Index">
+                        <div class="row align-items-center justify-content-center stretched-link">
+                            <div class="col">
+                                <h3 class="mb-2 f-w-300"></h3>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-lock"></i>
                             </div>
                         </div>
                     </a>

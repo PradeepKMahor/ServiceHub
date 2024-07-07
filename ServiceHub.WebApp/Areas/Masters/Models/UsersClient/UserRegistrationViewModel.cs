@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace ServiceHub.WebApp.Models
 {
@@ -33,5 +34,11 @@ namespace ServiceHub.WebApp.Models
 
         [Display(Name = "Status")]
         public string ActiveStatus { get; set; } = string.Empty;
+
+        public string SearchByFirstLastName { get; set; } = string.Empty;
+        public string SearchByUsername { get; set; } = string.Empty;
+        public string SearchByUID { get; set; } = string.Empty;
+        public string SearchByStatus { get; set; } = string.Empty;
+        public string SearchByUserType { get; set; } = string.Empty;
     }
 }

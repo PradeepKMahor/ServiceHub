@@ -18,19 +18,19 @@
     <div class="container-fluid">
         <div class="row mb-2">
             <div class="col-sm-6">
-                <h1 class="m-0">Corrective Maint Requests</h1>
+                <h1 class="m-0">Service Hub : <b>CMR</b></h1>
             </div>
             <div class="col-sm-6 font-weight-bold">
                 <ol class="breadcrumb float-sm-right">
-                    <li class="breadcrumb-item active ">CMR </li>
+                    <li class="breadcrumb-item active ">Corrective </li>
                     @* <li class="breadcrumb-item">
                     <a asp-action="CMRIndex" asp-controller="Home">CMR</a>
                     </li> *@
                     <li class="breadcrumb-item">
-                        <a asp-action="PMRIndex" asp-controller="Home">PMR</a>
+                        <a asp-action="PMRIndex" asp-controller="Home">Preventive</a>
                     </li>
                     <li class="breadcrumb-item">
-                        <a asp-action="WMRIndex" asp-controller="Home">WMR</a>
+                        <a asp-action="WMRIndex" asp-controller="Home">Warranty</a>
                     </li>
                 </ol>
             </div>
@@ -157,7 +157,7 @@
 <div class="col-sm-12">
     <div class="row">
         <div class="col-md-6 col-xl-4">
-            <div class="card card-tpl">
+            <div class="card card-tpl border shadow">
                 <div class="card-header header-flex" style="height:auto;">
                     <h5>CMR</h5>
 
@@ -233,10 +233,12 @@
             </div>
         </div>
         <div class="col-md-6 col-xl-4">
-            <div class="card card-tpl">
-                <div class="card-header header-flex" style="height:auto;">
+            <div class="card card-tpl border shadow">
+                <div class="card-header " style="height:auto;">
                     <h5>Status</h5>
-
+                    <span style="float: right;">
+                        Monthly
+                    </span>
                 </div>
                 <div class="card-block card-tile"
                      style="min-height: 250px!important; height: 250px!important; max-height: 250px!important; max-width: 100%; display: block;">
@@ -249,11 +251,14 @@
             </div>
         </div>
         <div class="col-md-6 col-xl-4">
-            <div class="card card-tpl">
-                <div class="card-header header-flex" style="height:auto;">
+            <div class="card card-tpl border shadow">
+                <div class="card-header " style="height:auto;">
                     <h5>SLAs</h5>
-
+                    <span style="float: right;">
+                        Monthly
+                    </span>
                 </div>
+
                 <div class="card-block card-tile"
                      style="min-height: 250px!important; height: 250px!important; max-height: 250px!important; max-width: 100%; display: block;">
                     <div class="small-box bg-info">
@@ -279,13 +284,16 @@
             </div>
         </div>
         <div class="col-md-6 col-xl-4">
-            <div class="card card-tpl">
-                <div class="card-header header-flex" style="height:auto;">
+            <div class="card card-tpl border shadow">
+
+                <div class="card-header " style="height:auto;">
                     <h5>
                         Priority
                         (Open/In-progress)
                     </h5>
-
+                    <span style="float: right;">
+                        Monthly
+                    </span>
                 </div>
                 <div class="card-block card-tile"
                      style="min-height: 250px!important; height: 250px!important; max-height: 250px!important; max-width: 100%; display: block;">
@@ -312,10 +320,13 @@
             </div>
         </div>
         <div class="col-md-6 col-xl-4">
-            <div class="card card-tpl">
-                <div class="card-header header-flex" style="height:auto;">
-                    <h5>Defect Types</h5>
+            <div class="card card-tpl border shadow">
 
+                <div class="card-header " style="height:auto;">
+                    <h5>Defect Types</h5>
+                    <span style="float: right;">
+                        Monthly
+                    </span>
                 </div>
                 <div class="card-block card-tile"
                      style="min-height: 250px!important; height: 250px!important; max-height: 250px!important; max-width: 100%; display: block;">
@@ -328,10 +339,13 @@
             </div>
         </div>
         <div class="col-md-6 col-xl-4">
-            <div class="card card-tpl">
-                <div class="card-header header-flex" style="height:auto;">
-                    <h5>Product With Most Requests</h5>
+            <div class="card card-tpl border shadow">
 
+                <div class="card-header " style="height:auto;">
+                    <h5>Product With Most Requests</h5>
+                    <span style="float: right;">
+                        Monthly
+                    </span>
                 </div>
                 <div class="card-block card-tile"
                      style="min-height: 250px!important; height: 250px!important; max-height: 250px!important; max-width: 100%; display: block;">

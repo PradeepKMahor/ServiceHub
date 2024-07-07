@@ -21,12 +21,7 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
             return View();
         }
 
-        public IActionResult ProductServicesIndex()
-        {
-            return View();
-        }
-
-        public IActionResult ServiceConfigIndex()
+        public IActionResult ProductIndex()
         {
             return View();
         }
@@ -42,11 +37,6 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
         }
 
         public IActionResult UsersClientIndex()
-        {
-            return View();
-        }
-
-        public IActionResult ProductIndex()
         {
             return View();
         }

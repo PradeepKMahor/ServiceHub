@@ -1,6 +1,6 @@
-﻿@model ServiceHub.WebApp.Models.UserRegistrationViewModel
+﻿@model ServiceHub.WebApp.Models.CustomerProductProfileViewModel
 @{
-    ViewData["Title"] = "Users Clint";
+    ViewData["Title"] = "Product";
 }
 @Html.AntiForgeryToken()
 
@@ -8,9 +8,9 @@
 {
     <ol class="breadcrumb">
         <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
-        <li class="breadcrumb-item "><a asp-action="UserIndex" asp-controller="Home" asp-area="Masters">User Management</a></li>
+        <li class="breadcrumb-item "><a asp-action="ProductServicesIndex" asp-controller="Home" asp-area="Masters">Product & Services</a></li>
 
-        <li class="breadcrumb-item active" aria-current="page">Users Clint list</li>
+        <li class="breadcrumb-item active" aria-current="page">Product list</li>
     </ol>
 
 }
@@ -20,88 +20,26 @@
 }
 
 <div style="display:none">
+    <input type="hidden" asp-for="@Model.FilterDataModel.IsActive" />
 </div>
 
 <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
     <div class="app-h4 app-card-header mb-2">
-        <p>Users Clint</p>
+        <p>Product list</p>
     </div>
     <div class="card-toolbar">
         <div role="toolbar">
-            <div class="d-flex flex-row">
-                <a title="New cost center"
-                   class="btn btn-outline-primary btn-sm border border-white" href="#"
-                   data-jqueryselector="openmodal"
-                   data-modalcontainer="modalcontainer"
-                   data-modalpopupwidth="rightw50"
-                   data-url='@Url.Action("Create", "DMS", new { Area = "DMS" })'
-                   data-statichtmlsourcedivid=""
-                   data-modaltitle="New cost center"
-                   data-modalheader="New cost center">
-                    <i class="fas fa-plus"></i> Create
-                </a>
-                <button name="ExcelDownload" id="idExcelDownload"
-                        title="Excel Download"
-                        class=" btn btn-sm btn-success mx-2 ml-auto">
-                    <i class="far fa-file-excel green-color "></i>
-                </button>
-            </div>
-        </div>
-    </div>
-    <div class="card-block">
-        <div class="row">
-            <div class="col-2">
-                <div class="form-group">
-                    <select asp-for="SearchByFirstLastName" class="form-control Select2 "
-                            asp-items="ViewBag.FirstNameLastNameList" data-placeholder="First/Last Name">
-                        <option selected></option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="form-group">
-                    <select asp-for="SearchByUsername" class="form-control Select2 "
-                            asp-items="ViewBag.UsernameList" data-placeholder="Username">
-                        <option selected></option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="form-group">
-                    <select asp-for="SearchByStatus" class="form-control chosen-select" data-placeholder="Status">
-                        <option selected></option>
-                        <option value="N">Active</option>
-                        <option value="Y">DeActive</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="form-group">
-                    <select asp-for="SearchByUID" class="form-control Select2 "
-                            asp-items="ViewBag.UIDList" data-placeholder="UID">
-                        <option selected></option>
-                    </select>
-                </div>
-            </div>
-            <div class="col-2">
-                <div class="form-group">
-                    <select asp-for="SearchByUserType" class="form-control chosen-select" data-placeholder="UserType">
-                        <option selected></option>
-                        <option value="Admin">Admin</option>
-                        <option value="Supervisor">Supervisor</option>
-                        <option value="Technician">Technician</option>
-                    </select>
-                </div>
-            </div>
-            <div class="col">
-                <button type="submit" class="btn btn-primary btn-sm  mx-2 ml-auto ">Go </button>
-            </div>
+            @*  @if (CurrentUserIdentity.ProfileActions.Any(p => p.ActionId == TCMPLApp.Domain.Models.LC.LCHelper.ActionCreateMasters))
+            { *@
 
-            <div class="col">
-                <a asp-action="Index" class="btn btn-outline-danger btn-sm border-white mx-2 ml-auto "> Clear Filter </a>
-            </div>
-        </div>
+            <a class="btn btn-outline-primary btn-sm border-white"
+               asp-action="CreateCustomerUser"
+               asp-area="Masters"
+               asp-controller="UsersCustomer">
+                <i class="fas fa-plus"></i>&nbsp; New
+            </a>
 
+        </div>
     </div>
     <div class="m-1"></div>
     <div class="bg-gray-active rounded ">
@@ -109,23 +47,23 @@
         <table id="tbGrid" class="table table-hover table-bordered  " style="width:100%">
             <thead class="bg-info text-white">
                 <tr role="row">
-                    <th>@Html.DisplayNameFor(model => model.UserId)</th>
-                    <th>@Html.DisplayNameFor(model => model.Username)</th>
-                    <th>@Html.DisplayNameFor(model => model.ActiveStatus)</th>
-
-                    <th>@Html.DisplayNameFor(model => model.ContactNo)</th>
-                    <th>@Html.DisplayNameFor(model => model.ValidToDate)</th>
+                    @*  <th>@Html.DisplayNameFor(model => model.ProductId)</th>
+                    <th>@Html.DisplayNameFor(model => model.ProductCode)</th>
+                    <th>@Html.DisplayNameFor(model => model.ProductName)</th>
+                    <th>@Html.DisplayNameFor(model => model.ServiceDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.WarrantyDate)</th> *@
+                    <th>@Html.DisplayNameFor(model => model.IsActive)</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
                     <td>1001</td>
-                    <td>PradeepMahor</td>
+                    <td>PROD-1</td>
+                    <td>Product 1</td>
+                    <td>01-Jan-2024</td>
+                    <td>29-Aug-2024</td>
                     <td>Active</td>
-
-                    <td>8424037919</td>
-                    <td>29-Aug-2014</td>
                     <td class="center">
                         <div class="row text-center pl-1 ml-1 pr-1 mr-1">
 
@@ -156,16 +94,41 @@
     }
 
     <script type="text/javascript">
-
-        $(document).ready(function () {
-
-            initSelect2();
-        });
         function localScript() {
             initSelect2();
         }
 
 
+        $(document).ready(function () {
+            // localLoadDataTable();
+            $('#tbGrid').DataTable({
+                // "dom": 'Bfrtip',
+                "lengthChange": false,
+                // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                "buttons": {
+                    buttons: [
+                        { extend: 'excel', className: 'btn shadow m-1 btn-info' },
+                        { extend: 'print', className: 'btn shadow m-1 btn-info' },
+                        { extend: 'colvis', className: 'btn shadow m-1 btn-info' }
+                    ]
+                },
+                // "dom": 'Qfrtip', for advance Search
+                "autoWidth": false,
+                "responsive": true,
+                "searching": true,
+                "processing": true,
+                "stateSave": true,
+                'columnDefs': [
+                    {
+                        "targets": 0,
+                        "className": "text-center",
+                        "className": "align-middle"
+                    }
+                ],
+            });
+
+
+        });
         function localLoadDataTable() {
 
             var table = $('#tbGrid').DataTable({

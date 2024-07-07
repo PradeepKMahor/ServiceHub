@@ -101,6 +101,7 @@ app.UseEndpoints(endpoints =>
 {
     endpoints.MapAreaControllerRoute(name: "Identity", areaName: "Identity", pattern: "Identity/{action=Index}/{id?}");
     endpoints.MapAreaControllerRoute(name: "Admin", areaName: "Admin", pattern: "Admin/{controller=Admin}/{action=Index}/{id?}");
+    endpoints.MapAreaControllerRoute(name: "Reports", areaName: "Reports", pattern: "Reports/{controller=Admin}/{action=Index}/{id?}");
     endpoints.MapAreaControllerRoute(name: "Masters", areaName: "Masters", pattern: "Masters/{controller=Masters}/{action=Index}/{id?}");
     endpoints.MapAreaControllerRoute(name: "SystemAdmin", areaName: "SystemAdmin", pattern: "SystemAdmin/{controller=SystemAdmin}/{action=Index}/{id?}");
     endpoints.MapAreaControllerRoute(name: "Users", areaName: "Users", pattern: "Users/{controller=Users}/{action=Index}/{id?}");
