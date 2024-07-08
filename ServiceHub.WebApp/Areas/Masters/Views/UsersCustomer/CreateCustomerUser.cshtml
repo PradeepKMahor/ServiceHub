@@ -16,178 +16,184 @@
             <a asp-action="Index" asp-controller="UsersCustomer" asp-area="Masters">Users-Customer list</a>
         </li>
 
-        <li class="breadcrumb-item active" aria-current="page">Create Users Customer </li>k
+        <li class="breadcrumb-item active" aria-current="page">Create Users Customer </li>
     </ol>
 
 }
+
 <div class="container-fluid ">
     @* <div class="row d-flex justify-content-center align-items-center h-100"> *@
 
     <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
         <div class="app-h4 app-card-header mb-2">
-            <p>New Application User Registration</p>
+            <p>Users-Customer Registration</p>
         </div>
         <div class="card-toolbar">
             <div role="toolbar">
                 <div class="card rounded-3">
-                    <div class="card-body p-4 p-md-5">
+                    <div class="card-body">
                         <form class="px-md-2">
-                            @* <div class="text-center ">
-                            <img id="preview" style="width:150px!important; " src="~/images\avatar5.png" alt="User Avatar"
-                            class="profile-user-img img-fluid img-circle">
-                            <hr />
-                            </div> *@
-                            <div class="col-12">
-                                <div class="row">
-                                    <div class=" col-6 col-md-4  ">
-                                        <div class="form-group">
-                                            <label asp-for="FirstName" class="col-12 control-label"></label>
-                                            <div class="col-12">
-                                                <input asp-for="FirstName" class="form-control capitalize" required />
-                                                <span asp-validation-for="FirstName" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
 
-                                    <div class=" col-6 col-md-4  ">
-                                        <div class="form-group">
-                                            <label asp-for="MiddleName" class="col-12 control-label"></label>
-                                            <div class="col-12">
-                                                <input asp-for="MiddleName" class="form-control capitalize" required />
-                                                <span asp-validation-for="MiddleName" class="text-danger"></span>
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="col-12">
+                                        <div class="card card-tpl border shadow">
+                                            <div class="card-header bg-info ">
+                                                <h5>Users Info</h5>
                                             </div>
-                                        </div>
-                                    </div>
-                                    <div class=" col-6 col-md-4  ">
-                                        <div class="form-group">
-                                            <label asp-for="LastName" class="col-12 control-label"></label>
-                                            <div class="col-12">
-                                                <input asp-for="LastName" class="form-control capitalize" required />
-                                                <span asp-validation-for="LastName" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class=" col-6 col-md-4  ">
-                                        <div class="form-group">
-                                            <label asp-for="Username" class="col-12 control-label"></label>
-                                            <div class="col-12">
-                                                <input asp-for="Username" class="form-control capitalize" required />
-                                                <span asp-validation-for="Username" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class=" col-6 col-md-4  ">
-                                        <div class="form-group">
-                                            <label asp-for="ContactNo" class="col-12 control-label"></label>
-                                            <div class="col-12">
-                                                <input asp-for="ContactNo" class="form-control capitalize" required />
-                                                <span asp-validation-for="ContactNo" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class=" col-6 col-md-4  ">
-                                        <div class="form-group">
-                                            <label asp-for="EmailId" class="col-12 control-label"></label>
-                                            <div class="col-12">
-                                                <input asp-for="EmailId" class="form-control capitalize" required />
-                                                <span asp-validation-for="EmailId" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class=" col-6 col-md-4  ">
-                                        <div class="form-group">
-                                            <label asp-for="ParentOrg" class="col-12 control-label"></label>
-                                            <div class="col-12">
-                                                <input asp-for="ParentOrg" class="form-control capitalize" required />
-                                                <span asp-validation-for="ParentOrg" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
+                                            <div class="card-block card-tile">
+                                                <div class="row p-2 m-1">
+                                                    <div class=" col-xl-6 col-lg-6 col-md-12 col-sm-12 ">
+                                                        <div class="form-group">
+                                                            <label asp-for="FirstName" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <input asp-for="FirstName" class="form-control capitalize" required />
+                                                                <span asp-validation-for="FirstName" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label asp-for="MiddleName" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <input asp-for="MiddleName" class="form-control capitalize" required />
+                                                                <span asp-validation-for="MiddleName" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label asp-for="LastName" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <input asp-for="LastName" class="form-control capitalize" required />
+                                                                <span asp-validation-for="LastName" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label asp-for="ParentOrg" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <select asp-for="ParentOrg" class="form-control" required>
+                                                                    <option> </option>
+                                                                    <option>ParentOrg - 1</option>
+                                                                    <option>ParentOrg - 2</option>
+                                                                    <option>ParentOrg - 3</option>
+                                                                    <option>ParentOrg - 4</option>
 
-                                    <div class=" col-6 col-md-4  ">
-                                        <div class="form-group">
-                                            <label asp-for="ValidFromDate" class="col-12 control-label"></label>
-                                            <div class="col-12">
-                                                <input asp-for="ValidFromDate" class="form-control capitalize" required />
-                                                <span asp-validation-for="ValidFromDate" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class=" col-6 col-md-4  ">
-                                        <div class="form-group">
-                                            <label asp-for="ValidToDate" class="col-12 control-label"></label>
-                                            <div class="col-12">
-                                                <input asp-for="ValidToDate" class="form-control capitalize" required />
-                                                <span asp-validation-for="ValidToDate" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class=" col-6 col-md-4  ">
-                                        <div class="form-group">
-                                            <label asp-for="UserType" class="col-12 control-label"></label>
-                                            <div class="col-12">
-                                                @* <input asp-for="UserType" class="form-control capitalize" required /> *@
-                                                <select asp-for="UserType" class="form-control" required>
-                                                    <option> </option>
-                                                    <option>Admin</option>
-                                                    <option>Customer</option>
-                                                    <option>Technician</option>
-                                                    <option>Audit</option>
-                                                </select>
-                                                <span asp-validation-for="UserType" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class=" col-6 col-md-4  ">
-                                        <div class="form-group">
-                                            <label asp-for="ActiveStatus" class="col-12 control-label"></label>
-                                            <div class="col-12">
-                                                @*                                                 <input asp-for="ActiveStatus" class="form-control capitalize" required />
-                                                *@
-                                                <select asp-for="ActiveStatus" class="form-control" required>
-                                                    <option> </option>
-                                                    <option>Active</option>
-                                                    <option>DeActive</option>
-
-                                                </select>
-                                                <span asp-validation-for="ActiveStatus" class="text-danger"></span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class=" col-6 col-md-4  ">
-                                        <div class="form-group">
-                                            <label asp-for="UploadProfilePic" class="col-12 control-label"></label>
-                                            <div class="col-12">
-                                                <input asp-for="UploadProfilePic" type="file" class=" " required />
-                                                @*                                             <input type="file" id="filetag">
-                                                *@
-                                                <span asp-validation-for="UploadProfilePic" class="text-danger"></span>
+                                                                </select>
+                                                                <span asp-validation-for="ParentOrg" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label asp-for="ContactNo" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <input asp-for="ContactNo" class="form-control capitalize" required />
+                                                                <span asp-validation-for="ContactNo" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 ">
+                                                        <div class="form-group">
+                                                            <label asp-for="EmailId" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <input asp-for="EmailId" class="form-control capitalize" required />
+                                                                <span asp-validation-for="EmailId" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
                                 </div>
+                                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="col-12">
+                                        <div class="card card-tpl border shadow">
+                                            <div class="card-header bg-info ">
+                                                <h5>Login details</h5>
+                                            </div>
+                                            <div class="card-block card-tile">
+                                                <div class="row p-2 m-1">
+                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label asp-for="Username" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <input asp-for="Username" class="form-control capitalize" required />
 
-                                <div class="from-group m-2 pb-2">
+                                                                <span asp-validation-for="Username" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label asp-for="ValidFromDate" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <input asp-for="ValidFromDate" placeholder="DD-MM-YYYY" style="display:none"
+                                                                       class="form-control capitalize" required />
+                                                                <input id="validFromDate" placeholder="DD-MM-YYYY" class="form-control capitalize" required />
+                                                                <span asp-validation-for="ValidFromDate" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label asp-for="ValidToDate" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <input asp-for="ValidToDate" class="form-control capitalize" style="display:none" required />
+                                                                <input id="validToDate" placeholder="DD-MM-YYYY" class="form-control capitalize" required />
+                                                                <span asp-validation-for="ValidToDate" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label asp-for="UserType" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <select asp-for="UserType" class="form-control" required>
+                                                                    <option> </option>
+                                                                    <option>Supervisor </option>
+                                                                    <option>End-User</option>
+                                                                </select>
+                                                                <span asp-validation-for="UserType" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label asp-for="ActiveStatus" class="col-12 control-label"></label>
+                                                            <div class="col-12">
 
-                                    <div class="col-12 ">
-                                        @*                         Edit   : <partial name="_EditAndBackToListBtn" model="@Convert.ToInt32(1)" />
-                                        Create :<partial name="_CreateAndBackToListBtn" />
-                                        *@
-                                        @* @if (Model.StudentInquiry.Id != 0)
-                                        {
+                                                                <select asp-for="ActiveStatus" class="form-control" required>
+                                                                    <option> </option>
+                                                                    <option>Active</option>
+                                                                    <option>DeActive</option>
 
-                                        //Edit btn and back to list
-                                        <partial name="_EditAndBackToListBtn" model="@Convert.ToInt32(Varid)" />
-                                        }
-                                        else
-                                        {
+                                                                </select>
+                                                                <span asp-validation-for="ActiveStatus" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6 col-lg-6 col-12-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label asp-for="Password" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <input asp-for="Password" readonly class="form-control capitalize" />
+                                                                <span asp-validation-for="Password" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
 
-                                        // Create btn and back to list
-                                        <partial name="_CreateAndBackToListBtn" />
-                                        } *@
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
+
                                 </div>
                             </div>
+
                             <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-lg mb-1">Submit</button>
 
                         </form>
