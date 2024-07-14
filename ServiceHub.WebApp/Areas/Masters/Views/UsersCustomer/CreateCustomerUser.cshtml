@@ -27,6 +27,7 @@
     <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
         <div class="app-h4 app-card-header mb-2">
             <p>Users-Customer Registration</p>
+
         </div>
         <div class="card-toolbar">
             <div role="toolbar">
@@ -35,6 +36,7 @@
                         <form class="px-md-2">
 
                             <div class="row">
+
                                 <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
                                     <div class="col-12">
                                         <div class="card card-tpl border shadow">
@@ -131,9 +133,8 @@
                                                         <div class="form-group">
                                                             <label asp-for="ValidFromDate" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <input asp-for="ValidFromDate" placeholder="DD-MM-YYYY" style="display:none"
-                                                                       class="form-control capitalize" required />
-                                                                <input id="validFromDate" placeholder="DD-MM-YYYY" class="form-control capitalize" required />
+                                                                <input asp-for="ValidFromDate" type="text" placeholder="DD-MMM-YYYY"
+                                                                       class="form-control DateTimePickerInit" required />
                                                                 <span asp-validation-for="ValidFromDate" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -142,8 +143,9 @@
                                                         <div class="form-group">
                                                             <label asp-for="ValidToDate" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <input asp-for="ValidToDate" class="form-control capitalize" style="display:none" required />
-                                                                <input id="validToDate" placeholder="DD-MM-YYYY" class="form-control capitalize" required />
+                                                                <input asp-for="ValidToDate" type="text"
+                                                                       class="form-control  DateTimePickerInit" placeholder="DD-MMM-YYYY"
+                                                                       required />
                                                                 <span asp-validation-for="ValidToDate" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -152,7 +154,7 @@
                                                         <div class="form-group">
                                                             <label asp-for="UserType" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <select asp-for="UserType" class="form-control" required>
+                                                                <select asp-for="UserType" class="form-control chosen-select" required>
                                                                     <option> </option>
                                                                     <option>Supervisor </option>
                                                                     <option>End-User</option>
@@ -161,27 +163,24 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                        <div class="form-group">
-                                                            <label asp-for="ActiveStatus" class="col-12 control-label"></label>
-                                                            <div class="col-12">
 
-                                                                <select asp-for="ActiveStatus" class="form-control" required>
-                                                                    <option> </option>
-                                                                    <option>Active</option>
-                                                                    <option>DeActive</option>
-
-                                                                </select>
-                                                                <span asp-validation-for="ActiveStatus" class="text-danger"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
                                                     <div class="col-xl-6 col-lg-6 col-12-6 col-sm-12">
                                                         <div class="form-group">
                                                             <label asp-for="Password" class="col-12 control-label"></label>
                                                             <div class="col-12">
                                                                 <input asp-for="Password" readonly class="form-control capitalize" />
                                                                 <span asp-validation-for="Password" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-6 col-lg-6 col-12-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            @* <label asp-for="ActiveStatus" class="col-12 control-label"></label> *@<br />
+                                                            <div class="col-12">
+                                                                <div class="switch d-inline m-r-5">
+                                                                    <input type="checkbox" asp-for="ActiveStatus" />
+                                                                    Status  <label for="ActiveStatus" class="cr"></label>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -193,9 +192,13 @@
 
                                 </div>
                             </div>
-
-                            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-lg mb-1">Submit</button>
-
+                            <button type="submit"
+                                    data-mdb-button-init
+                                    data-mdb-ripple-init
+                                    class="btn btn-primary btn-lg mb-1">
+                                Draft
+                            </button>
+                            <button type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-success btn-lg mb-1">Save</button>
                         </form>
                     </div>
                 </div>
@@ -209,27 +212,15 @@
     <script>
 
         $(document).ready(function () {
-            var fileTag = document.getElementById("UploadProfilePic"),
-                preview = document.getElementById("preview");
-
-            fileTag.addEventListener("change", function () {
-                changeImage(this);
-            });
-
-            function changeImage(input) {
-                var reader;
-
-                if (input.files && input.files[0]) {
-                    reader = new FileReader();
-
-                    reader.onload = function (e) {
-                        preview.setAttribute('src', e.target.result);
-                    }
-
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
+            DateTimePickerInit();
         });
+
+        function DateTimePickerInit() {
+            $('.DateTimePickerInit').bootstrapMaterialDatePicker({
+                format: 'DD-MMM-YYYY',
+                time: false
+            });
+        }
     </script>
 
 }

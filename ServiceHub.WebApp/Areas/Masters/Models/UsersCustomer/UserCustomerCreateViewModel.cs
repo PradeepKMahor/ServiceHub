@@ -57,7 +57,7 @@ namespace ServiceHub.WebApp.Models
         public string AdminName { get; set; } = string.Empty;
 
         [Display(Name = "Status")]
-        public string ActiveStatus { get; set; } = string.Empty;
+        public bool ActiveStatus { get; set; } = false;
 
         [Display(Name = "Password")]
         public string Password { get; set; } = string.Empty;

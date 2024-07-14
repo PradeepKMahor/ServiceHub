@@ -1,28 +1,31 @@
-/*html {
-  font-size: 14px;
+/* Seelct 2 css */
+.select2-container .select2-selection--single {
+    height: calc(1.5em + .75rem + 2px) !important;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+.select2-container--default .select2-selection--single .select2-selection__rendered {
+    line-height: 30px !important;
+}
+/* Seelct 2 css End*/
+
+/*====== text colotr ends ======*/
+
+:required {
+    border: 1px solid #ffc000;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+    :required + .select2-container--default .select2-selection--single {
+        border: 1.5px solid #ffc000;
+    }
+
+    :required + .select2-container--default .select2-selection--multiple {
+        border: 1.5px solid #ffc000 !important;
+    }
+
+.btn-smaller {
+    padding: 3px 6px !important;
+    font-size: 10pt !important
 }
-
-html {
-  position: relative;
-  min-height: 100%;
-}
-
-body {
-  margin-bottom: 60px;
-}*/
-
-/* Please see documentation at https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
-for details on configuring this project to bundle and minify static web assets. */
 
 .card-primary.card-outline {
     color: #035d7b !important;
@@ -385,13 +388,10 @@ input:checked + .slider:before {
         border-radius: 50%;
     }
 
-
 .vcenter-item {
     display: flex;
     align-items: center;
 }
-
-
 
 /* Modal start */
 .modal-dialog {
@@ -518,7 +518,6 @@ input.readonly {
     cursor: not-allowed;
 }
 
-
 /* L o a d e r */
 .load-bar1 {
     position: relative;
@@ -572,7 +571,6 @@ input.readonly {
     }
 }
 /* E N D   L  o a d e r */
-
 
 /*Card - TILES*/
 div.nav-card-bg a {
@@ -674,3 +672,243 @@ th.weektotals {
 }
 
 /*FromTCMPL*/
+
+/* Create a custom checkbox */
+
+.checkboxlabel label {
+    padding-left: 5px;
+    cursor: pointer;
+    vertical-align: top;
+}
+
+.checkBox-Blue {
+    /*accent-color: #0689ac;*/
+    accent-color: #17a2b8;
+    height: 20px; /* not needed */
+    width: 20px; /* not needed */
+}
+
+.checkBox-DarkBlue {
+    /*accent-color: #0689ac;*/
+    accent-color: #1b6ec2;
+    height: 20px; /* not needed */
+    width: 20px; /* not needed */
+}
+/* End a custom checkbox */
+
+Switches css start
+========================== **/
+.switch input[type=checkbox] {
+    opacity: 0;
+    position: absolute;
+}
+
+.switch input[type=checkbox] + .cr {
+    position: relative;
+    display: inline-block;
+    transition: 0.4s ease;
+    height: 20px;
+    width: 35px;
+    border: 1px solid #e9eaec;
+    border-radius: 60px;
+    cursor: pointer;
+    z-index: 0;
+    top: 12px;
+}
+
+    .switch input[type=checkbox] + .cr:after, .switch input[type=checkbox] + .cr:before {
+        content: "";
+        position: absolute;
+        display: block;
+        top: 0;
+        left: 0;
+    }
+
+    .switch input[type=checkbox] + .cr:before {
+        transition: 0.2s cubic-bezier(0.24, 0, 0.5, 1);
+        height: 20px;
+        width: 35px;
+        border-radius: 30px;
+    }
+
+    .switch input[type=checkbox] + .cr:after {
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.1), 0 4px 0 0 rgba(0, 0, 0, 0.04), 0 4px 9px rgba(0, 0, 0, 0.13), 0 3px 3px rgba(0, 0, 0, 0.05);
+        transition: 0.35s cubic-bezier(0.54, 1.6, 0.5, 1);
+        background: #f7f7f7;
+        height: 19px;
+        width: 19px;
+        border-radius: 60px;
+    }
+
+.switch input[type=checkbox]:checked + .cr:before {
+    background: linear-gradient(-135deg, #1de9b6 0%, #1dc4e9 100%);
+    transition: width 0.2s cubic-bezier(0, 0, 0, 0.1);
+}
+
+.switch input[type=checkbox]:checked + .cr:after {
+    left: 16px;
+}
+
+.switch input[type=checkbox]:disabled + label {
+    opacity: 0.5;
+    filter: grayscale(0.4);
+    cursor: not-allowed;
+}
+
+.switch.switch-primary input[type=checkbox]:checked + .cr:before {
+    background: #04a9f5;
+}
+
+.switch.switch-danger input[type=checkbox]:checked + .cr:before {
+    background: #f44236;
+}
+
+.switch.switch-success input[type=checkbox]:checked + .cr:before {
+    background: #1de9b6;
+}
+
+.switch.switch-warning input[type=checkbox]:checked + .cr:before {
+    background: #f4c22b;
+}
+
+.switch.switch-info input[type=checkbox]:checked + .cr:before {
+    background: #3ebfea;
+}
+
+.switch.switch-alternative input[type=checkbox]:checked + .cr:before {
+    background: linear-gradient(-135deg, #899FD4 0%, #A389D4 100%);
+}
+
+/**====== Switches css end ======**/
+
+/* radio */
+.radio-all {
+    background-color: azure;
+    padding: 7px;
+    margin-left: 10px;
+    margin-right: 15px;
+}
+
+.radio {
+    padding: 10px 0;
+    min-height: auto;
+    position: relative;
+    margin-right: -5px;
+}
+
+    .radio input[type=radio] {
+        margin: 0;
+        display: none;
+        width: 22px;
+    }
+
+        .radio input[type=radio] + .cr {
+            padding-left: 0;
+        }
+
+            .radio input[type=radio] + .cr:after, .radio input[type=radio] + .cr:before {
+                content: "";
+                display: inline-block;
+                margin-right: 5px;
+                margin-left: 10px;
+                border-radius: 50%;
+                vertical-align: bottom;
+                background: #fff;
+                color: transparent;
+                cursor: pointer;
+                transition: all 0.2s ease-in-out;
+            }
+
+            .radio input[type=radio] + .cr:before {
+                width: 22px;
+                height: 20px;
+                border: 2px solid #d2d5d7;
+            }
+
+            .radio input[type=radio] + .cr:after {
+                width: 12px;
+                height: 12px;
+                position: absolute;
+                top: 13px;
+                left: 5px;
+            }
+
+        .radio input[type=radio]:checked + .cr:before {
+            border-color: #1dd5d2;
+        }
+
+        .radio input[type=radio]:checked + .cr:after {
+            background: linear-gradient(-135deg, #1de9b6 0%, #1dc4e9 100%);
+        }
+
+        .radio input[type=radio]:disabled + .cr {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+            .radio input[type=radio]:disabled + .cr:after, .radio input[type=radio]:disabled + .cr:before {
+                cursor: not-allowed;
+            }
+
+    .radio.radio-fill input[type=radio] + .cr:after {
+        width: 18px;
+        height: 18px;
+        top: 10px;
+        left: 2px;
+    }
+
+    .radio.radio-primary input[type=radio]:checked + .cr:before {
+        border-color: #04a9f5;
+    }
+
+    .radio.radio-primary input[type=radio]:checked + .cr:after {
+        background: #04a9f5;
+    }
+
+    .radio.radio-danger input[type=radio]:checked + .cr:before {
+        border-color: #f44236;
+    }
+
+    .radio.radio-danger input[type=radio]:checked + .cr:after {
+        background: #f44236;
+    }
+
+    .radio.radio-success input[type=radio]:checked + .cr:before {
+        border-color: #1de9b6;
+    }
+
+    .radio.radio-success input[type=radio]:checked + .cr:after {
+        background: #1de9b6;
+    }
+
+    .radio.radio-warning input[type=radio]:checked + .cr:before {
+        border-color: #f4c22b;
+    }
+
+    .radio.radio-warning input[type=radio]:checked + .cr:after {
+        background: #f4c22b;
+    }
+
+    .radio.radio-info input[type=radio]:checked + .cr:before {
+        border-color: #3ebfea;
+    }
+
+    .radio.radio-info input[type=radio]:checked + .cr:after {
+        background: #3ebfea;
+    }
+
+    .radio .cr {
+        cursor: pointer;
+    }
+
+@-moz-document url-prefix() {
+    .radio input[type="radio"] + .cr::after {
+        top: 14px;
+    }
+}
+
+.custom-controls-stacked .radio input[type=radio] + .cr:after {
+    top: 15px;
+}
+
+/* radio End*/
