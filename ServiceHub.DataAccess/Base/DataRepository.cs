@@ -1,11 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using ServiceHub.Domain.Context;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServiceHub.DataAccess.Base
 {
@@ -40,18 +35,12 @@ namespace ServiceHub.DataAccess.Base
 
         public int GetLast(Expression<Func<T, int>> predicate)
         {
-            if (Context.Set<T>().Count() == 0)
-                return 0;
-            else
-                return Context.Set<T>().Max(predicate);
+            return Context.Set<T>().Count() == 0 ? 0 : Context.Set<T>().Max(predicate);
         }
 
         public async Task<int> GetLastAsync(Expression<Func<T, int>> predicate)
         {
-            if (await Context.Set<T>().CountAsync() == 0)
-                return 0;
-            else
-                return await Context.Set<T>().MaxAsync(predicate);
+            return await Context.Set<T>().CountAsync() == 0 ? 0 : await Context.Set<T>().MaxAsync(predicate);
         }
 
         public virtual IEnumerable<T> GetAll()
@@ -87,49 +76,57 @@ namespace ServiceHub.DataAccess.Base
         public virtual void Insert(T entity)
         {
             if (entity == null)
+            {
                 throw new ArgumentException("entity is null");
+            }
 
-            Context.Set<T>().Add(entity);
-            Context.SaveChanges();
+            _ = Context.Set<T>().Add(entity);
+            _ = Context.SaveChanges();
         }
 
         public virtual async Task InsertAsync(T entity)
         {
             if (entity == null)
+            {
                 throw new ArgumentException("entity is null");
+            }
 
-            Context.Set<T>().Add(entity);
-            await Context.SaveChangesAsync();
+            _ = Context.Set<T>().Add(entity);
+            _ = await Context.SaveChangesAsync();
         }
 
         public virtual void Update(T entity)
         {
             if (entity == null)
+            {
                 throw new ArgumentException("entity is null");
+            }
 
-            Context.Update(entity);
-            Context.SaveChanges();
+            _ = Context.Update(entity);
+            _ = Context.SaveChanges();
         }
 
         public virtual async Task UpdateAsync(T entity)
         {
             if (entity == null)
+            {
                 throw new ArgumentException("entity is null");
+            }
 
-            Context.Update(entity);
-            await Context.SaveChangesAsync();
+            _ = Context.Update(entity);
+            _ = await Context.SaveChangesAsync();
         }
 
         public virtual void Delete(T entity)
         {
-            Context.Set<T>().Remove(entity);
-            Context.SaveChanges();
+            _ = Context.Set<T>().Remove(entity);
+            _ = Context.SaveChanges();
         }
 
         public virtual async Task DeleteAsync(T entity)
         {
-            Context.Set<T>().Remove(entity);
-            await Context.SaveChangesAsync();
+            _ = Context.Set<T>().Remove(entity);
+            _ = await Context.SaveChangesAsync();
         }
 
         public void Dispose()

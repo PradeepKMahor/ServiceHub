@@ -1,9 +1,4 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace ServiceHub.Domain.Context
 {
@@ -18,19 +13,21 @@ namespace ServiceHub.Domain.Context
         public ViewContext(DbContextOptions<ViewContext> options)
             : base(options)
         {
-            this.DisableCache = false;
+            DisableCache = false;
         }
 
         public ViewContext(DbContextOptions<ViewContext> options, ViewContextOption viewContextOption)
             : base(options)
         {
             if (viewContextOption != null)
-                this.DisableCache = viewContextOption.DisableCache;
+            {
+                DisableCache = viewContextOption.DisableCache;
+            }
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.HasAnnotation("ProductVersion", "2.1.1");
+            _ = modelBuilder.HasAnnotation("ProductVersion", "2.1.1");
         }
     }
 }
