@@ -2,17 +2,14 @@
 
 namespace ServiceHub.WebApp.Models
 {
-    public class CustomerProductProfileViewModel
+    public class CustomerProductProfileDetailViewModel
     {
-        public CustomerProductProfileViewModel()
+        public CustomerProductProfileDetailViewModel()
         {
             this.FilterDataModel = new FilterDataModel();
         }
 
         public FilterDataModel FilterDataModel { get; set; }
-
-        [Display(Name = "User Id")]
-        public string UserId { get; set; }
 
         [Display(Name = "CustomerID")]
         public string CustomerID { get; set; }
@@ -34,6 +31,30 @@ namespace ServiceHub.WebApp.Models
 
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        [Display(Name = "Customer GST")]
+        public string CustomerGST { get; set; }
+
+        [Display(Name = "Customer Address")]
+        public string CustomerAddress { get; set; }
+
+        [Display(Name = "Valid From Date")]
+        public string ValidFromDate { get; set; }
+
+        [Display(Name = "Valid To Date")]
+        public string ValidToDate { get; set; }
+
+        [Display(Name = "Country Code")]
+        public string CountryCode { get; set; }
+
+        [Display(Name = "Contact No.")]
+        public string ContactNo { get; set; }
+
+        public string CountProducts { get; set; }
+        public string CountUsers { get; set; }
+        public string CountPMRs { get; set; }
+        public string CMRs { get; set; }
+        public string WMRs { get; set; }
 
         public string SearchByCustomerID { get; set; } = string.Empty;
         public string SearchByCustomerName { get; set; } = string.Empty;
