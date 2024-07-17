@@ -31,8 +31,8 @@
         <div role="toolbar">
             <div class="d-flex flex-row">
                 <a asp-area="Masters"
-                   asp-controller="UsersCustomer"
-                   asp-action="CreateCustomerUser"
+                   asp-controller="CustomerProductProfile"
+                   asp-action="DetailIndex"
                    class="nav-link">
                     <i class="fas fa-plus " aria-hidden="true"></i>&nbsp;
                     New Customer
@@ -95,7 +95,7 @@
         <table id="tbGrid" class="table table-hover table-bordered  " style="width:100%">
             <thead class="bg-info text-white">
                 <tr role="row">
-                    <th> </th>
+
                     <th>@Html.DisplayNameFor(model => model.CustomerID)</th>
                     <th>@Html.DisplayNameFor(model => model.CustomerName)</th>
                     <th>@Html.DisplayNameFor(model => model.Status)</th>

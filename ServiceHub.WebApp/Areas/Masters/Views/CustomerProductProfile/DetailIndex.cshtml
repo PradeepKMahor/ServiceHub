@@ -9,16 +9,7 @@
 @section styles
 {
     <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
-    <link href="~/lib/dropzone/dropzone.css" rel="stylesheet" asp-append-version="true" />
-    <link href="~/lib/dropzone/basic.css" rel="stylesheet" asp-append-version="true" />
-    <style>
-        @@media (-webkit-min-device-pixel-ratio: 1.25) {
-            .openbal .col-xl-1, .closebal .col-xl-1 {
-                flex: 0 0 12% !important;
-                max-width: 12% !important;
-            }
-        }
-    </style>
+
 }
 <input type="hidden" asp-for="CustomerID" />
 
@@ -26,210 +17,309 @@
 @section BreadCrumbs
 {
     <ol class="breadcrumb">
- <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
+        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
         <li class="breadcrumb-item "><a asp-action="UserIndex" asp-controller="Home" asp-area="Masters">User Management</a></li>
         <li class="breadcrumb-item "><a asp-action="Index" asp-controller="CustomerProductProfile" asp-area="Masters">Customer Product Profile list</a></li>
-        <li class="breadcrumb-item active" aria-current="page">Employee General Information</li>
+        <li class="breadcrumb-item active" aria-current="page">Customer company ID</li>
     </ol>
 }
-<div class="col-sm-12">
-    <div class="card bg-gray-active border rounded shadow m-auto ">
-        <div class="card-block ">
+<div class="container-fluid bg-white border card rounded shadow m-auto col-xl-12 p-2 ">
+    <partial name="_CreateCustomerCompanyPartial" model="@Model" />
+    <div class="card-pill" style="margin-top: 20px">
+        <ul class="nav nav-tabs" id="tabs-tab" role="tablist">
 
-            <div class="card-deck">
-                <div class="card col-md-12 col-xl-12">
-                    <div class="card-body">
-                        <div id="divPrimaryDetails">
-                            <div class="row p-2">
-                                <div class="col-xl-4 col-md-6">
-                                    <div class="form-group">
-                                        <div class="dt-met">@Html.DisplayNameFor(model => model.CustomerID)</div>
-                                        <div class="dd-met">
-                                            @(Model.CustomerID)
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6">
-                                    <div class="form-group">
-                                        <div class="dt-met">@Html.DisplayNameFor(model => model.CustomerName)</div>
-                                        <div class="dd-met">
-                                            @(Model.CustomerName)
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-4 col-md-6">
-                                    <div class="form-group">
-                                        <div class="dt-met">@Html.DisplayNameFor(model => model.CustomerGST)</div>
-                                        <div class="dd-met">
-                                            @(Model.CustomerGST)
-                                        </div>
-                                    </div>
+            <li class="nav-item">
+                <a class="nav-link active" id="tabs-ProductDetails-tab" data-toggle="pill" href="#tabs-ProductDetails" role="tab" aria-controls="tabs-ProductDetails" aria-selected="true"
+                   data-url="@Url.Action("ProductDetailIndex", "EmpGenInfoDetails", new { empno = "4444" })"
+                   data-id="@Model.CustomerID"
+                   data-divid="pw-ProductDetails"
+                   data-callback="validateTabs()"
+                   data-area="EmpGenInfo"
+                   data-controller="EmpGenInfoDetails"
+                   data-action="ProductDetailIndex">
+                    <b> Product Details</b>
+                    <i id="imgDescriptionPrimaryStatus" class="fas fa-info-circle text-danger" style="display:none"></i>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" id="tabs-UserDetails-tab" data-toggle="pill" href="#tabs-UserDetails" role="tab" aria-controls="tabs-UserDetails" aria-selected="false"
+                   data-url="@Url.Action("UsersDetails", "EmpGenInfoDetails", new { id = Model.CustomerID })"
+                   data-id="@Model.CustomerID"
+                   data-divid="pw-UserDetails"
+                   data-callback="validateTabs()"
+                   data-area="EmpGenInfo"
+                   data-controller="EmpGenInfoDetails"
+                   data-action="UsersDetailsEdit">
+                    <b> Users Details</b>
+                    <i id="imgDescriptionSecondaryStatus" class="fas fa-info-circle text-danger" style="display:none"></i>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" id="tabs-PMRDetails-tab" data-toggle="pill" href="#tabs-PMRDetails" role="tab" aria-controls="tabs-PMRDetails" aria-selected="false"
+                   data-url="@Url.Action("PMRDetailsIndex", "EmpGenInfoDetails", new { id = Model.CustomerID })"
+                   data-id="@Model.CustomerID"
+                   data-divid="pw-PMRDetails"
+                   data-area="EmpGenInfo"
+                   data-controller="EmpGenInfoDetails"
+                   data-callback="activateGratuityTab();"
+                   data-action="PMRDetailsIndex">
+                    <b> PMR Details</b>
+                    <i id="imgDescriptionPMRStatus" class="fas fa-info-circle text-danger" style="display:none"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tabs-CMRDetails-tab" data-toggle="pill" href="#tabs-CMRDetails" role="tab" aria-controls="tabs-CMRDetails" aria-selected="false"
+                   data-url="@Url.Action("CMRDetailsIndex", "EmpGenInfoDetails", new { id = Model.CustomerID })"
+                   data-id="@Model.CustomerID"
+                   data-divid="pw-CMRDetails"
+                   data-area="EmpGenInfo"
+                   data-controller="EmpGenInfoDetails"
+                   data-callback="loadEmpCMRListDataTable();"
+                   data-action="CMRDetailsIndex">
+                    <b> CMR Details</b>
+                    <i id="imgDescriptionCMRStatus" class="fas fa-info-circle text-danger" style="display:none"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tabs-WMRDetails-tab" data-toggle="pill" href="#tabs-WMRDetails" role="tab" aria-controls="tabs-WMRDetails" aria-selected="false"
+                   data-url="@Url.Action("WMRDetails", "EmpGenInfoDetails", new { id = Model.CustomerID })"
+                   data-id="@Model.CustomerID"
+                   data-divid="pw-WMRDetails"
+                   data-callback="validateTabs()"
+                   data-area="EmpGenInfo"
+                   data-controller="EmpGenInfoDetails"
+                   data-action="EmployeeWMRDetails">
+                    <b> WMR Details</b>
+                    <i id="imgDescriptionPpAaStatus" class="fas fa-info-circle text-danger" style="display:none"></i>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            @*  @await Html.PartialAsync("_LoaderPartial")
+            *@
+
+            <div class="tab-pane fade show active" id="tabs-ProductDetails" role="tabpanel" aria-labelledby="tabs-ProductDetails-tab">
+                <div id="pw-ProductDetails">
+                    <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-12 p-1 ">
+                        <div class="app-h4 app-card-header mb-2">
+                            <p>Product list</p>
+                        </div>
+                        <div class="card-toolbar">
+                            <div role="toolbar">
+                                @*  @if (CurrentUserIdentity.ProfileActions.Any(p => p.ActionId == TCMPLApp.Domain.Models.LC.LCHelper.ActionCreateMasters))
+                                { *@
+
+                                <a class="btn btn-outline-primary btn-sm border-white"
+                                   asp-action="CreateCustomerUser"
+                                   asp-area="Masters"
+                                   asp-controller="UsersCustomer">
+                                    <i class="fas fa-plus"></i>&nbsp; New
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="m-1"></div>
+                        <div class="bg-gray-active rounded ">
+
+                            <table id="tbGrid" class="table table-hover table-bordered  " style="width:100%">
+                                <thead class="bg-info text-white">
+                                    <tr role="row">
+                                        <th>@Html.DisplayNameFor(model => model.productViewModel.ProductId)</th>
+                                        <th>@Html.DisplayNameFor(model => model.productViewModel.ProductCode)</th>
+                                        <th>@Html.DisplayNameFor(model => model.productViewModel.ProductName)</th>
+                                        <th>@Html.DisplayNameFor(model => model.productViewModel.ServiceDate)</th>
+                                        <th>@Html.DisplayNameFor(model => model.productViewModel.WarrantyDate)</th>
+                                        <th>@Html.DisplayNameFor(model => model.productViewModel.Status)</th>
+                                        <th>Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1001</td>
+                                        <td>PROD-1</td>
+                                        <td>Product 1</td>
+                                        <td>01-Jan-2024</td>
+                                        <td>29-Aug-2024</td>
+                                        <td>Active</td>
+                                        <td class="center">
+                                            <div class="row text-center pl-1 ml-1 pr-1 mr-1">
+
+                                                <a href="/Admin/CourseMaster/Upsert/${data.id}"
+                                                   class='btn btn-success btn-sm text-white  m-2'
+                                                   style='cursor:pointer;  '>
+                                                    <i class='far fa-edit'></i>
+
+                                                </a>
+
+                                                <a onclick=Delete("/Admin/CourseMaster/Delete/${data.id}")
+                                                   class='btn btn-danger btn-sm text-white m-2'
+                                                   style='cursor:pointer;  '>
+                                                    <i class='far fa-trash-alt'></i>
+                                                </a>
+
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tabs-UserDetails" role="tabpanel" aria-labelledby="tabs-UserDetails-tab">
+                <div id="pw-UserDetails">
+
+                    <div class="container-fluid bg-white border card rounded shadow m-auto  col-xl-12 p-1 ">
+                        <div class="app-h4 app-card-header mb-2">
+                            <p>Users-Customer</p>
+                        </div>
+                        <div class="card-toolbar">
+                            <div role="toolbar">
+                                <div class="d-flex flex-row">
+                                    <a asp-area="Masters"
+                                       asp-controller="UsersCustomer"
+                                       asp-action="CreateCustomerUser"
+                                       class="nav-link">
+                                        <i class="fas fa-plus " aria-hidden="true"></i>&nbsp;
+                                        New User
+                                    </a>
+                                    <button name="ExcelDownload" id="idExcelDownload"
+                                            title="Excel Download"
+                                            class="btn btn-outline-success btn-sm border-white  mx-2 ml-auto">
+                                        <i class="fas fa-file-excel green-color "> &nbsp;Excel</i>
+                                    </button>
                                 </div>
                             </div>
-                            <div class="row p-2">
-                                <div class="col-xl-4 col-md-6">
+                        </div>
+                        <div class="card-block">
+                            <div class="row">
+                                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
                                     <div class="form-group">
-                                        <div class="dt-met">@Html.DisplayNameFor(model => model.ValidFromDate)</div>
-                                        <div class="dd-met">
-                                            @(Model.ValidFromDate  )
-                                        </div>
+                                        <select asp-for="@Model.userCustomerViewModel.SearchByFirstLastName" class="form-control Select2 "
+                                                asp-items="ViewBag.FirstNameLastNameList" data-placeholder="First/Last Name">
+                                            <option selected></option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-xl-4 col-md-6">
+                                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
                                     <div class="form-group">
-                                        <div class="dt-met">@Html.DisplayNameFor(model => model.ValidToDate)</div>
-                                        <div class="dd-met">
-                                            @( Model.ValidToDate)
-                                        </div>
+                                        <select asp-for="@Model.userCustomerViewModel.SearchByUsername" class="form-control Select2 "
+                                                asp-items="ViewBag.UsernameList" data-placeholder="Username">
+                                            <option selected></option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-xl-4 col-md-6">
+                                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
                                     <div class="form-group">
-                                        <div class="dt-met">@Html.DisplayNameFor(model => model.CountryCode)</div>
-                                        <div class="dd-met">
-                                            @(Model.CountryCode)
-                                        </div>
+                                        <select asp-for="@Model.userCustomerViewModel.SearchByParentOrg" class="form-control Select2 "
+                                                asp-items="ViewBag.ParentOrgList" data-placeholder="Parent Org">
+                                            <option selected></option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-xl-4 col-md-6">
+                                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
                                     <div class="form-group">
-                                        <div class="dt-met">@Html.DisplayNameFor(model => model.Contact)</div>
-                                        <div class="dd-met">@Html.DisplayFor(model => model.Contact)</div>
+                                        <select asp-for="@Model.userCustomerViewModel.SearchByStatus" class="form-control chosen-select" data-placeholder="Status">
+                                            <option selected></option>
+                                            <option value="N">Active</option>
+                                            <option value="Y">De-Active</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-xl-4 col-md-6">
+
+                                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
                                     <div class="form-group">
-                                        <div class="dt-met">@Html.DisplayNameFor(model => model.Email)</div>
-                                        <div class="dd-met">@Html.DisplayFor(model => model.Email)</div>
+                                        <select asp-for="@Model.userCustomerViewModel.SearchByUserType" class="form-control chosen-select" data-placeholder="UserType">
+                                            <option selected></option>
+                                            <option>Supervisor </option>
+                                            <option>End-User</option>
+                                        </select>
                                     </div>
                                 </div>
-                                <div class="col-xl-4 col-md-6">
-                                    <div class="form-group">
-                                        <div class="dt-met">@Html.DisplayNameFor(model => model.CustomerAddress)</div>
-                                        <div class="dd-met">@Html.DisplayFor(model => model.CustomerAddress)</div>
-                                    </div>
+                                <div class="col">
+                                    <button type="submit" class="btn btn-outline-primary btn-sm  btn-block mx-2 ml-auto ">Go </button>
                                 </div>
+                                <div class="col">
+                                    <a asp-action="Index" class="btn btn-outline-danger btn-sm border-white mx-2 ml-auto "> Clear Filter </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-1"></div>
+                        <div class="bg-gray-active rounded ">
+                            <div class="table-responsive" style="overflow:auto;">
+                                <table id="tbGrid" class="table table-hover table-bordered  " style="width:100%">
+                                    <thead class="bg-info text-white">
+                                        <tr role="row">
+
+                                            <th>@Html.DisplayNameFor(model => model.userCustomerViewModel.Username)</th>
+                                            <th>@Html.DisplayNameFor(model => model.userCustomerViewModel.FirstName)</th>
+                                            <th>@Html.DisplayNameFor(model => model.userCustomerViewModel.LastName)</th>
+                                            <th>@Html.DisplayNameFor(model => model.userCustomerViewModel.ActiveStatus)</th>
+                                            <th>@Html.DisplayNameFor(model => model.userCustomerViewModel.ParentOrg)</th>
+                                            <th>@Html.DisplayNameFor(model => model.userCustomerViewModel.UserType)</th>
+                                            <th>@Html.DisplayNameFor(model => model.userCustomerViewModel.SupervisorName)</th>
+                                            <th>@Html.DisplayNameFor(model => model.userCustomerViewModel.ContactNo)</th>
+                                            <th>@Html.DisplayNameFor(model => model.userCustomerViewModel.ValidToDate)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a href="/Admin/CourseMaster/Upsert/${data.id}"
+                                                   class=' '
+                                                   style='cursor:pointer;  '>
+                                                    PradeepMahor001
+                                                </a>
+                                            </td>
+                                            <td>Pradeepkumar</td>
+                                            <td>Mahor</td>
+                                            <td>Active</td>
+                                            <td>Dell</td>
+                                            <td>Tech</td>
+                                            <td>Sandeep</td>
+                                            <td>8424037919</td>
+                                            <td>29-Aug-2014</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
                     </div>
 
                 </div>
             </div>
-
-            <div class="card-pill" style="margin-top: 20px">
-                <ul class="nav nav-tabs" id="tabs-tab" role="tablist">
-
-                    <li class="nav-item">
-                        <a class="nav-link" id="tabs-ProductDetails-tab" data-toggle="pill" href="#tabs-ProductDetails" role="tab" aria-controls="tabs-ProductDetails" aria-selected="true"
-                           data-url="@Url.Action("ProductDetailIndex", "EmpGenInfoDetails", new { empno = "4444" })"
-                           data-id="@Model.CustomerID"
-                           data-divid="pw-ProductDetails"
-                           data-callback="validateTabs()"
-                           data-area="EmpGenInfo"
-                           data-controller="EmpGenInfoDetails"
-                           data-action="ProductDetailIndex">
-                            Primary Details
-                            <i id="imgDescriptionPrimaryStatus" class="fas fa-info-circle text-danger" style="display:none"></i>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link" id="tabs-UserDetails-tab" data-toggle="pill" href="#tabs-UserDetails" role="tab" aria-controls="tabs-UserDetails" aria-selected="false"
-                           data-url="@Url.Action("UsersDetails", "EmpGenInfoDetails", new { id = Model.CustomerID })"
-                           data-id="@Model.CustomerID"
-                           data-divid="pw-UserDetails"
-                           data-callback="validateTabs()"
-                           data-area="EmpGenInfo"
-                           data-controller="EmpGenInfoDetails"
-                           data-action="UsersDetailsEdit">
-                            Secondary Details
-                            <i id="imgDescriptionSecondaryStatus" class="fas fa-info-circle text-danger" style="display:none"></i>
-                        </a>
-                    </li>
-
-
-                    <li class="nav-item">
-                        <a class="nav-link" id="tabs-PMRDetails-tab" data-toggle="pill" href="#tabs-PMRDetails" role="tab" aria-controls="tabs-PMRDetails" aria-selected="false"
-                           data-url="@Url.Action("PMRDetailsIndex", "EmpGenInfoDetails", new { id = Model.CustomerID })"
-                          data-id="@Model.CustomerID"
-                           data-divid="pw-PMRDetails"
-                           data-area="EmpGenInfo"
-                           data-controller="EmpGenInfoDetails"
-                           data-callback="activateGratuityTab();"
-                           data-action="PMRDetailsIndex">
-                            PMR Details
-                            <i id="imgDescriptionPMRStatus" class="fas fa-info-circle text-danger" style="display:none"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="tabs-CMRDetails-tab" data-toggle="pill" href="#tabs-CMRDetails" role="tab" aria-controls="tabs-CMRDetails" aria-selected="false"
-                           data-url="@Url.Action("CMRDetailsIndex", "EmpGenInfoDetails", new { id = Model.CustomerID })"
-                           data-id="@Model.CustomerID"
-                           data-divid="pw-CMRDetails"
-                           data-area="EmpGenInfo"
-                           data-controller="EmpGenInfoDetails"
-                           data-callback="loadEmpCMRListDataTable();"
-                           data-action="CMRDetailsIndex">
-                            CMR Details
-                            <i id="imgDescriptionCMRStatus" class="fas fa-info-circle text-danger" style="display:none"></i>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" id="tabs-WMRDetails-tab" data-toggle="pill" href="#tabs-WMRDetails" role="tab" aria-controls="tabs-WMRDetails" aria-selected="false"
-                           data-url="@Url.Action("WMRDetails", "EmpGenInfoDetails",new { id = Model.CustomerID })"
-                           data-id="@Model.CustomerID"
-                           data-divid="pw-WMRDetails"
-                           data-callback="validateTabs()"
-                           data-area="EmpGenInfo"
-                           data-controller="EmpGenInfoDetails"
-                           data-action="EmployeeWMRDetails">
-                            WMR Details
-                            <i id="imgDescriptionPpAaStatus" class="fas fa-info-circle text-danger" style="display:none"></i>
-                        </a>
-                    </li>
-                </ul>
-                <div class="tab-content">
-                   @*  @await Html.PartialAsync("_LoaderPartial")
- *@
-
-                    <div class="tab-pane fade show active" id="tabs-ProductDetails" role="tabpanel" aria-labelledby="tabs-ProductDetails-tab">
-                        <div id="pw-ProductDetails">
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tabs-UserDetails" role="tabpanel" aria-labelledby="tabs-UserDetails-tab">
-                        <div id="pw-UserDetails">
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tabs-PMRDetails" role="tabpanel" aria-labelledby="tabs-PMRDetails-tab">
-                        <div id="pw-PMRDetails">
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tabs-CMRDetails" role="tabpanel" aria-labelledby="tabs-CMRDetails-tab">
-                        <div id="pw-CMRDetails">
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tabs-WMRDetails" role="tabpanel" aria-labelledby="tabs-WMRDetails-tab">
-                        <div id="pw-WMRDetails">
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tabs-AadhaarDetails" role="tabpanel" aria-labelledby="tabs-AadhaarDetails-tab">
-                        <div id="pw-AadhaarDetails">
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tabs-WMRAndAadhaarDetails" role="tabpanel" aria-labelledby="tabs-WMRAndAadhaarDetails-tab">
-                        <div id="pw-WMRAndAadhaarDetails">
-                        </div>
-                    </div>
-                    <div class="tab-pane fade" id="tabs-GTLIDetails" role="tabpanel" aria-labelledby="tabs-GTLIDetails-tab">
-                        <div id="pw-GTLIDetails">
-                        </div>
-                    </div>
+            <div class="tab-pane fade" id="tabs-PMRDetails" role="tabpanel" aria-labelledby="tabs-PMRDetails-tab">
+                <div id="pw-PMRDetails">
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tabs-CMRDetails" role="tabpanel" aria-labelledby="tabs-CMRDetails-tab">
+                <div id="pw-CMRDetails">
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tabs-WMRDetails" role="tabpanel" aria-labelledby="tabs-WMRDetails-tab">
+                <div id="pw-WMRDetails">
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tabs-AadhaarDetails" role="tabpanel" aria-labelledby="tabs-AadhaarDetails-tab">
+                <div id="pw-AadhaarDetails">
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tabs-WMRAndAadhaarDetails" role="tabpanel" aria-labelledby="tabs-WMRAndAadhaarDetails-tab">
+                <div id="pw-WMRAndAadhaarDetails">
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tabs-GTLIDetails" role="tabpanel" aria-labelledby="tabs-GTLIDetails-tab">
+                <div id="pw-GTLIDetails">
                 </div>
             </div>
         </div>
     </div>
-
 </div>
+
 @section Scripts {
 
     @{
@@ -241,7 +331,16 @@
     <script src="~/js/EmployeeGenInfo.js" asp-append-version="true"></script>
 
     <script>
+        $(document).ready(function () {
+            DateTimePickerInit();
+        });
 
+        function DateTimePickerInit() {
+            $('.DateTimePickerInit').bootstrapMaterialDatePicker({
+                format: 'DD-MMM-YYYY',
+                time: false
+            });
+        }
 
 
         function flagUnflagTabsCallback(jsonData) {

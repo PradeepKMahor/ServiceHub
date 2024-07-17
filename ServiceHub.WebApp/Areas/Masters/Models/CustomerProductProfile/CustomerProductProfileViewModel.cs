@@ -14,7 +14,7 @@ namespace ServiceHub.WebApp.Models
         [Display(Name = "User Id")]
         public string UserId { get; set; }
 
-        [Display(Name = "CustomerID")]
+        [Display(Name = "Customer ID")]
         public string CustomerID { get; set; }
 
         [Display(Name = "Customer Name")]

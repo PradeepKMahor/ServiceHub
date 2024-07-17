@@ -22,7 +22,7 @@ namespace ServiceHub.WebApp.Models
         [Display(Name = "Role Name")]
         public string RoleName { get; set; } = string.Empty;
 
-        [Display(Name = "IsActive")]
+        [Display(Name = "Status")]
         public string IsActive { get; set; } = string.Empty;
     }
 }

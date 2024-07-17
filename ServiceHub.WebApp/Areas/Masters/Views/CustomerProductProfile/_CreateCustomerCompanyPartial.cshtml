@@ -1,0 +1,174 @@
+﻿@model ServiceHub.WebApp.Models.CustomerProductProfileDetailViewModel
+
+<form>
+    @Html.AntiForgeryToken()
+    <div class="app-h4 app-card-header mb-2">
+        <p>Customer company ID -   @(Model.CustomerID)</p>
+    </div>
+    <div class="card-block p-0 m-0 ">
+        <div class="card-deck">
+            <div class="card col-md-12 col-xl-12">
+                <div class="card-body m-0 p-0 ">
+                    <div id="divPrimaryDetails">
+                        <div class="row p-1">
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="CustomerName" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <input asp-for="CustomerName" class="form-control capitalize" required />
+                                        <span asp-validation-for="CustomerName" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Email1" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <input asp-for="Email1" class="form-control capitalize" required />
+                                        <span asp-validation-for="Email1" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Email2" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <input asp-for="Email2" class="form-control capitalize" required />
+                                        <span asp-validation-for="Email2" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Contact1" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <input asp-for="Contact1" class="form-control capitalize" required />
+                                        <span asp-validation-for="Contact1" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="Contact2" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <input asp-for="Contact2" class="form-control capitalize" required />
+                                        <span asp-validation-for="Contact2" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="CustomerGST" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <input asp-for="CustomerGST" class="form-control capitalize" required />
+                                        <span asp-validation-for="CustomerGST" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="ValidFromDate" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <input asp-for="ValidFromDate" type="text" placeholder="DD-MMM-YYYY"
+                                               class="form-control DateTimePickerInit" required />
+                                        <span asp-validation-for="ValidFromDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="ValidToDate" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <input asp-for="ValidToDate" type="text" placeholder="DD-MMM-YYYY"
+                                               class="form-control DateTimePickerInit" required />
+                                        <span asp-validation-for="ValidToDate" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-3 col-lg-4 col-md-6">
+                                <div class="form-group">
+                                    <label asp-for="CountryCode" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <input asp-for="CountryCode" class="form-control capitalize" required />
+                                        <span asp-validation-for="CountryCode" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-12 col-lg-12 col-md-12">
+                                <div class="form-group">
+                                    <label asp-for="CustomerAddress" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <textarea asp-for="CustomerAddress" rows="1" class="form-control capitalize" required></textarea>
+                                        <span asp-validation-for="CustomerAddress" class="text-danger"></span>
+                                    </div>
+                                </div>
+
+                            </div>
+                        </div>
+                        <hr class="m-0 p-1" />
+                        <div class="row p-1 ">
+                            <button type="submit"
+                                    class="btn btn-primary mb-1 mx-3 right ">
+                                <i class="fas fa-save"></i>
+                            </button>
+                            <button type="submit"
+                                    class="btn btn-info mb-1 mx-3 right ">
+                                <i class="fas fa-user-edit"></i>
+                            </button>
+                            @* <div class="col-8 col-lg-6 col-12-6 col-sm-12">
+                            <button type="submit"
+                            data-mdb-button-init
+                            data-mdb-ripple-init
+                            class="btn btn-success mb-1 mx-2 ml-auto">
+                            Submit
+                            </button>
+                            </div> *@
+                            <div class="col-2 d-flex flex-row col-lg-6 col-12-6 col-sm-12">
+
+
+
+                                @*   <button type="submit"
+                                data-mdb-button-init
+                                data-mdb-ripple-init
+                                class="btn btn-warning mb-1  mx-3 ml-auto">
+                                <i class="fas fa-unlock-alt"></i>
+                                </button> *@
+
+
+
+                                @*  <button type="submit"
+                                data-mdb-button-init
+                                data-mdb-ripple-init
+                                class="btn btn-danger mb-1 mx-3 ml-auto">
+                                <i class="fas fa-trash-alt"></i>
+                                </button>  *@
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+</form>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+
+        $(document).ready(function () {
+            DateTimePickerInit();
+        });
+
+        function DateTimePickerInit() {
+            $('.DateTimePickerInit').bootstrapMaterialDatePicker({
+                format: 'DD-MMM-YYYY',
+                time: false
+            });
+        }
+    </script>
+
+}

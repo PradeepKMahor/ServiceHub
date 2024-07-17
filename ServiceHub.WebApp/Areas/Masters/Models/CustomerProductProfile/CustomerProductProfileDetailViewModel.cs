@@ -9,6 +9,10 @@ namespace ServiceHub.WebApp.Models
             this.FilterDataModel = new FilterDataModel();
         }
 
+        public ProductViewModel productViewModel { get; set; }
+        public UserCustomerViewModel userCustomerViewModel { get; set; }
+        public UserRegistrationViewModel userRegistrationViewModel { get; set; }
+
         public FilterDataModel FilterDataModel { get; set; }
 
         [Display(Name = "CustomerID")]
@@ -23,14 +27,20 @@ namespace ServiceHub.WebApp.Models
         [Display(Name = "Supervisor Name")]
         public string SupervisorName { get; set; }
 
-        [Display(Name = "Contact")]
-        public string Contact { get; set; }
+        [Display(Name = "Contact No. 1")]
+        public string Contact1 { get; set; }
+
+        [Display(Name = "Contact No. 2")]
+        public string Contact2 { get; set; }
 
         [Display(Name = "Valid End Date")]
         public string ValidEndDate { get; set; }
 
-        [Display(Name = "Email")]
-        public string Email { get; set; }
+        [Display(Name = "Email 1")]
+        public string Email1 { get; set; }
+
+        [Display(Name = "Email 2")]
+        public string Email2 { get; set; }
 
         [Display(Name = "Customer GST")]
         public string CustomerGST { get; set; }

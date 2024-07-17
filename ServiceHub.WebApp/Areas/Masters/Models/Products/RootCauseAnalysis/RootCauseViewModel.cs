@@ -25,7 +25,7 @@ namespace ServiceHub.WebApp.Models
 
         public string ProductId { get; set; }
 
-        [Display(Name = "IsActive")]
+        [Display(Name = "Status")]
         public string IsActive { get; set; }
     }
 }

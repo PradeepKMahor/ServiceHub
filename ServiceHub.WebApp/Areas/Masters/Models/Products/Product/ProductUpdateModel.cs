@@ -33,7 +33,7 @@ namespace ServiceHub.WebApp.Models
         public string UploadPhoto { get; set; } = string.Empty;
 
         [Required]
-        [Display(Name = "IsActive")]
+        [Display(Name = "Status")]
         public string IsActive { get; set; } = string.Empty;
     }
 }
