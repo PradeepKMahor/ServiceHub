@@ -5,25 +5,25 @@ using ServiceHub.WebApp.Models;
 namespace ServiceHub.WebApp.Areas.ServiceRequests.Controllers
 {
     [Area("ServiceRequests")]
-    public class ServiceRequestController : BaseController
+    public class CMRController : BaseController
     {
         public IActionResult Index()
         {
             //Notify("Success", "Success", "toaster", notificationType: NotificationType.success);
-            var serviceRequestViewModel = new ServiceRequestViewModel();
-            return View(serviceRequestViewModel);
+            var cmrViewModel = new CMRViewModel();
+            return View(cmrViewModel);
         }
 
-        public async Task<IActionResult> CreateServiceRequest()
+        public async Task<IActionResult> CreateCMR()
         {
-            ServiceRequestCreateViewModel serviceRequestCreateViewModel = new();
+            CMRCreateViewModel cmrCreateViewModel = new();
 
-            return View(serviceRequestCreateViewModel);
+            return View(cmrCreateViewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateServiceRequest([FromForm] ServiceRequestCreateViewModel serviceRequestCreateViewModel)
+        public async Task<IActionResult> CreateCMR([FromForm] CMRCreateViewModel cmrCreateViewModel)
         {
             try
             {
@@ -35,14 +35,14 @@ namespace ServiceHub.WebApp.Areas.ServiceRequests.Controllers
                 else
                 {
                     Notify("Error", "Something Missing Or Data Not Found", "toaster", NotificationType.error);
-                    return View(serviceRequestCreateViewModel);
+                    return View(cmrCreateViewModel);
                 }
             }
             catch (Exception ex)
             {
                 Notify("Exception", ex.Message + " " + ex.InnerException?.Message, "toaster", NotificationType.error);
             }
-            return View(serviceRequestCreateViewModel);
+            return View(cmrCreateViewModel);
         }
     }
 }

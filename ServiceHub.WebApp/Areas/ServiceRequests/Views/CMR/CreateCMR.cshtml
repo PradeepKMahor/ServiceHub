@@ -1,8 +1,8 @@
-﻿@model ServiceHub.WebApp.Models.ServiceRequestCreateViewModel
+﻿@model ServiceHub.WebApp.Models.CMRCreateViewModel
 
 @{
-    ViewData["Title"] = "New Service Request ";
-    var title = "New Service Request ";
+    ViewData["Title"] = "New Corrective Maint Requests ";
+    var title = "New Corrective Maint Requests  ";
     var Varid = "";
 }
 @Html.AntiForgeryToken()
@@ -11,9 +11,9 @@
 {
     <ol class="breadcrumb">
         <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="ServiceRequest">Dashboard</a></li>
-        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="ServiceRequest" asp-area="ServiceRequests">Service Request List</a></li>
+        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="CMR" asp-area="ServiceRequests">CMR List</a></li>
 
-        <li class="breadcrumb-item active" aria-current="page">New Service Request</li>
+        <li class="breadcrumb-item active" aria-current="page">New Corrective Maint Request </li>
     </ol>
 
 }
@@ -25,7 +25,7 @@
 
     <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
         <div class="app-h4 app-card-header mb-2">
-            <p>New Service Request</p>
+            <p>New Corrective Maint Request </p>
         </div>
         <div class="card-toolbar">
             <div role="toolbar">

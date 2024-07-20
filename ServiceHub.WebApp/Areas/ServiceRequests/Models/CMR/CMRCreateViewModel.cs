@@ -2,7 +2,7 @@
 
 namespace ServiceHub.WebApp.Models
 {
-    public class ServiceRequestCreateViewModel
+    public class CMRCreateViewModel
     {
         //[Required]
         //[Display(Name = "UserID")]

@@ -2,9 +2,9 @@
 
 namespace ServiceHub.WebApp.Models
 {
-    public class ServiceRequestViewModel
+    public class CMRViewModel
     {
-        public ServiceRequestViewModel()
+        public CMRViewModel()
         {
             this.FilterDataModel = new FilterDataModel();
         }
@@ -13,6 +13,9 @@ namespace ServiceHub.WebApp.Models
 
         [Display(Name = "SRN")]
         public string SRN { get; set; }
+
+        [Display(Name = "Serial No.")]
+        public string SerialNo { get; set; }
 
         [Display(Name = "Product")]
         public string Product { get; set; }
@@ -32,9 +35,6 @@ namespace ServiceHub.WebApp.Models
         [Display(Name = "Assigned To")]
         public string AssignedTo { get; set; }
 
-        [Display(Name = "Serial No")]
-        public string SerialNo { get; set; }
-
         [Display(Name = "Closure Date")]
         public DateTime? ClosureDate { get; set; }
 
@@ -43,5 +43,29 @@ namespace ServiceHub.WebApp.Models
 
         [Display(Name = "SLA Status")]
         public string SLAStatus { get; set; }
+
+        [Display(Name = "From Date")]
+        public string SearchByFromDate { get; set; }
+
+        [Display(Name = "To Date")]
+        public string SearchByToDate { get; set; }
+
+        [Display(Name = "Product")]
+        public string SearchByProduct { get; set; }
+
+        [Display(Name = "Customer")]
+        public string SearchByCustomer { get; set; }
+
+        [Display(Name = "Status")]
+        public string SearchByStatus { get; set; }
+
+        [Display(Name = "Priority")]
+        public string SearchByPriority { get; set; }
+
+        [Display(Name = "Assigned To")]
+        public string SearchByAssignedTo { get; set; }
+
+        [Display(Name = "SLA Status")]
+        public string SearchBySLAStatus { get; set; }
     }
 }
