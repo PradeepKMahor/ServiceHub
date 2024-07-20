@@ -31,16 +31,150 @@
         <div role="toolbar">
             @*  @if (CurrentUserIdentity.ProfileActions.Any(p => p.ActionId == TCMPLApp.Domain.Models.LC.LCHelper.ActionCreateMasters))
             { *@
+            <form>
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-8">
+                        <div class="card-block p-0 m-0 ">
+                            <div class="card-deck">
+                                <div class="card col-md-12 col-xl-12">
+                                    <div class="card-body m-0 p-0 ">
+                                        <div id="divPrimaryDetails">
+                                            <div class="row p-1">
+                                                <div class="col-xl-6 col-lg-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="ProductName" class="col-12 control-label"></label>
+                                                        <div class="col-12">
+                                                            <input asp-for="ProductName" class="form-control capitalize" required />
+                                                            <span asp-validation-for="ProductName" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="ProductCode" class="col-12 control-label"></label>
+                                                        <div class="col-12">
+                                                            <input asp-for="ProductCode" class="form-control capitalize" required />
+                                                            <span asp-validation-for="ProductCode" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="ServiceDate" class="col-12 control-label"></label>
+                                                        <div class="col-12">
+                                                            <input asp-for="ServiceDate" type="text" placeholder="DD-MMM-YYYY"
+                                                                   class="form-control DateTimePickerInit" required />
+                                                            <span asp-validation-for="ServiceDate" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="WarrantyDate" class="col-12 control-label"></label>
+                                                        <div class="col-12">
+                                                            <input asp-for="WarrantyDate" type="text" placeholder="DD-MMM-YYYY"
+                                                                   class="form-control DateTimePickerInit" required />
+                                                            <span asp-validation-for="WarrantyDate" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
 
-            <a class="btn btn-outline-primary btn-sm border-white"
-               asp-action="CreateCustomerUser"
-               asp-area="Masters"
-               asp-controller="UsersCustomer">
-                <i class="fas fa-plus"></i>&nbsp; New
-            </a>
+                                                <div class="col-xl-12 col-lg-12 col-md-12">
+                                                    <div class="form-group">
+                                                        <label asp-for="ProductDescription" class="col-12 control-label"></label>
+                                                        <div class="col-12">
+                                                            <textarea asp-for="ProductDescription" rows="1" class="form-control capitalize" required></textarea>
+                                                            <span asp-validation-for="ProductDescription" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
 
+                                                </div>
+                                            </div>
+                                            <hr class="m-0 p-1" />
+                                            <div class="row p-1 ">
+                                                <div class="col-8 col-lg-6 col-12-6 col-sm-12">
+                                                    <button type="submit"
+                                                            data-mdb-button-init
+                                                            data-mdb-ripple-init
+                                                            class="btn btn-success mb-1 mx-2 ml-auto">
+                                                        Submit
+                                                    </button>
+                                                </div>
+
+                                                <div class="col-2 d-flex flex-row col-lg-6 col-12-6 col-sm-12">
+
+                                                    <button type="submit"
+                                                            data-mdb-button-init
+                                                            data-mdb-ripple-init
+                                                            class="btn btn-primary mb-1 mx-3 ml-auto">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+
+                                                    <button type="submit"
+                                                            data-mdb-button-init
+                                                            data-mdb-ripple-init
+                                                            class="btn btn-primary mb-1 mx-3 ml-auto">
+                                                        <i class="fas fa-save"></i>
+                                                    </button>
+
+
+                                                    <button type="submit"
+                                                            data-mdb-button-init
+                                                            data-mdb-ripple-init
+                                                            class="btn btn-info mb-1 mx-3 ml-auto">
+                                                        <i class="fas fa-edit"></i>
+                                                    </button>
+
+                                                    <button type="submit"
+                                                            data-mdb-button-init
+                                                            data-mdb-ripple-init
+                                                            class="btn btn-danger mb-1 mx-3 ml-auto">
+                                                        <i class="fas fa-trash-alt"></i>
+
+                                                    </button>
+
+                                                    <div class="col-6 mx-3 ml-auto">
+                                                        <div class="switch d-inline  font-weight-bold">
+                                                            <input type="checkbox" asp-for="Status" />
+                                                            Status
+                                                            <label for="Status" class="cr"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card-block p-0 m-0 ">
+                            <div class="card-deck  ">
+                                <div class="card col-md-12 col-xl-12">
+                                    <div class="card-body m-0 p-0 " style="height:310px;">
+                                        <div class="text-center" style="height:250px;">
+                                            <img id="preview" height="150px" style="width:150px!important; max-width:150px!important;min-width:150px!important;" src="~/images\avatar5.png" alt="User Avatar"
+                                                 class="profile-user-img img-fluid img-square">
+                                            <hr />
+                                        </div>
+                                        <input asp-for="UploadPhoto" type="file" class="form-control capitalize" required />
+
+                                        <span asp-validation-for="UploadPhoto" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
     </div>
+    <hr />
     <div class="m-1"></div>
     <div class="bg-gray-active rounded ">
 
@@ -101,6 +235,8 @@
 
         $(document).ready(function () {
             // localLoadDataTable();
+            UploadPhoto();
+            DateTimePickerInit();
             $('#tbGrid').DataTable({
                 // "dom": 'Bfrtip',
                 "lengthChange": false,
@@ -129,6 +265,34 @@
 
 
         });
+        function DateTimePickerInit() {
+            $('.DateTimePickerInit').bootstrapMaterialDatePicker({
+                format: 'DD-MMM-YYYY',
+                time: false
+            });
+        }
+        function UploadPhoto() {
+            var fileTag = document.getElementById("UploadPhoto"),
+                preview = document.getElementById("preview");
+
+            fileTag.addEventListener("change", function () {
+                changeImage(this);
+            });
+
+            function changeImage(input) {
+                var reader;
+
+                if (input.files && input.files[0]) {
+                    reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        preview.setAttribute('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        }
         function localLoadDataTable() {
 
             var table = $('#tbGrid').DataTable({

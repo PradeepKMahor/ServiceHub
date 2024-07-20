@@ -4,7 +4,6 @@ namespace ServiceHub.WebApp.Models
 {
     public class ProductCreateModel
     {
-        [Required]
         [Display(Name = "Product Id")]
         public string ProductId { get; set; } = string.Empty;
 
@@ -34,6 +33,6 @@ namespace ServiceHub.WebApp.Models
 
         [Required]
         [Display(Name = "Status")]
-        public string IsActive { get; set; } = string.Empty;
+        public string Status { get; set; } = string.Empty;
     }
 }
