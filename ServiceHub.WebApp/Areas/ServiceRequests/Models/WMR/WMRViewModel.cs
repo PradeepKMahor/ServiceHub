@@ -2,9 +2,9 @@
 
 namespace ServiceHub.WebApp.Models
 {
-    public class PMRViewModel
+    public class WMRViewModel
     {
-        public PMRViewModel()
+        public WMRViewModel()
         {
             this.FilterDataModel = new FilterDataModel();
         }
