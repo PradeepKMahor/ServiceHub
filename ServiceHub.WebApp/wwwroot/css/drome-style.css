@@ -1319,15 +1319,15 @@ p.text-muted {
 /*====== text colotr ends ======*/
 
 :required {
-    border: 1px solid #ffc000;
+    border: 1px solid #0085ff7a;
 }
 
     :required + .select2-container--default .select2-selection--single {
-        border: 1.5px solid #ffc000;
+        border: 1.5px solid #0085ff7a;
     }
 
     :required + .select2-container--default .select2-selection--multiple {
-        border: 1.5px solid #ffc000 !important;
+        border: 1.5px solid #0085ff7a !important;
     }
 
 /*:required:valid {

@@ -53,8 +53,20 @@ namespace ServiceHub.WebApp.Models
         public string OtherUserComments { get; set; } = string.Empty;
 
         [Required]
+        [Display(Name = "Technician Remarks")]
+        public string TechnicianRemarks { get; set; } = string.Empty;
+
+        [Required]
         [Display(Name = "Product SOP")]
         public string ProductSOP { get; set; } = string.Empty;
+
+        [Required]
+        [Display(Name = "ETR")]
+        public string ETR { get; set; } = string.Empty;
+
+        [Required]
+        [Display(Name = "RCA")]
+        public string RCA { get; set; } = string.Empty;
 
         [Required]
         [Display(Name = "Priority")]
