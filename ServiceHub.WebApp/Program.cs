@@ -1,3 +1,5 @@
+using DeviceDetectorNET.Cache;
+using DeviceDetectorNET;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -87,6 +89,29 @@ else
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
     app.UseHsts();
 }
+
+app.Use(async (context, next) =>
+{
+    var detector = new DeviceDetector(context.Request.Headers["User-Agent"].ToString());
+    detector.SetCache(new DictionaryCache());
+    detector.Parse();
+
+    if (detector.IsMobile())
+    {
+        context.Items.Remove("isMobile");
+        context.Items.Add("isMobile", true);
+    }
+    else
+    {
+        context.Items.Remove("isMobile");
+        context.Items.Add("isMobile", false);
+    }
+
+    context.Items.Remove("DeviceName");
+    context.Items.Add("DeviceName", detector.GetDeviceName());
+
+    await next();
+});
 app.UseResponseCaching();
 app.UseHttpsRedirection();
 app.UseStaticFiles();

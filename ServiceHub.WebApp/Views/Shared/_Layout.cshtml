@@ -1,4 +1,13 @@
-﻿<!DOCTYPE html>
+﻿@{
+    var isMobileBool = (bool)@Context.Items["isMobile"];
+    string isMobile = "false";
+    if (isMobileBool == true)
+    {
+        isMobile = "true";
+    }
+}
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -11,6 +20,7 @@
     <partial name="_Styles" />
     <!--Render Styles-->
     @await RenderSectionAsync("Styles", required: false)
+
     <!--Render Styles-->
 </head>
 @* <body class="hold-transition sidebar-mini">
@@ -62,9 +72,19 @@
 
     <partial name="_Scripts" />
     <script src="~/js/site.js" asp-append-version="true"></script>
-    @*     <script src="~/js/genericTrs.js" asp-append-version="true"></script>
-    *@    @await Html.PartialAsync("_notificationPartial")
+
+    @await Html.PartialAsync("_notificationPartial")
     @await Html.PartialAsync("_RestrictIEScriptPartial")
     @await RenderSectionAsync("Scripts", required: false)
+    <script type="text/javascript">
+        var datatableColumns;
+        $(document).ready(function () {
+            // if (@isMobile.ToString() == false) {
+            //     alert("IsMobile : false");
+            // } else {
+            //     alert("IsMobile : true");
+            // }
+        });
+    </script>
 </body>
 </html>

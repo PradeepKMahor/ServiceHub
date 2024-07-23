@@ -4,109 +4,187 @@
 @{
     ViewData["Title"] = "Log in";
 }
-<div class="row pt-4 mt-4">
-    <div class="col-8">
-
-        <img class="img-fluid border shadow rounded mx-auto d-block" src="~/images/LogInHomePage.jpg" />
-    </div>
-    <div class="col-4">
-        @*
-        <div class="hold-transition login-page" style="background-color:transparent!important; justify-content:normal!important">
-        <div class="login-box"> *@
-        <div class="card card-outline card-primary  border shadow">
-            <div class="card-header text-center">
-                <a href="#" class="h1"><b>Service</b>Hub</a>
+@{
+    if ((bool)HttpContext.Items["isMobile"] == false)
+    {
+        <div class="row pt-4 mt-4">
+            <div class="col-8">
+                <img class="img-fluid border shadow rounded mx-auto d-block" src="~/images/LogInHomePage.jpg" />
             </div>
-            <div class="card-body">
-                <p class="login-box-msg h5">
-                    Have a Good Day !!!
-                </p>
-                <form id="account" method="post">
-                    @* <div class="input-group mb-3">
-                    <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" placeholder="name@example.com" />
-                    <div class="input-group-append">
-                    <div class="input-group-text">
-                    <span class="fas fa-envelope"></span>
-                    </div>
-                    </div>
-                    </div> *@
+            <div class="col-4">
 
-                    <div class="input-group mb-3">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user-shield"></span>
-                            </div>
-                        </div>
-                        <input asp-for="Input.Email"
-                               class="form-control"
-                               autocomplete="username"
-                               aria-required="true"
-                               placeholder="Username / Email-Id / Mobile No." />
+                <div class="card card-outline card-primary  border shadow">
+                    <div class="card-header text-center">
+                        <a href="#" class="h1"><b>Service</b>Hub</a>
                     </div>
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                    <div class="input-group mb-3">
-                        <div class="input-group-append">
-                            <div class="input-group-text">
-                                <span class="fas fa-user-lock"></span>
-                            </div>
-                        </div>
-                        <input asp-for="Input.Password"
-                               class="form-control"
-                               autocomplete="current-password"
-                               aria-required="true"
-                               placeholder="Password" />
-                    </div>
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                    <div class="row ">
-                        <div class="col-8 col-sm-12">
-                            <div class="icheck-primary pb-1">
-                                <input class="form-check-input" asp-for="Input.RememberMe" />
-                                <label asp-for="Input.RememberMe" class="form-label">
-                                    @Html.DisplayNameFor(m => m.Input.RememberMe)
-                                </label>
-                            </div>
-                        </div>
+                    <div class="card-body">
+                        <p class="login-box-msg h5">
+                            Have a Good Day !!!
+                        </p>
+                        <form id="account" method="post">
 
-                        <div class="col-4 col-sm-12">
-                            <button id="login-submit" type="submit"
-                                    class="btn btn-primary btn-block">
-                                Sign In
-                            </button>
+                            <div class="input-group mb-3">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user-shield"></span>
+                                    </div>
+                                </div>
+                                <input asp-for="Input.Email"
+                                       class="form-control"
+                                       autocomplete="username"
+                                       aria-required="true"
+                                       placeholder="Username / Email-Id / Mobile No." />
+                            </div>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            <div class="input-group mb-3">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user-lock"></span>
+                                    </div>
+                                </div>
+                                <input asp-for="Input.Password"
+                                       class="form-control"
+                                       autocomplete="current-password"
+                                       aria-required="true"
+                                       placeholder="Password" />
+                            </div>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            <div class="row ">
+                                <div class="col-8 col-sm-12">
+                                    <div class="icheck-primary pb-1">
+                                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                                        <label asp-for="Input.RememberMe" class="form-label">
+                                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                        </label>
+                                    </div>
+                                </div>
+
+                                <div class="col-4 col-sm-12">
+                                    <button id="login-submit" type="submit"
+                                            class="btn btn-primary btn-block">
+                                        Sign In
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <hr />
+                        <div class="row h6">
+                            <div class="col-6">
+                                <a class="nav-link " id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                            </div>
+                            <div class="col-6">
+                            </div>
+
                         </div>
-                    </div>
-                </form>
-                <hr />
-                <div class="row h6">
-                    <div class="col-6">
-                        <a class="nav-link " id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </div>
-                    <div class="col-6">
-                        @*   <a asp-area="Masters"
-                        asp-controller="UsersClient"
-                        asp-action="CreateClientUserIndex"
-                        class="nav-link ">
-                        <i class="fas fa-user " aria-hidden="true"></i>
-                        Register as a new user
-                        </a>
-                        *@
+                        <p class="">
+                        </p>
+                        <p class="">
+
+                        </p>
                     </div>
 
                 </div>
-                <p class="">
-                </p>
-                <p class="">
 
-                </p>
+            </div>
+        </div>
+    }
+    else
+    {
+        <div class="row pt-1 mt-1">
+            <div class="col-12">
+                <div class=" ">
+                    <div class="card-header text-center">
+                        <a href="#" class="h1" style="color:#035d7b !important"><b>Service</b>Hub</a>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-12">
+                <img class="img-fluid border shadow rounded mx-auto d-block" src="~/images/LogInHomePage.jpg" />
             </div>
 
-        </div>
+            <div class="col-12 pt-2">
 
-        @*    </div>
+                <div class="card card-outline card-primary ">
+                    <div class="card-body">
+                        <p class="login-box-msg h5">
+                            Have a Good Day !!!
+                        </p>
+                        <form id="account" method="post">
+                            <div class="input-group mb-3">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user-shield"></span>
+                                    </div>
+                                </div>
+                                <input asp-for="Input.Email"
+                                       class="form-control"
+                                       autocomplete="username"
+                                       aria-required="true"
+                                       placeholder="Username / Email-Id / Mobile No." />
+                            </div>
+                            <span asp-validation-for="Input.Email" class="text-danger"></span>
+                            <div class="input-group mb-3">
+                                <div class="input-group-append">
+                                    <div class="input-group-text">
+                                        <span class="fas fa-user-lock"></span>
+                                    </div>
+                                </div>
+                                <input asp-for="Input.Password"
+                                       class="form-control"
+                                       autocomplete="current-password"
+                                       aria-required="true"
+                                       placeholder="Password" />
+                            </div>
+                            <span asp-validation-for="Input.Password" class="text-danger"></span>
+                            <div class="row ">
+                                <div class="col-8 col-sm-12">
+                                    <div class="icheck-primary pb-1">
+                                        <input class="form-check-input" asp-for="Input.RememberMe" />
+                                        <label asp-for="Input.RememberMe" class="form-label">
+                                            @Html.DisplayNameFor(m => m.Input.RememberMe)
+                                        </label>
+                                    </div>
+                                </div>
 
+                                <div class="col-4 col-sm-12">
+                                    <button id="login-submit" type="submit"
+                                            class="btn btn-primary btn-block">
+                                        Sign In
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                        <hr />
+                        <div class="row h6">
+                            <div class="col-6">
+                                <a class="nav-link " id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
+                            </div>
+                            <div class="col-6">
+                            </div>
+
+                        </div>
+                        <p class="">
+                        </p>
+                        <p class="">
+
+                        </p>
+                    </div>
+
+                </div>
+
+            </div>
         </div>
-        *@
-    </div>
-</div>
+    }
+
+    // <div class="card card-outline card-primary  border shadow hidden">
+    //     <div class="card-header text-center">
+    //         <a href="#" class="h1"><b>Service</b>Hub</a>
+
+    //     </div>
+
+    // </div>
+}
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
 }

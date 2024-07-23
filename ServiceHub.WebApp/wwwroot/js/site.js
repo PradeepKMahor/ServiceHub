@@ -27,6 +27,7 @@ function isEllipsisActive(element) {
     return false;
 }
 function loadScript() {
+
     openModalListner();
     checkFilteredMarker();
     binaryDownloadListner();
@@ -493,7 +494,6 @@ function toggleMenuState() {
         r.style.setProperty('--navbar-width', navBarOpenWidth);
         console.log("Step2")
     }
-
 }
 
 function ofbfileDownload(event, object) {
@@ -706,7 +706,6 @@ function loadView(element) {
                 if (typeof loadTimesheetNotfilledDataTable == 'function' && action == 'EmployeeNotfilledIndex') {
                     loadTimesheetNotfilledDataTable();
                 }
-
             } if (callback) {
                 var aryCallBack = (callback + ";").split(";");
                 for (i = 0; i < aryCallBack.length; i++) {
