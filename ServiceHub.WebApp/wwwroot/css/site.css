@@ -1020,3 +1020,26 @@ Switches css start
 }
 
 /* radio End*/
+
+.datatable-td-mobile {
+    padding: 0px !important;
+    border: none !important;
+}
+
+.card .card-mobiletable, .card-mobiledatatable {
+    border: 1px solid #035d7b !important;
+    padding-top: 15px;
+    padding-right: 15px;
+    padding-bottom: 15px;
+    padding-left: 15px;
+    white-space: normal;
+    margin: 2px;
+}
+
+    .card .card-mobiletable .row {
+        margin: 0px -5px 0px -5px;
+    }
+
+.card .card-mobiledatatable a {
+    color: unset;
+}
