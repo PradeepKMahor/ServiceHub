@@ -15,7 +15,7 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
             var listFirstNameLastName = TestList("FirstName/LastName ");
             ViewData["FirstNameLastNameList"] = new SelectList(listFirstNameLastName, "DataValueField", "DataTextField");
 
-            var listUsername = TestList("Username ");
+            var listUsername = TestList("Username");
             ViewData["UsernameList"] = new SelectList(listUsername, "DataValueField", "DataTextField");
 
             var listParentOrg = TestList("Parent Org. ");

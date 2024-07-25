@@ -54,6 +54,8 @@
 		<Folder Include="Areas\ServiceRequests\Data\" />
 		<Folder Include="Areas\SystemAdmin\Models\" />
 		<Folder Include="Areas\SystemAdmin\Data\" />
+		<Folder Include="Areas\Technician\Data\" />
+		<Folder Include="Areas\Technician\Models\" />
 		<Folder Include="Views\Shared\AdminLTE\" />
 	</ItemGroup>
 

@@ -1028,12 +1028,13 @@ Switches css start
 
 .card .card-mobiletable, .card-mobiledatatable {
     border: 1px solid #035d7b !important;
-    padding-top: 15px;
-    padding-right: 15px;
-    padding-bottom: 15px;
-    padding-left: 15px;
+    padding-top: 5px;
+    padding-right: 5px;
+    padding-bottom: 0px;
+    padding-left: 5px;
     white-space: normal;
-    margin: 2px;
+    margin: 5px;
+    border-radius: 10px;
 }
 
     .card .card-mobiletable .row {
@@ -1042,4 +1043,8 @@ Switches css start
 
 .card .card-mobiledatatable a {
     color: unset;
+}
+
+.ol, ul, dl {
+    margin-bottom: 2px !important;
 }
