@@ -11,7 +11,42 @@ namespace ServiceHub.WebApp.Areas.Technician.Controllers
         {
             var cmrViewModel = new CMRViewModel();
             return View(cmrViewModel);
-            return View();
+        }
+
+        public IActionResult CMRDashboardIndex()
+        {
+            var cmrViewModel = new CMRViewModel();
+            return View(cmrViewModel);
+        }
+
+        public IActionResult PMRDashboardIndex()
+        {
+            var pmrViewModel = new PMRViewModel();
+            return View(pmrViewModel);
+        }
+
+        public IActionResult WMRDashboardIndex()
+        {
+            var cmrViewModel = new CMRViewModel();
+            return View(cmrViewModel);
+        }
+
+        public IActionResult CMRIndex()
+        {
+            var cmrViewModel = new CMRViewModel();
+            return View(cmrViewModel);
+        }
+
+        public IActionResult PMRIndex()
+        {
+            var cmrViewModel = new CMRViewModel();
+            return View(cmrViewModel);
+        }
+
+        public IActionResult WMRIndex()
+        {
+            var cmrViewModel = new CMRViewModel();
+            return View(cmrViewModel);
         }
 
         public IActionResult DashboardIndex()

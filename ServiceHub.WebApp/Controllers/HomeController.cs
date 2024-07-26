@@ -22,6 +22,10 @@ namespace ServiceHub.WebApp.Controllers
 
         public IActionResult CMRIndex()
         {
+            if ((bool)HttpContext.Items["isMobile"])
+            {
+                return RedirectToAction("CMRDashboardIndex", "Home", new { Area = "Technician" });
+            }
             Notify("Success", "Data updated successfully", "toaster", NotificationType.success);
             return View();
         }

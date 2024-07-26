@@ -30,7 +30,10 @@
 <body class="sidebar-mini pace-warning pace-running sidebar-collapse">
     <div class="wrapper">
         <partial name="_TopNavigation" />
-        <partial name="_MainNavigation" />
+        @if ((bool)@Context.Items["isMobile"] == false)
+        {
+            <partial name="_MainNavigation" />
+        }
 
         <!-- Main Sidebar Container -->
         <div class="content-wrapper">
@@ -78,11 +81,16 @@
     @await RenderSectionAsync("Scripts", required: false)
     <script type="text/javascript">
         var datatableColumns;
+        var isMobileBool = "NA";
         $(document).ready(function () {
-            // if (@isMobile.ToString() == false) {
-            //     alert("IsMobile : false");
-            // } else {
-            //     alert("IsMobile : true");
+
+            // if (isMobileBool == "NA") {
+            //     isMobileBool = @(((bool)@Context.Items["isMobile"]) ? "true" : "false");
+            //     if (isMobileBool == false) {
+            //         alert("IsMobile : false");
+            //     } else {
+            //         window.location.href = '@Url.Action("CMRDashboardIndex", "Home", new { Area = "Technician" })';
+            //     }
             // }
         });
     </script>

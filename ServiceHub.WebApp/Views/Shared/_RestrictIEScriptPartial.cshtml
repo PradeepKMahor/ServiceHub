@@ -2,6 +2,6 @@
     var isIE = false || !!document.documentMode;
     if (isIE) {
         if (window.location.href.indexOf("ErrorIE") == -1)
-            window.location.href = '@Url.Action("ErrorIE", "Home", new { Area = ""})';
+            window.location.href = '@Url.Action("ErrorIE", "Home", new { Area = "" })';
     }
 </script>
