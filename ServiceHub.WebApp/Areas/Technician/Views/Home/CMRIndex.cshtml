@@ -65,15 +65,15 @@
                     <h5 style=" "> Service Requests <b>[CMR]</b></h5>
                 </div>
                 <div class="col-4">
-                    <a asp-area="Masters" style="float: right;"
-                       asp-controller="UsersClient"
-                       asp-action="CreateClientUserIndex"
-                       class=" pl-2 pr-2">
-                        <i class="far fa-bell" aria-hidden="true"></i>&nbsp;
-                    </a>
-                    <a asp-area="Masters" style="float: right;"
-                       asp-controller="UsersClient"
-                       asp-action="CreateClientUserIndex"
+                    @*  <a asp-area="Technician" style="float: right;"
+                asp-controller="UsersClient"
+                asp-action="CreateClientUserIndex"
+                class=" pl-2 pr-2">
+                <i class="far fa-bell" aria-hidden="true"></i>&nbsp;
+                </a> *@
+                    <a asp-area="Technician" style="float: right;"
+                       asp-controller="ServiceRequest"
+                       asp-action="CreateSR"
                        class=" pr-2 ">
                         <i class="fas fa-plus " aria-hidden="true"></i>&nbsp;
                     </a>

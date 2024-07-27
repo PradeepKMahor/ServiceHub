@@ -8,7 +8,7 @@
 {
     <ol class="breadcrumb">
         <li class="breadcrumb-item ">
-            <a asp-action="Index" asp-controller="Home" asp-area="Technician">
+            <a asp-action="CMRDashboardIndex" asp-controller="Home" asp-area="Technician">
                 <i class="fas fa-home"></i>
             </a>
         </li>
@@ -77,15 +77,15 @@
                     <h5 style=" "> Service Requests</h5>
                 </div>
                 <div class="col-4">
-                    <a asp-area="Masters" style="float: right;"
-                       asp-controller="UsersClient"
-                       asp-action="CreateClientUserIndex"
-                       class=" pl-2 pr-2">
-                        <i class="far fa-bell" aria-hidden="true"></i>&nbsp;
-                    </a>
-                    <a asp-area="Masters" style="float: right;"
-                       asp-controller="UsersClient"
-                       asp-action="CreateClientUserIndex"
+                    @*  <a asp-area="Masters" style="float: right;"
+                asp-controller="UsersClient"
+                asp-action="CreateClientUserIndex"
+                class=" pl-2 pr-2">
+                <i class="far fa-bell" aria-hidden="true"></i>&nbsp;
+                </a> *@
+                    <a asp-area="Technician" style="float: right;"
+                       asp-controller="ServiceRequest"
+                       asp-action="CreateSR"
                        class=" pr-2 ">
                         <i class="fas fa-plus " aria-hidden="true"></i>&nbsp;
                     </a>

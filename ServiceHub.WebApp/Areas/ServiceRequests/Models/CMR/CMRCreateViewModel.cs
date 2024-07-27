@@ -69,6 +69,10 @@ namespace ServiceHub.WebApp.Models
         public string RCA { get; set; } = string.Empty;
 
         [Required]
+        [Display(Name = "Parts")]
+        public string Parts { get; set; } = string.Empty;
+
+        [Required]
         [Display(Name = "Priority")]
         public string Priority { get; set; } = string.Empty;
 
