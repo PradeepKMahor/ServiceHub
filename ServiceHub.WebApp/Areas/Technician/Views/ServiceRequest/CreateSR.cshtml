@@ -18,6 +18,7 @@
 }
 
 @section Styles {
+    <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
     <style>
 
         .step-container {
@@ -70,9 +71,9 @@
                         <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
                     </div>
                     <div class="step-container d-flex justify-content-between">
-                        <div class="step-circle" onclick="displayStep(1)">Create</div>
-                        <div class="step-circle" onclick="displayStep(2)">Resolve</div>
-                        <div class="step-circle" onclick="displayStep(3)">Log</div>
+                        <div class="step-circle circle1" onclick="displayStep(1)">Create</div>
+                        <div class="step-circle circle2" onclick="displayStep(2)">Resolve</div>
+                        <div class="step-circle circle3" onclick="displayStep(3)">Log</div>
                     </div>
                 </div>
 
@@ -101,7 +102,15 @@
                                                         <div class="form-group">
                                                             <label asp-for="CustomerName" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <input asp-for="CustomerName" class="form-control capitalize" required />
+                                                                <select asp-for="CustomerName" class="form-control chosen-select"
+                                                                        required>
+                                                                    <option> </option>
+                                                                    <option>Customer Name 1</option>
+                                                                    <option>Customer Name 2</option>
+                                                                    <option>Customer Name 3</option>
+                                                                    <option>Customer Name 4</option>
+                                                                    <option>Customer Name 5</option>
+                                                                </select>
                                                                 <span asp-validation-for="CustomerName" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -151,11 +160,12 @@
                                                             <label asp-for="OtherUserComments" class="col-12 control-label"></label>
                                                             <div class="col-12">
                                                                 <textarea asp-for="OtherUserComments" rows="3" class="form-control capitalize" required>
-                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                </textarea>
                                                                 <span asp-validation-for="OtherUserComments" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                     </div>
+
                                                 </div>
 
                                                 <div class="row  p-1">
@@ -209,7 +219,21 @@
                                                         </div>
                                                     </div>
                                                 </div>
-
+                                                <div class="col-xl-4 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label asp-for="Priority" class="col-12 control-label"></label>
+                                                        <div class="col-12">
+                                                            <select asp-for="Priority" class="form-control" required>
+                                                                <option> </option>
+                                                                <option>High</option>
+                                                                <option>Medium</option>
+                                                                <option>Low</option>
+                                                                <option>Critical</option>
+                                                            </select>
+                                                            <span asp-validation-for="Product" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
                                                 <div class="from-group m-2 pb-2">
 
                                                     <div class="col-12 ">
@@ -237,7 +261,7 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary next-step">Next</button>
+                        <button type="button" class="btn btn-primary next-step" style="display:none;">Next</button>
                     </div>
 
                     <div class="step step-2" style="transform: translateY(-5%)!important; display:none;">
@@ -284,7 +308,7 @@
                                                             <label asp-for="TechnicianRemarks" class="col-12 control-label"></label>
                                                             <div class="col-12">
                                                                 <textarea asp-for="TechnicianRemarks" rows="3" class="form-control capitalize" required>
-                                                                                                                                                                                                            </textarea>
+                                                                                                                                                                                                                                                                </textarea>
                                                                 <span asp-validation-for="TechnicianRemarks" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -362,8 +386,8 @@
                                 </div>
                             </div>
                         </div>
-                        <button type="button" class="btn btn-primary prev-step">Previous</button>
-                        <button type="button" class="btn btn-primary next-step">Next</button>
+                        <button type="button" class="btn btn-primary prev-step" style="display:none;">Previous</button>
+                        <button type="button" class="btn btn-primary next-step" style="display:none;">Next</button>
                     </div>
 
                     <div class="step step-3" style="transform: translateY(-5%)!important; display:none;">
@@ -392,6 +416,11 @@ else
         var updateProgressBar;
 
         function displayStep(stepNumber) {
+
+            if (stepNumber = 2 || stepNumber = 3 ) {
+                $(".circle1").css('background-color', 'red');
+            }
+
             if (stepNumber >= 1 && stepNumber <= 3) {
                 $(".step-" + currentStep).hide();
                 $(".step-" + stepNumber).show();
