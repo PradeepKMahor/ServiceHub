@@ -1035,7 +1035,8 @@ Switches css start
     white-space: normal;
     margin: 5px;
     border-radius: 10px;
-    font-size: 14px;
+    font-size: 16px;
+    background-color: #c7ff690a !important;
 }
 
     .card .card-mobiletable .row {
@@ -1048,4 +1049,9 @@ Switches css start
 
 .ol, ul, dl {
     margin-bottom: 2px !important;
+}
+
+.breadcrumb {
+    font-size: 18px !important;
+    font-weight: 300 !important;
 }

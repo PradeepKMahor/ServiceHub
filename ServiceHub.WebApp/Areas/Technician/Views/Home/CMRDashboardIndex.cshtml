@@ -6,7 +6,7 @@
 
 @section BreadCrumbs
 {
-    <ol class="breadcrumb">
+    <ol class="breadcrumb mb-0">
         <li class="breadcrumb-item ">
             <a asp-action="CMRDashboardIndex" asp-controller="Home" asp-area="Technician">
                 <i class="fas fa-home"></i>
@@ -27,7 +27,7 @@
     <div style="display:none">
     </div>
 
-    <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-12 p-0  ">
+    <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-12 pt-2  ">
 
         <section>
             <div class="row">
@@ -74,9 +74,9 @@
 
             <div class="row">
                 <div class="col-8">
-                    <h5 style=" "> Service Requests</h5>
+                    <h4 style="font-weight: bold;color: #035d7b!important;"> Service Requests</h4>
                 </div>
-                <div class="col-4">
+                <div class="col-4 h4">
                     @*  <a asp-area="Masters" style="float: right;"
                 asp-controller="UsersClient"
                 asp-action="CreateClientUserIndex"
@@ -94,7 +94,6 @@
 
         </div>
 
-        <div class="m-1"></div>
         <div class="bg-gray-active rounded ">
             <div class="table-responsive" style="overflow:auto;">
 

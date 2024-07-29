@@ -2963,3 +2963,7 @@
 .ion-xbox:before {
     content: "\f30c"
 }
+
+.breadcrumb {
+    font-size: 18px !important;
+}

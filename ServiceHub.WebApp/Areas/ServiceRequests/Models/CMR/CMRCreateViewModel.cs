@@ -84,6 +84,9 @@ namespace ServiceHub.WebApp.Models
         [Display(Name = "Requested By Contact")]
         public string RequestedByContact { get; set; } = string.Empty;
 
+        [Display(Name = "Alternate Contact")]
+        public string AlternateContact { get; set; } = string.Empty;
+
         //[Required]
         [Display(Name = "Upload photo")]
         public string SrUploadPhoto1 { get; set; } = string.Empty;

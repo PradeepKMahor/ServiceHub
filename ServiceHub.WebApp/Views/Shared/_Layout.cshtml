@@ -56,12 +56,23 @@
                 <nav aria-label="breadcrumb">
                     @await RenderSectionAsync("BreadCrumbs", required: false)
                 </nav>
+                @if ((bool)@Context.Items["isMobile"] == true)
+                {
 
-                <div class="container-fluid p-2 ">
+                    <div class="container-fluid pt-2 pr-0 pl-0">
+                        @RenderBody()
 
-                    @RenderBody()
+                    </div>
+                }
+                else
+                {
+                    <div class="container-fluid p-2 ">
 
-                </div>
+                        @RenderBody()
+
+                    </div>
+                }
+
             </div>
         </div>
         <aside class="control-sidebar control-sidebar-dark">
