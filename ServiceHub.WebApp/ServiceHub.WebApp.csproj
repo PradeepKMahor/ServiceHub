@@ -50,8 +50,6 @@
 		<Folder Include="Areas\Admin\Models\" />
 		<Folder Include="Areas\MobileApp\Controllers\" />
 		<Folder Include="Areas\MobileApp\Data\" />
-		<Folder Include="Areas\MobileApp\Models\" />
-		<Folder Include="Areas\MobileApp\Views\" />
 		<Folder Include="Areas\Reports\Data\" />
 		<Folder Include="Areas\Reports\Models\" />
 		<Folder Include="Areas\Masters\Data\" />
@@ -59,7 +57,6 @@
 		<Folder Include="Areas\SystemAdmin\Models\" />
 		<Folder Include="Areas\SystemAdmin\Data\" />
 		<Folder Include="Areas\MobileApp\Data\" />
-		<Folder Include="Areas\MobileApp\Models\" />
 		<Folder Include="Views\Shared\AdminLTE\" />
 	</ItemGroup>
 

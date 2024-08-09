@@ -18,6 +18,18 @@ namespace ServiceHub.WebApp.Areas.MobileApp.Controllers
             return View(model);
         }
 
+        public IActionResult WorkReview()
+        {
+            WorkReviewViewModel model = new WorkReviewViewModel();
+            return View(model);
+        }
+
+        public IActionResult Notifications()
+        {
+            NotificationsViewModel model = new NotificationsViewModel();
+            return View(model);
+        }
+
         public async Task<IActionResult> CreateSR()
         {
             CMRCreateViewModel cmrCreateViewModel = new();
