@@ -26,7 +26,7 @@ builder.Services.AddProgressiveWebApp(new PwaOptions
 {
     RegisterServiceWorker = true,
     RegisterWebmanifest = false,  // (Manually register in Layout file)
-    Strategy = ServiceWorkerStrategy.Minimal,
+    Strategy = ServiceWorkerStrategy.NetworkFirst,
     OfflineRoute = "Offline.html"
 });
 
@@ -62,6 +62,7 @@ builder.Services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3
                   options.Conventions.AuthorizeAreaFolder("Identity", $"/Account/Manage");
                   options.Conventions.AuthorizeAreaPage("Identity", $"/Account/Logout");
               });
+
 builder.Services.ConfigureApplicationCookie(options =>
 {
     options.LoginPath = $"/Identity/Account/Login";
@@ -70,6 +71,11 @@ builder.Services.ConfigureApplicationCookie(options =>
 
     options.AccessDeniedPath = $"/Identity/Account/AccessDenied";
 });
+
+builder.Services.AddMvc().AddRazorPagesOptions(options =>
+{
+    options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "/Account/Login");
+}).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -124,7 +130,6 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapAreaControllerRoute(name: "Identity", areaName: "Identity", pattern: "Identity/{action=Index}/{id?}");
     endpoints.MapAreaControllerRoute(name: "Admin", areaName: "Admin", pattern: "Admin/{controller=Admin}/{action=Index}/{id?}");
     endpoints.MapAreaControllerRoute(name: "Reports", areaName: "Reports", pattern: "Reports/{controller=Admin}/{action=Index}/{id?}");
     endpoints.MapAreaControllerRoute(name: "Masters", areaName: "Masters", pattern: "Masters/{controller=Masters}/{action=Index}/{id?}");
@@ -133,8 +138,13 @@ app.UseEndpoints(endpoints =>
     endpoints.MapAreaControllerRoute(name: "ServiceRequests", areaName: "ServiceRequests", pattern: "ServiceRequests/{controller=ServiceRequests}/{action=Index}/{id?}");
     endpoints.MapAreaControllerRoute(name: "Technician", areaName: "Technician", pattern: "Technician/{controller=Technician}/{action=Index}/{id?}");
 
-    endpoints.MapControllerRoute(name: "default", pattern: "{controller=Home}/{action=CMRIndex}/{id?}");
+    endpoints.MapControllerRoute(name: "Home", pattern: "{controller=Home}/{action=CMRIndex}/{id?}");
+    endpoints.MapAreaControllerRoute(name: "default", areaName: "Identity", pattern: "Identity/{action=Login}/{id?}");
+
+    endpoints.MapGet("/", context =>
+    {
+        return Task.Run(() => context.Response.Redirect("/Account/Login"));
+    });
     endpoints.MapRazorPages();
 });
-
 app.Run();
