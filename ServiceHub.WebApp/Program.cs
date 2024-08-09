@@ -136,11 +136,14 @@ app.UseEndpoints(endpoints =>
     endpoints.MapAreaControllerRoute(name: "SystemAdmin", areaName: "SystemAdmin", pattern: "SystemAdmin/{controller=SystemAdmin}/{action=Index}/{id?}");
     endpoints.MapAreaControllerRoute(name: "Users", areaName: "Users", pattern: "Users/{controller=Users}/{action=Index}/{id?}");
     endpoints.MapAreaControllerRoute(name: "ServiceRequests", areaName: "ServiceRequests", pattern: "ServiceRequests/{controller=ServiceRequests}/{action=Index}/{id?}");
-    endpoints.MapAreaControllerRoute(name: "Technician", areaName: "Technician", pattern: "Technician/{controller=Technician}/{action=Index}/{id?}");
+    endpoints.MapAreaControllerRoute(name: "MobileApp", areaName: "MobileApp", pattern: "MobileApp/{controller=MobileApp}/{action=Index}/{id?}");
 
     endpoints.MapControllerRoute(name: "Home", pattern: "{controller=Home}/{action=CMRIndex}/{id?}");
     endpoints.MapAreaControllerRoute(name: "default", areaName: "Identity", pattern: "Identity/{action=Login}/{id?}");
-
+    endpoints.MapControllerRoute(
+            name: "areas",
+            pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
+          );
     endpoints.MapGet("/", context =>
     {
         return Task.Run(() => context.Response.Redirect("/Account/Login"));
