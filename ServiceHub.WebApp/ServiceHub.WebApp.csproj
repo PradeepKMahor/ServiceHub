@@ -48,8 +48,8 @@
 	<ItemGroup>
 		<Folder Include="Areas\Admin\Data\" />
 		<Folder Include="Areas\Admin\Models\" />
-		<Folder Include="Areas\MobileApp\Controllers\" />
 		<Folder Include="Areas\MobileApp\Data\" />
+		<Folder Include="Areas\MobileApp\Models\Customer\" />
 		<Folder Include="Areas\Reports\Data\" />
 		<Folder Include="Areas\Reports\Models\" />
 		<Folder Include="Areas\Masters\Data\" />
@@ -82,6 +82,26 @@
 		<Content Update="Areas\Masters\Views\Home\UserIndex.cshtml">
 			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+		<Content Update="Areas\MobileApp\Views\Customer\Index.cshtml">
+		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+		<Content Update="Areas\MobileApp\Views\Customer\PMRDashboardIndex.cshtml">
+		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+		<Content Update="Areas\MobileApp\Views\Customer\PMRIndex.cshtml">
+		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+		<Content Update="Areas\MobileApp\Views\Customer\WMRDashboardIndex.cshtml">
+		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+		</Content>
+		<Content Update="Areas\MobileApp\Views\Customer\WMRIndex.cshtml">
+		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Home\CMRDashboardIndex.cshtml">
 		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -123,5 +143,18 @@
 			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
+	</ItemGroup>
+
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Areas\MobileApp\Views\Customer\CMRDashboardIndex.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="Areas\MobileApp\Views\Customer\CMRDashboardIndex.cshtml" />
+	  <_ContentIncludedByDefault Remove="Areas\MobileApp\Views\Customer\CMRIndex.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Areas\MobileApp\Views\Customer\CMRIndex.cshtml" />
 	</ItemGroup>
 </Project>
