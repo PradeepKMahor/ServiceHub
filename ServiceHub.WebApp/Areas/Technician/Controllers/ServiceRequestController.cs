@@ -12,6 +12,12 @@ namespace ServiceHub.WebApp.Areas.Technician.Controllers
             return View();
         }
 
+        public IActionResult Feedback()
+        {
+            CMRFeedbackViewModel model = new CMRFeedbackViewModel();
+            return View(model);
+        }
+
         public async Task<IActionResult> CreateSR()
         {
             CMRCreateViewModel cmrCreateViewModel = new();
