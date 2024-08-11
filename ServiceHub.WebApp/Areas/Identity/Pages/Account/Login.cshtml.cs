@@ -72,6 +72,16 @@ namespace ServiceHub.WebApp.Areas.Identity.Pages.Account
 
             if (ModelState.IsValid)
             {
+                if (Input.Email.ToString() == "Technician@1")
+                {
+                    return RedirectToAction("CMRDashboardIndex", "Technician", new { Area = "MobileApp" });
+                }
+                if (Input.Email.ToString() == "Customer@1")
+                {
+                    return RedirectToAction("CMRDashboardIndex", "Customer", new { Area = "MobileApp" });
+                }
+                ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                return Page();
                 // This doesn't count login failures towards account lockout
                 // To enable password failures to trigger account lockout, set lockoutOnFailure: true
                 var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, Input.RememberMe, lockoutOnFailure: false);

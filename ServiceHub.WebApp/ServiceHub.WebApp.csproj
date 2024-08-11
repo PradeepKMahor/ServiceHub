@@ -131,11 +131,11 @@
 		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
-		<Content Update="Areas\MobileApp\Views\ServiceRequest\CreateSR.cshtml">
+		<Content Update="Areas\MobileApp\Views\Technician\CreateSR.cshtml">
 		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
-		<Content Update="Areas\MobileApp\Views\ServiceRequest\Feedback.cshtml">
+		<Content Update="Areas\MobileApp\Views\Technician\Feedback.cshtml">
 		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
 		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>

@@ -8,12 +8,12 @@
 {
     <ol class="breadcrumb">
         <li class="breadcrumb-item ">
-            <a asp-action="CMRDashboardIndex" asp-controller="Home" asp-area="MobileApp">
+            <a asp-action="CMRDashboardIndex" asp-controller="Technician" asp-area="MobileApp">
                 <i class="fas fa-home"></i>
             </a>
         </li>
 
-        <li class="breadcrumb-item active" aria-current="page">Create SR</li>
+        <li class="breadcrumb-item active" aria-current="page">Technician Create SR</li>
     </ol>
 }
 
@@ -85,8 +85,8 @@
                             <div role="toolbar">
                                 <div class="card rounded-3">
                                     <div class="card-body mt-2 p-0">
-                                        <form asp-controller="ServiceRequest"
-                                              asp-area="ServiceRequests"
+                                        <form asp-controller="Technician"
+                                              asp-area="MobileApp"
                                               asp-action="CreateServiceRequest"
                                               id="formServiceRequests">
                                             <input type="hidden" asp-for="SrResolutionUploadPhoto1">
@@ -161,7 +161,7 @@
                                                             <label asp-for="OtherUserComments" class="col-12 control-label"></label>
                                                             <div class="col-12">
                                                                 <textarea asp-for="OtherUserComments" rows="3" class="form-control capitalize" required>
-                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                                 <span asp-validation-for="OtherUserComments" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -271,8 +271,8 @@
                             <div role="toolbar">
                                 <div class="card rounded-3">
                                     <div class="card-body mt-2 p-0 ">
-                                        <form asp-controller="ServiceRequest"
-                                              asp-area="ServiceRequests"
+                                        <form asp-controller="Technician"
+                                              asp-area="MobileApp"
                                               asp-action="CreateServiceRequest"
                                               id="formServiceRequests">
                                             <input type="hidden" asp-for="SrResolutionUploadPhoto1">
@@ -309,7 +309,7 @@
                                                             <label asp-for="TechnicianRemarks" class="col-12 control-label"></label>
                                                             <div class="col-12">
                                                                 <textarea asp-for="TechnicianRemarks" rows="3" class="form-control capitalize" required>
-                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                                 <span asp-validation-for="TechnicianRemarks" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -401,8 +401,8 @@
                             <div role="toolbar">
                                 <div class="card rounded-3">
                                     <div class="card-body mt-2 p-0 ">
-                                        <form asp-controller="ServiceRequest"
-                                              asp-area="ServiceRequests"
+                                        <form asp-controller="Technician"
+                                              asp-area="MobileApp"
                                               asp-action="CreateServiceRequest"
                                               id="formServiceRequests">
                                             <input type="hidden" asp-for="SrResolutionUploadPhoto1">
