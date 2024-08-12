@@ -1037,6 +1037,7 @@ Switches css start
     border-radius: 10px;
     font-size: 14px;
     background-color: #c7ff690a !important;
+    border-radius: 0px 23px 28px !important;
 }
 
     .card .card-mobiletable .row {
@@ -1055,7 +1056,6 @@ Switches css start
     font-size: 18px !important;
     font-weight: 300 !important;
 }
-
 
 .offcanvas {
     position: fixed;

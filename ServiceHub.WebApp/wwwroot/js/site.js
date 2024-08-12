@@ -27,7 +27,6 @@ function isEllipsisActive(element) {
     return false;
 }
 function loadScript() {
-
     openModalListner();
     checkFilteredMarker();
     binaryDownloadListner();
@@ -400,12 +399,20 @@ function hideModalLoader() {
 function initSelect2() {
     $('.Select2').select2({
         placeholder: "Select an option",
+        minimumResultsForSearch: -1,
+        placeholder: function () {
+            $(this).data('placeholder');
+        },
         allowClear: true,
         width: "100%"
     });
 
     $('.chosen-select').select2({
         placeholder: "Select an option",
+        minimumResultsForSearch: -1,
+        placeholder: function () {
+            $(this).data('placeholder');
+        },
         allowClear: true,
         width: "100%"
     });

@@ -26,7 +26,7 @@ builder.Services.AddProgressiveWebApp(new PwaOptions
 {
     RegisterServiceWorker = true,
     RegisterWebmanifest = false,  // (Manually register in Layout file)
-    Strategy = ServiceWorkerStrategy.NetworkFirst,
+    Strategy = ServiceWorkerStrategy.Minimal,
     OfflineRoute = "Offline.html"
 });
 

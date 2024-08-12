@@ -8,12 +8,12 @@
 {
     <ol class="breadcrumb mb-0">
         <li class="breadcrumb-item ">
-            <a asp-action="CMRDashboardIndex" asp-controller="Technician" asp-area="MobileApp">
+            <a asp-action="DashboardIndex" asp-controller="Technician" asp-area="MobileApp">
                 <i class="fas fa-home"></i>
             </a>
         </li>
 
-        <li class="breadcrumb-item active" aria-current="page">Technician Dashboard</li>
+        <li class="breadcrumb-item active font-weight-bold" aria-current="page">Dashboard-Technician</li>
     </ol>
 
 }
@@ -45,27 +45,30 @@
                     </a>
                 </div>
                 <div class="col-lg-4 col-4">
-
-                    <div class="small-box bg-success  m-0">
-                        <div class="inner p-0">
-                            <h3>2</h3>
-                            <p><h4>PMR</h4></p>
+                    <a asp-action="PMRIndex" asp-controller="Technician" asp-area="MobileApp">
+                        <div class="small-box bg-success  m-0">
+                            <div class="inner p-0">
+                                <h3>2</h3>
+                                <p><h4>PMR</h4></p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-stats-bars"></i>
+                            </div>
                         </div>
-                        <div class="icon">
-                            <i class="ion ion-stats-bars"></i>
-                        </div>
-                    </div>
+                    </a>
                 </div>
                 <div class="col-lg-4 col-4">
-                    <div class="small-box bg-warning text-white m-0">
-                        <div class="inner p-0">
-                            <h3>8</h3>
-                            <p><h4>WMR</h4></p>
+                    <a asp-action="WMRIndex" asp-controller="Technician" asp-area="MobileApp">
+                        <div class="small-box bg-warning text-white m-0">
+                            <div class="inner p-0">
+                                <h3>8</h3>
+                                <p><h4>WMR</h4></p>
+                            </div>
+                            <div class="icon">
+                                <i class="ion ion-person-add"></i>
+                            </div>
                         </div>
-                        <div class="icon">
-                            <i class="ion ion-person-add"></i>
-                        </div>
-                    </div>
+                    </a>
                 </div>
             </div>
         </section>

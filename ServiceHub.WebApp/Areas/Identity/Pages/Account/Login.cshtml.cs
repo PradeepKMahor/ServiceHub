@@ -74,11 +74,11 @@ namespace ServiceHub.WebApp.Areas.Identity.Pages.Account
             {
                 if (Input.Email.ToString() == "Technician@1")
                 {
-                    return RedirectToAction("CMRDashboardIndex", "Technician", new { Area = "MobileApp" });
+                    return RedirectToAction("DashboardIndex", "Technician", new { Area = "MobileApp" });
                 }
                 if (Input.Email.ToString() == "Customer@1")
                 {
-                    return RedirectToAction("CMRDashboardIndex", "Customer", new { Area = "MobileApp" });
+                    return RedirectToAction("DashboardIndex", "Customer", new { Area = "MobileApp" });
                 }
                 ModelState.AddModelError(string.Empty, "Invalid login attempt.");
                 return Page();

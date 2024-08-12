@@ -69,7 +69,7 @@ namespace ServiceHub.WebApp.Areas.MobileApp.Controllers
             return View(cmrViewModel);
         }
 
-        public IActionResult CMRDashboardIndex()
+        public IActionResult DashboardIndex()
         {
             var cmrViewModel = new CMRViewModel();
             return View(cmrViewModel);
@@ -105,10 +105,10 @@ namespace ServiceHub.WebApp.Areas.MobileApp.Controllers
             return View(cmrViewModel);
         }
 
-        public IActionResult DashboardIndex()
-        {
-            return View();
-        }
+        //public IActionResult DashboardIndex()
+        //{
+        //    return View();
+        //}
 
         public IActionResult AboutUsIndex()
         {

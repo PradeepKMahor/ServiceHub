@@ -6,14 +6,14 @@
 
 @section BreadCrumbs
 {
-    <ol class="breadcrumb">
+    <ol class="breadcrumb mb-0 ">
         <li class="breadcrumb-item ">
-            <a asp-action="CMRDashboardIndex" asp-controller="Technician" asp-area="MobileApp">
+            <a asp-action="DashboardIndex" asp-controller="Technician" asp-area="MobileApp">
                 <i class="fas fa-home"></i>
             </a>
         </li>
 
-        <li class="breadcrumb-item active" aria-current="page">Technician Create SR</li>
+        <li class="breadcrumb-item active  font-weight-bold" aria-current="page">Create Service Request</li>
     </ol>
 }
 
@@ -60,12 +60,13 @@
 
 @if ((bool)@Context.Items["isMobile"] == true)
 {
-    <div class="container-fluid ">
+    <div class="container-fluid p-0 m-0 ">
         <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-12 p-2 ">
-            <div class="app-h4 app-card-header mb-2">
+            @* <div class="app-h4 app-card-header mb-2">
 
-                <h4 style="font-weight: bold;color: #035d7b!important;"> New Request</h4>
-            </div>
+        <h4 style="font-weight: bold;color: #035d7b!important;"> New Request</h4>
+
+        </div> *@
             <div id="container" class="mt-5 " style="font-size:14px!important;">
                 <div class="container">
                     <div class="progress px-1" style="height: 3px;">
@@ -79,7 +80,8 @@
                 </div>
 
                 <form id="multi-step-form">
-                    <div class="step step-1" style="transform: translateY(-1%)!important; background-color:#d8efff">
+                    <hr class="p-1 m-1" />
+                    <div class="step step-1" style="transform: translateY(-1%)!important; margin-top: -10px; background-color:#d8efff">
 
                         <div class="card-toolbar">
                             <div role="toolbar">
@@ -101,9 +103,10 @@
                                                 <div class="row">
                                                     <div class="col-xl-4 col-md-6 col-sm-12">
                                                         <div class="form-group">
-                                                            <label asp-for="CustomerName" class="col-12 control-label"></label>
+                                                            @*  <label asp-for="CustomerName" class="col-12 control-label"></label> *@
                                                             <div class="col-12">
-                                                                <select asp-for="CustomerName" class="form-control  "
+                                                                <select asp-for="CustomerName" class="form-control Select2 "
+                                                                        data-placeholder="CustomerName"
                                                                         required>
                                                                     <option> </option>
                                                                     <option>Customer Name 1</option>
@@ -118,19 +121,18 @@
                                                     </div>
                                                     <div class="col-xl-4 col-md-6 col-sm-12">
                                                         <div class="form-group">
-                                                            <label asp-for="SerialNo" class="col-12 control-label"></label>
-                                                            <div class="col-12">
-                                                                <input asp-for="SerialNo" class="form-control capitalize" required />
+                                                            @* <label asp-for="SerialNo" class="col-12 control-label"></label> *@                                                            <div class="col-12">
+                                                                <input asp-for="SerialNo" class="form-control capitalize" placeholder="SerialNo" required />
                                                                 <span asp-validation-for="SerialNo" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-4 col-md-6 col-sm-12">
                                                         <div class="form-group">
-                                                            <label asp-for="Product" class="col-12 control-label"></label>
+                                                            @* <label asp-for="Product" class="col-12 control-label"></label> *@
                                                             <div class="col-12">
 
-                                                                <select asp-for="Product" class="form-control" required>
+                                                                <select asp-for="Product" class="form-control Select2" data-placeholder="Product" required>
                                                                     <option> </option>
                                                                     <option>Product 1</option>
                                                                     <option>Product 2</option>
@@ -143,9 +145,10 @@
                                                     </div>
                                                     <div class="col-xl-12 col-md-12 col-sm-12">
                                                         <div class="form-group">
-                                                            <label asp-for="ServiceCause" class="col-12 control-label"></label>
+                                                            @* <label asp-for="ServiceCause" class="col-12 control-label"></label> *@
                                                             <div class="col-12">
-                                                                <select asp-for="ServiceCause" class="chosen-select-multiple form-control" multiple="multiple" required>
+                                                                <select asp-for="ServiceCause" class="chosen-select-multiple form-control" data-placeholder="Service Cause"
+                                                                        multiple="multiple" required>
                                                                     <option> </option>
                                                                     <option>ServiceCause 1</option>
                                                                     <option>ServiceCause 2</option>
@@ -158,10 +161,10 @@
                                                     </div>
                                                     <div class="col-xl-12 col-md-12 col-sm-12">
                                                         <div class="form-group">
-                                                            <label asp-for="OtherUserComments" class="col-12 control-label"></label>
+                                                            @* <label asp-for="OtherUserComments" class="col-12 control-label"></label> *@
                                                             <div class="col-12">
-                                                                <textarea asp-for="OtherUserComments" rows="3" class="form-control capitalize" required>
-                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                <textarea asp-for="OtherUserComments" rows="3" class="form-control capitalize" required placeholder="Other User Comments">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                                 <span asp-validation-for="OtherUserComments" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -222,9 +225,9 @@
                                                 </div>
                                                 <div class="col-xl-4 col-md-6 col-sm-12">
                                                     <div class="form-group">
-                                                        <label asp-for="Priority" class="col-12 control-label"></label>
+                                                        @* <label asp-for="Priority" class="col-12 control-label"></label> *@
                                                         <div class="col-12">
-                                                            <select asp-for="Priority" class="form-control" required>
+                                                            <select asp-for="Priority" class="form-control Select2" required data-placeholder="Priority">
                                                                 <option> </option>
                                                                 <option>High</option>
                                                                 <option>Medium</option>
@@ -309,7 +312,7 @@
                                                             <label asp-for="TechnicianRemarks" class="col-12 control-label"></label>
                                                             <div class="col-12">
                                                                 <textarea asp-for="TechnicianRemarks" rows="3" class="form-control capitalize" required>
-                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                                 <span asp-validation-for="TechnicianRemarks" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -349,7 +352,7 @@
                                                         <label asp-for="Parts" class="col-12 control-label"></label>
                                                         <div class="col-12">
 
-                                                            <select asp-for="Parts" class="form-control" required>
+                                                            <select asp-for="Parts" class="form-control Select2" required>
                                                                 <option> </option>
                                                                 <option>Parts 1</option>
                                                                 <option>Parts 2</option>
