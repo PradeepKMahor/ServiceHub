@@ -21,8 +21,8 @@ namespace ServiceHub.WebApp.Models
         public string ServiceCause { get; set; } = string.Empty;
 
         [Required]
-        [Display(Name = "Request Date")]
-        public DateTime? RequestDate { get; set; }
+        [Display(Name = "Requested On")]
+        public DateTime? RequestedDate { get; set; }
 
         [Required]
         [Display(Name = "Assigned Date")]

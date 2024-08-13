@@ -15,7 +15,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <link rel="manifest" href="~/manifest.json" crossorigin="use-credentials" />
 
-    <title> Service Hub </title>
+    <title>ServiceHub</title>
 
     <partial name="_Styles" />
     <!--Render Styles-->
@@ -146,11 +146,11 @@
         var isMobileBool = "NA";
         $(document).ready(function () {
 
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker
-                    .register('app.js')
-                    .then(() => { console.log('Service Worker Registered'); });
-            }
+            // if ('serviceWorker' in navigator) {
+            //     navigator.serviceWorker
+            //         .register('app.js')
+            //         .then(() => { console.log('Service Worker Registered'); });
+            // }
 
             //  let deferredPrompt;
             // const pwaBtn = document.querySelector('.pwa-btn');

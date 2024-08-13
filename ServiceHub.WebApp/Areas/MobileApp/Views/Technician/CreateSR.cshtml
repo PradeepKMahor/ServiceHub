@@ -103,10 +103,9 @@
                                                 <div class="row">
                                                     <div class="col-xl-4 col-md-6 col-sm-12">
                                                         <div class="form-group">
-                                                            @*  <label asp-for="CustomerName" class="col-12 control-label"></label> *@
+                                                            <label asp-for="CustomerName" class="col-12 control-label"></label>
                                                             <div class="col-12">
                                                                 <select asp-for="CustomerName" class="form-control Select2 "
-                                                                        data-placeholder="CustomerName"
                                                                         required>
                                                                     <option> </option>
                                                                     <option>Customer Name 1</option>
@@ -129,10 +128,11 @@
                                                     </div>
                                                     <div class="col-xl-4 col-md-6 col-sm-12">
                                                         <div class="form-group">
-                                                            @* <label asp-for="Product" class="col-12 control-label"></label> *@
+                                                            <label asp-for="Product" class="col-12 control-label"></label>
                                                             <div class="col-12">
 
-                                                                <select asp-for="Product" class="form-control Select2" data-placeholder="Product" required>
+                                                                <select asp-for="Product" class="form-control Select2"
+                                                                        required>
                                                                     <option> </option>
                                                                     <option>Product 1</option>
                                                                     <option>Product 2</option>
@@ -145,9 +145,9 @@
                                                     </div>
                                                     <div class="col-xl-12 col-md-12 col-sm-12">
                                                         <div class="form-group">
-                                                            @* <label asp-for="ServiceCause" class="col-12 control-label"></label> *@
+                                                            <label asp-for="ServiceCause" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <select asp-for="ServiceCause" class="chosen-select-multiple form-control" data-placeholder="Service Cause"
+                                                                <select asp-for="ServiceCause" class="chosen-select-multiple form-control"
                                                                         multiple="multiple" required>
                                                                     <option> </option>
                                                                     <option>ServiceCause 1</option>
@@ -164,7 +164,7 @@
                                                             @* <label asp-for="OtherUserComments" class="col-12 control-label"></label> *@
                                                             <div class="col-12">
                                                                 <textarea asp-for="OtherUserComments" rows="3" class="form-control capitalize" required placeholder="Other User Comments">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                                 <span asp-validation-for="OtherUserComments" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -227,14 +227,14 @@
                                                     <div class="form-group">
                                                         @* <label asp-for="Priority" class="col-12 control-label"></label> *@
                                                         <div class="col-12">
-                                                            <select asp-for="Priority" class="form-control Select2" required data-placeholder="Priority">
+                                                            <select asp-for="Priority" class="form-control" required placeholder="Priority">
                                                                 <option> </option>
                                                                 <option>High</option>
                                                                 <option>Medium</option>
                                                                 <option>Low</option>
                                                                 <option>Critical</option>
                                                             </select>
-                                                            <span asp-validation-for="Product" class="text-danger"></span>
+                                                            <span asp-validation-for="Priority" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -290,10 +290,12 @@
                                                 <div class="row">
                                                     <div class="col-xl-4 col-md-6 col-sm-12">
                                                         <div class="form-group">
-                                                            <label asp-for="ETR" class="col-12 control-label"></label>
+                                                            @*   <label asp-for="ETR" class="col-12 control-label"></label> *@
                                                             <div class="col-12">
-                                                                <input asp-for="ETR" class="form-control capitalize" required />
-                                                                <span asp-validation-for="ETR" class="text-danger"></span>
+                                                                <input asp-for="ETR" type="text" placeholder="ETR DD-MMM-YYYY"
+                                                                       class="form-control DateTimePickerInit" required />
+                                                                @*                                                                 <input asp-for="ETR" class="form-control capitalize" required />
+                                                            *@                                                                <span asp-validation-for="ETR" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -301,7 +303,16 @@
                                                         <div class="form-group">
                                                             <label asp-for="RCA" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <input asp-for="RCA" class="form-control capitalize" required />
+
+                                                                <select asp-for="RCA" class="chosen-select-multiple form-control"
+                                                                        multiple="multiple" required>
+                                                                    <option> </option>
+                                                                    <option>RCA 1</option>
+                                                                    <option>RCA 2</option>
+                                                                    <option>RCA 3</option>
+                                                                    <option>RCA 4</option>
+                                                                    <option>RCA 5</option>
+                                                                </select>
                                                                 <span asp-validation-for="RCA" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -312,7 +323,7 @@
                                                             <label asp-for="TechnicianRemarks" class="col-12 control-label"></label>
                                                             <div class="col-12">
                                                                 <textarea asp-for="TechnicianRemarks" rows="3" class="form-control capitalize" required>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            </textarea>
                                                                 <span asp-validation-for="TechnicianRemarks" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -351,14 +362,15 @@
                                                     <div class="form-group">
                                                         <label asp-for="Parts" class="col-12 control-label"></label>
                                                         <div class="col-12">
-
-                                                            <select asp-for="Parts" class="form-control Select2" required>
+                                                            <select asp-for="Parts" class="chosen-select-multiple form-control"
+                                                                    multiple="multiple" required>
                                                                 <option> </option>
                                                                 <option>Parts 1</option>
                                                                 <option>Parts 2</option>
                                                                 <option>Parts 3</option>
                                                                 <option>Parts 4</option>
                                                             </select>
+
                                                             <span asp-validation-for="Parts" class="text-danger"></span>
                                                         </div>
                                                     </div>
@@ -437,7 +449,7 @@
                                                                         <div class="col-6 ">
                                                                             <dl class="row margin-bottom-0">
                                                                                 <dt class="col-lg-4">
-                                                                                    @Html.DisplayNameFor(model => model.RequestDate)
+                                                                                    @Html.DisplayNameFor(model => model.RequestedDate)
                                                                                 </dt>
                                                                                 <dd class="col-lg-8">
                                                                                     01-Mar-2024
@@ -642,7 +654,10 @@ else
             }
         }
 
+
         $(document).ready(function () {
+            DateTimePickerInit();
+
             $('#multi-step-form').find('.step').slice(1).hide();
 
             $(".next-step").click(function () {
@@ -674,29 +689,34 @@ else
                 $(".progress-bar").css("width", progressPercentage + "%");
             }
         });
+        function DateTimePickerInit() {
+            $('.DateTimePickerInit').bootstrapMaterialDatePicker({
+                format: 'DD-MMM-YYYY',
+                time: false
+            });
+        }
+        // $(document).ready(function () {
+        //     // var fileTag = document.getElementById("UploadProfilePic"),
+        //     //     preview = document.getElementById("preview");
 
-        $(document).ready(function () {
-            // var fileTag = document.getElementById("UploadProfilePic"),
-            //     preview = document.getElementById("preview");
+        //     // fileTag.addEventListener("change", function () {
+        //     //     changeImage(this);
+        //     // });
 
-            // fileTag.addEventListener("change", function () {
-            //     changeImage(this);
-            // });
+        //     // function changeImage(input) {
+        //     //     var reader;
 
-            // function changeImage(input) {
-            //     var reader;
+        //     //     if (input.files && input.files[0]) {
+        //     //         reader = new FileReader();
 
-            //     if (input.files && input.files[0]) {
-            //         reader = new FileReader();
+        //     //         reader.onload = function (e) {
+        //     //             preview.setAttribute('src', e.target.result);
+        //     //         }
 
-            //         reader.onload = function (e) {
-            //             preview.setAttribute('src', e.target.result);
-            //         }
-
-            //         reader.readAsDataURL(input.files[0]);
-            //     }
-            // }
-        });
+        //     //         reader.readAsDataURL(input.files[0]);
+        //     //     }
+        //     // }
+        // });
     </script>
 
 }

@@ -26,6 +26,9 @@ namespace ServiceHub.WebApp.Models
         [Display(Name = "Priority")]
         public string Priority { get; set; }
 
+        [Display(Name = "Status")]
+        public string Status { get; set; }
+
         [Display(Name = "Requested Date")]
         public DateTime? RequestedDate { get; set; }
 
