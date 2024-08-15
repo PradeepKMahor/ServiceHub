@@ -42,6 +42,10 @@
             cursor: pointer; /* Added cursor pointer */
         }
 
+        .step-circle-backcolor {
+            background-color: #cbf2fff2;
+        }
+
         .step-line {
             position: absolute;
             top: 16px;
@@ -134,10 +138,10 @@
                                                                 <select asp-for="Product" class="form-control Select2"
                                                                         required>
                                                                     <option> </option>
-                                                                    <option>Product 1</option>
-                                                                    <option>Product 2</option>
-                                                                    <option>Product 3</option>
-                                                                    <option>Product 4</option>
+                                                                    <option>10001 - Product 1</option>
+                                                                    <option>10002 - Product 2</option>
+                                                                    <option>10003 - Product 3</option>
+                                                                    <option>10004 - Product 4</option>
                                                                 </select>
                                                                 <span asp-validation-for="Product" class="text-danger"></span>
                                                             </div>
@@ -164,7 +168,7 @@
                                                             @* <label asp-for="OtherUserComments" class="col-12 control-label"></label> *@
                                                             <div class="col-12">
                                                                 <textarea asp-for="OtherUserComments" rows="3" class="form-control capitalize" required placeholder="Other User Comments">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                                 <span asp-validation-for="OtherUserComments" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -259,7 +263,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-success btn-md  mb-1 " style="float:right">Submit</button>
+                                            <button type="submit" class="btn btn-primary btn-md  mb-1 " style="float:right">Submit</button>
                                         </form>
                                     </div>
                                 </div>
@@ -323,7 +327,7 @@
                                                             <label asp-for="TechnicianRemarks" class="col-12 control-label"></label>
                                                             <div class="col-12">
                                                                 <textarea asp-for="TechnicianRemarks" rows="3" class="form-control capitalize" required>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                                 <span asp-validation-for="TechnicianRemarks" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -396,7 +400,7 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-success btn-md  mb-1 " style="float:right">Submit</button>
+                                            <button type="submit" class="btn btn-primary btn-md  mb-1 " style="float:right">Submit</button>
                                         </form>
                                     </div>
                                 </div>
@@ -615,14 +619,14 @@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-success btn-md  mb-1 " style="float:right">Submit</button>
+                                            <button type="submit" class="btn btn-primary btn-md  mb-1 " style="float:right">Submit</button>
                                         </form>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         @*  <button type="button" class="btn btn-primary prev-step">Previous</button>
-                    <button type="submit" class="btn btn-success">Submit</button> *@
+                    <button type="submit" class="btn btn-primary">Submit</button> *@
                     </div>
                 </form>
             </div>
@@ -642,9 +646,22 @@ else
 
         function displayStep(stepNumber) {
 
-            // if (stepNumber = 2 || stepNumber = 3 ) {
-            //     $(".circle1").css('background-color', 'red');
-            // }
+            if (stepNumber == 1) {
+                $(".circle1").css('background-color', 'rgb(205 240 255 / 73%)');
+                $(".circle2").css('background-color', 'white');
+                $(".circle3").css('background-color', 'white');
+            }
+            if (stepNumber == 2) {
+                $(".circle1").css('background-color', 'rgb(205 240 255 / 73%)');
+                $(".circle2").css('background-color', 'rgb(205 240 255 / 73%)');
+
+                $(".circle3").css('background-color', 'white');
+            }
+            if (stepNumber == 3) {
+                $(".circle1").css('background-color', 'rgb(205 240 255 / 73%)');
+                $(".circle2").css('background-color', 'rgb(205 240 255 / 73%)');
+                $(".circle3").css('background-color', 'rgb(205 240 255 / 73%)');
+            }
 
             if (stepNumber >= 1 && stepNumber <= 3) {
                 $(".step-" + currentStep).hide();
@@ -662,7 +679,7 @@ else
 
             $(".next-step").click(function () {
                 if (currentStep < 3) {
-                    $(".step-" + currentStep).addClass("animate__animated animate__fadeOutLeft");
+                    $(".step-" + currentStep).addClass("animate__animated animate__fadeOutLeft step-circle-backcolor");
                     currentStep++;
                     setTimeout(function () {
                         $(".step").removeClass("animate__animated animate__fadeOutLeft").hide();
