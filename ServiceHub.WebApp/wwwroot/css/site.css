@@ -1040,9 +1040,22 @@ Switches css start
     border-radius: 0px 23px 28px !important;
 }
 
-    .card .card-mobiletable .row {
-        margin: 0px -5px 0px -5px;
-    }
+.card .card-mobiledatatableView {
+    border: 1px solid #035d7b !important;
+    padding-top: 10px;
+    padding-right: 5px;
+    padding-bottom: 5px;
+    padding-left: 5px;
+    white-space: normal;
+    margin: 5px;
+    border-radius: 10px;
+    font-size: 18px;
+    background-color: #c7ff690a !important;
+}
+
+.card .card-mobiletable .row {
+    margin: 0px -5px 0px -5px;
+}
 
 .card .card-mobiledatatable a {
     color: unset;
