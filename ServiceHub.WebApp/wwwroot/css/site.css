@@ -1225,3 +1225,9 @@ Switches css start
     .error-page .icon-bx {
         margin: 0 0 10px;
     }
+
+.center {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

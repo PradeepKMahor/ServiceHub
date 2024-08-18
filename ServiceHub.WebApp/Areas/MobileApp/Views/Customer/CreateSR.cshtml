@@ -91,7 +91,7 @@
                             <div role="toolbar">
                                 <div class="card rounded-3">
                                     <div class="card-body mt-2 p-0">
-                                        <form asp-controller="Customer"
+                                        <form asp-controller="Technician"
                                               asp-area="MobileApp"
                                               asp-action="CreateServiceRequest"
                                               id="formServiceRequests">
@@ -168,7 +168,7 @@
                                                             @* <label asp-for="OtherUserComments" class="col-12 control-label"></label> *@
                                                             <div class="col-12">
                                                                 <textarea asp-for="OtherUserComments" rows="3" class="form-control capitalize" required placeholder="Other User Comments">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                                 <span asp-validation-for="OtherUserComments" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -178,7 +178,7 @@
 
                                                 <div class="row  p-1">
 
-                                                    <div class="col-6">
+                                                    <div class="col-6 center">
                                                         <div class="form-group">
                                                             <label asp-for="SrUploadPhoto1" class="col-12 control-label"></label>
                                                             <div class="col-12">
@@ -190,7 +190,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-6">
+                                                    <div class="col-6 center">
                                                         <div class="form-group">
                                                             <label asp-for="SrUploadPhoto2" class="col-12 control-label"></label>
                                                             <div class="col-12">
@@ -202,7 +202,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-6">
+                                                    <div class="col-6 center">
                                                         <div class="form-group">
                                                             <label asp-for="SrUploadPhoto3" class="col-12 control-label"></label>
                                                             <div class="col-12">
@@ -214,7 +214,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-6">
+                                                    <div class="col-6 center">
                                                         <div class="form-group">
                                                             <label asp-for="SrUploadPhoto4" class="col-12 control-label"></label>
                                                             <div class="col-12">
@@ -244,26 +244,11 @@
                                                 </div>
                                                 <div class="from-group m-2 pb-2">
 
-                                                    <div class="col-12 ">
-                                                        @*                         Edit   : <partial name="_EditAndBackToListBtn" model="@Convert.ToInt32(1)" />
-                                                    Create :<partial name="_CreateAndBackToListBtn" />
-                                                    *@
-                                                        @* @if (Model.StudentInquiry.Id != 0)
-                                                    {
-
-                                                    //Edit btn and back to list
-                                                    <partial name="_EditAndBackToListBtn" model="@Convert.ToInt32(Varid)" />
-                                                    }
-                                                    else
-                                                    {
-
-                                                    // Create btn and back to list
-                                                    <partial name="_CreateAndBackToListBtn" />
-                                                    } *@
+                                                    <div class="col-12 center">
+                                                        <button type="submit" class="btn btn-primary btn-md  mb-1 " style="margin-right:auto;margin-left:auto;">Submit</button>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary btn-md  mb-1 " style="float:right">Submit</button>
                                         </form>
                                     </div>
                                 </div>
@@ -278,7 +263,7 @@
                             <div role="toolbar">
                                 <div class="card rounded-3">
                                     <div class="card-body mt-2 p-0 ">
-                                        <form asp-controller="Customer"
+                                        <form asp-controller="Technician"
                                               asp-area="MobileApp"
                                               asp-action="CreateServiceRequest"
                                               id="formServiceRequests">
@@ -327,7 +312,7 @@
                                                             <label asp-for="TechnicianRemarks" class="col-12 control-label"></label>
                                                             <div class="col-12">
                                                                 <textarea asp-for="TechnicianRemarks" rows="3" class="form-control capitalize" required>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </textarea>
                                                                 <span asp-validation-for="TechnicianRemarks" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -336,7 +321,7 @@
 
                                                 <div class="row p-1">
 
-                                                    <div class="col-6">
+                                                    <div class="col-6 center">
                                                         <div class="form-group">
                                                             <label asp-for="SrResolutionUploadPhoto1" class="col-12 control-label"></label>
                                                             <div class="col-12">
@@ -348,7 +333,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="col-6">
+                                                    <div class="col-6 center">
                                                         <div class="form-group">
                                                             <label asp-for="SrResolutionUploadPhoto2" class="col-12 control-label"></label>
                                                             <div class="col-12">
@@ -381,26 +366,12 @@
                                                 </div>
                                                 <div class="from-group m-2 pb-2">
 
-                                                    <div class="col-12 ">
-                                                        @*                         Edit   : <partial name="_EditAndBackToListBtn" model="@Convert.ToInt32(1)" />
-                                                    Create :<partial name="_CreateAndBackToListBtn" />
-                                                    *@
-                                                        @* @if (Model.StudentInquiry.Id != 0)
-                                                    {
+                                                    <div class="col-12 center">
+                                                        <button type="submit" class="btn btn-primary btn-md  mb-1 " style="margin-right:auto;margin-left:auto;">Submit</button>
 
-                                                    //Edit btn and back to list
-                                                    <partial name="_EditAndBackToListBtn" model="@Convert.ToInt32(Varid)" />
-                                                    }
-                                                    else
-                                                    {
-
-                                                    // Create btn and back to list
-                                                    <partial name="_CreateAndBackToListBtn" />
-                                                    } *@
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary btn-md  mb-1 " style="float:right">Submit</button>
                                         </form>
                                     </div>
                                 </div>
@@ -420,7 +391,7 @@
                             <div role="toolbar">
                                 <div class="card rounded-3">
                                     <div class="card-body mt-2 p-0 ">
-                                        <form asp-controller="Customer"
+                                        <form asp-controller="Technician"
                                               asp-area="MobileApp"
                                               asp-action="CreateServiceRequest"
                                               id="formServiceRequests">
@@ -593,6 +564,99 @@
                                                                         </div>
                                                                     </div>
                                                                 </div>
+                                                                <div class="card-mobiledatatable ">
+                                                                    <div class="row ">
+                                                                        <div class="col-12 ">
+                                                                            <h4 style="font-weight: 503!important;text-align: center;">
+                                                                                RCA Details
+                                                                            </h4>
+                                                                            <hr class="p-1 m-1" />
+                                                                        </div>
+                                                                        <div class="col-6 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    RCA1  Date
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    RCA1  Accepted
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                        <div class="col-6 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    RCA2 Date
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    RCA2 Accepted
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-mobiledatatable ">
+                                                                    <div class="row ">
+                                                                        <div class="col-12 ">
+                                                                            <h4 style="font-weight: 503!important;text-align: center;">
+                                                                                Parts Details
+                                                                            </h4>
+                                                                            <hr class="p-1 m-1" />
+                                                                        </div>
+                                                                        <div class="col-6 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    Part1
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    Part1
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                        <div class="col-6 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    Part2
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    Part2
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-mobiledatatable ">
+                                                                    <div class="row ">
+                                                                        <div class="col-12 ">
+                                                                            <h4 style="font-weight: 503!important;text-align: center;">
+                                                                                Technician  Details
+                                                                            </h4>
+                                                                            <hr class="p-1 m-1" />
+                                                                        </div>
+                                                                        <div class="col-6 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    Technician is assigned
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    Technician Name
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                        <div class="col-6 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    Corrective Request is created
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    Created On/ By
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -600,26 +664,11 @@
 
                                                 <div class="from-group m-2 pb-2">
 
-                                                    <div class="col-12 ">
-                                                        @*                         Edit   : <partial name="_EditAndBackToListBtn" model="@Convert.ToInt32(1)" />
-                                                    Create :<partial name="_CreateAndBackToListBtn" />
-                                                    *@
-                                                        @* @if (Model.StudentInquiry.Id != 0)
-                                                    {
-
-                                                    //Edit btn and back to list
-                                                    <partial name="_EditAndBackToListBtn" model="@Convert.ToInt32(Varid)" />
-                                                    }
-                                                    else
-                                                    {
-
-                                                    // Create btn and back to list
-                                                    <partial name="_CreateAndBackToListBtn" />
-                                                    } *@
+                                                    <div class="col-12 center">
+                                                        <button type="submit" class="btn btn-primary btn-md  mb-1 " style="margin-right:auto;margin-left:auto;">Submit</button>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <button type="submit" class="btn btn-primary btn-md  mb-1 " style="float:right">Submit</button>
                                         </form>
                                     </div>
                                 </div>

@@ -38,6 +38,17 @@ namespace ServiceHub.WebApp.Areas.MobileApp.Controllers
             return View(cmrCreateViewModel);
         }
 
+        public async Task<IActionResult> CreateUserIndex()
+        {
+            if ((bool)HttpContext.Items["isMobile"] == false)
+            {
+                return Forbid();
+            }
+            UserCreateViewModel userCreateViewModel = new();
+
+            return View(userCreateViewModel);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> CreateSR([FromForm] CMRCreateViewModel cmrCreateViewModel)

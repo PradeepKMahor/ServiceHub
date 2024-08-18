@@ -1,0 +1,201 @@
+﻿@model ServiceHub.WebApp.Models.UserCreateViewModel
+
+@{
+    ViewData["Title"] = "User Registration ";
+    var title = "User Registration ";
+    var Varid = "";
+}
+@Html.AntiForgeryToken()
+
+<div class="container-fluid " style=" ">
+
+
+    @* <div class="row d-flex justify-content-center align-items-center h-100"> *@
+    <div class="">
+        <div class="card rounded-3">
+            @* <img id="preview" src="~/images\avatar5.png"
+            height="100"
+            class="img-circle elevation-2"
+            alt="Sample photo"> *@
+            <div class="card-body ">
+                <p class="login-box-msg h4" style=" text-align: center; color:#035d7b!important">
+                    Go ahead & Fill the details...
+                </p>
+
+                <form class="px-md-2">
+
+                    <div class="col-12 p-0 m-0">
+                        <div class="row">
+                            <div class="col-6 p-0 m-0">
+                                <div class="col-12 p-0 m-0">
+                                    <div class="form-group">
+                                        <div class="col-12">
+                                            <input class="form-control" value=" Org Id: XXXXX" disabled></input>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 p-0 m-0">
+                                    <div class="form-group">
+                                        <div class="col-12">
+                                            <input class="form-control" value=" Username: XXXXX" disabled> </input>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 p-0 m-0">
+                                    <div class="form-group">
+                                        <div class="col-12">
+                                            <input asp-for="FirstName" class="form-control capitalize"
+                                                   required placeholder="First Name" />
+                                            <span asp-validation-for="FirstName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 p-0 m-0">
+                                    <div class="form-group">
+                                        <div class="col-12">
+                                            <input asp-for="LastName" class="form-control capitalize" required
+                                                   placeholder="Last Name" />
+                                            <span asp-validation-for="LastName" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 p-0 m-0">
+                                    <div class="form-group">
+                                        <div class="col-12">
+                                            <input asp-for="ContactNo" class="form-control capitalize" required
+                                                   placeholder="Contact No" />
+                                            <span asp-validation-for="ContactNo" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 p-0 m-0">
+                                    <div class="form-group">
+                                        <div class="col-12">
+                                            <input asp-for="Email" class="form-control capitalize" required
+                                                   placeholder="Email Id" />
+                                            <span asp-validation-for="Email" class="text-danger"></span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6 p-0 m-0">
+                                <div class=" col-12  p-0 m-0">
+                                    <div class="text-center">
+                                        <img id="preview"
+                                             style="width:150px!important;
+                                                max-width:150px!important;
+                                                max-height:150px!important;
+                                                min-width:150px!important;
+                                                min-height:150px!important;"
+                                             src="~/images\avatar5.png" alt="User Avatar"
+                                             class="profile-user-img img-fluid img-square">
+                                        <div class="form-group">
+                                            <div class="col-12  p-0 m-0">
+                                                <div class="input-group">
+
+                                                    <input asp-for="UploadProfilePic" type="file"
+                                                           class=" " required />
+                                                    <span asp-validation-for="UploadProfilePic" class="text-danger"></span>
+
+
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="  col-12  p-0 m-0 ">
+                                <div class="form-group">
+                                    <label asp-for="EnterPassword" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-user-lock"></span>
+                                                </div>
+                                            </div>
+                                            <input asp-for="EnterPassword"
+                                                   class="form-control"
+                                                   autocomplete="current-password"
+                                                   aria-required="true"
+                                                   placeholder="Password" />
+                                        </div>
+                                        <span asp-validation-for="EnterPassword" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="  col-12  p-0 m-0">
+                                <div class="form-group">
+                                    <label asp-for="ConfirmPassword" class="col-12 control-label"></label>
+                                    <div class="col-12">
+                                        <div class="input-group mb-3">
+                                            <div class="input-group-append">
+                                                <div class="input-group-text">
+                                                    <span class="fas fa-user-lock"></span>
+                                                </div>
+                                            </div>
+                                            <input asp-for="ConfirmPassword"
+                                                   class="form-control"
+                                                   autocomplete="current-password"
+                                                   aria-required="true"
+                                                   placeholder="Password" />
+                                        </div>
+                                        <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="from-group m-2 pb-2">
+
+                            <div class="col-12 center">
+                                <button type="submit"
+                                        data-mdb-button-init data-mdb-ripple-init
+                                        class="btn btn-primary  btn-md mb-1">
+                                    Sign Up
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+@* </div> *@
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+
+        $(document).ready(function () {
+            var fileTag = document.getElementById("UploadProfilePic"),
+                preview = document.getElementById("preview");
+
+            fileTag.addEventListener("change", function () {
+                changeImage(this);
+            });
+
+            function changeImage(input) {
+                var reader;
+
+                if (input.files && input.files[0]) {
+                    reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        preview.setAttribute('src', e.target.result);
+                    }
+
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        });
+    </script>
+
+}
