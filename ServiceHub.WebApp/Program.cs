@@ -8,6 +8,9 @@ using ServiceHub.WebApp.Data;
 using ServiceHub.WebApp.Interfaces;
 using ServiceHub.WebApp.Repositories;
 using WebEssentials.AspNetCore.Pwa;
+using DeviceDetectorNET.Parser.Device;
+using System.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,11 +18,28 @@ var builder = WebApplication.CreateBuilder(args);
 var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(connectionString));
+
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<DataContext>();
 
+//Entity Framework
+//builder.Services.AddDbContext<DataContext>(options =>
+//   options.UseSqlServer(connectionString));
+
+//Authentication and Authorization
+//builder.Services.AddIdentity<IdentityUser, IdentityRole>() //Changes
+//          .AddEntityFrameworkStores<DataContext>()
+//          .AddDefaultTokenProviders();
+
+builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
 builder.Services.AddControllersWithViews();
 
 builder.Services.AddProgressiveWebApp(new PwaOptions
@@ -29,6 +49,7 @@ builder.Services.AddProgressiveWebApp(new PwaOptions
     Strategy = ServiceWorkerStrategy.Minimal,
     OfflineRoute = "Offline.html"
 });
+builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddHealthChecks();
 builder.Services.AddResponseCaching();
@@ -80,7 +101,7 @@ builder.Services.AddMvc().AddRazorPagesOptions(options =>
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddTransient<ICategories, CategoriesRepository>();
-builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
+//builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
 

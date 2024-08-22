@@ -9,14 +9,14 @@ namespace ServiceHub.WebApp.Models
             this.FilterDataModel = new FilterDataModel();
         }
 
-        public ProductViewModel productViewModel { get; set; }
-        public UserCustomerViewModel userCustomerViewModel { get; set; }
-        public UserRegistrationViewModel userRegistrationViewModel { get; set; }
+        public ProductViewModel? productViewModel { get; set; }
+        public UserCustomerViewModel? userCustomerViewModel { get; set; }
+        public UserRegistrationViewModel? userRegistrationViewModel { get; set; }
 
         public FilterDataModel FilterDataModel { get; set; }
 
         [Display(Name = "CustomerID")]
-        public string CustomerID { get; set; }
+        public string CustomerID { get; set; } = string.Empty;
 
         [Display(Name = "Customer Name")]
         public string CustomerName { get; set; }

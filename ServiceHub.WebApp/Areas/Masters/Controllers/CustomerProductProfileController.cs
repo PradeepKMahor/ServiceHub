@@ -9,7 +9,8 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
     {
         public IActionResult Index()
         {
-            return View();
+            CustomerProductProfileViewModel customerProductProfileViewModel = new CustomerProductProfileViewModel();
+            return View(customerProductProfileViewModel);
         }
 
         public IActionResult DetailIndex(string id)

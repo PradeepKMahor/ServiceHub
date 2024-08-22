@@ -4,6 +4,8 @@ namespace ServiceHub.WebApp.Models
 {
     public class UserCustomerCreateViewModel
     {
+        public int? Id { get; set; }
+
         [Required]
         [Display(Name = "First Name")]
         public string FirstName { get; set; } = string.Empty;

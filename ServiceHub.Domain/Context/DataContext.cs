@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using ServiceHub.Domain.Models.Data;
 
 namespace ServiceHub.Domain.Context
 {
@@ -13,5 +14,7 @@ namespace ServiceHub.Domain.Context
             : base(options)
         {
         }
+
+        public DbSet<TblUserCustomer> TblUserCustomer { get; set; }
     }
 }

@@ -6,11 +6,15 @@ namespace ServiceHub.DataAccess.Base
 {
     public class DataRepository<T> : IDataRepository<T> where T : class
     {
-        public DataContext Context { get; set; }
+        protected readonly DataContext Context;
+        internal DbSet<T> dbSet;
+
+        DataContext IDataRepository<T>.Context { get => throw new NotImplementedException(); set => throw new NotImplementedException(); }
 
         public DataRepository(DataContext context)
         {
             Context = context;
+            this.dbSet = context.Set<T>();
         }
 
         public virtual T Get(Expression<Func<T, bool>> predicate)
