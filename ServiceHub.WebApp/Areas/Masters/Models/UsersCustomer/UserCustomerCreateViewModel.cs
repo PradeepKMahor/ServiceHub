@@ -38,7 +38,6 @@ namespace ServiceHub.WebApp.Models
         [Display(Name = "Valid To Date")]
         public DateTime? ValidToDate { get; set; }
 
-        [Required]
         [Display(Name = "Upload Profile")]
         public string UploadProfilePic { get; set; } = string.Empty;
 
@@ -50,11 +49,9 @@ namespace ServiceHub.WebApp.Models
         [Display(Name = "User Type")]
         public string UserType { get; set; } = string.Empty;
 
-        [Required]
         [Display(Name = "Supervisor Name")]
         public string SupervisorName { get; set; } = string.Empty;
 
-        [Required]
         [Display(Name = "Admin Name")]
         public string AdminName { get; set; } = string.Empty;
 

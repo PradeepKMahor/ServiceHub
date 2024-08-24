@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using ServiceHub.DataAccess;
+using ServiceHub.Domain.Context;
 using ServiceHub.Domain.Models.Data;
 using ServiceHub.WebApp.Controllers;
 using ServiceHub.WebApp.Models;
@@ -9,11 +10,11 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
     [Area("Masters")]
     public class UsersCustomerController : BaseController
     {
-        private readonly IUnitOfWork _unitOfWork;
+        private readonly DataContext _dataContext;
 
-        public UsersCustomerController(IUnitOfWork unitOfWork)
+        public UsersCustomerController(DataContext dataContext)
         {
-            _unitOfWork = unitOfWork;
+            _dataContext = dataContext;
         }
 
         public IActionResult Index()
@@ -67,18 +68,18 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                     //}
                     //userCustomerCreateViewModel.StaffInfo.CrOn = DateTime.Now;
 
-                    if (userCustomerCreateViewModel.Id == 0)
+                    if (userCustomerCreateViewModel.Id == null)
                     {
-                        _unitOfWork.UserCustomer.Add(tblUserCustomer);
-                        _unitOfWork.Save();
+                        _dataContext.AddAsync(tblUserCustomer);
+                        _dataContext.SaveChanges();
                         Notify("Success", "Data saved successfully", "toaster", notificationType: Models.NotificationType.success);
 
                         return RedirectToAction(nameof(CreateCustomerUser));
                     }
                     else
                     {
-                        _unitOfWork.UserCustomer.Update(tblUserCustomer);
-                        _unitOfWork.Save();
+                        _dataContext.Update(tblUserCustomer);
+                        _dataContext.SaveChanges();
                         Notify("Success", "Data updated successfully", "toaster", notificationType: Models.NotificationType.success);
                         return RedirectToAction(nameof(Index));
                     }

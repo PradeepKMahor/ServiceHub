@@ -33,7 +33,6 @@ builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.Sign
 //          .AddEntityFrameworkStores<DataContext>()
 //          .AddDefaultTokenProviders();
 
-builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);

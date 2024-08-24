@@ -5,7 +5,6 @@
     var title = "New User ";
     var Varid = "";
 }
-@Html.AntiForgeryToken()
 
 @section BreadCrumbs
 {
@@ -33,7 +32,11 @@
             <div role="toolbar">
                 <div class="card rounded-3">
                     <div class="card-body">
-                        <form class="px-md-2">
+                        <form method="post" class="px-md-2" asp-action="CreateCustomerUser"
+                              asp-controller="UsersCustomer"
+                              asp-area="Masters">
+                            @Html.AntiForgeryToken()
+ <input asp-for="Id" class="form-control capitalize" style="display:none"/>
 
                             <div class="row">
 
@@ -168,7 +171,7 @@
                                                         <div class="form-group">
                                                             <label asp-for="Password" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <input asp-for="Password" readonly class="form-control capitalize" />
+                                                                <input asp-for="Password" class="form-control capitalize" />
                                                                 <span asp-validation-for="Password" class="text-danger"></span>
                                                             </div>
                                                         </div>
