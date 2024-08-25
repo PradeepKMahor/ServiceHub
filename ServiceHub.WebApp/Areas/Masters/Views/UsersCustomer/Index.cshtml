@@ -118,30 +118,7 @@
                         <th>@Html.DisplayNameFor(model => model.ValidToDate)</th>
                     </tr>
                 </thead>
-                <tbody>
-                    <tr>
-                        @*                     <td>1001</td>
-                        *@
-                        <td>
-                            <a href="/Admin/CourseMaster/Upsert/${data.id}"
-                               class=' '
-                               style='cursor:pointer;  '>
-                                PradeepMahor001
-                            </a>
-                        </td>
-                        <td>Pradeepkumar</td>
-                        <td>Mahor</td>
-                        <td>Active</td>
 
-                        <td>Dell</td>
-                        <td>Tech</td>
-                        <td>Sandeep</td>
-
-                        <td>8424037919</td>
-                        <td>29-Aug-2014</td>
-
-                    </tr>
-                </tbody>
             </table>
         </div>
     </div>
@@ -156,6 +133,7 @@
         $(document).ready(function () {
 
             initSelect2();
+            localLoadDataTable();
         });
         function localScript() {
             initSelect2();
@@ -177,48 +155,42 @@
                 info: false,
                 filter: false,
                 dom: 'rt<"row"<"col-1"l><"col"p>><"clear">',
-                ordering: false,
+                ordering: true,
+                order: [1, "asc"],
                 columns: [
-                    { data: "userName" },
-                    { data: "email" },
-                    { data: "clintName" },
-                    { data: "roleName" },
                     {
-                        data: null,
-                        render: function (data, type, row) {
-                            if (data.isActive == 1 || data.isActive == "1") {
-                                return 'Yes';
-                            }
-                            else {
-                                return 'No';
-                            }
-                        }
+                    data: null,
+                    render: function (data, type, row) {
+                        return '<a class="btn btn-sm-icon btn-primary" href="UsersCustomer/UpdateCustomerUser/' + data.id + '" title="username"]"> ' + data.username + ' </a>';
                     },
-                    {
-                        data: null,
-                        render: function (data, type, row) {
-                            if (isActionCreateMasters == "True") {
-                                return '<button class="btn btn-outline-primary btn-sm border-none" ' +
-                                    ' data-jqueryselector="openmodal" ' +
-                                    ' data-modalcontainer="modalcontainer" ' +
-                                    ' data-url="@Url.Action("BankUpdate", "Masters", new { Area = "LC" })"' +
-                                    ' data-modalpopupwidth="rightw35" ' +
-                                    ' data-applicationid="' + data.userId + '"' +
-                                    ' data-modaltitle="Edit details" ' +
-                                    ' data-modalheader="Edit details" ' +
-                                    ' > ' +
-                                    ' <i class="fas fa-edit" aria-hidden="true"></i> ' +
-                                    ' </button>'
-                            }
-                            else {
-                                return '';
-                            }
-                        },
-                        'className': "td-icon",
-                    }
+                    sortable: false,
+                    searchable: false,
+                    className: "td-icon"
+                     },
+                    // { data: "username" },
+                    { data: "firstName" },
+                    { data: "lastName" },
+                    { data: "activeStatus" },
+                    { data: "parentOrg" },
+                    { data: "userType" },
+                    { data: "supervisorName" },
+                    { data: "contactNo" },
+                    { data: "validToDate" }
+                    // ,
+                    // {
+                    //     data: null,
+                    //     render: function (data, type, row) {
+                    //         if (data.isActive == 1 || data.isActive == "1") {
+                    //             return 'Yes';
+                    //         }
+                    //         else {
+                    //             return 'No';
+                    //         }
+                    //     }
+                    // },
                 ], ajax: {
                     headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
-                    url: '@Url.Action("GetListsBank", "Masters")',
+                    url: '@Url.Action("GetListsUsersCustomer", "UsersCustomer")',
                     type: 'GET',
                     cache: true,
                     dataType: "json",
@@ -233,6 +205,7 @@
                         d.statusTypeId = null; // $('#FilterDataModel_StatusTypeId').val();
                         d.isActive = $('#FilterDataModel_IsActive').val();
                         //d.endDate = $('#FilterDataModel_EndDate').val();
+                        return { "paramJson": JSON.stringify(d) };
                     },
                     error: function (request, status, error) {
                         notify('error', request.responseText, 'danger');

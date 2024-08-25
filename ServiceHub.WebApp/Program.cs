@@ -11,6 +11,7 @@ using WebEssentials.AspNetCore.Pwa;
 using DeviceDetectorNET.Parser.Device;
 using System.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using ServiceHub.WebApp.Classes;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -100,6 +101,7 @@ builder.Services.AddMvc().AddRazorPagesOptions(options =>
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
 builder.Services.AddTransient<ICategories, CategoriesRepository>();
+builder.Services.AddDataAccessService();
 //builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
 var app = builder.Build();
