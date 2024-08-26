@@ -1,13 +1,18 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ServiceHub.DataAccess;
 using ServiceHub.DataAccess.Base;
+using ServiceHub.DataAccess.Models;
 using ServiceHub.DataAccess.Repositories.Core;
 using ServiceHub.Domain.Context;
 using ServiceHub.Domain.Models.Data;
 using ServiceHub.WebApp.Controllers;
 using ServiceHub.WebApp.Models;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Data;
 using static ServiceHub.WebApp.Models.DTModel;
 
 namespace ServiceHub.WebApp.Areas.Masters.Controllers
@@ -89,6 +94,23 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
         public IActionResult CreateCustomerUser()
         {
             var userCustomerCreateViewModel = new UserCustomerCreateViewModel();
+
+            List<DataField> parentOrgList = new()
+            {
+                new DataField { DataTextField = "ParentOrg - 1", DataValueField ="ParentOrg - 1"},
+                new DataField { DataTextField = "ParentOrg - 2", DataValueField ="ParentOrg - 2"},
+                new DataField { DataTextField = "ParentOrg - 3", DataValueField ="ParentOrg - 3"},
+                new DataField { DataTextField = "ParentOrg - 4", DataValueField ="ParentOrg - 4"}
+            };
+
+            ViewData["ParentOrg"] = new SelectList(parentOrgList.ToList(), "DataValueField", "DataTextField");
+
+            List<DataField> userTypeList = new()
+            {
+                new DataField { DataTextField = "Customer", DataValueField ="Customer"}
+            };
+            ViewData["UserType"] = new SelectList(userTypeList, "DataValueField", "DataTextField");
+
             return View(userCustomerCreateViewModel);
         }
 
@@ -112,6 +134,7 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
 
                     tblUserCustomer.Username = userCustomerCreateViewModel.Username;
                     tblUserCustomer.FirstName = userCustomerCreateViewModel.FirstName;
+                    tblUserCustomer.MiddleName = userCustomerCreateViewModel.MiddleName;
                     tblUserCustomer.LastName = userCustomerCreateViewModel.LastName;
                     tblUserCustomer.ContactNo = userCustomerCreateViewModel.ContactNo;
                     tblUserCustomer.EmailId = userCustomerCreateViewModel.EmailId;
@@ -121,17 +144,8 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                     tblUserCustomer.ValidFromDate = userCustomerCreateViewModel.ValidFromDate;
                     tblUserCustomer.ValidToDate = userCustomerCreateViewModel.ValidToDate;
                     tblUserCustomer.UserType = userCustomerCreateViewModel.UserType;
+                    tblUserCustomer.Password = userCustomerCreateViewModel.Password;
                     tblUserCustomer.SupervisorName = "AvinashK";
-
-                    //if (User.Identity.Name == null)
-                    //{
-                    //    userCustomerCreateViewModel.StaffInfo.CrBy = "Admin";
-                    //}
-                    //else
-                    //{
-                    //    userCustomerCreateViewModel.StaffInfo.CrBy = User.Identity.Name;
-                    //}
-                    //userCustomerCreateViewModel.StaffInfo.CrOn = DateTime.Now;
 
                     _usersCustomerRepository.InsertAsync(tblUserCustomer);
                     Notify("Success", "Data saved successfully", "toaster", notificationType: Models.NotificationType.success);
@@ -150,29 +164,9 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
             }
 
             return View(userCustomerCreateViewModel);
-            //try
-            //{
-            //    if (ModelState.IsValid)
-            //    {
-            //        Notify("Success", "Data saved successfully", "toaster", notificationType: NotificationType.success);
-
-            //        return RedirectToAction(nameof(Index));
-            //    }
-            //    else
-            //    {
-            //        Notify("Error", "Something Missing Or Data Not Found", "toaster", notificationType: NotificationType.error);
-            //        return RedirectToAction(nameof(Index));
-            //    }
-            //}
-            //catch (Exception ex)
-            //{
-            //    Notify("Error", ex.Message, "toaster", notificationType: NotificationType.error);
-            //}
-
-            //return View(userCustomerCreateViewModel);
         }
 
-        public async Task<IActionResult> UpdateCustomerUserAsync(int id)
+        public async Task<IActionResult> UpdateCustomerUserAsync(int? id)
         {
             if (id == null)
             {
@@ -192,7 +186,9 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                 ContactNo = result.ContactNo,
                 EmailId = result.EmailId,
                 FirstName = result.FirstName,
+                MiddleName = result.MiddleName,
                 LastName = result.LastName,
+                Password = result.Password,
                 Id = result.Id,
                 ParentOrg = result.ParentOrg,
                 SupervisorName = result.SupervisorName,
@@ -200,8 +196,7 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                 Username = result.Username,
                 UserType = result.UserType,
                 ValidFromDate = result.ValidFromDate,
-                ValidToDate = result.ValidToDate,
-                MiddleName = ""
+                ValidToDate = result.ValidToDate
             };
             if (result.ActiveStatus == "Active")
             {
@@ -211,6 +206,22 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
             {
                 model.ActiveStatus = false;
             }
+            List<DataField> parentOrgList = new()
+            {
+                new DataField { DataTextField = "ParentOrg - 1", DataValueField ="ParentOrg - 1"},
+                new DataField { DataTextField = "ParentOrg - 2", DataValueField ="ParentOrg - 2"},
+                new DataField { DataTextField = "ParentOrg - 3", DataValueField ="ParentOrg - 3"},
+                new DataField { DataTextField = "ParentOrg - 4", DataValueField ="ParentOrg - 4"}
+            };
+
+            ViewData["ParentOrg"] = new SelectList(parentOrgList, "DataValueField", "DataTextField", result.ParentOrg);
+
+            List<DataField> userTypeList = new()
+            {
+                new DataField { DataTextField = "Customer", DataValueField ="Customer"}
+            };
+            ViewData["UserType"] = new SelectList(userTypeList, "DataValueField", "DataTextField", result.UserType);
+
             return View(model);
         }
 
@@ -232,8 +243,10 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                         tblUserCustomer.ActiveStatus = "DeActive";
                     }
 
+                    tblUserCustomer.Id = userCustomerUpdateModel.Id;
                     tblUserCustomer.Username = userCustomerUpdateModel.Username;
                     tblUserCustomer.FirstName = userCustomerUpdateModel.FirstName;
+                    tblUserCustomer.MiddleName = userCustomerUpdateModel.MiddleName;
                     tblUserCustomer.LastName = userCustomerUpdateModel.LastName;
                     tblUserCustomer.ContactNo = userCustomerUpdateModel.ContactNo;
                     tblUserCustomer.EmailId = userCustomerUpdateModel.EmailId;
@@ -243,6 +256,7 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                     tblUserCustomer.ValidFromDate = userCustomerUpdateModel.ValidFromDate;
                     tblUserCustomer.ValidToDate = userCustomerUpdateModel.ValidToDate;
                     tblUserCustomer.UserType = userCustomerUpdateModel.UserType;
+                    tblUserCustomer.Password = userCustomerUpdateModel.Password;
                     tblUserCustomer.SupervisorName = "AvinashK";
 
                     _usersCustomerRepository.UpdateAsync(tblUserCustomer);
@@ -259,8 +273,44 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
             {
                 Notify("Error", ex.Message, "toaster", notificationType: Models.NotificationType.error);
             }
+            List<DataField> parentOrgList = new()
+            {
+                new DataField { DataTextField = "ParentOrg - 1", DataValueField ="ParentOrg - 1"},
+                new DataField { DataTextField = "ParentOrg - 2", DataValueField ="ParentOrg - 2"},
+                new DataField { DataTextField = "ParentOrg - 3", DataValueField ="ParentOrg - 3"},
+                new DataField { DataTextField = "ParentOrg - 4", DataValueField ="ParentOrg - 4"}
+            };
+
+            ViewBag["ParentOrg"] = new SelectList(parentOrgList, "DataValueField", "DataTextField", userCustomerUpdateModel.ParentOrg);
+
+            List<DataField> userTypeList = new()
+            {
+                new DataField { DataTextField = "Customer", DataValueField ="Customer"}
+            };
+            ViewData["UserType"] = new SelectList(userTypeList, "DataValueField", "DataTextField", userCustomerUpdateModel.UserType);
 
             return View(userCustomerUpdateModel);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> DeleteConfirmed(short? id)
+        {
+            var result = await _usersCustomerRepository.GetAsync(m => m.Id == id);
+
+            try
+            {
+                await _usersCustomerRepository.DeleteAsync(result);
+                Notify("Success", "Data deleted successfully", "toaster", notificationType: Models.NotificationType.success);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                Notify("Error", ex.Message, "toaster", notificationType: Models.NotificationType.error);
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

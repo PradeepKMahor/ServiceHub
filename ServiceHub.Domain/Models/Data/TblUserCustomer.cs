@@ -15,6 +15,7 @@ namespace ServiceHub.Domain.Models.Data
 
         public string FirstName { get; set; } = string.Empty;
 
+        public string MiddleName { get; set; } = string.Empty;
         public string LastName { get; set; } = string.Empty;
 
         public string Username { get; set; } = string.Empty;
@@ -38,5 +39,6 @@ namespace ServiceHub.Domain.Models.Data
         public string UploadProfilePic { get; set; } = string.Empty;
 
         public string ActiveStatus { get; set; } = string.Empty;
+        public string Password { get; set; } = string.Empty;
     }
 }
