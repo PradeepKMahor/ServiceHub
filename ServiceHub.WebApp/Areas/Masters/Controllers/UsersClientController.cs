@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using ServiceHub.DataAccess.Repositories.Core;
 using ServiceHub.WebApp.Controllers;
 using ServiceHub.WebApp.Models;
 
@@ -8,6 +9,13 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
     [Area("Masters")]
     public class UsersClientController : BaseController
     {
+        private readonly IUserClintRepository _userClintRepository;
+
+        public UsersClientController(IUserClintRepository userClintRepository)
+        {
+            _userClintRepository = userClintRepository;
+        }
+
         public IActionResult Index()
         {
             UserRegistrationViewModel userRegistrationViewModel = new UserRegistrationViewModel();

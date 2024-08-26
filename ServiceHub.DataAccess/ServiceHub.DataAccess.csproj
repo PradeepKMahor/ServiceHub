@@ -23,7 +23,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Interface\Core\" />
     <Folder Include="Interface\Exec\" />
     <Folder Include="Repositories\Exec\" />
   </ItemGroup>

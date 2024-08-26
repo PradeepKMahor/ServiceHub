@@ -16,5 +16,6 @@ namespace ServiceHub.Domain.Context
         }
 
         public DbSet<TblUserCustomer> TblUserCustomer { get; set; }
+        public DbSet<TblUserClint> TblUserClint { get; set; }
     }
 }

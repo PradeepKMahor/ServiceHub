@@ -10,6 +10,7 @@ namespace ServiceHub.WebApp.Classes
             #region Core repository
 
             services.AddTransient<IUsersCustomerRepository, UsersCustomerRepository>();
+            services.AddTransient<IUserClintRepository, UserClintRepository>();
 
             #endregion Core repository
 

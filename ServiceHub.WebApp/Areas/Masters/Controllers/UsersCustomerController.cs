@@ -20,12 +20,13 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
     [Area("Masters")]
     public class UsersCustomerController : BaseController
     {
-        private readonly DataContext _dataContext;
+        //private readonly DataContext _dataContext;
         private readonly IUsersCustomerRepository _usersCustomerRepository;
 
-        public UsersCustomerController(DataContext dataContext, IUsersCustomerRepository usersCustomerRepository)
+        public UsersCustomerController(/*DataContext dataContext, */
+            IUsersCustomerRepository usersCustomerRepository)
         {
-            _dataContext = dataContext;
+            //_dataContext = dataContext;
             _usersCustomerRepository = usersCustomerRepository;
         }
 
@@ -293,7 +294,6 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
         }
 
         [HttpPost, ActionName("Delete")]
-        //[ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(short? id)
         {
             var result = await _usersCustomerRepository.GetAsync(m => m.Id == id);
