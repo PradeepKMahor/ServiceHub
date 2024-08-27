@@ -28,6 +28,7 @@ namespace ServiceHub.WebApp.Models
 
         [Required]
         [Display(Name = "Email Id")]
+        [EmailAddress]
         public string EmailId { get; set; } = string.Empty;
 
         [Required]

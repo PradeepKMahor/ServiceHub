@@ -159,15 +159,11 @@
                 order: [1, "asc"],
                 columns: [
                     {
-                    data: null,
-                    render: function (data, type, row) {
-                        return '<a class="btn btn-sm-icon btn-primary" href="UsersCustomer/UpdateCustomerUser/' + data.id + '" title="username"]"> ' + data.username + ' </a>';
+                        data: null,
+                        render: function (data, type, row) {
+                            return '<a class="" href="UsersCustomer/UpdateCustomerUser/' + data.id + '" title="username"]"> ' + data.username + ' </a>';
+                        }
                     },
-                    sortable: false,
-                    searchable: false,
-                    className: "td-icon"
-                     },
-                    // { data: "username" },
                     { data: "firstName" },
                     { data: "lastName" },
                     { data: "activeStatus" },
@@ -176,18 +172,6 @@
                     { data: "supervisorName" },
                     { data: "contactNo" },
                     { data: "validToDate" }
-                    // ,
-                    // {
-                    //     data: null,
-                    //     render: function (data, type, row) {
-                    //         if (data.isActive == 1 || data.isActive == "1") {
-                    //             return 'Yes';
-                    //         }
-                    //         else {
-                    //             return 'No';
-                    //         }
-                    //     }
-                    // },
                 ], ajax: {
                     headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
                     url: '@Url.Action("GetListsUsersCustomer", "UsersCustomer")',

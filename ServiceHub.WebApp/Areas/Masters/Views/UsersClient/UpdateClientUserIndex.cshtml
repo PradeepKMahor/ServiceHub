@@ -1,8 +1,8 @@
 ﻿@model ServiceHub.WebApp.Models.UserRegistrationCreateViewModel
 
 @{
-    ViewData["Title"] = "User Registration ";
-    var title = "User Registration ";
+    ViewData["Title"] = "Update Registration ";
+    var title = "Update Registration ";
     var Varid = "";
 }
 @Html.AntiForgeryToken()
@@ -16,12 +16,12 @@
             <a asp-action="Index" asp-controller="UsersClient" asp-area="Masters">Users-Clint list</a>
         </li>
 
-        <li class="breadcrumb-item active" aria-current="page">User Registration </li>
+        <li class="breadcrumb-item active" aria-current="page">Update User Registration </li>
     </ol>
 
 }
 
-<h1 class="text-center">User Registration</h1>
+<h1 class="text-center">Update User Registration</h1>
 
 <div class="container-fluid " style="max-width:800px;">
 
@@ -37,7 +37,7 @@
                 @*                     <h3 class="mb-4 pb-2 pb-md-0 mb-md-5 px-md-2">Registration Info</h3>
                 *@
                 <form method="post" class="px-md-2"
-                      asp-action="CreateClientUserIndex"
+                      asp-action="UpdateClientUserIndex"
                       asp-controller="UsersClient"
                       asp-area="Masters"
                       enctype="multipart/form-data">
@@ -45,13 +45,12 @@
                     @Html.HiddenFor(m => m.Id)
 
                     <div class="text-center">
-                        <img id="preview" style="width:150px!important; max-width:150px!important;min-width:150px!important;" src="~/images\avatar5.png" alt="User Avatar"
+                        <img id="preview" src="@Model.UploadProfilePic" style="width:150px!important; max-width:150px!important;min-width:150px!important;" src="~/images\avatar5.png" alt="User Avatar"
                              class="profile-user-img img-fluid img-square">
                         <hr />
                     </div>
                     @* class=" mr-3 img-circle" *@
                     <div class="col-12">
-
                         <div class="row">
                             <div class=" col-12 col-md-6  ">
                                 <div class="form-group">
@@ -137,21 +136,6 @@
                         <div class="from-group m-2 pb-2">
 
                             <div class="col-12 ">
-                                @*                         Edit   : <partial name="_EditAndBackToListBtn" model="@Convert.ToInt32(1)" />
-                                Create :<partial name="_CreateAndBackToListBtn" />
-                                *@
-                                @* @if (Model.StudentInquiry.Id != 0)
-                                {
-
-                                //Edit btn and back to list
-                                <partial name="_EditAndBackToListBtn" model="@Convert.ToInt32(Varid)" />
-                                }
-                                else
-                                {
-
-                                // Create btn and back to list
-                                <partial name="_CreateAndBackToListBtn" />
-                                } *@
                             </div>
                         </div>
                     </div>
@@ -191,12 +175,12 @@
                 }
             }
         });
-             function DateTimePickerInit() {
-                    $('.DateTimePickerInit').bootstrapMaterialDatePicker({
-                        format: 'DD-MMM-YYYY',
-                        time: false
-                    });
-                }
+        function DateTimePickerInit() {
+            $('.DateTimePickerInit').bootstrapMaterialDatePicker({
+                format: 'DD-MMM-YYYY',
+                time: false
+            });
+        }
     </script>
 
 }

@@ -121,28 +121,6 @@
                         </tr>
                     </thead>
 
-                    <tbody>
-                        <tr>
-                            <td>
-                                <a href="/Admin/CourseMaster/Upsert/${data.id}"
-                                   class=' '
-                                   style='cursor:pointer;  '>
-                                    PradeepMahor001
-                                </a>
-                            </td>
-                            <td>Pradeepkumar</td>
-                            <td>Mahor</td>
-                            <td>Active</td>
-
-                            <td>Dell</td>
-                            <td>Tech</td>
-                            <td>Sandeep</td>
-
-                            <td>8424037919</td>
-                            <td>29-Aug-2014</td>
-
-                        </tr>
-                    </tbody>
                 </table>
             }
             else
@@ -448,7 +426,7 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-
+            localLoadDataTable();
             initSelect2();
         });
         function localScript() {
@@ -471,48 +449,26 @@
                 info: false,
                 filter: false,
                 dom: 'rt<"row"<"col-1"l><"col"p>><"clear">',
-                ordering: false,
+                ordering: true,
+                order: [1, "asc"],
                 columns: [
-                    { data: "userName" },
-                    { data: "email" },
-                    { data: "ClientName" },
-                    { data: "roleName" },
                     {
                         data: null,
                         render: function (data, type, row) {
-                            if (data.isActive == 1 || data.isActive == "1") {
-                                return 'Yes';
-                            }
-                            else {
-                                return 'No';
-                            }
+                            return '<a class=" " href="UsersClient/UpdateClientUserIndex/' + data.id + '" title="username"]"> ' + data.username + ' </a>';
                         }
                     },
-                    {
-                        data: null,
-                        render: function (data, type, row) {
-                            if (isActionCreateMasters == "True") {
-                                return '<button class="btn btn-outline-primary btn-sm border-none" ' +
-                                    ' data-jqueryselector="openmodal" ' +
-                                    ' data-modalcontainer="modalcontainer" ' +
-                                    ' data-url="@Url.Action("BankUpdate", "Masters", new { Area = "LC" })"' +
-                                    ' data-modalpopupwidth="rightw35" ' +
-                                    ' data-applicationid="' + data.userId + '"' +
-                                    ' data-modaltitle="Edit details" ' +
-                                    ' data-modalheader="Edit details" ' +
-                                    ' > ' +
-                                    ' <i class="fas fa-edit" aria-hidden="true"></i> ' +
-                                    ' </button>'
-                            }
-                            else {
-                                return '';
-                            }
-                        },
-                        'className': "td-icon",
-                    }
+                    { data: "firstName" },
+                    { data: "lastName" },
+                    { data: "activeStatus" },
+                    { data: "parentOrg" },
+                    { data: "userType" },
+                    { data: "supervisorName" },
+                    { data: "contactNo" },
+                    { data: "validToDate" }
                 ], ajax: {
                     headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
-                    url: '@Url.Action("GetListsBank", "Masters")',
+                    url: '@Url.Action("GetListsUsersClint", "UsersClient")',
                     type: 'GET',
                     cache: true,
                     dataType: "json",
@@ -527,6 +483,7 @@
                         d.statusTypeId = null; // $('#FilterDataModel_StatusTypeId').val();
                         d.isActive = $('#FilterDataModel_IsActive').val();
                         //d.endDate = $('#FilterDataModel_EndDate').val();
+                        return { "paramJson": JSON.stringify(d) };
                     },
                     error: function (request, status, error) {
                         notify('error', request.responseText, 'danger');
@@ -535,6 +492,7 @@
             });
 
             //dataTableSearch();
+
         }
 
         function PostFilterReLoadDataTable(data) {
