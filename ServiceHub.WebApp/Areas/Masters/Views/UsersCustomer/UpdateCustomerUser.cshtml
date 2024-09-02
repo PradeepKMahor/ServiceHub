@@ -215,8 +215,18 @@
                                             class="btn btn-info mb-1 mx-3 ml-auto">
                                         <i class="fas fa-user-edit"></i>
                                     </button>
-                                    <input class="btn btn-danger mb-1 mx-3 ml-auto"
-                                           type="submit" value="Delete" asp-action="Delete" />
+
+
+                                    <button type="button" class="btn btn-danger mb-1 mx-3 ml-auto"
+                                            onclick="return functionConfirm(this)">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+
+
+
+                                    @*    <input class="btn btn-danger mb-1 mx-3 ml-auto"
+                                    type="submit" value="Delete" asp-action="Delete" /> *@
+
                                     <div class="col-6 mx-3 ml-auto">
                                         <div class="switch d-inline  font-weight-bold">
                                             <input type="checkbox" asp-for="ActiveStatus" />
@@ -228,6 +238,13 @@
 
                             </div>
                         </form>
+                        <form id="frmDelete" asp-action="Delete" hidden method="post"
+                              asp-controller="UsersCustomer"
+                              asp-area="Masters">
+                            @Html.HiddenFor(m => m.Id)
+
+                        </form>
+
                     </div>
                 </div>
             </div>
@@ -258,7 +275,27 @@
                 event.preventDefault();
             }
         }
-
+        function functionConfirm(event) {
+            swal({
+                title: 'are you sur?',
+                text: "You will not be able to recover this item",
+                type: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'No',
+                cancelButtonClass: 'btn btn-danger mr-2 ml-2',
+                showConfirmButton: true,
+                confirmButtonText: 'Yes',
+                confirmButtonClass: 'btn btn-success mr-2 ml-2'
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    $('#frmDelete').submit();
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            return false;
+        }
     </script>
 
 }
