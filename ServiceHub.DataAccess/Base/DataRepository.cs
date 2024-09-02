@@ -106,7 +106,7 @@ namespace ServiceHub.DataAccess.Base
                 throw new ArgumentException("entity is null");
             }
 
-            _ = Context.Update(entity);
+            _ = Context.Set<T>().Update(entity);
             _ = Context.SaveChanges();
         }
 
@@ -117,7 +117,7 @@ namespace ServiceHub.DataAccess.Base
                 throw new ArgumentException("entity is null");
             }
 
-            _ = Context.Update(entity);
+            _ = Context.Set<T>().Update(entity);
             _ = await Context.SaveChangesAsync();
         }
 

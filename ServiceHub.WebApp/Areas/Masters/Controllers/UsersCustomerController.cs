@@ -133,7 +133,7 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                         tblUserCustomer.ActiveStatus = "DeActive";
                     }
 
-                    tblUserCustomer.Username = userCustomerCreateViewModel.Username;
+                    tblUserCustomer.Username = userCustomerCreateViewModel.ContactNo;
                     tblUserCustomer.FirstName = userCustomerCreateViewModel.FirstName;
                     tblUserCustomer.MiddleName = userCustomerCreateViewModel.MiddleName;
                     tblUserCustomer.LastName = userCustomerCreateViewModel.LastName;

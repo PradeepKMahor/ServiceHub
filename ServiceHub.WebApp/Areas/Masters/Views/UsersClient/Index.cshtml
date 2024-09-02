@@ -113,7 +113,7 @@
                             <th>@Html.DisplayNameFor(model => model.FirstName)</th>
                             <th>@Html.DisplayNameFor(model => model.LastName)</th>
                             <th>@Html.DisplayNameFor(model => model.ActiveStatus)</th>
-                            <th>@Html.DisplayNameFor(model => model.ParentOrg)</th>
+                            @* <th>@Html.DisplayNameFor(model => model.ParentOrg)</th> *@
                             <th>@Html.DisplayNameFor(model => model.UserType)</th>
                             <th>@Html.DisplayNameFor(model => model.SupervisorName)</th>
                             <th>@Html.DisplayNameFor(model => model.ContactNo)</th>
@@ -461,11 +461,22 @@
                     { data: "firstName" },
                     { data: "lastName" },
                     { data: "activeStatus" },
-                    { data: "parentOrg" },
+                    // { data: "parentOrg" },
                     { data: "userType" },
                     { data: "supervisorName" },
                     { data: "contactNo" },
-                    { data: "validToDate" }
+                    {
+                        data: "validToDate",
+                        width: '10.0rem',
+                        render: function (data, type, row) {
+                            if (data) {
+                                return moment(data).format("DD-MMM-YYYY");
+                            }
+                            else {
+                                return "";
+                            }
+                        }
+                    }
                 ], ajax: {
                     headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
                     url: '@Url.Action("GetListsUsersClint", "UsersClient")',

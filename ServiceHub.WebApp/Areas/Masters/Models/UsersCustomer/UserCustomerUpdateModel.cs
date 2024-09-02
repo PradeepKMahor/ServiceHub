@@ -19,11 +19,12 @@ namespace ServiceHub.WebApp.Models
         [Display(Name = "Middle Name")]
         public string MiddleName { get; set; } = string.Empty;
 
-        [Required]
         [Display(Name = "User Name")]
         public string Username { get; set; } = string.Empty;
 
-        [Required]
+        [Required(ErrorMessage = "You must provide a Contact number")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
         [Display(Name = "Contact No")]
         public string ContactNo { get; set; } = string.Empty;
 
@@ -60,7 +61,7 @@ namespace ServiceHub.WebApp.Models
         [Display(Name = "Status")]
         public bool ActiveStatus { get; set; } = false;
 
-        [Display(Name = "Password")]
+        [Display(Name = "One time Password")]
         public string Password { get; set; } = string.Empty;
     }
 }

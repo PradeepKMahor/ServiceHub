@@ -1231,3 +1231,8 @@ Switches css start
     justify-content: center;
     align-items: center;
 }
+
+.dataTables_processing {
+    z-index: 9999;
+    border: dotted;
+}

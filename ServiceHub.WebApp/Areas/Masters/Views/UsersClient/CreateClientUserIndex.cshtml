@@ -191,12 +191,43 @@
                 }
             }
         });
-             function DateTimePickerInit() {
-                    $('.DateTimePickerInit').bootstrapMaterialDatePicker({
-                        format: 'DD-MMM-YYYY',
-                        time: false
-                    });
-                }
+        function DateTimePickerInit() {
+            var currYear = moment().year();
+            var curYearLastDate = new Date(currYear, 11, 31);
+            var curYearMinDate = new Date((currYear - 1), 0, 1);
+
+            $('.DateTimePickerInit').bootstrapMaterialDatePicker({
+                format: 'DD-MMM-YYYY',
+                time: false,
+                minDate: today,
+                maxDate: curYearLastDate,
+                useCurrent: true,
+                nowButton: true
+            });
+
+
+
+            $('#ValidFromDate').bootstrapMaterialDatePicker({
+                format: 'DD-MMM-YYYY',
+                weekStart: 0,
+                time: false
+            }).on('change', function (e, date) {
+                alert("change");
+                $('#ValidToDate').bootstrapMaterialDatePicker('setMinDate', date);
+                $('#ValidToDate').bootstrapMaterialDatePicker('setMaxDate', curYearLastDate);
+
+                $("#ValidToDate").val(date.format('DD-MMM-YYYY'));
+
+            });
+
+            $('#ValidToDate').bootstrapMaterialDatePicker({
+                format: 'DD-MMM-YYYY',
+                weekStart: 0,
+                time: false
+            }).on('change', function (e, date) {
+                $("#ValidToDate").val(date.format('DD-MMM-YYYY'));
+            });
+        }
     </script>
 
 }

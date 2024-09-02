@@ -94,7 +94,10 @@
                                                         <div class="form-group">
                                                             <label asp-for="ContactNo" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <input asp-for="ContactNo" class="form-control capitalize" required />
+                                                                <input asp-for="ContactNo" type="number"
+                                                                       onkeypress="limitKeypress(event,this.value,10)"
+                                                                       class="form-control capitalize text__input"
+                                                                       required />
                                                                 <span asp-validation-for="ContactNo" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -125,9 +128,8 @@
                                                         <div class="form-group">
                                                             <label asp-for="Username" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <input asp-for="Username" class="form-control capitalize" required />
+                                                                <input asp-for="Username" value="@Model.ContactNo" class="form-control text__input" readonly />
 
-                                                                <span asp-validation-for="Username" class="text-danger"></span>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -254,11 +256,55 @@
         });
 
         function DateTimePickerInit() {
+            var currYear = moment().year();
+            var curYearLastDate = new Date(currYear, 44, 31);
+            var curYearMinDate = new Date((currYear ), 1, 0);
+             var currentDate = moment(new Date);
             $('.DateTimePickerInit').bootstrapMaterialDatePicker({
                 format: 'DD-MMM-YYYY',
+                time: false,
+                minDate: currentDate,
+                 useCurrent: true
+            });
+
+              $('#ValidFromDate').bootstrapMaterialDatePicker('setMinDate', currentDate);
+              $('#ValidFromDate').bootstrapMaterialDatePicker('setDate', currentDate);
+
+              $('#ValidToDate').bootstrapMaterialDatePicker('setMinDate', curYearLastDate);
+              $('#ValidToDate').bootstrapMaterialDatePicker('setDate', curYearLastDate);
+
+
+            $('#ValidFromDate').bootstrapMaterialDatePicker({
+                format: 'DD-MMM-YYYY',
+                weekStart: 0,
                 time: false
+            }).on('change', function (e, date) {
+
+                $('#ValidToDate').bootstrapMaterialDatePicker('setMinDate', date);
+                $('#ValidToDate').bootstrapMaterialDatePicker('setDate', curYearLastDate);
+
+
+            });
+
+            $('#ValidToDate').bootstrapMaterialDatePicker({
+                format: 'DD-MMM-YYYY',
+                weekStart: 0,
+                time: false
+            }).on('change', function (e, date) {
+                $("#ValidToDate").val(date.format('DD-MMM-YYYY'));
             });
         }
+
+        $('.text__input').on('input', function () {
+            $('.text__input').val($(this).val())
+        });
+
+        function limitKeypress(event, value, maxLength) {
+            if (value != undefined && value.toString().length >= maxLength) {
+                event.preventDefault();
+            }
+        }
+
     </script>
 
 }

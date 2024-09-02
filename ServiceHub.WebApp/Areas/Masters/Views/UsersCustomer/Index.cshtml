@@ -138,7 +138,9 @@
         function localScript() {
             initSelect2();
         }
-
+        $('.text__input').on('input', function () {
+            $('.text__input').val($(this).val())
+        });
 
         function localLoadDataTable() {
 
@@ -171,7 +173,18 @@
                     { data: "userType" },
                     { data: "supervisorName" },
                     { data: "contactNo" },
-                    { data: "validToDate" }
+                    {
+                        data: "validToDate",
+                        width: '10.0rem',
+                        render: function (data, type, row) {
+                            if (data) {
+                                return moment(data).format("DD-MMM-YYYY");
+                            }
+                            else {
+                                return "";
+                            }
+                        }
+                    }
                 ], ajax: {
                     headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
                     url: '@Url.Action("GetListsUsersCustomer", "UsersCustomer")',

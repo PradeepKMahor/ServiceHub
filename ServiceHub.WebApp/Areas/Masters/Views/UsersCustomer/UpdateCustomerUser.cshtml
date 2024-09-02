@@ -25,7 +25,7 @@
 
     <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
         <div class="app-h4 app-card-header mb-2">
-            <p>Users-Customer Update</p>
+            <p>Users-Customer Details</p>
 
         </div>
         <div class="card-toolbar">
@@ -92,7 +92,10 @@
                                                         <div class="form-group">
                                                             <label asp-for="ContactNo" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <input asp-for="ContactNo" class="form-control capitalize" required />
+                                                                <input asp-for="ContactNo" type="number"
+                                                                       onkeypress="limitKeypress(event,this.value,10)"
+                                                                       class="form-control capitalize text__input"
+                                                                       required />
                                                                 <span asp-validation-for="ContactNo" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -123,9 +126,7 @@
                                                         <div class="form-group">
                                                             <label asp-for="Username" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <input asp-for="Username" class="form-control capitalize" required />
-
-                                                                <span asp-validation-for="Username" class="text-danger"></span>
+                                                                <input asp-for="Username" value="@Model.ContactNo" class="form-control text__input" readonly />
                                                             </div>
                                                         </div>
                                                     </div>
@@ -133,7 +134,9 @@
                                                         <div class="form-group">
                                                             <label asp-for="ValidFromDate" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <input asp-for="ValidFromDate" type="text" placeholder="DD-MMM-YYYY"
+                                                                <input asp-for="ValidFromDate"
+                                                                       value="@Model.ValidFromDate?.ToString("dd-MMM-yyyy")"
+                                                                       type="text" placeholder="DD-MMM-YYYY"
                                                                        class="form-control DateTimePickerInit" required />
                                                                 <span asp-validation-for="ValidFromDate" class="text-danger"></span>
                                                             </div>
@@ -143,7 +146,10 @@
                                                         <div class="form-group">
                                                             <label asp-for="ValidToDate" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <input asp-for="ValidToDate" type="text"
+                                                                <input asp-for="ValidToDate"
+                                                                       value="@Model.ValidToDate?.ToString("dd-MMM-yyyy")"
+                                                                       type="text" placeholder="DD-MMM-YYYY"
+                                                                       type="text"
                                                                        class="form-control  DateTimePickerInit" placeholder="DD-MMM-YYYY"
                                                                        required />
                                                                 <span asp-validation-for="ValidToDate" class="text-danger"></span>
@@ -186,14 +192,7 @@
                             <hr />
                             <div class="row p-1 ">
                                 <div class="col-8 col-lg-6 col-12-6 col-sm-12">
-                                    @*  <button type="submit"
-                                    data-mdb-button-init
-                                    data-mdb-ripple-init
-                                    class="btn btn-success mb-1 mx-2 ml-auto">
-                                    Submit
-                                    </button> *@
                                 </div>
-
                                 <div class="col-2 d-flex flex-row col-lg-6 col-12-6 col-sm-12">
 
                                     <button type="submit"
@@ -218,15 +217,6 @@
                                     </button>
                                     <input class="btn btn-danger mb-1 mx-3 ml-auto"
                                            type="submit" value="Delete" asp-action="Delete" />
-
-
-
-                                    @*  <button type="button"
-                                    data-mdb-button-init
-                                    data-mdb-ripple-init
-                                    class="btn btn-danger mb-1 mx-3 ml-auto">
-                                    <i class="fas fa-trash-alt"></i>
-                                    </button> *@
                                     <div class="col-6 mx-3 ml-auto">
                                         <div class="switch d-inline  font-weight-bold">
                                             <input type="checkbox" asp-for="ActiveStatus" />
@@ -259,6 +249,16 @@
                 time: false
             });
         }
+        $('.text__input').on('input', function () {
+            $('.text__input').val($(this).val())
+        });
+
+        function limitKeypress(event, value, maxLength) {
+            if (value != undefined && value.toString().length >= maxLength) {
+                event.preventDefault();
+            }
+        }
+
     </script>
 
 }
