@@ -127,21 +127,26 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    string strFilePath = @"Imgs\ClintUser";
-                    string strFolderPath = @"\Imgs\ClintUser\";
+                    string strFilePath = @"Imgs\UsersCustomer";
+                    string strFolderPath = @"\Imgs\UsersCustomer\";
                     string webRootPath = _WebHostEnvironment.WebRootPath;
                     var files = HttpContext.Request.Form.Files;
-                    // New Service
-                    string fileName = Guid.NewGuid().ToString();
-                    var upload = Path.Combine(webRootPath, strFilePath);
-                    var extention = Path.GetExtension(files[0].FileName);
-                    TblUserCustomer tblUserCustomer = new TblUserCustomer();
-                    using (var fileStream = new FileStream(Path.Combine(upload, fileName + extention), FileMode.Create))
-                    {
-                        files[0].CopyTo(fileStream);
 
-                        userCustomerCreateViewModel.UploadProfilePic = strFolderPath + fileName + extention;
+                    string fileName = Guid.NewGuid().ToString();
+                    TblUserCustomer tblUserCustomer = new TblUserCustomer();
+                    if (files != null)
+                    {
+                        var upload = Path.Combine(webRootPath, strFilePath);
+                        var extention = Path.GetExtension(files[0].FileName);
+
+                        using (var fileStream = new FileStream(Path.Combine(upload, fileName + extention), FileMode.Create))
+                        {
+                            files[0].CopyTo(fileStream);
+
+                            userCustomerCreateViewModel.UploadProfilePic = strFolderPath + fileName + extention;
+                        }
                     }
+
                     if (userCustomerCreateViewModel.ActiveStatus)
                     {
                         tblUserCustomer.ActiveStatus = "Active";
@@ -252,9 +257,9 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    TblUserCustomer tblUserCustomer = new TblUserCustomer();
-                    string strFilePath = @"Imgs\ClintUser";
-                    string strFolderPath = @"\Imgs\ClintUser\";
+                    //TblUserCustomer tblUserCustomer = new TblUserCustomer();
+                    string strFilePath = @"Imgs\UsersCustomer";
+                    string strFolderPath = @"\Imgs\UsersCustomer\";
                     string webRootPath = _WebHostEnvironment.WebRootPath;
                     var files = HttpContext.Request.Form.Files;
                     var fromDb = _usersCustomerRepository.GetAsync(m => m.Id == userCustomerUpdateModel.Id);
@@ -285,39 +290,40 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
 
                     if (userCustomerUpdateModel.ActiveStatus)
                     {
-                        tblUserCustomer.ActiveStatus = "Active";
+                        fromDb.Result.ActiveStatus = "Active";
                     }
                     else
                     {
-                        tblUserCustomer.ActiveStatus = "DeActive";
+                        fromDb.Result.ActiveStatus = "DeActive";
                     }
 
                     if (userCustomerUpdateModel.ActiveStatus)
                     {
-                        tblUserCustomer.ActiveStatus = "Active";
+                        fromDb.Result.ActiveStatus = "Active";
                     }
                     else
                     {
-                        tblUserCustomer.ActiveStatus = "DeActive";
+                        fromDb.Result.ActiveStatus = "DeActive";
                     }
 
-                    tblUserCustomer.Id = userCustomerUpdateModel.Id;
-                    tblUserCustomer.Username = userCustomerUpdateModel.Username;
-                    tblUserCustomer.FirstName = userCustomerUpdateModel.FirstName;
-                    tblUserCustomer.MiddleName = userCustomerUpdateModel.MiddleName;
-                    tblUserCustomer.LastName = userCustomerUpdateModel.LastName;
-                    tblUserCustomer.ContactNo = userCustomerUpdateModel.ContactNo;
-                    tblUserCustomer.EmailId = userCustomerUpdateModel.EmailId;
-                    tblUserCustomer.AdminName = userCustomerUpdateModel.AdminName;
-                    tblUserCustomer.ParentOrg = userCustomerUpdateModel.ParentOrg;
-                    tblUserCustomer.UploadProfilePic = userCustomerUpdateModel.UploadProfilePic;
-                    tblUserCustomer.ValidFromDate = userCustomerUpdateModel.ValidFromDate;
-                    tblUserCustomer.ValidToDate = userCustomerUpdateModel.ValidToDate;
-                    tblUserCustomer.UserType = userCustomerUpdateModel.UserType;
-                    tblUserCustomer.Password = userCustomerUpdateModel.Password;
-                    tblUserCustomer.SupervisorName = "AvinashK";
+                    fromDb.Result.Id = userCustomerUpdateModel.Id;
+                    fromDb.Result.Username = userCustomerUpdateModel.Username;
+                    fromDb.Result.FirstName = userCustomerUpdateModel.FirstName;
+                    fromDb.Result.MiddleName = userCustomerUpdateModel.MiddleName;
+                    fromDb.Result.LastName = userCustomerUpdateModel.LastName;
+                    fromDb.Result.ContactNo = userCustomerUpdateModel.ContactNo;
+                    fromDb.Result.EmailId = userCustomerUpdateModel.EmailId;
+                    fromDb.Result.AdminName = userCustomerUpdateModel.AdminName;
+                    fromDb.Result.ParentOrg = userCustomerUpdateModel.ParentOrg;
+                    fromDb.Result.UploadProfilePic = userCustomerUpdateModel.UploadProfilePic;
+                    fromDb.Result.ValidFromDate = userCustomerUpdateModel.ValidFromDate;
+                    fromDb.Result.ValidToDate = userCustomerUpdateModel.ValidToDate;
+                    fromDb.Result.UserType = userCustomerUpdateModel.UserType;
+                    fromDb.Result.Password = userCustomerUpdateModel.Password;
+                    fromDb.Result.UserId = userCustomerUpdateModel.ContactNo;
+                    fromDb.Result.SupervisorName = "AvinashK";
 
-                    _usersCustomerRepository.UpdateAsync(tblUserCustomer);
+                    _usersCustomerRepository.UpdateAsync(fromDb.Result);
                     Notify("Success", "Data updated successfully", "toaster", notificationType: Models.NotificationType.success);
                     return RedirectToAction(nameof(Index));
                 }

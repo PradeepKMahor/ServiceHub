@@ -4,8 +4,16 @@
     ViewData["Title"] = "update User ";
     var title = "update User ";
     var Varid = "";
+    string img = "";
+    if (string.IsNullOrEmpty(Model.UploadProfilePic))
+    {
+        img = "~/images\\avatar5.png";
+    }
+    else
+    {
+        img = Model.UploadProfilePic;
+    }
 }
-
 @section BreadCrumbs
 {
     <ol class="breadcrumb">
@@ -38,17 +46,19 @@
                               enctype="multipart/form-data">
                             @Html.AntiForgeryToken()
                             @Html.HiddenFor(m => m.Id)
+                            @Html.HiddenFor(m => m.UploadProfilePic)
                             <div class="text-center">
                                 <div class="col-6 p-0 m-0">
                                     <div class=" col-12  p-0 m-0">
                                         <div class="text-center">
+
                                             <img id="preview"
                                                  style="width:150px!important;
                                                 max-width:150px!important;
                                                 max-height:150px!important;
                                                 min-width:150px!important;
                                                 min-height:150px!important;"
-                                                 src="~/images\avatar5.png" alt="User Avatar"
+                                                 src="@img.ToString()" alt="User Avatar"
                                                  class="profile-user-img img-fluid img-square">
                                             <div class="form-group">
                                                 <div class="col-12  p-0 m-0">

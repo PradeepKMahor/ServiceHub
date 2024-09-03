@@ -251,7 +251,7 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                     Notify("Error", "Something Missing Or Data Not Found", "toaster", notificationType: Models.NotificationType.error);
                     return RedirectToAction(nameof(CreateClientUserIndex));
                 }
-                TblUserClint tblUserClint = new TblUserClint();
+
                 if (ModelState.IsValid)
                 {
                     string strFilePath = @"Imgs\ClintUser";
@@ -286,31 +286,30 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
 
                     if (userRegistrationCreateViewModel.ActiveStatus)
                     {
-                        tblUserClint.ActiveStatus = "Active";
+                        fromDb.Result.ActiveStatus = "Active";
                     }
                     else
                     {
-                        tblUserClint.ActiveStatus = "DeActive";
+                        fromDb.Result.ActiveStatus = "DeActive";
                     }
-                    tblUserClint.ActiveStatus = "Active";
-                    tblUserClint.Id = (int)userRegistrationCreateViewModel.Id;
-                    tblUserClint.Username = userRegistrationCreateViewModel.Username;
-                    tblUserClint.FirstName = userRegistrationCreateViewModel.FirstName;
-                    tblUserClint.MiddleName = userRegistrationCreateViewModel.MiddleName;
-                    tblUserClint.LastName = userRegistrationCreateViewModel.LastName;
-                    tblUserClint.ContactNo = userRegistrationCreateViewModel.ContactNo;
-                    tblUserClint.EmailId = userRegistrationCreateViewModel.EmailId;
-                    //tblUserClint.AdminName = userRegistrationCreateViewModel.AdminName;
-                    tblUserClint.UploadProfilePic = userRegistrationCreateViewModel.UploadProfilePic;
-                    tblUserClint.ValidFromDate = userRegistrationCreateViewModel.ValidFromDate;
-                    tblUserClint.ValidToDate = userRegistrationCreateViewModel.ValidToDate;
-                    //tblUserClint.UserType = userRegistrationCreateViewModel.UserType;
-                    tblUserClint.UserType = "Clint";
-                    tblUserClint.UserId = tblUserClint.Username + "_" + tblUserClint.LastName;
-                    tblUserClint.Password = userRegistrationCreateViewModel.Username + "_" + userRegistrationCreateViewModel.LastName;
-                    tblUserClint.SupervisorName = "AvinashK";
+                    fromDb.Result.ActiveStatus = "Active";
+                    fromDb.Result.Username = userRegistrationCreateViewModel.Username;
+                    fromDb.Result.FirstName = userRegistrationCreateViewModel.FirstName;
+                    fromDb.Result.MiddleName = userRegistrationCreateViewModel.MiddleName;
+                    fromDb.Result.LastName = userRegistrationCreateViewModel.LastName;
+                    fromDb.Result.ContactNo = userRegistrationCreateViewModel.ContactNo;
+                    fromDb.Result.EmailId = userRegistrationCreateViewModel.EmailId;
+                    //fromDb.Result.AdminName = userRegistrationCreateViewModel.AdminName;
+                    fromDb.Result.UploadProfilePic = userRegistrationCreateViewModel.UploadProfilePic;
+                    fromDb.Result.ValidFromDate = userRegistrationCreateViewModel.ValidFromDate;
+                    fromDb.Result.ValidToDate = userRegistrationCreateViewModel.ValidToDate;
+                    //fromDb.Result.UserType = userRegistrationCreateViewModel.UserType;
+                    fromDb.Result.UserType = "Clint";
+                    fromDb.Result.UserId = fromDb.Result.Username + "_" + fromDb.Result.LastName;
+                    fromDb.Result.Password = userRegistrationCreateViewModel.Username + "_" + userRegistrationCreateViewModel.LastName;
+                    fromDb.Result.SupervisorName = "AvinashK";
 
-                    _userClintRepository.UpdateAsync(tblUserClint);
+                    _userClintRepository.UpdateAsync(fromDb.Result);
                     Notify("Success", "Data updated successfully", "toaster", notificationType: Models.NotificationType.success);
 
                     return RedirectToAction(nameof(Index));

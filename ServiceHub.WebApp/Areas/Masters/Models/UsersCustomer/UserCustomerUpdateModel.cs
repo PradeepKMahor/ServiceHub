@@ -42,7 +42,7 @@ namespace ServiceHub.WebApp.Models
         public DateTime? ValidToDate { get; set; }
 
         [Display(Name = "Upload Profile")]
-        public string UploadProfilePic { get; set; } = string.Empty;
+        public string? UploadProfilePic { get; set; } = string.Empty;
 
         [Required]
         [Display(Name = "Parent Org.")]

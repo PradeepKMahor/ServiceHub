@@ -36,7 +36,7 @@ namespace ServiceHub.Domain.Models.Data
 
         public DateTime? ValidToDate { get; set; }
 
-        public string UploadProfilePic { get; set; } = string.Empty;
+        public string? UploadProfilePic { get; set; } = string.Empty;
 
         public string ActiveStatus { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
