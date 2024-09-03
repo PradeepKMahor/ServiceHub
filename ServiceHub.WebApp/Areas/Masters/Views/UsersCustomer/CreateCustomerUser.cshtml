@@ -38,7 +38,38 @@
                               asp-area="Masters">
                             @Html.AntiForgeryToken()
                             @Html.HiddenFor(m => m.Id)
+                            <div class="text-center">
+                                <div class="col-6 p-0 m-0">
+                                    <div class=" col-12  p-0 m-0">
+                                        <div class="text-center">
+                                            <img id="preview"
+                                                 style="width:150px!important;
+                                                max-width:150px!important;
+                                                max-height:150px!important;
+                                                min-width:150px!important;
+                                                min-height:150px!important;"
+                                                 src="~/images\avatar5.png" alt="User Avatar"
+                                                 class="profile-user-img img-fluid img-square">
+                                            <div class="form-group">
+                                                <div class="col-12  p-0 m-0">
+                                                    <div class="input-group">
 
+                                                        <input type="file" name="file" accept="image/*"
+                                                            id="UploadProfilePic"
+                                                            onchange="loadFile(event)"
+                                                            class="form-control capitalize "/>
+                                                        <span asp-validation-for="UploadProfilePic" class="text-danger"></span>
+
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                                <hr />
+                            </div>
                             <div class="row">
 
                                 <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
@@ -221,13 +252,6 @@
                                         <i class="fas fa-user-edit"></i>
                                     </button>
 
-                                    <button type="submit"
-                                            data-mdb-button-init
-                                            data-mdb-ripple-init
-                                            class="btn btn-danger mb-1 mx-3 ml-auto">
-                                        <i class="fas fa-trash-alt"></i>
-
-                                    </button>
 
                                     <div class="col-6 mx-3 ml-auto">
                                         <div class="switch d-inline  font-weight-bold">
@@ -258,20 +282,20 @@
         function DateTimePickerInit() {
             var currYear = moment().year();
             var curYearLastDate = new Date(currYear, 44, 31);
-            var curYearMinDate = new Date((currYear ), 1, 0);
-             var currentDate = moment(new Date);
+            var curYearMinDate = new Date((currYear), 1, 0);
+            var currentDate = moment(new Date);
             $('.DateTimePickerInit').bootstrapMaterialDatePicker({
                 format: 'DD-MMM-YYYY',
                 time: false,
                 minDate: currentDate,
-                 useCurrent: true
+                useCurrent: true
             });
 
-              $('#ValidFromDate').bootstrapMaterialDatePicker('setMinDate', currentDate);
-              $('#ValidFromDate').bootstrapMaterialDatePicker('setDate', currentDate);
+            $('#ValidFromDate').bootstrapMaterialDatePicker('setMinDate', currentDate);
+            $('#ValidFromDate').bootstrapMaterialDatePicker('setDate', currentDate);
 
-              $('#ValidToDate').bootstrapMaterialDatePicker('setMinDate', curYearLastDate);
-              $('#ValidToDate').bootstrapMaterialDatePicker('setDate', curYearLastDate);
+            $('#ValidToDate').bootstrapMaterialDatePicker('setMinDate', curYearLastDate);
+            $('#ValidToDate').bootstrapMaterialDatePicker('setDate', curYearLastDate);
 
 
             $('#ValidFromDate').bootstrapMaterialDatePicker({
@@ -293,7 +317,7 @@
             }).on('change', function (e, date) {
                 $("#ValidToDate").val(date.format('DD-MMM-YYYY'));
             });
-        }
+        };
 
         $('.text__input').on('input', function () {
             $('.text__input').val($(this).val())
@@ -303,7 +327,15 @@
             if (value != undefined && value.toString().length >= maxLength) {
                 event.preventDefault();
             }
-        }
+        };
+
+        var loadFile = function(event) {
+            var output = document.getElementById('preview');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src) // free memory
+            };
+        };
 
     </script>
 

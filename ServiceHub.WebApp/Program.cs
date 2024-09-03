@@ -42,13 +42,14 @@ builder.Services.AddSession(options =>
 });
 builder.Services.AddControllersWithViews();
 
-builder.Services.AddProgressiveWebApp(new PwaOptions
-{
-    RegisterServiceWorker = true,
-    RegisterWebmanifest = false,  // (Manually register in Layout file)
-    Strategy = ServiceWorkerStrategy.Minimal,
-    OfflineRoute = "Offline.html"
-});
+//builder.Services.AddProgressiveWebApp(new PwaOptions
+//{
+//    RegisterServiceWorker = true,
+//    RegisterWebmanifest = false,  // (Manually register in Layout file)
+//    Strategy = ServiceWorkerStrategy.Minimal,
+//    OfflineRoute = "Offline.html"
+//});
+
 builder.Services.AddHttpContextAccessor();
 
 builder.Services.AddHealthChecks();

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -23,11 +24,14 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
         //private readonly DataContext _dataContext;
         private readonly IUsersCustomerRepository _usersCustomerRepository;
 
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+
         public UsersCustomerController(/*DataContext dataContext, */
-            IUsersCustomerRepository usersCustomerRepository)
+            IUsersCustomerRepository usersCustomerRepository, IWebHostEnvironment webHostEnvironment)
         {
             //_dataContext = dataContext;
             _usersCustomerRepository = usersCustomerRepository;
+            _WebHostEnvironment = webHostEnvironment;
         }
 
         public IActionResult Index()
@@ -123,7 +127,21 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    string strFilePath = @"Imgs\ClintUser";
+                    string strFolderPath = @"\Imgs\ClintUser\";
+                    string webRootPath = _WebHostEnvironment.WebRootPath;
+                    var files = HttpContext.Request.Form.Files;
+                    // New Service
+                    string fileName = Guid.NewGuid().ToString();
+                    var upload = Path.Combine(webRootPath, strFilePath);
+                    var extention = Path.GetExtension(files[0].FileName);
                     TblUserCustomer tblUserCustomer = new TblUserCustomer();
+                    using (var fileStream = new FileStream(Path.Combine(upload, fileName + extention), FileMode.Create))
+                    {
+                        files[0].CopyTo(fileStream);
+
+                        userCustomerCreateViewModel.UploadProfilePic = strFolderPath + fileName + extention;
+                    }
                     if (userCustomerCreateViewModel.ActiveStatus)
                     {
                         tblUserCustomer.ActiveStatus = "Active";
@@ -132,20 +150,20 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                     {
                         tblUserCustomer.ActiveStatus = "DeActive";
                     }
-
-                    tblUserCustomer.Username = userCustomerCreateViewModel.ContactNo;
+                    tblUserCustomer.Username = userCustomerCreateViewModel.Username;
                     tblUserCustomer.FirstName = userCustomerCreateViewModel.FirstName;
                     tblUserCustomer.MiddleName = userCustomerCreateViewModel.MiddleName;
                     tblUserCustomer.LastName = userCustomerCreateViewModel.LastName;
                     tblUserCustomer.ContactNo = userCustomerCreateViewModel.ContactNo;
                     tblUserCustomer.EmailId = userCustomerCreateViewModel.EmailId;
-                    tblUserCustomer.AdminName = userCustomerCreateViewModel.AdminName;
-                    tblUserCustomer.ParentOrg = userCustomerCreateViewModel.ParentOrg;
+                    //tblUserCustomer.AdminName = userCustomerCreateViewModel.AdminName;
                     tblUserCustomer.UploadProfilePic = userCustomerCreateViewModel.UploadProfilePic;
                     tblUserCustomer.ValidFromDate = userCustomerCreateViewModel.ValidFromDate;
                     tblUserCustomer.ValidToDate = userCustomerCreateViewModel.ValidToDate;
-                    tblUserCustomer.UserType = userCustomerCreateViewModel.UserType;
-                    tblUserCustomer.Password = userCustomerCreateViewModel.Password;
+                    //tblUserCustomer.UserType = userCustomerCreateViewModel.UserType;
+                    tblUserCustomer.UserType = "Clint";
+                    tblUserCustomer.UserId = tblUserCustomer.Username + "_" + tblUserCustomer.LastName;
+                    tblUserCustomer.Password = userCustomerCreateViewModel.Username + "_" + userCustomerCreateViewModel.LastName;
                     tblUserCustomer.SupervisorName = "AvinashK";
 
                     _usersCustomerRepository.InsertAsync(tblUserCustomer);
@@ -235,6 +253,45 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                 if (ModelState.IsValid)
                 {
                     TblUserCustomer tblUserCustomer = new TblUserCustomer();
+                    string strFilePath = @"Imgs\ClintUser";
+                    string strFolderPath = @"\Imgs\ClintUser\";
+                    string webRootPath = _WebHostEnvironment.WebRootPath;
+                    var files = HttpContext.Request.Form.Files;
+                    var fromDb = _usersCustomerRepository.GetAsync(m => m.Id == userCustomerUpdateModel.Id);
+
+                    if (files.Count > 0)
+                    {
+                        string fileName = Guid.NewGuid().ToString();
+                        var upload = Path.Combine(webRootPath, strFilePath);
+                        var extention_new = Path.GetExtension(files[0].FileName);
+
+                        var imagePath = Path.Combine(webRootPath, fromDb.Result.UploadProfilePic.TrimStart('\\'));
+
+                        if (System.IO.File.Exists(imagePath))
+                        {
+                            System.IO.File.Delete(imagePath);
+                        }
+
+                        using (var fileStream = new FileStream(Path.Combine(upload, fileName + extention_new), FileMode.Create))
+                        {
+                            files[0].CopyTo(fileStream);
+                        }
+                        userCustomerUpdateModel.UploadProfilePic = strFolderPath + fileName + extention_new;
+                    }
+                    else
+                    {
+                        userCustomerUpdateModel.UploadProfilePic = fromDb.Result.UploadProfilePic;
+                    }
+
+                    if (userCustomerUpdateModel.ActiveStatus)
+                    {
+                        tblUserCustomer.ActiveStatus = "Active";
+                    }
+                    else
+                    {
+                        tblUserCustomer.ActiveStatus = "DeActive";
+                    }
+
                     if (userCustomerUpdateModel.ActiveStatus)
                     {
                         tblUserCustomer.ActiveStatus = "Active";
