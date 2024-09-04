@@ -118,11 +118,19 @@
                         <th>@Html.DisplayNameFor(model => model.ValidToDate)</th>
                     </tr>
                 </thead>
-
             </table>
         </div>
     </div>
 </div>
+<form id="frmDetails"
+      asp-action="DetailsCustomerUser" hidden method="post"
+      asp-controller="UsersCustomer"
+      asp-area="Masters">
+    @Html.AntiForgeryToken()
+
+    <input hidden id="Id" name="Id" />
+
+</form>
 
 @section Scripts {
     @{
@@ -135,9 +143,11 @@
             initSelect2();
             localLoadDataTable();
         });
+
         function localScript() {
             initSelect2();
         }
+
         $('.text__input').on('input', function () {
             $('.text__input').val($(this).val())
         });
@@ -163,7 +173,7 @@
                     {
                         data: null,
                         render: function (data, type, row) {
-                            return '<a class="" href="UsersCustomer/UpdateCustomerUser/' + data.id + '" title="username"]"> ' + data.username + ' </a>';
+                            return '<a class="" onclick="return functionConfirm(' + data.id + ')" href="#" title="username"]"> ' + data.username + ' </a>';
                         }
                     },
                     { data: "firstName" },
@@ -231,5 +241,16 @@
                 notify('success', data.response, 'Success');
             }
         }
+
+        function functionConfirm(id) {
+
+            $('#Id').val(id);
+
+            $('#frmDetails').submit();
+
+
+            return false;
+        }
+
     </script>
 }

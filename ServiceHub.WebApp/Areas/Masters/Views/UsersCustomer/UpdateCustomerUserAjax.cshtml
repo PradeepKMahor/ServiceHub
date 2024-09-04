@@ -238,19 +238,28 @@
                                 </div>
                                 <div class="col-2 d-flex flex-row col-lg-6 col-12-6 col-sm-12">
 
-                                    <button type="submit"
-                                            data-mdb-button-init
-                                            data-mdb-ripple-init
-                                            class="btn btn-primary mb-1 mx-3 ml-auto">
-                                        <i class="fas fa-save"></i>
+                                    <a asp-area="Masters"
+                                       asp-controller="UsersCustomer"
+                                       asp-action="CreateCustomerUser"
+                                       data-mdb-button-init
+                                       data-mdb-ripple-init
+                                       class="btn btn-primary mb-1 mx-3 ml-auto">
+                                        <i class="fas fa-plus "
+                                           aria-hidden="true"></i>&nbsp;
+                                    </a>
+                                    @*  <button type="submit"
+                                    data-mdb-button-init
+                                    data-mdb-ripple-init
+                                    class="btn btn-primary mb-1 mx-3 ml-auto">
+                                    <i class="fas fa-save"></i>
                                     </button>
-
-                                    <button type="submit"
-                                            data-mdb-button-init
-                                            data-mdb-ripple-init
-                                            class="btn btn-warning mb-1  mx-3 ml-auto">
-                                        <i class="fas fa-unlock-alt"></i>
-                                    </button>
+                                    *@
+                                    @*  <button type="submit"
+                                    data-mdb-button-init
+                                    data-mdb-ripple-init
+                                    class="btn btn-warning mb-1  mx-3 ml-auto">
+                                    <i class="fas fa-unlock-alt"></i>
+                                    </button> *@
 
                                     <button type="submit"
                                             data-mdb-button-init
@@ -271,7 +280,7 @@
                                     type="submit" value="Delete" asp-action="Delete" /> *@
 
                                     <div class="col-6 mx-3 ml-auto">
-                                        <div class="switch d-inline  font-weight-bold">
+                                        <div class="switch d-inline font-weight-bold">
                                             <input type="checkbox" asp-for="ActiveStatus" />
                                             Status
                                             <label for="ActiveStatus" class="cr"></label>

@@ -1,11 +1,19 @@
-﻿@model ServiceHub.WebApp.Models.UserCustomerCreateViewModel
+﻿@model ServiceHub.WebApp.Models.UserCustomerUpdateModel
 
 @{
-    ViewData["Title"] = "New User ";
-    var title = "New User ";
+    ViewData["Title"] = "Details User ";
+    var title = "Details User ";
     var Varid = "";
+    string img = "";
+    if (string.IsNullOrEmpty(Model.UploadProfilePic))
+    {
+        img = "~/images\\avatar5.png";
+    }
+    else
+    {
+        img = Model.UploadProfilePic;
+    }
 }
-
 @section BreadCrumbs
 {
     <ol class="breadcrumb">
@@ -15,7 +23,7 @@
             <a asp-action="Index" asp-controller="UsersCustomer" asp-area="Masters">Users-Customer list</a>
         </li>
 
-        <li class="breadcrumb-item active" aria-current="page">Create Users Customer </li>
+        <li class="breadcrumb-item active" aria-current="page">Details Users Customer </li>
     </ol>
 
 }
@@ -25,21 +33,20 @@
 
     <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
         <div class="app-h4 app-card-header mb-2">
-            <p>Users-Customer Registration</p>
+            <p>Users-Customer Details</p>
 
         </div>
         <div class="card-toolbar">
             <div role="toolbar">
                 <div class="card rounded-3">
                     <div class="card-body">
-                        <form method="post" class="px-md-2"
-                              asp-action="CreateCustomerUser"
-                              asp-controller="UsersCustomer"
-                              asp-area="Masters"
-                              enctype="multipart/form-data">
-
+                        <div method="post" class="px-md-2" asp-action="UpdateCustomerUser"
+                             asp-controller="UsersCustomer"
+                             asp-area="Masters"
+                             enctype="multipart/form-data">
                             @Html.AntiForgeryToken()
                             @Html.HiddenFor(m => m.Id)
+                            @Html.HiddenFor(m => m.UploadProfilePic)
                             <div class="text-center">
                                 <div class="col-6 p-0 m-0">
                                     <div class=" col-12  p-0 m-0">
@@ -50,24 +57,20 @@
                                                 max-height:150px!important;
                                                 min-width:150px!important;
                                                 min-height:150px!important;"
-                                                 src="~/images\avatar5.png" alt="User Avatar"
+                                                 src="@img.ToString()" alt="User Avatar"
                                                  class="profile-user-img img-fluid img-square">
                                             <div class="form-group">
                                                 <div class="col-12  p-0 m-0">
                                                     <div class="input-group">
-
                                                         <input type="file" name="file" accept="image/*"
                                                                id="UploadProfilePic"
                                                                onchange="loadFile(event)"
-                                                               class="form-control capitalize " />
+                                                               class="form-control capitalize  hidden " />
                                                         <span asp-validation-for="UploadProfilePic" class="text-danger"></span>
-
                                                     </div>
-
                                                 </div>
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                                 <hr />
@@ -86,7 +89,7 @@
                                                         <div class="form-group">
                                                             <label asp-for="FirstName" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <input asp-for="FirstName" class="form-control capitalize" required />
+                                                                <input asp-for="FirstName" class="form-control capitalize" readonly />
                                                                 <span asp-validation-for="FirstName" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -95,7 +98,7 @@
                                                         <div class="form-group">
                                                             <label asp-for="MiddleName" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <input asp-for="MiddleName" class="form-control capitalize" required />
+                                                                <input asp-for="MiddleName" class="form-control capitalize" readonly />
                                                                 <span asp-validation-for="MiddleName" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -104,7 +107,7 @@
                                                         <div class="form-group">
                                                             <label asp-for="LastName" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <input asp-for="LastName" class="form-control capitalize" required />
+                                                                <input asp-for="LastName" class="form-control capitalize" readonly />
                                                                 <span asp-validation-for="LastName" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -113,9 +116,9 @@
                                                         <div class="form-group">
                                                             <label asp-for="ParentOrg" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <select asp-for="ParentOrg" class="form-control chosen-select-required"
+                                                                <select asp-for="ParentOrg" class="form-control chosen-select-readonly"
                                                                         data-placeholder="Please select..."
-                                                                        asp-items="ViewBag.ParentOrg" required>
+                                                                        asp-items="ViewBag.ParentOrg" readonly>
                                                                     <option selected></option>
                                                                 </select>
 
@@ -130,7 +133,7 @@
                                                                 <input asp-for="ContactNo" type="number"
                                                                        onkeypress="limitKeypress(event,this.value,10)"
                                                                        class="form-control capitalize text__input"
-                                                                       required />
+                                                                       readonly />
                                                                 <span asp-validation-for="ContactNo" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -139,7 +142,7 @@
                                                         <div class="form-group">
                                                             <label asp-for="EmailId" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <input asp-for="EmailId" class="form-control capitalize" required />
+                                                                <input asp-for="EmailId" class="form-control capitalize" readonly />
                                                                 <span asp-validation-for="EmailId" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -162,7 +165,6 @@
                                                             <label asp-for="Username" class="col-12 control-label"></label>
                                                             <div class="col-12">
                                                                 <input asp-for="Username" value="@Model.ContactNo" class="form-control text__input" readonly />
-
                                                             </div>
                                                         </div>
                                                     </div>
@@ -170,8 +172,10 @@
                                                         <div class="form-group">
                                                             <label asp-for="ValidFromDate" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <input asp-for="ValidFromDate" type="text" placeholder="DD-MMM-YYYY"
-                                                                       class="form-control DateTimePickerInit" required />
+                                                                <input asp-for="ValidFromDate"
+                                                                       value="@Model.ValidFromDate?.ToString("dd-MMM-yyyy")"
+                                                                       type="text" placeholder="DD-MMM-YYYY"
+                                                                       class="form-control" readonly />
                                                                 <span asp-validation-for="ValidFromDate" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -180,9 +184,12 @@
                                                         <div class="form-group">
                                                             <label asp-for="ValidToDate" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <input asp-for="ValidToDate" type="text"
-                                                                       class="form-control  DateTimePickerInit" placeholder="DD-MMM-YYYY"
-                                                                       required />
+                                                                <input asp-for="ValidToDate"
+                                                                       value="@Model.ValidToDate?.ToString("dd-MMM-yyyy")"
+                                                                       type="text" placeholder="DD-MMM-YYYY"
+                                                                       type="text"
+                                                                       class="form-control" placeholder="DD-MMM-YYYY"
+                                                                       readonly />
                                                                 <span asp-validation-for="ValidToDate" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -191,9 +198,9 @@
                                                         <div class="form-group">
                                                             <label asp-for="UserType" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <select asp-for="UserType" class="form-control chosen-select-required"
+                                                                <select asp-for="UserType" class="form-control chosen-select-readonly"
                                                                         data-placeholder="Please select..."
-                                                                        asp-items="ViewBag.UserType" required>
+                                                                        asp-items="ViewBag.UserType" readonly>
                                                                     <option selected></option>
                                                                 </select>
                                                                 <span asp-validation-for="UserType" class="text-danger"></span>
@@ -205,7 +212,9 @@
                                                         <div class="form-group">
                                                             <label asp-for="Password" class="col-12 control-label"></label>
                                                             <div class="col-12">
-                                                                <input asp-for="Password" class="form-control capitalize" />
+                                                                <input asp-for="Password"
+                                                                       class="form-control capitalize"
+                                                                       readonly />
                                                                 <span asp-validation-for="Password" class="text-danger"></span>
                                                             </div>
                                                         </div>
@@ -223,48 +232,36 @@
                             <hr />
                             <div class="row p-1 ">
                                 <div class="col-8 col-lg-6 col-12-6 col-sm-12">
-                                    @*  <button type="submit"
-                                    data-mdb-button-init
-                                    data-mdb-ripple-init
-                                    class="btn btn-success mb-1 mx-2 ml-auto">
-                                    Submit
-                                    </button> *@
                                 </div>
-
                                 <div class="col-2 d-flex flex-row col-lg-6 col-12-6 col-sm-12">
 
-                                    <button type="submit"
+                                    <button type="button"
                                             data-mdb-button-init
                                             data-mdb-ripple-init
-                                            class="btn btn-primary mb-1 mx-3 ml-auto">
-                                        <i class="fas fa-save"></i>
+                                            onclick="return functionConfirm(this)"
+                                            class="btn btn-warning mb-1  mx-3 ml-auto">
+                                        <i class="fas fa-unlock-alt"></i>
                                     </button>
 
-                                    @*  <button type="submit"
-                                    data-mdb-button-init
-                                    data-mdb-ripple-init
-                                    class="btn btn-warning mb-1  mx-3 ml-auto">
-                                    <i class="fas fa-unlock-alt"></i>
-                                    </button>
-
-                                    <button type="submit"
-                                    data-mdb-button-init
-                                    data-mdb-ripple-init
-                                    class="btn btn-info mb-1 mx-3 ml-auto">
-                                    <i class="fas fa-user-edit"></i>
-                                    </button> *@
-
+                                    @*    <input class="btn btn-danger mb-1 mx-3 ml-auto"
+                                    type="submit" value="Update" asp-action="Update" /> *@
 
                                     <div class="col-6 mx-3 ml-auto">
                                         <div class="switch d-inline  font-weight-bold">
-                                            <input type="checkbox" asp-for="ActiveStatus" />
+                                            <input type="checkbox" asp-for="ActiveStatus" disabled />
                                             Status
                                             <label for="ActiveStatus" class="cr"></label>
                                         </div>
                                     </div>
                                 </div>
-
                             </div>
+                        </div>
+                        <form id="frmUpdate"
+                              asp-action="UpdateCustomerUserAjax" hidden method="post"
+                              asp-controller="UsersCustomer"
+                              asp-area="Masters">
+                            @Html.AntiForgeryToken()
+                            <input asp-for="Id" id="id" value="@Model.Id" name="id" />
                         </form>
                     </div>
                 </div>
@@ -282,45 +279,11 @@
         });
 
         function DateTimePickerInit() {
-            var currYear = moment().year();
-            var curYearLastDate = new Date(currYear, 44, 31);
-            var curYearMinDate = new Date((currYear), 1, 0);
-            var currentDate = moment(new Date);
             $('.DateTimePickerInit').bootstrapMaterialDatePicker({
                 format: 'DD-MMM-YYYY',
-                time: false,
-                minDate: currentDate,
-                useCurrent: true
-            });
-
-            $('#ValidFromDate').bootstrapMaterialDatePicker('setMinDate', currentDate);
-            $('#ValidFromDate').bootstrapMaterialDatePicker('setDate', currentDate);
-
-            $('#ValidToDate').bootstrapMaterialDatePicker('setMinDate', curYearLastDate);
-            $('#ValidToDate').bootstrapMaterialDatePicker('setDate', curYearLastDate);
-
-
-            $('#ValidFromDate').bootstrapMaterialDatePicker({
-                format: 'DD-MMM-YYYY',
-                weekStart: 0,
                 time: false
-            }).on('change', function (e, date) {
-
-                $('#ValidToDate').bootstrapMaterialDatePicker('setMinDate', date);
-                $('#ValidToDate').bootstrapMaterialDatePicker('setDate', curYearLastDate);
-
-
             });
-
-            $('#ValidToDate').bootstrapMaterialDatePicker({
-                format: 'DD-MMM-YYYY',
-                weekStart: 0,
-                time: false
-            }).on('change', function (e, date) {
-                $("#ValidToDate").val(date.format('DD-MMM-YYYY'));
-            });
-        };
-
+        }
         $('.text__input').on('input', function () {
             $('.text__input').val($(this).val())
         });
@@ -329,7 +292,7 @@
             if (value != undefined && value.toString().length >= maxLength) {
                 event.preventDefault();
             }
-        };
+        }
 
         var loadFile = function (event) {
             var output = document.getElementById('preview');
@@ -339,6 +302,32 @@
             };
         };
 
+
+        function functionConfirm(event) {
+
+
+            $('#frmUpdate').submit();
+
+            // swal({
+            //     title: 'are you sur?',
+            //     text: "You will not be able to recover this item",
+            //     type: 'warning',
+            //     showCancelButton: true,
+            //     cancelButtonText: 'No',
+            //     cancelButtonClass: 'btn btn-danger mr-2 ml-2',
+            //     showConfirmButton: true,
+            //     confirmButtonText: 'Yes',
+            //     confirmButtonClass: 'btn btn-success mr-2 ml-2'
+            // }, function (isConfirm) {
+            //     if (isConfirm) {
+            //         $('#frmUpdate').submit();
+            //         return true;
+            //     } else {
+            //         return false;
+            //     }
+            // });
+            return false;
+        }
     </script>
 
 }
