@@ -4,9 +4,6 @@ namespace ServiceHub.WebApp.Models
 {
     public class UserRegistrationCreateViewModel
     {
-        //[Required]
-        //[Display(Name = "UserID")]
-        //public string UserId { get; set; } = string.Empty;
         public int? Id { get; set; }
 
         [Required]
@@ -17,14 +14,16 @@ namespace ServiceHub.WebApp.Models
         [Display(Name = "Last Name")]
         public string LastName { get; set; } = string.Empty;
 
+        [Required]
         [Display(Name = "Middle Name")]
         public string MiddleName { get; set; } = string.Empty;
 
-        [Required]
         [Display(Name = "User Name")]
         public string Username { get; set; } = string.Empty;
 
-        [Required]
+        [Required(ErrorMessage = "You must provide a Contact number")]
+        [DataType(DataType.PhoneNumber)]
+        [RegularExpression(@"^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$", ErrorMessage = "Not a valid phone number")]
         [Display(Name = "Contact No")]
         public string ContactNo { get; set; } = string.Empty;
 
@@ -42,11 +41,26 @@ namespace ServiceHub.WebApp.Models
         public DateTime? ValidToDate { get; set; }
 
         [Display(Name = "Upload Profile")]
-        [DataType(DataType.ImageUrl)]
         public string UploadProfilePic { get; set; } = string.Empty;
 
         [Required]
-        [Display(Name = "Active Status")]
-        public bool ActiveStatus { get; set; }
+        [Display(Name = "Parent Org.")]
+        public string ParentOrg { get; set; } = string.Empty;
+
+        [Required]
+        [Display(Name = "User Type")]
+        public string UserType { get; set; } = string.Empty;
+
+        [Display(Name = "Supervisor Name")]
+        public string SupervisorName { get; set; } = string.Empty;
+
+        [Display(Name = "Admin Name")]
+        public string AdminName { get; set; } = string.Empty;
+
+        [Display(Name = "Status")]
+        public bool ActiveStatus { get; set; } = false;
+
+        [Display(Name = "One time Password")]
+        public string Password { get; set; } = string.Empty;
     }
 }

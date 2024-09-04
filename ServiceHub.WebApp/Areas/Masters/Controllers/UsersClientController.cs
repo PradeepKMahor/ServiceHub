@@ -95,8 +95,10 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
             }
         }
 
-        public IActionResult CreateClientUserIndex()
+        public IActionResult CreateClientUser()
         {
+            var viewModel = new UserRegistrationCreateViewModel();
+
             List<DataField> parentOrgList = new()
             {
                 new DataField { DataTextField = "ParentOrg - 1", DataValueField ="ParentOrg - 1"},
@@ -109,38 +111,45 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
 
             List<DataField> userTypeList = new()
             {
-                new DataField { DataTextField = "Customer", DataValueField ="Customer"}
+                new DataField { DataTextField = "ClientUser", DataValueField ="ClientUser"},
+                new DataField { DataTextField = "Administrator", DataValueField ="Administrator"},
+                new DataField { DataTextField = "Technion", DataValueField ="Technion"},
+                new DataField { DataTextField = "Supervisor", DataValueField ="Supervisor"}
             };
             ViewData["UserType"] = new SelectList(userTypeList, "DataValueField", "DataTextField");
 
-            var userRegistrationCreateViewModel = new UserRegistrationCreateViewModel();
-            return View(userRegistrationCreateViewModel);
+            return View(viewModel);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult CreateClientUserIndex(UserRegistrationCreateViewModel userRegistrationCreateViewModel)
+        public IActionResult CreateClientUser(UserRegistrationCreateViewModel viewModel)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    string strFilePath = @"Imgs\ClintUser";
-                    string strFolderPath = @"\Imgs\ClintUser\";
+                    string strFilePath = @"Imgs\UsersClient";
+                    string strFolderPath = @"\Imgs\UsersClient\";
                     string webRootPath = _WebHostEnvironment.WebRootPath;
                     var files = HttpContext.Request.Form.Files;
-                    // New Service
-                    string fileName = Guid.NewGuid().ToString();
-                    var upload = Path.Combine(webRootPath, strFilePath);
-                    var extention = Path.GetExtension(files[0].FileName);
-                    TblUserClint tblUserClint = new TblUserClint();
-                    using (var fileStream = new FileStream(Path.Combine(upload, fileName + extention), FileMode.Create))
-                    {
-                        files[0].CopyTo(fileStream);
 
-                        userRegistrationCreateViewModel.UploadProfilePic = strFolderPath + fileName + extention;
+                    string fileName = Guid.NewGuid().ToString();
+                    TblUserClint tblUserClint = new TblUserClint();
+                    if (files != null)
+                    {
+                        var upload = Path.Combine(webRootPath, strFilePath);
+                        var extention = Path.GetExtension(files[0].FileName);
+
+                        using (var fileStream = new FileStream(Path.Combine(upload, fileName + extention), FileMode.Create))
+                        {
+                            files[0].CopyTo(fileStream);
+
+                            viewModel.UploadProfilePic = strFolderPath + fileName + extention;
+                        }
                     }
-                    if (userRegistrationCreateViewModel.ActiveStatus)
+
+                    if (viewModel.ActiveStatus)
                     {
                         tblUserClint.ActiveStatus = "Active";
                     }
@@ -148,31 +157,31 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                     {
                         tblUserClint.ActiveStatus = "DeActive";
                     }
-                    tblUserClint.Username = userRegistrationCreateViewModel.Username;
-                    tblUserClint.FirstName = userRegistrationCreateViewModel.FirstName;
-                    tblUserClint.MiddleName = userRegistrationCreateViewModel.MiddleName;
-                    tblUserClint.LastName = userRegistrationCreateViewModel.LastName;
-                    tblUserClint.ContactNo = userRegistrationCreateViewModel.ContactNo;
-                    tblUserClint.EmailId = userRegistrationCreateViewModel.EmailId;
-                    //tblUserClint.AdminName = userRegistrationCreateViewModel.AdminName;
-                    tblUserClint.UploadProfilePic = userRegistrationCreateViewModel.UploadProfilePic;
-                    tblUserClint.ValidFromDate = userRegistrationCreateViewModel.ValidFromDate;
-                    tblUserClint.ValidToDate = userRegistrationCreateViewModel.ValidToDate;
-                    //tblUserClint.UserType = userRegistrationCreateViewModel.UserType;
-                    tblUserClint.UserType = "Clint";
+                    tblUserClint.Username = viewModel.Username;
+                    tblUserClint.FirstName = viewModel.FirstName;
+                    tblUserClint.MiddleName = viewModel.MiddleName;
+                    tblUserClint.LastName = viewModel.LastName;
+                    tblUserClint.ContactNo = viewModel.ContactNo;
+                    tblUserClint.EmailId = viewModel.EmailId;
+                    //tblUserClint.AdminName = viewModel.AdminName;
+                    tblUserClint.UploadProfilePic = viewModel.UploadProfilePic;
+                    tblUserClint.ValidFromDate = viewModel.ValidFromDate;
+                    tblUserClint.ValidToDate = viewModel.ValidToDate;
+                    tblUserClint.ParentOrg = viewModel.ParentOrg;
+                    tblUserClint.UserType = viewModel.UserType;
                     tblUserClint.UserId = tblUserClint.Username + "_" + tblUserClint.LastName;
-                    tblUserClint.Password = userRegistrationCreateViewModel.Username + "_" + userRegistrationCreateViewModel.LastName;
+                    tblUserClint.Password = viewModel.Username + "_" + viewModel.LastName;
                     tblUserClint.SupervisorName = "AvinashK";
 
                     _userClintRepository.InsertAsync(tblUserClint);
                     Notify("Success", "Data saved successfully", "toaster", notificationType: Models.NotificationType.success);
 
-                    return RedirectToAction(nameof(CreateClientUserIndex));
+                    return RedirectToAction(nameof(CreateClientUser));
                 }
                 else
                 {
                     Notify("Error", "Something Missing Or Data Not Found", "toaster", notificationType: Models.NotificationType.error);
-                    return RedirectToAction(nameof(CreateClientUserIndex));
+                    return RedirectToAction(nameof(CreateClientUser));
                 }
             }
             catch (Exception ex)
@@ -180,36 +189,60 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                 Notify("Error", ex.Message, "toaster", notificationType: Models.NotificationType.error);
             }
 
-            return View(userRegistrationCreateViewModel);
+            List<DataField> parentOrgList = new()
+            {
+                new DataField { DataTextField = "ParentOrg - 1", DataValueField ="ParentOrg - 1"},
+                new DataField { DataTextField = "ParentOrg - 2", DataValueField ="ParentOrg - 2"},
+                new DataField { DataTextField = "ParentOrg - 3", DataValueField ="ParentOrg - 3"},
+                new DataField { DataTextField = "ParentOrg - 4", DataValueField ="ParentOrg - 4"}
+            };
+
+            ViewData["ParentOrg"] = new SelectList(parentOrgList.ToList(), "DataValueField", "DataTextField", viewModel.ParentOrg);
+
+            List<DataField> userTypeList = new()
+            {
+                new DataField { DataTextField = "ClientUser", DataValueField ="ClientUser"},
+                new DataField { DataTextField = "Administrator", DataValueField ="Administrator"},
+                new DataField { DataTextField = "Technion", DataValueField ="Technion"},
+                new DataField { DataTextField = "Supervisor", DataValueField ="Supervisor"}
+            };
+
+            ViewData["UserType"] = new SelectList(userTypeList, "DataValueField", "DataTextField", viewModel.UserType);
+
+            return View(viewModel);
         }
 
-        public async Task<IActionResult> UpdateClientUserIndexAsync(int? id)
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> DetailsClientUser(int? id)
         {
             if (id == null)
             {
                 return NotFound();
             }
+
             var result = await _userClintRepository.GetAsync(m => m.Id == id);
 
             if (result == null)
             {
                 return NotFound();
             }
-            var userRegistrationCreateViewModel = new UserRegistrationCreateViewModel();
+
             var model = new UserRegistrationCreateViewModel
             {
+                AdminName = result.AdminName,
                 ContactNo = result.ContactNo,
                 EmailId = result.EmailId,
                 FirstName = result.FirstName,
                 MiddleName = result.MiddleName,
                 LastName = result.LastName,
-
+                Password = result.Password,
                 Id = result.Id,
-                // ParentOrg = result.ParentOrg,
-
+                ParentOrg = result.ParentOrg,
+                SupervisorName = result.SupervisorName,
                 UploadProfilePic = result.UploadProfilePic,
                 Username = result.Username,
-
+                UserType = result.UserType,
                 ValidFromDate = result.ValidFromDate,
                 ValidToDate = result.ValidToDate
             };
@@ -229,36 +262,100 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                 new DataField { DataTextField = "ParentOrg - 4", DataValueField ="ParentOrg - 4"}
             };
 
-            ViewData["ParentOrg"] = new SelectList(parentOrgList.ToList(), "DataValueField", "DataTextField");
+            ViewData["ParentOrg"] = new SelectList(parentOrgList.ToList(), "DataValueField", "DataTextField", model.ParentOrg);
 
             List<DataField> userTypeList = new()
             {
-                new DataField { DataTextField = "Customer", DataValueField ="Customer"}
+                new DataField { DataTextField = "ClientUser", DataValueField ="ClientUser"},
+                new DataField { DataTextField = "Administrator", DataValueField ="Administrator"},
+                new DataField { DataTextField = "Technion", DataValueField ="Technion"},
+                new DataField { DataTextField = "Supervisor", DataValueField ="Supervisor"}
             };
-            ViewData["UserType"] = new SelectList(userTypeList, "DataValueField", "DataTextField");
+
+            ViewData["UserType"] = new SelectList(userTypeList, "DataValueField", "DataTextField", model.UserType);
 
             return View(model);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult UpdateClientUserIndex(UserRegistrationCreateViewModel userRegistrationCreateViewModel)
+        public async Task<IActionResult> UpdateClientUserAjax(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _userClintRepository.GetAsync(m => m.Id == id);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            var model = new UserRegistrationCreateViewModel
+            {
+                AdminName = result.AdminName,
+                ContactNo = result.ContactNo,
+                EmailId = result.EmailId,
+                FirstName = result.FirstName,
+                MiddleName = result.MiddleName,
+                LastName = result.LastName,
+                Password = result.Password,
+                Id = result.Id,
+                ParentOrg = result.ParentOrg,
+                SupervisorName = result.SupervisorName,
+                UploadProfilePic = result.UploadProfilePic,
+                Username = result.Username,
+                UserType = result.UserType,
+                ValidFromDate = result.ValidFromDate,
+                ValidToDate = result.ValidToDate
+            };
+            if (result.ActiveStatus == "Active")
+            {
+                model.ActiveStatus = true;
+            }
+            else
+            {
+                model.ActiveStatus = false;
+            }
+            List<DataField> parentOrgList = new()
+            {
+                new DataField { DataTextField = "ParentOrg - 1", DataValueField ="ParentOrg - 1"},
+                new DataField { DataTextField = "ParentOrg - 2", DataValueField ="ParentOrg - 2"},
+                new DataField { DataTextField = "ParentOrg - 3", DataValueField ="ParentOrg - 3"},
+                new DataField { DataTextField = "ParentOrg - 4", DataValueField ="ParentOrg - 4"}
+            };
+
+            ViewData["ParentOrg"] = new SelectList(parentOrgList.ToList(), "DataValueField", "DataTextField", model.ParentOrg);
+
+            List<DataField> userTypeList = new()
+            {
+                new DataField { DataTextField = "ClientUser", DataValueField ="ClientUser"},
+                new DataField { DataTextField = "Administrator", DataValueField ="Administrator"},
+                new DataField { DataTextField = "Technion", DataValueField ="Technion"},
+                new DataField { DataTextField = "Supervisor", DataValueField ="Supervisor"}
+            };
+
+            ViewData["UserType"] = new SelectList(userTypeList, "DataValueField", "DataTextField", model.UserType);
+
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult UpdateClientUser(UserRegistrationCreateViewModel viewModel)
         {
             try
             {
-                if (userRegistrationCreateViewModel.Id == 0)
-                {
-                    Notify("Error", "Something Missing Or Data Not Found", "toaster", notificationType: Models.NotificationType.error);
-                    return RedirectToAction(nameof(CreateClientUserIndex));
-                }
-
                 if (ModelState.IsValid)
                 {
-                    string strFilePath = @"Imgs\ClintUser";
-                    string strFolderPath = @"\Imgs\ClintUser\";
+                    //TblUserCustomer tblUserCustomer = new TblUserCustomer();
+                    string strFilePath = @"Imgs\UsersClient";
+                    string strFolderPath = @"\Imgs\UsersClient\";
                     string webRootPath = _WebHostEnvironment.WebRootPath;
                     var files = HttpContext.Request.Form.Files;
-                    var fromDb = _userClintRepository.GetAsync(m => m.Id == userRegistrationCreateViewModel.Id);
+                    var fromDb = _userClintRepository.GetAsync(m => m.Id == viewModel.Id);
 
                     if (files.Count > 0)
                     {
@@ -277,14 +374,14 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                         {
                             files[0].CopyTo(fileStream);
                         }
-                        userRegistrationCreateViewModel.UploadProfilePic = strFolderPath + fileName + extention_new;
+                        viewModel.UploadProfilePic = strFolderPath + fileName + extention_new;
                     }
                     else
                     {
-                        userRegistrationCreateViewModel.UploadProfilePic = fromDb.Result.UploadProfilePic;
+                        viewModel.UploadProfilePic = fromDb.Result.UploadProfilePic;
                     }
 
-                    if (userRegistrationCreateViewModel.ActiveStatus)
+                    if (viewModel.ActiveStatus)
                     {
                         fromDb.Result.ActiveStatus = "Active";
                     }
@@ -292,32 +389,40 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                     {
                         fromDb.Result.ActiveStatus = "DeActive";
                     }
-                    fromDb.Result.ActiveStatus = "Active";
-                    fromDb.Result.Username = userRegistrationCreateViewModel.Username;
-                    fromDb.Result.FirstName = userRegistrationCreateViewModel.FirstName;
-                    fromDb.Result.MiddleName = userRegistrationCreateViewModel.MiddleName;
-                    fromDb.Result.LastName = userRegistrationCreateViewModel.LastName;
-                    fromDb.Result.ContactNo = userRegistrationCreateViewModel.ContactNo;
-                    fromDb.Result.EmailId = userRegistrationCreateViewModel.EmailId;
-                    //fromDb.Result.AdminName = userRegistrationCreateViewModel.AdminName;
-                    fromDb.Result.UploadProfilePic = userRegistrationCreateViewModel.UploadProfilePic;
-                    fromDb.Result.ValidFromDate = userRegistrationCreateViewModel.ValidFromDate;
-                    fromDb.Result.ValidToDate = userRegistrationCreateViewModel.ValidToDate;
-                    //fromDb.Result.UserType = userRegistrationCreateViewModel.UserType;
-                    fromDb.Result.UserType = "Clint";
-                    fromDb.Result.UserId = fromDb.Result.Username + "_" + fromDb.Result.LastName;
-                    fromDb.Result.Password = userRegistrationCreateViewModel.Username + "_" + userRegistrationCreateViewModel.LastName;
+
+                    if (viewModel.ActiveStatus)
+                    {
+                        fromDb.Result.ActiveStatus = "Active";
+                    }
+                    else
+                    {
+                        fromDb.Result.ActiveStatus = "DeActive";
+                    }
+
+                    fromDb.Result.Username = viewModel.Username;
+                    fromDb.Result.FirstName = viewModel.FirstName;
+                    fromDb.Result.MiddleName = viewModel.MiddleName;
+                    fromDb.Result.LastName = viewModel.LastName;
+                    fromDb.Result.ContactNo = viewModel.ContactNo;
+                    fromDb.Result.EmailId = viewModel.EmailId;
+                    fromDb.Result.AdminName = viewModel.AdminName;
+                    fromDb.Result.ParentOrg = viewModel.ParentOrg;
+                    fromDb.Result.UploadProfilePic = viewModel.UploadProfilePic;
+                    fromDb.Result.ValidFromDate = viewModel.ValidFromDate;
+                    fromDb.Result.ValidToDate = viewModel.ValidToDate;
+                    fromDb.Result.UserType = viewModel.UserType;
+                    fromDb.Result.Password = viewModel.Password;
+                    fromDb.Result.UserId = viewModel.ContactNo;
                     fromDb.Result.SupervisorName = "AvinashK";
 
                     _userClintRepository.UpdateAsync(fromDb.Result);
                     Notify("Success", "Data updated successfully", "toaster", notificationType: Models.NotificationType.success);
-
                     return RedirectToAction(nameof(Index));
                 }
                 else
                 {
                     Notify("Error", "Something Missing Or Data Not Found", "toaster", notificationType: Models.NotificationType.error);
-                    return RedirectToAction(nameof(CreateClientUserIndex));
+                    return RedirectToAction(nameof(CreateClientUser));
                 }
             }
             catch (Exception ex)
@@ -325,7 +430,59 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                 Notify("Error", ex.Message, "toaster", notificationType: Models.NotificationType.error);
             }
 
-            return View(userRegistrationCreateViewModel);
+            List<DataField> parentOrgList = new()
+            {
+                new DataField { DataTextField = "ParentOrg - 1", DataValueField ="ParentOrg - 1"},
+                new DataField { DataTextField = "ParentOrg - 2", DataValueField ="ParentOrg - 2"},
+                new DataField { DataTextField = "ParentOrg - 3", DataValueField ="ParentOrg - 3"},
+                new DataField { DataTextField = "ParentOrg - 4", DataValueField ="ParentOrg - 4"}
+            };
+
+            ViewData["ParentOrg"] = new SelectList(parentOrgList.ToList(), "DataValueField", "DataTextField", viewModel.ParentOrg);
+
+            List<DataField> userTypeList = new()
+            {
+                new DataField { DataTextField = "ClientUser", DataValueField ="ClientUser"},
+                new DataField { DataTextField = "Administrator", DataValueField ="Administrator"},
+                new DataField { DataTextField = "Technion", DataValueField ="Technion"},
+                new DataField { DataTextField = "Supervisor", DataValueField ="Supervisor"}
+            };
+
+            ViewData["UserType"] = new SelectList(userTypeList, "DataValueField", "DataTextField", viewModel.UserType);
+
+            return View(viewModel);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        public async Task<IActionResult> DeleteConfirmed(short? id)
+        {
+            var result = await _userClintRepository.GetAsync(m => m.Id == id);
+
+            try
+            {
+                await _userClintRepository.DeleteAsync(result);
+
+                string strFilePath = @"Imgs\UsersClient";
+                string strFolderPath = @"\Imgs\UsersClient\";
+                string webRootPath = _WebHostEnvironment.WebRootPath;
+
+                var imagePath = Path.Combine(webRootPath, result.UploadProfilePic.TrimStart('\\'));
+
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+
+                Notify("Success", "Data deleted successfully", "toaster", notificationType: Models.NotificationType.success);
+                return RedirectToAction(nameof(Index));
+            }
+            catch (Exception ex)
+            {
+                Notify("Error", ex.Message, "toaster", notificationType: Models.NotificationType.error);
+                return RedirectToAction(nameof(Index));
+            }
+
+            return RedirectToAction(nameof(Index));
         }
     }
 }

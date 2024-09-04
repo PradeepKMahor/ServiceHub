@@ -58,7 +58,7 @@
 		<Folder Include="Areas\SystemAdmin\Data\" />
 		<Folder Include="Areas\MobileApp\Data\" />
 		<Folder Include="Views\Shared\AdminLTE\" />
-		<Folder Include="wwwroot\Imgs\ClintUser\" />
+		<Folder Include="wwwroot\Imgs\UsersClient\" />
 	</ItemGroup>
 
 	<ItemGroup>

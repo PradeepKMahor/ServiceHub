@@ -1,4 +1,4 @@
-﻿@model ServiceHub.WebApp.Models.UserCustomerUpdateModel
+﻿@model ServiceHub.WebApp.Models.UserRegistrationCreateViewModel
 
 @{
     ViewData["Title"] = "Details User ";
@@ -20,10 +20,10 @@
         <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
         <li class="breadcrumb-item "><a asp-action="UserIndex" asp-controller="Home" asp-area="Masters">User Management</a></li>
         <li class="breadcrumb-item ">
-            <a asp-action="Index" asp-controller="UsersCustomer" asp-area="Masters">Users-Customer list</a>
+            <a asp-action="Index" asp-controller="UsersClient" asp-area="Masters">Users-Client list</a>
         </li>
 
-        <li class="breadcrumb-item active" aria-current="page">Details Users Customer </li>
+        <li class="breadcrumb-item active" aria-current="page">Details Users Client </li>
     </ol>
 
 }
@@ -33,7 +33,7 @@
 
     <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
         <div class="app-h4 app-card-header mb-2">
-            <p>Users-Customer Details</p>
+            <p>Users-Client Details</p>
 
         </div>
         <div class="card-toolbar">
@@ -257,8 +257,8 @@
                             </div>
                         </div>
                         <form id="frmUpdate"
-                              asp-action="UpdateCustomerUserAjax" hidden method="post"
-                              asp-controller="UsersCustomer"
+                              asp-action="UpdateClientUserAjax" hidden method="post"
+                              asp-controller="UsersClient"
                               asp-area="Masters">
                             @Html.AntiForgeryToken()
                             <input asp-for="Id" id="id" value="@Model.Id" name="id" />

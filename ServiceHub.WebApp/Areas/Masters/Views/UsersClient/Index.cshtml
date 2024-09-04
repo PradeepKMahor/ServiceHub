@@ -31,7 +31,7 @@
             <div class="d-flex flex-row">
                 <a asp-area="Masters"
                    asp-controller="UsersClient"
-                   asp-action="CreateClientUserIndex"
+                   asp-action="CreateClientUser"
                    class="nav-link">
                     <i class="fas fa-plus " aria-hidden="true"></i>&nbsp;
                     New User
@@ -417,7 +417,15 @@
         </div>
     </div>
 </div>
+<form id="frmDetails"
+      asp-action="DetailsClientUser" hidden method="post"
+      asp-controller="UsersClient"
+      asp-area="Masters">
+    @Html.AntiForgeryToken()
 
+    <input hidden id="Id" name="Id" />
+
+</form>
 @section Scripts {
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
@@ -455,7 +463,7 @@
                     {
                         data: null,
                         render: function (data, type, row) {
-                            return '<a class=" " href="UsersClient/UpdateClientUserIndex/' + data.id + '" title="username"]"> ' + data.username + ' </a>';
+                            return '<a class="" onclick="return functionConfirm(' + data.id + ')" href="#" title="username"]"> ' + data.username + ' </a>';
                         }
                     },
                     { data: "firstName" },
@@ -523,6 +531,16 @@
                 hideLoader();
                 notify('success', data.response, 'Success');
             }
+        }
+
+        function functionConfirm(id) {
+
+            $('#Id').val(id);
+
+            $('#frmDetails').submit();
+
+
+            return false;
         }
     </script>
 }

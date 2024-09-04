@@ -35,6 +35,7 @@ namespace ServiceHub.Domain.Models.Data
         [DataType(DataType.ImageUrl)]
         public string UploadProfilePic { get; set; } = string.Empty;
 
+        public string ParentOrg { get; set; } = string.Empty;
         public string Password { get; set; } = string.Empty;
         public string ActiveStatus { get; set; } = string.Empty;
     }

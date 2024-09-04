@@ -442,6 +442,17 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
             try
             {
                 await _usersCustomerRepository.DeleteAsync(result);
+                string strFilePath = @"Imgs\UsersClient";
+                string strFolderPath = @"\Imgs\UsersClient\";
+                string webRootPath = _WebHostEnvironment.WebRootPath;
+
+                var imagePath = Path.Combine(webRootPath, result.UploadProfilePic.TrimStart('\\'));
+
+                if (System.IO.File.Exists(imagePath))
+                {
+                    System.IO.File.Delete(imagePath);
+                }
+
                 Notify("Success", "Data deleted successfully", "toaster", notificationType: Models.NotificationType.success);
                 return RedirectToAction(nameof(Index));
             }
