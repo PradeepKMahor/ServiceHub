@@ -30,12 +30,12 @@
 
             <li class="nav-item">
                 <a class="nav-link active" id="tabs-ProductDetails-tab" data-toggle="pill" href="#tabs-ProductDetails" role="tab" aria-controls="tabs-ProductDetails" aria-selected="true"
-                   data-url="@Url.Action("ProductDetailIndex", "EmpGenInfoDetails", new { empno = "4444" })"
+                   data-url="@Url.Action("ProductDetailIndex", " ", new { empno = "4444" })"
                    data-id="@Model.CustomerID"
                    data-divid="pw-ProductDetails"
                    data-callback="validateTabs()"
-                   data-area="EmpGenInfo"
-                   data-controller="EmpGenInfoDetails"
+                   data-area=" "
+                   data-controller=" "
                    data-action="ProductDetailIndex">
                     <b> Product Details</b>
                     <i id="imgDescriptionPrimaryStatus" class="fas fa-info-circle text-danger" style="display:none"></i>
@@ -44,12 +44,12 @@
 
             <li class="nav-item">
                 <a class="nav-link" id="tabs-UserDetails-tab" data-toggle="pill" href="#tabs-UserDetails" role="tab" aria-controls="tabs-UserDetails" aria-selected="false"
-                   data-url="@Url.Action("UsersDetails", "EmpGenInfoDetails", new { id = Model.CustomerID })"
+                   data-url="@Url.Action("UsersDetails", " ", new { id = Model.CustomerID })"
                    data-id="@Model.CustomerID"
                    data-divid="pw-UserDetails"
                    data-callback="validateTabs()"
-                   data-area="EmpGenInfo"
-                   data-controller="EmpGenInfoDetails"
+                   data-area=" "
+                   data-controller=" "
                    data-action="UsersDetailsEdit">
                     <b> Users Details</b>
                     <i id="imgDescriptionSecondaryStatus" class="fas fa-info-circle text-danger" style="display:none"></i>
@@ -59,11 +59,11 @@
 
             <li class="nav-item">
                 <a class="nav-link" id="tabs-PMRDetails-tab" data-toggle="pill" href="#tabs-PMRDetails" role="tab" aria-controls="tabs-PMRDetails" aria-selected="false"
-                   data-url="@Url.Action("PMRDetailsIndex", "EmpGenInfoDetails", new { id = Model.CustomerID })"
+                   data-url="@Url.Action("PMRDetailsIndex", " ", new { id = Model.CustomerID })"
                    data-id="@Model.CustomerID"
                    data-divid="pw-PMRDetails"
-                   data-area="EmpGenInfo"
-                   data-controller="EmpGenInfoDetails"
+                   data-area=" "
+                   data-controller=" "
                    data-callback="activateGratuityTab();"
                    data-action="PMRDetailsIndex">
                     <b> PMR Details</b>
@@ -72,11 +72,11 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="tabs-CMRDetails-tab" data-toggle="pill" href="#tabs-CMRDetails" role="tab" aria-controls="tabs-CMRDetails" aria-selected="false"
-                   data-url="@Url.Action("CMRDetailsIndex", "EmpGenInfoDetails", new { id = Model.CustomerID })"
+                   data-url="@Url.Action("CMRDetailsIndex", " ", new { id = Model.CustomerID })"
                    data-id="@Model.CustomerID"
                    data-divid="pw-CMRDetails"
-                   data-area="EmpGenInfo"
-                   data-controller="EmpGenInfoDetails"
+                   data-area=" "
+                   data-controller=" "
                    data-callback="loadEmpCMRListDataTable();"
                    data-action="CMRDetailsIndex">
                     <b> CMR Details</b>
@@ -85,12 +85,12 @@
             </li>
             <li class="nav-item">
                 <a class="nav-link" id="tabs-WMRDetails-tab" data-toggle="pill" href="#tabs-WMRDetails" role="tab" aria-controls="tabs-WMRDetails" aria-selected="false"
-                   data-url="@Url.Action("WMRDetails", "EmpGenInfoDetails", new { id = Model.CustomerID })"
+                   data-url="@Url.Action("WMRDetails", " ", new { id = Model.CustomerID })"
                    data-id="@Model.CustomerID"
                    data-divid="pw-WMRDetails"
                    data-callback="validateTabs()"
-                   data-area="EmpGenInfo"
-                   data-controller="EmpGenInfoDetails"
+                   data-area=" "
+                   data-controller=" "
                    data-action="EmployeeWMRDetails">
                     <b> WMR Details</b>
                     <i id="imgDescriptionPpAaStatus" class="fas fa-info-circle text-danger" style="display:none"></i>
@@ -133,7 +133,7 @@
                                         <th>@Html.DisplayNameFor(model => model.productViewModel.ServiceDate)</th>
                                         <th>@Html.DisplayNameFor(model => model.productViewModel.WarrantyDate)</th>
                                         <th>@Html.DisplayNameFor(model => model.productViewModel.Status)</th>
-                                        <th>Action</th>
+
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -144,24 +144,7 @@
                                         <td>01-Jan-2024</td>
                                         <td>29-Aug-2024</td>
                                         <td>Active</td>
-                                        <td class="center">
-                                            <div class="row text-center pl-1 ml-1 pr-1 mr-1">
 
-                                                <a href="/Admin/CourseMaster/Upsert/${data.id}"
-                                                   class='btn btn-success btn-sm text-white  m-2'
-                                                   style='cursor:pointer;  '>
-                                                    <i class='far fa-edit'></i>
-
-                                                </a>
-
-                                                <a onclick=Delete("/Admin/CourseMaster/Delete/${data.id}")
-                                                   class='btn btn-danger btn-sm text-white m-2'
-                                                   style='cursor:pointer;  '>
-                                                    <i class='far fa-trash-alt'></i>
-                                                </a>
-
-                                            </div>
-                                        </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -328,7 +311,7 @@
 
     }
     <script src="~/lib/dropzone/dropzone.js" asp-append-version="true"></script>
-    <script src="~/js/EmployeeGenInfo.js" asp-append-version="true"></script>
+   @*  <script src="~/js/EmployeeGenInfo.js" asp-append-version="true"></script> *@
 
     <script>
         $(document).ready(function () {
