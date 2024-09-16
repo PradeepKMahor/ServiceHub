@@ -1,22 +1,22 @@
 ﻿@model ServiceHub.WebApp.Models.RootCauseViewModel
 @{
-    ViewData["Title"] = "Product";
+    ViewData["Title"] = "Root Cause Analysis  ";
 }
 @Html.AntiForgeryToken()
 
 @section BreadCrumbs
 {
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
-        <li class="breadcrumb-item "><a asp-action="ProductIndex" asp-controller="Home" asp-area="Masters">Products</a></li>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
+                <li class="breadcrumb-item "><a asp-action="ProductIndex" asp-controller="Home" asp-area="Masters">Products</a></li>
 
-        <li class="breadcrumb-item active" aria-current="page">Root Cause list</li>
-    </ol>
+                <li class="breadcrumb-item active" aria-current="page">Root Cause list</li>
+            </ol>
 
 }
 
 @section Styles {
-    <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
+            <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
 }
 
 <div style="display:none">
@@ -88,140 +88,140 @@
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
 
-    <script type="text/javascript">
-        function localScript() {
-            initSelect2();
-        }
+            <script type="text/javascript">
+                function localScript() {
+                    initSelect2();
+                }
 
 
-        $(document).ready(function () {
-            // localLoadDataTable();
-            $('#tbGrid').DataTable({
-                // "dom": 'Bfrtip',
-                "lengthChange": false,
-                // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-                "buttons": {
-                    buttons: [
-                        { extend: 'excel', className: 'btn shadow m-1 btn-info' },
-                        { extend: 'print', className: 'btn shadow m-1 btn-info' },
-                        { extend: 'colvis', className: 'btn shadow m-1 btn-info' }
-                    ]
-                },
-                // "dom": 'Qfrtip', for advance Search
-                "autoWidth": false,
-                "responsive": true,
-                "searching": true,
-                "processing": true,
-                "stateSave": true,
-                'columnDefs': [
-                    {
-                        "targets": 0,
-                        "className": "text-center",
-                        "className": "align-middle"
-                    }
-                ],
-            });
-
-
-        });
-        function localLoadDataTable() {
-
-            var table = $('#tbGrid').DataTable({
-                drawCallback: function (settings) {
-                    loadScript();
-                },
-                destroy: true,
-                pageLength: 25,
-                lengthMenu: [25, 50],
-                processing: true,
-                serverSide: true,
-                stateSave: true,
-                info: false,
-                filter: false,
-                dom: 'rt<"row"<"col-1"l><"col"p>><"clear">',
-                ordering: false,
-                columns: [
-                    { data: "userName" },
-                    { data: "email" },
-                    { data: "clintName" },
-                    { data: "roleName" },
-                    {
-                        data: null,
-                        render: function (data, type, row) {
-                            if (data.isActive == 1 || data.isActive == "1") {
-                                return 'Yes';
+                $(document).ready(function () {
+                    // localLoadDataTable();
+                    $('#tbGrid').DataTable({
+                        // "dom": 'Bfrtip',
+                        "lengthChange": false,
+                        // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                        "buttons": {
+                            buttons: [
+                                { extend: 'excel', className: 'btn shadow m-1 btn-info' },
+                                { extend: 'print', className: 'btn shadow m-1 btn-info' },
+                                { extend: 'colvis', className: 'btn shadow m-1 btn-info' }
+                            ]
+                        },
+                        // "dom": 'Qfrtip', for advance Search
+                        "autoWidth": false,
+                        "responsive": true,
+                        "searching": true,
+                        "processing": true,
+                        "stateSave": true,
+                        'columnDefs': [
+                            {
+                                "targets": 0,
+                                "className": "text-center",
+                                "className": "align-middle"
                             }
-                            else {
-                                return 'No';
+                        ],
+                    });
+
+
+                });
+                function localLoadDataTable() {
+
+                    var table = $('#tbGrid').DataTable({
+                        drawCallback: function (settings) {
+                            loadScript();
+                        },
+                        destroy: true,
+                        pageLength: 25,
+                        lengthMenu: [25, 50],
+                        processing: true,
+                        serverSide: true,
+                        stateSave: true,
+                        info: false,
+                        filter: false,
+                        dom: 'rt<"row"<"col-1"l><"col"p>><"clear">',
+                        ordering: false,
+                        columns: [
+                            { data: "userName" },
+                            { data: "email" },
+                            { data: "clintName" },
+                            { data: "roleName" },
+                            {
+                                data: null,
+                                render: function (data, type, row) {
+                                    if (data.isActive == 1 || data.isActive == "1") {
+                                        return 'Yes';
+                                    }
+                                    else {
+                                        return 'No';
+                                    }
+                                }
+                            },
+                            {
+                                data: null,
+                                render: function (data, type, row) {
+                                    if (isActionCreateMasters == "True") {
+                                        return '<button class="btn btn-outline-primary btn-sm border-none" ' +
+                                            ' data-jqueryselector="openmodal" ' +
+                                            ' data-modalcontainer="modalcontainer" ' +
+                                            ' data-url="@Url.Action("BankUpdate", "Masters", new { Area = "LC" })"' +
+                                            ' data-modalpopupwidth="rightw35" ' +
+                                            ' data-applicationid="' + data.userId + '"' +
+                                            ' data-modaltitle="Edit details" ' +
+                                            ' data-modalheader="Edit details" ' +
+                                            ' > ' +
+                                            ' <i class="fas fa-edit" aria-hidden="true"></i> ' +
+                                            ' </button>'
+                                    }
+                                    else {
+                                        return '';
+                                    }
+                                },
+                                'className': "td-icon",
+                            }
+                        ], ajax: {
+                            headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+                            url: '@Url.Action("GetListsBank", "Masters")',
+                            type: 'GET',
+                            cache: true,
+                            dataType: "json",
+                            data: function (d) {
+                                d.columns = null;
+                                d.order = null;
+                                d.search = null;
+                                d.genericSearch = null; // $('#FilterDataModel_GenericSearch').val();
+                                d.businessEntityId = null; // $('#FilterDataModel_BusinessEntityId').val();
+                                d.startDateTime = null; // $('#FilterDataModel_StartDateTime').val();
+                                d.endDateTime = null; // $('#FilterDataModel_EndDateTime').val();
+                                d.statusTypeId = null; // $('#FilterDataModel_StatusTypeId').val();
+                                d.isActive = $('#FilterDataModel_IsActive').val();
+                                //d.endDate = $('#FilterDataModel_EndDate').val();
+                            },
+                            error: function (request, status, error) {
+                                notify('error', request.responseText, 'danger');
                             }
                         }
-                    },
-                    {
-                        data: null,
-                        render: function (data, type, row) {
-                            if (isActionCreateMasters == "True") {
-                                return '<button class="btn btn-outline-primary btn-sm border-none" ' +
-                                    ' data-jqueryselector="openmodal" ' +
-                                    ' data-modalcontainer="modalcontainer" ' +
-                                    ' data-url="@Url.Action("BankUpdate", "Masters", new { Area = "LC" })"' +
-                                    ' data-modalpopupwidth="rightw35" ' +
-                                    ' data-applicationid="' + data.userId + '"' +
-                                    ' data-modaltitle="Edit details" ' +
-                                    ' data-modalheader="Edit details" ' +
-                                    ' > ' +
-                                    ' <i class="fas fa-edit" aria-hidden="true"></i> ' +
-                                    ' </button>'
-                            }
-                            else {
-                                return '';
-                            }
-                        },
-                        'className': "td-icon",
-                    }
-                ], ajax: {
-                    headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
-                    url: '@Url.Action("GetListsBank", "Masters")',
-                    type: 'GET',
-                    cache: true,
-                    dataType: "json",
-                    data: function (d) {
-                        d.columns = null;
-                        d.order = null;
-                        d.search = null;
-                        d.genericSearch = null; // $('#FilterDataModel_GenericSearch').val();
-                        d.businessEntityId = null; // $('#FilterDataModel_BusinessEntityId').val();
-                        d.startDateTime = null; // $('#FilterDataModel_StartDateTime').val();
-                        d.endDateTime = null; // $('#FilterDataModel_EndDateTime').val();
-                        d.statusTypeId = null; // $('#FilterDataModel_StatusTypeId').val();
-                        d.isActive = $('#FilterDataModel_IsActive').val();
-                        //d.endDate = $('#FilterDataModel_EndDate').val();
-                    },
-                    error: function (request, status, error) {
-                        notify('error', request.responseText, 'danger');
+                    });
+
+                    //dataTableSearch();
+                }
+
+                function PostFilterReLoadDataTable(data) {
+                    $("#modalcontainer").modal('hide');
+
+                    $("#FilterDataModel_IsActive").val(data.isActive);
+
+                    localLoadDataTable();
+
+                    hideLoader();
+                }
+
+                function PostSaveReLoadDataTable(data) {
+                    if (data.success) {
+                        $("#modalcontainer").modal('hide');
+                        localLoadDataTable();
+                        hideLoader();
+                        notify('success', data.response, 'Success');
                     }
                 }
-            });
-
-            //dataTableSearch();
-        }
-
-        function PostFilterReLoadDataTable(data) {
-            $("#modalcontainer").modal('hide');
-
-            $("#FilterDataModel_IsActive").val(data.isActive);
-
-            localLoadDataTable();
-
-            hideLoader();
-        }
-
-        function PostSaveReLoadDataTable(data) {
-            if (data.success) {
-                $("#modalcontainer").modal('hide');
-                localLoadDataTable();
-                hideLoader();
-                notify('success', data.response, 'Success');
-            }
-        }
-    </script>
+            </script>
 }

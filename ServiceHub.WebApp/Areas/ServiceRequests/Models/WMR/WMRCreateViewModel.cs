@@ -41,7 +41,7 @@ namespace ServiceHub.WebApp.Models
         public string RequestedBy { get; set; } = string.Empty;
 
         [Required]
-        [Display(Name = "Customer Name")]
+        [Display(Name = "Customer/Organization name")]
         public string CustomerName { get; set; } = string.Empty;
 
         [Required]

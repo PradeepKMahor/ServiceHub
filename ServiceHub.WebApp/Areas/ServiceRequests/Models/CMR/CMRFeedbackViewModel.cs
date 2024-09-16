@@ -29,7 +29,7 @@ namespace ServiceHub.WebApp.Models
         [Display(Name = "Requested By")]
         public string RequestedBy { get; set; } = string.Empty;
 
-        [Display(Name = "Customer Name")]
+        [Display(Name = "Customer/Organization name")]
         public string CustomerName { get; set; } = string.Empty;
 
         [Required]
