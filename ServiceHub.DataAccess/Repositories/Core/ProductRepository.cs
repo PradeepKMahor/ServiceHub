@@ -5,9 +5,9 @@ using ServiceHub.Domain.Models.Data;
 
 namespace ServiceHub.DataAccess.Repositories.Core
 {
-    public class UserClintRepository : DataRepository<TblUserClint>, IUserClintRepository
+    public class ProductRepository : DataRepository<TblProduct>, IProductRepository
     {
-        public UserClintRepository(DataContext context) : base(context)
+        public ProductRepository(DataContext context) : base(context)
         {
         }
     }

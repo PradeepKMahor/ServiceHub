@@ -1,4 +1,5 @@
 ﻿using ServiceHub.DataAccess.Base;
+using ServiceHub.DataAccess.Interface.Core;
 using ServiceHub.DataAccess.Repositories.Core;
 
 namespace ServiceHub.WebApp.Classes
@@ -11,6 +12,7 @@ namespace ServiceHub.WebApp.Classes
 
             services.AddTransient<IUsersCustomerRepository, UsersCustomerRepository>();
             services.AddTransient<IUserClintRepository, UserClintRepository>();
+            services.AddTransient<IProductRepository, ProductRepository>();
 
             #endregion Core repository
 

@@ -31,7 +31,12 @@
         <div role="toolbar">
             @*  @if (CurrentUserIdentity.ProfileActions.Any(p => p.ActionId == TCMPLApp.Domain.Models.LC.LCHelper.ActionCreateMasters))
             { *@
-            <form>
+            <form method="post" class="px-md-2"
+                  asp-action="ProductCreate"
+                  asp-controller="Products"
+                  asp-area="Masters"
+                  enctype="multipart/form-data">
+
                 @Html.AntiForgeryToken()
                 <div class="row">
                     <div class="col-8">
@@ -43,49 +48,51 @@
                                             <div class="row p-1">
                                                 <div class="col-xl-6 col-lg-6 col-md-6">
                                                     <div class="form-group">
-                                                        <label asp-for="ProductName" class="col-12 control-label"></label>
+                                                        <label asp-for="CreateModel.ProductName" class="col-12 control-label"></label>
                                                         <div class="col-12">
-                                                            <input asp-for="ProductName" class="form-control capitalize" required />
-                                                            <span asp-validation-for="ProductName" class="text-danger"></span>
+                                                            <input asp-for="CreateModel.ProductName" name="ProductName" class="form-control capitalize" required />
+                                                            <span asp-validation-for="CreateModel.ProductName" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6 col-lg-6 col-md-6">
                                                     <div class="form-group">
-                                                        <label asp-for="ProductCode" class="col-12 control-label"></label>
+                                                        <label asp-for="CreateModel.ProductCode" class="col-12 control-label"></label>
                                                         <div class="col-12">
-                                                            <input asp-for="ProductCode" class="form-control capitalize" required />
-                                                            <span asp-validation-for="ProductCode" class="text-danger"></span>
+                                                            <input asp-for="CreateModel.ProductCode" name="ProductCode" class="form-control capitalize" required />
+                                                            <span asp-validation-for="CreateModel.ProductCode" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6 col-lg-6 col-md-6">
                                                     <div class="form-group">
-                                                        <label asp-for="ServiceDate" class="col-12 control-label"></label>
+                                                        <label asp-for="CreateModel.ServiceDate" class="col-12 control-label"></label>
                                                         <div class="col-12">
-                                                            <input asp-for="ServiceDate" type="text" placeholder="DD-MMM-YYYY"
+                                                            <input asp-for="CreateModel.ServiceDate" name="ServiceDate" type="text" placeholder="DD-MMM-YYYY"
                                                                    class="form-control DateTimePickerInit" required />
-                                                            <span asp-validation-for="ServiceDate" class="text-danger"></span>
+                                                            <span asp-validation-for="CreateModel.ServiceDate" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                 </div>
                                                 <div class="col-xl-6 col-lg-6 col-md-6">
                                                     <div class="form-group">
-                                                        <label asp-for="WarrantyDate" class="col-12 control-label"></label>
+                                                        <label asp-for="CreateModel.WarrantyDate" class="col-12 control-label"></label>
                                                         <div class="col-12">
-                                                            <input asp-for="WarrantyDate" type="text" placeholder="DD-MMM-YYYY"
+                                                            <input asp-for="CreateModel.WarrantyDate" name="WarrantyDate" type="text" placeholder="DD-MMM-YYYY"
                                                                    class="form-control DateTimePickerInit" required />
-                                                            <span asp-validation-for="WarrantyDate" class="text-danger"></span>
+                                                            <span asp-validation-for="CreateModel.WarrantyDate" class="text-danger"></span>
                                                         </div>
                                                     </div>
                                                 </div>
 
                                                 <div class="col-xl-12 col-lg-12 col-md-12">
                                                     <div class="form-group">
-                                                        <label asp-for="ProductDescription" class="col-12 control-label"></label>
+                                                        <label asp-for="CreateModel.ProductDescription" class="col-12 control-label"></label>
                                                         <div class="col-12">
-                                                            <textarea asp-for="ProductDescription" rows="1" class="form-control capitalize" required></textarea>
-                                                            <span asp-validation-for="ProductDescription" class="text-danger"></span>
+                                                            <textarea asp-for="CreateModel.ProductDescription"
+                                                                      name="ProductDescription"
+                                                                      rows="1" class="form-control capitalize" required></textarea>
+                                                            <span asp-validation-for="CreateModel.ProductDescription" class="text-danger"></span>
                                                         </div>
                                                     </div>
 
@@ -93,15 +100,15 @@
                                             </div>
                                             <hr class="m-0 p-1" />
                                             <div class="row p-1 ">
-                                                <div class="col-8 col-lg-6 col-12-6 col-sm-12">
-                                                    <button type="submit"
-                                                            data-mdb-button-init
-                                                            data-mdb-ripple-init
-                                                            class="btn btn-success mb-1 mx-2 ml-auto">
-                                                        Submit
-                                                    </button>
+                                                @*   <div class="col-8 col-lg-6 col-12-6 col-sm-12">
+                                                <button type="submit"
+                                                data-mdb-button-init
+                                                data-mdb-ripple-init
+                                                class="btn btn-success mb-1 mx-2 ml-auto">
+                                                Submit
+                                                </button>
                                                 </div>
-
+                                                *@
                                                 <div class="col-2 d-flex flex-row col-lg-6 col-12-6 col-sm-12">
 
                                                     <button type="submit"
@@ -119,12 +126,12 @@
                                                     </button>
 
 
-                                                    <button type="submit"
-                                                            data-mdb-button-init
-                                                            data-mdb-ripple-init
-                                                            class="btn btn-info mb-1 mx-3 ml-auto">
-                                                        <i class="fas fa-edit"></i>
-                                                    </button>
+                                                    @*   <button type="submit"
+                                                    data-mdb-button-init
+                                                    data-mdb-ripple-init
+                                                    class="btn btn-info mb-1 mx-3 ml-auto">
+                                                    <i class="fas fa-edit"></i>
+                                                    </button> *@
 
                                                     <button type="submit"
                                                             data-mdb-button-init
@@ -136,7 +143,9 @@
 
                                                     <div class="col-6 mx-3 ml-auto">
                                                         <div class="switch d-inline  font-weight-bold">
-                                                            <input type="checkbox" asp-for="Status" />
+                                                            <input type="checkbox" asp-for="CreateModel.Status"
+                                                                   name="Status"
+                                                                   id="Status" />
                                                             Status
                                                             <label for="Status" class="cr"></label>
                                                         </div>
@@ -162,9 +171,12 @@
                                                  class="profile-user-img img-fluid img-square">
                                             <hr />
                                         </div>
-                                        <input asp-for="UploadPhoto" type="file" class="form-control capitalize" required />
+                                        <input type="file" name="file" accept="image/*"
+                                               id="UploadPhoto"
+                                               onchange="loadFile(event)"
+                                               class="form-control capitalize " />
 
-                                        <span asp-validation-for="UploadPhoto" class="text-danger"></span>
+                                        <span asp-validation-for="CreateModel.UploadPhoto" class="text-danger"></span>
                                     </div>
                                 </div>
                             </div>
@@ -181,24 +193,28 @@
         <table id="tbGrid" class="table table-hover table-bordered  " style="width:100%">
             <thead class="bg-info text-white">
                 <tr role="row">
-                    <th>@Html.DisplayNameFor(model => model.ProductId)</th>
-                    <th>@Html.DisplayNameFor(model => model.ProductCode)</th>
-                    <th>@Html.DisplayNameFor(model => model.ProductName)</th>
-                    <th>@Html.DisplayNameFor(model => model.ServiceDate)</th>
-                    <th>@Html.DisplayNameFor(model => model.WarrantyDate)</th>
-                    <th>@Html.DisplayNameFor(model => model.Status)</th>
+                    @*                     <th>@Html.DisplayNameFor(model => model.CreateModel.ProductId)</th>
+                    *@
+                    <th>@Html.DisplayNameFor(model => model.CreateModel.ProductCode)</th>
+                    <th>@Html.DisplayNameFor(model => model.CreateModel.ProductName)</th>
+                    <th>@Html.DisplayNameFor(model => model.CreateModel.ServiceDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.CreateModel.WarrantyDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.CreateModel.Status)</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1001</td>
-                    <td>PROD-1</td>
-                    <td>Product 1</td>
-                    <td>01-Jan-2024</td>
-                    <td>29-Aug-2024</td>
-                    <td>Active</td>
-
-                </tr>
+                @{
+                    foreach (var item in Model.Products)
+                    {
+                        <tr>
+                            <td>@item.ProductCode </td>
+                            <td>@item.ProductName </td>
+                            <td>@item.ServiceDate </td>
+                            <td>@item.WarrantyDate </td>
+                            <td>@item.Status </td>
+                        </tr>
+                    }
+                }
             </tbody>
         </table>
     </div>
@@ -217,7 +233,6 @@
 
         $(document).ready(function () {
             // localLoadDataTable();
-            UploadPhoto();
             DateTimePickerInit();
             $('#tbGrid').DataTable({
                 // "dom": 'Bfrtip',
@@ -252,127 +267,17 @@
                 format: 'DD-MMM-YYYY',
                 time: false
             });
-        }
-        function UploadPhoto() {
-            var fileTag = document.getElementById("UploadPhoto"),
-                preview = document.getElementById("preview");
+        };
 
-            fileTag.addEventListener("change", function () {
-                changeImage(this);
-            });
+        var loadFile = function (event) {
+            var output = document.getElementById('preview');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function () {
+                URL.revokeObjectURL(output.src) // free memory
+            };
+        };
 
-            function changeImage(input) {
-                var reader;
 
-                if (input.files && input.files[0]) {
-                    reader = new FileReader();
 
-                    reader.onload = function (e) {
-                        preview.setAttribute('src', e.target.result);
-                    }
-
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-        }
-        function localLoadDataTable() {
-
-            var table = $('#tbGrid').DataTable({
-                drawCallback: function (settings) {
-                    loadScript();
-                },
-                destroy: true,
-                pageLength: 25,
-                lengthMenu: [25, 50],
-                processing: true,
-                serverSide: true,
-                stateSave: true,
-                info: false,
-                filter: false,
-                dom: 'rt<"row"<"col-1"l><"col"p>><"clear">',
-                ordering: false,
-                columns: [
-                    { data: "userName" },
-                    { data: "email" },
-                    { data: "clintName" },
-                    { data: "roleName" },
-                    {
-                        data: null,
-                        render: function (data, type, row) {
-                            if (data.isActive == 1 || data.isActive == "1") {
-                                return 'Yes';
-                            }
-                            else {
-                                return 'No';
-                            }
-                        }
-                    },
-                    {
-                        data: null,
-                        render: function (data, type, row) {
-                            if (isActionCreateMasters == "True") {
-                                return '<button class="btn btn-outline-primary btn-sm border-none" ' +
-                                    ' data-jqueryselector="openmodal" ' +
-                                    ' data-modalcontainer="modalcontainer" ' +
-                                    ' data-url="@Url.Action("BankUpdate", "Masters", new { Area = "LC" })"' +
-                                    ' data-modalpopupwidth="rightw35" ' +
-                                    ' data-applicationid="' + data.userId + '"' +
-                                    ' data-modaltitle="Edit details" ' +
-                                    ' data-modalheader="Edit details" ' +
-                                    ' > ' +
-                                    ' <i class="fas fa-edit" aria-hidden="true"></i> ' +
-                                    ' </button>'
-                            }
-                            else {
-                                return '';
-                            }
-                        },
-                        'className': "td-icon",
-                    }
-                ], ajax: {
-                    headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
-                    url: '@Url.Action("GetListsBank", "Masters")',
-                    type: 'GET',
-                    cache: true,
-                    dataType: "json",
-                    data: function (d) {
-                        d.columns = null;
-                        d.order = null;
-                        d.search = null;
-                        d.genericSearch = null; // $('#FilterDataModel_GenericSearch').val();
-                        d.businessEntityId = null; // $('#FilterDataModel_BusinessEntityId').val();
-                        d.startDateTime = null; // $('#FilterDataModel_StartDateTime').val();
-                        d.endDateTime = null; // $('#FilterDataModel_EndDateTime').val();
-                        d.statusTypeId = null; // $('#FilterDataModel_StatusTypeId').val();
-                        d.isActive = $('#FilterDataModel_IsActive').val();
-                        //d.endDate = $('#FilterDataModel_EndDate').val();
-                    },
-                    error: function (request, status, error) {
-                        notify('error', request.responseText, 'danger');
-                    }
-                }
-            });
-
-            //dataTableSearch();
-        }
-
-        function PostFilterReLoadDataTable(data) {
-            $("#modalcontainer").modal('hide');
-
-            $("#FilterDataModel_IsActive").val(data.isActive);
-
-            localLoadDataTable();
-
-            hideLoader();
-        }
-
-        function PostSaveReLoadDataTable(data) {
-            if (data.success) {
-                $("#modalcontainer").modal('hide');
-                localLoadDataTable();
-                hideLoader();
-                notify('success', data.response, 'Success');
-            }
-        }
     </script>
 }

@@ -27,12 +27,11 @@ namespace ServiceHub.WebApp.Models
         [Display(Name = "Product Description")]
         public string ProductDescription { get; set; } = string.Empty;
 
-        [Required]
         [Display(Name = "Upload Photo")]
         public string UploadPhoto { get; set; } = string.Empty;
 
         [Required]
         [Display(Name = "Status")]
-        public string Status { get; set; } = string.Empty;
+        public bool Status { get; set; }
     }
 }

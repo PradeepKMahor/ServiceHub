@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using ServiceHub.DataAccess.Interface.Core;
 using ServiceHub.DataAccess.Models;
 using ServiceHub.DataAccess.Repositories.Core;
 using ServiceHub.Domain.Models.Data;

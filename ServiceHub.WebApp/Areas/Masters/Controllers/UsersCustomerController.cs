@@ -5,6 +5,7 @@ using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
 using ServiceHub.DataAccess;
 using ServiceHub.DataAccess.Base;
+using ServiceHub.DataAccess.Interface.Core;
 using ServiceHub.DataAccess.Models;
 using ServiceHub.DataAccess.Repositories.Core;
 using ServiceHub.Domain.Context;

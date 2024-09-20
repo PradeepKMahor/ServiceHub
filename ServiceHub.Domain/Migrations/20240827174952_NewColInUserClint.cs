@@ -10,7 +10,7 @@ namespace ServiceHub.Domain.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
+            _ = migrationBuilder.AddColumn<string>(
                 name: "MiddleName",
                 table: "TblUserClint",
                 type: "nvarchar(max)",
@@ -21,7 +21,7 @@ namespace ServiceHub.Domain.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropColumn(
+            _ = migrationBuilder.DropColumn(
                 name: "MiddleName",
                 table: "TblUserClint");
         }

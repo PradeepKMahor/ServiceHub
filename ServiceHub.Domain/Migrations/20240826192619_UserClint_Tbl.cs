@@ -1,5 +1,4 @@
-﻿using System;
-using Microsoft.EntityFrameworkCore.Migrations;
+﻿using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
@@ -11,7 +10,7 @@ namespace ServiceHub.Domain.Migrations
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.CreateTable(
+            _ = migrationBuilder.CreateTable(
                 name: "TblUserClint",
                 columns: table => new
                 {
@@ -34,14 +33,14 @@ namespace ServiceHub.Domain.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_TblUserClint", x => x.Id);
+                    _ = table.PrimaryKey("PK_TblUserClint", x => x.Id);
                 });
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.DropTable(
+            _ = migrationBuilder.DropTable(
                 name: "TblUserClint");
         }
     }
