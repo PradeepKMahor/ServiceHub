@@ -2,7 +2,7 @@
 {
     public class TblProduct
     {
-        public string Id { get; set; } = string.Empty;
+        public int Id { get; set; }
 
         public string ProductCode { get; set; } = string.Empty;
 
@@ -14,7 +14,7 @@
 
         public string ProductDescription { get; set; } = string.Empty;
 
-        public string UploadPhoto { get; set; } = string.Empty;
+        public string? UploadPhoto { get; set; } = string.Empty;
 
         public string Status { get; set; } = string.Empty;
     }

@@ -59,8 +59,9 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                     var files = HttpContext.Request.Form.Files;
 
                     string fileName = Guid.NewGuid().ToString();
-                    TblProduct tblProduct = new TblProduct();
-                    if (files.Any())
+                    TblProduct tblProduct = new();
+
+                    if (files.Count > 0)
                     {
                         var upload = Path.Combine(webRootPath, strFilePath);
                         var extention = Path.GetExtension(files[0].FileName);
@@ -88,7 +89,7 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                     tblProduct.ProductDescription = viewModel.ProductDescription;
                     tblProduct.UploadPhoto = viewModel.UploadPhoto;
 
-                    _productRepository.InsertAsync(tblProduct);
+                    var t = _productRepository.InsertAsync(tblProduct);
                     Notify("Success", "Data saved successfully", "toaster", notificationType: Models.NotificationType.success);
 
                     return RedirectToAction(nameof(Index));

@@ -5,14 +5,14 @@
 namespace ServiceHub.Domain.Migrations
 {
     /// <inheritdoc />
-    public partial class New : Migration
+    public partial class TblProductuPDATE : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            _ = migrationBuilder.AlterColumn<string>(
-                name: "UploadProfilePic",
-                table: "TblUserCustomer",
+            migrationBuilder.AlterColumn<string>(
+                name: "UploadPhoto",
+                table: "TblProduct",
                 type: "nvarchar(max)",
                 nullable: true,
                 oldClrType: typeof(string),
@@ -22,9 +22,9 @@ namespace ServiceHub.Domain.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            _ = migrationBuilder.AlterColumn<string>(
-                name: "UploadProfilePic",
-                table: "TblUserCustomer",
+            migrationBuilder.AlterColumn<string>(
+                name: "UploadPhoto",
+                table: "TblProduct",
                 type: "nvarchar(max)",
                 nullable: false,
                 defaultValue: "",

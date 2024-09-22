@@ -1,16 +1,17 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
 namespace ServiceHub.Domain.Migrations
 {
     /// <inheritdoc />
-    public partial class Initial : Migration
+    public partial class Init : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            _ = migrationBuilder.CreateTable(
+            migrationBuilder.CreateTable(
                 name: "AspNetRoles",
                 columns: table => new
                 {
@@ -21,10 +22,10 @@ namespace ServiceHub.Domain.Migrations
                 },
                 constraints: table =>
                 {
-                    _ = table.PrimaryKey("PK_AspNetRoles", x => x.Id);
+                    table.PrimaryKey("PK_AspNetRoles", x => x.Id);
                 });
 
-            _ = migrationBuilder.CreateTable(
+            migrationBuilder.CreateTable(
                 name: "AspNetUsers",
                 columns: table => new
                 {
@@ -46,10 +47,57 @@ namespace ServiceHub.Domain.Migrations
                 },
                 constraints: table =>
                 {
-                    _ = table.PrimaryKey("PK_AspNetUsers", x => x.Id);
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
-            _ = migrationBuilder.CreateTable(
+            migrationBuilder.CreateTable(
+                name: "TblProduct",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ProductCode = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ProductName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ServiceDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    WarrantyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ProductDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UploadPhoto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TblProduct", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TblUserClint",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Username = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContactNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmailId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SupervisorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AdminName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ValidFromDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ValidToDate = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    UploadProfilePic = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ParentOrg = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ActiveStatus = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_TblUserClint", x => x.Id);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "TblUserCustomer",
                 columns: table => new
                 {
@@ -68,16 +116,16 @@ namespace ServiceHub.Domain.Migrations
                     AdminName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ValidFromDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ValidToDate = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    UploadProfilePic = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UploadProfilePic = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     ActiveStatus = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Password = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>
                 {
-                    _ = table.PrimaryKey("PK_TblUserCustomer", x => x.Id);
+                    table.PrimaryKey("PK_TblUserCustomer", x => x.Id);
                 });
 
-            _ = migrationBuilder.CreateTable(
+            migrationBuilder.CreateTable(
                 name: "AspNetRoleClaims",
                 columns: table => new
                 {
@@ -89,8 +137,8 @@ namespace ServiceHub.Domain.Migrations
                 },
                 constraints: table =>
                 {
-                    _ = table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
-                    _ = table.ForeignKey(
+                    table.PrimaryKey("PK_AspNetRoleClaims", x => x.Id);
+                    table.ForeignKey(
                         name: "FK_AspNetRoleClaims_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
@@ -98,7 +146,7 @@ namespace ServiceHub.Domain.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            _ = migrationBuilder.CreateTable(
+            migrationBuilder.CreateTable(
                 name: "AspNetUserClaims",
                 columns: table => new
                 {
@@ -110,8 +158,8 @@ namespace ServiceHub.Domain.Migrations
                 },
                 constraints: table =>
                 {
-                    _ = table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
-                    _ = table.ForeignKey(
+                    table.PrimaryKey("PK_AspNetUserClaims", x => x.Id);
+                    table.ForeignKey(
                         name: "FK_AspNetUserClaims_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
@@ -119,7 +167,7 @@ namespace ServiceHub.Domain.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            _ = migrationBuilder.CreateTable(
+            migrationBuilder.CreateTable(
                 name: "AspNetUserLogins",
                 columns: table => new
                 {
@@ -130,8 +178,8 @@ namespace ServiceHub.Domain.Migrations
                 },
                 constraints: table =>
                 {
-                    _ = table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
-                    _ = table.ForeignKey(
+                    table.PrimaryKey("PK_AspNetUserLogins", x => new { x.LoginProvider, x.ProviderKey });
+                    table.ForeignKey(
                         name: "FK_AspNetUserLogins_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
@@ -139,7 +187,7 @@ namespace ServiceHub.Domain.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            _ = migrationBuilder.CreateTable(
+            migrationBuilder.CreateTable(
                 name: "AspNetUserRoles",
                 columns: table => new
                 {
@@ -148,14 +196,14 @@ namespace ServiceHub.Domain.Migrations
                 },
                 constraints: table =>
                 {
-                    _ = table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
-                    _ = table.ForeignKey(
+                    table.PrimaryKey("PK_AspNetUserRoles", x => new { x.UserId, x.RoleId });
+                    table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetRoles_RoleId",
                         column: x => x.RoleId,
                         principalTable: "AspNetRoles",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
-                    _ = table.ForeignKey(
+                    table.ForeignKey(
                         name: "FK_AspNetUserRoles_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
@@ -163,7 +211,7 @@ namespace ServiceHub.Domain.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            _ = migrationBuilder.CreateTable(
+            migrationBuilder.CreateTable(
                 name: "AspNetUserTokens",
                 columns: table => new
                 {
@@ -174,8 +222,8 @@ namespace ServiceHub.Domain.Migrations
                 },
                 constraints: table =>
                 {
-                    _ = table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
-                    _ = table.ForeignKey(
+                    table.PrimaryKey("PK_AspNetUserTokens", x => new { x.UserId, x.LoginProvider, x.Name });
+                    table.ForeignKey(
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
@@ -183,39 +231,39 @@ namespace ServiceHub.Domain.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            _ = migrationBuilder.CreateIndex(
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",
                 column: "RoleId");
 
-            _ = migrationBuilder.CreateIndex(
+            migrationBuilder.CreateIndex(
                 name: "RoleNameIndex",
                 table: "AspNetRoles",
                 column: "NormalizedName",
                 unique: true,
                 filter: "[NormalizedName] IS NOT NULL");
 
-            _ = migrationBuilder.CreateIndex(
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserClaims_UserId",
                 table: "AspNetUserClaims",
                 column: "UserId");
 
-            _ = migrationBuilder.CreateIndex(
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserLogins_UserId",
                 table: "AspNetUserLogins",
                 column: "UserId");
 
-            _ = migrationBuilder.CreateIndex(
+            migrationBuilder.CreateIndex(
                 name: "IX_AspNetUserRoles_RoleId",
                 table: "AspNetUserRoles",
                 column: "RoleId");
 
-            _ = migrationBuilder.CreateIndex(
+            migrationBuilder.CreateIndex(
                 name: "EmailIndex",
                 table: "AspNetUsers",
                 column: "NormalizedEmail");
 
-            _ = migrationBuilder.CreateIndex(
+            migrationBuilder.CreateIndex(
                 name: "UserNameIndex",
                 table: "AspNetUsers",
                 column: "NormalizedUserName",
@@ -226,28 +274,34 @@ namespace ServiceHub.Domain.Migrations
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
-            _ = migrationBuilder.DropTable(
+            migrationBuilder.DropTable(
                 name: "AspNetRoleClaims");
 
-            _ = migrationBuilder.DropTable(
+            migrationBuilder.DropTable(
                 name: "AspNetUserClaims");
 
-            _ = migrationBuilder.DropTable(
+            migrationBuilder.DropTable(
                 name: "AspNetUserLogins");
 
-            _ = migrationBuilder.DropTable(
+            migrationBuilder.DropTable(
                 name: "AspNetUserRoles");
 
-            _ = migrationBuilder.DropTable(
+            migrationBuilder.DropTable(
                 name: "AspNetUserTokens");
 
-            _ = migrationBuilder.DropTable(
+            migrationBuilder.DropTable(
+                name: "TblProduct");
+
+            migrationBuilder.DropTable(
+                name: "TblUserClint");
+
+            migrationBuilder.DropTable(
                 name: "TblUserCustomer");
 
-            _ = migrationBuilder.DropTable(
+            migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
-            _ = migrationBuilder.DropTable(
+            migrationBuilder.DropTable(
                 name: "AspNetUsers");
         }
     }

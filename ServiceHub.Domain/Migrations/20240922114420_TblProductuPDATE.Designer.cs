@@ -12,8 +12,8 @@ using ServiceHub.Domain.Context;
 namespace ServiceHub.Domain.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20240827180447_NewColInUserUploadUrlDatatype")]
-    partial class NewColInUserUploadUrlDatatype
+    [Migration("20240922114420_TblProductuPDATE")]
+    partial class TblProductuPDATE
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -223,6 +223,44 @@ namespace ServiceHub.Domain.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("ServiceHub.Domain.Models.Data.TblProduct", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ProductCode")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductDescription")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ProductName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("ServiceDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Status")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UploadPhoto")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("WarrantyDate")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TblProduct");
+                });
+
             modelBuilder.Entity("ServiceHub.Domain.Models.Data.TblUserClint", b =>
                 {
                     b.Property<int>("Id")
@@ -256,6 +294,10 @@ namespace ServiceHub.Domain.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MiddleName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ParentOrg")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
@@ -343,7 +385,6 @@ namespace ServiceHub.Domain.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UploadProfilePic")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserId")

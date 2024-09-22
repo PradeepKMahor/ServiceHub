@@ -222,8 +222,11 @@ namespace ServiceHub.Domain.Migrations
 
             modelBuilder.Entity("ServiceHub.Domain.Models.Data.TblProduct", b =>
                 {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
                     b.Property<string>("ProductCode")
                         .IsRequired()
@@ -245,7 +248,6 @@ namespace ServiceHub.Domain.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UploadPhoto")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime?>("WarrantyDate")
