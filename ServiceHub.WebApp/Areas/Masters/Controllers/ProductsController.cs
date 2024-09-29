@@ -22,12 +22,34 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
             _WebHostEnvironment = webHostEnvironment;
         }
 
-        public async Task<IActionResult> Index()
+        public async Task<IActionResult> Index(int? id)
         {
             var productViewModel = new ProductViewModel();
             var data = (await _productRepository.GetAllAsync());
 
             productViewModel.Products = data;
+
+            if (id is not null)
+            {
+                var result = await _productRepository.GetAsync(m => m.Id == id);
+
+                productViewModel.CreateModel.ProductId = (int)id;
+                productViewModel.CreateModel.ProductCode = result.ProductCode;
+                productViewModel.CreateModel.ProductName = result.ProductName;
+                productViewModel.CreateModel.ServiceDate = result.ServiceDate;
+                productViewModel.CreateModel.WarrantyDate = result.WarrantyDate;
+                productViewModel.CreateModel.ProductDescription = result.ProductDescription;
+                productViewModel.CreateModel.UploadPhoto = result.UploadPhoto;
+
+                if (result.Status == "Active")
+                {
+                    productViewModel.CreateModel.Status = true;
+                }
+                else
+                {
+                    productViewModel.CreateModel.Status = false;
+                }
+            }
 
             return View(productViewModel);
         }
@@ -39,10 +61,56 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
             return View();
         }
 
-        public IActionResult ProductCreate()
+        public async Task<IActionResult> ProductCreate(int? id)
         {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _productRepository.GetAsync(m => m.Id == id);
+
             ProductCreateModel productCreateModel = new();
+
+            if (result == null)
+            {
+                return View(productCreateModel);
+            }
+
+            productCreateModel.ProductId = result.Id;
+            productCreateModel.ProductCode = result.ProductCode;
+            productCreateModel.ProductName = result.ProductName;
+            productCreateModel.ServiceDate = result.ServiceDate;
+            productCreateModel.WarrantyDate = result.WarrantyDate;
+            productCreateModel.ProductDescription = result.ProductDescription;
+            productCreateModel.UploadPhoto = result.UploadPhoto;
+
+            if (result.Status == "Active")
+            {
+                productCreateModel.Status = true;
+            }
+            else
+            {
+                productCreateModel.Status = false;
+            }
+
             return View(productCreateModel);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ProductDetails(int? id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var result = await _productRepository.GetAsync(m => m.Id == id);
+
+            ProductCreateModel productCreateModel = new();
+
+            return RedirectToAction("Index", new { id });
         }
 
         [HttpPost]
@@ -106,6 +174,12 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
             }
 
             return RedirectToAction(nameof(Index));
+        }
+
+        public IActionResult ProductUpdate(int? id)
+        {
+            ProductCreateModel productCreateModel = new();
+            return View(productCreateModel);
         }
 
         public IActionResult ProductUpdate(ProductUpdateModel productUpdateModel)

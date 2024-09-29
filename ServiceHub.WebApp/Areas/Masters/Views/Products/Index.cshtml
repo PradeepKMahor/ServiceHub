@@ -15,10 +15,6 @@
 
 }
 
-@section Styles {
-    <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
-}
-
 <div style="display:none">
     <input type="hidden" asp-for="@Model.FilterDataModel.IsActive" />
 </div>
@@ -31,6 +27,12 @@
         <div role="toolbar">
             @*  @if (CurrentUserIdentity.ProfileActions.Any(p => p.ActionId == TCMPLApp.Domain.Models.LC.LCHelper.ActionCreateMasters))
             { *@
+                <form id="frmDetails"
+                  asp-action="ProductDetails" hidden method="post"
+                  asp-controller="Products"
+                  asp-area="Masters">
+                 <input hidden id="Id" name="Id" />
+                </form>
             <form method="post" class="px-md-2"
                   asp-action="ProductCreate"
                   asp-controller="Products"
@@ -100,15 +102,7 @@
                                             </div>
                                             <hr class="m-0 p-1" />
                                             <div class="row p-1 ">
-                                                @*   <div class="col-8 col-lg-6 col-12-6 col-sm-12">
-                                                <button type="submit"
-                                                data-mdb-button-init
-                                                data-mdb-ripple-init
-                                                class="btn btn-success mb-1 mx-2 ml-auto">
-                                                Submit
-                                                </button>
-                                                </div>
-                                                *@
+
                                                 <div class="col-2 d-flex flex-row col-lg-6 col-12-6 col-sm-12">
 
                                                     <button type="submit"
@@ -124,14 +118,6 @@
                                                             class="btn btn-primary mb-1 mx-3 ml-auto">
                                                         <i class="fas fa-save"></i>
                                                     </button>
-
-
-                                                    @*   <button type="submit"
-                                                    data-mdb-button-init
-                                                    data-mdb-ripple-init
-                                                    class="btn btn-info mb-1 mx-3 ml-auto">
-                                                    <i class="fas fa-edit"></i>
-                                                    </button> *@
 
                                                     <button type="submit"
                                                             data-mdb-button-init
@@ -207,7 +193,12 @@
                     foreach (var item in Model.Products)
                     {
                         <tr>
-                            <td>@item.ProductCode </td>
+                            <td>
+                            <a class="" onclick="return functionConfirm(@item.Id)"
+                                href="#" title="@item.ProductCode">
+                                @item.ProductCode
+                                </a>
+                            </td>
                             <td>@item.ProductName </td>
                             <td>@item.ServiceDate </td>
                             <td>@item.WarrantyDate </td>
@@ -221,10 +212,10 @@
 </div>
 
 @section Scripts {
+    <partial name="_ValidationScriptsPartial" />
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-
     <script type="text/javascript">
         function localScript() {
             initSelect2();
@@ -239,6 +230,7 @@
                 "lengthChange": false,
                 // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
                 "buttons": {
+
                     buttons: [
                         { extend: 'excel', className: 'btn shadow m-1 btn-info' },
                         { extend: 'print', className: 'btn shadow m-1 btn-info' },
@@ -277,6 +269,15 @@
             };
         };
 
+         function functionConfirm(id) {
+
+            $('#Id').val(id);
+
+            $('#frmDetails').submit();
+
+
+            return false;
+        }
 
 
     </script>
