@@ -1,365 +1,367 @@
 ﻿@model ServiceHub.WebApp.Models.UserRegistrationCreateViewModel
 
 @{
-    ViewData["Title"] = "Update Registration ";
-    var title = "Update Registration ";
-    var Varid = "";
-    string img = "";
-    if (string.IsNullOrEmpty(Model.UploadProfilePic))
-    {
-        img = "~/images\\avatar5.png";
-    }
-    else
-    {
-        img = Model.UploadProfilePic;
-    }
+	ViewData["Title"] = "Update Registration ";
+	var title = "Update Registration ";
+	var Varid = "";
+	string img = "";
+	if (string.IsNullOrEmpty(Model.UploadProfilePic))
+	{
+		img = "~/images\\avatar5.png";
+	}
+	else
+	{
+		img = Model.UploadProfilePic;
+	}
 }
 @Html.AntiForgeryToken()
 
 @section BreadCrumbs
 {
-    <ol class="breadcrumb">
-        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
-        <li class="breadcrumb-item "><a asp-action="UserIndex" asp-controller="Home" asp-area="Masters">User Management</a></li>
-        <li class="breadcrumb-item ">
-            <a asp-action="Index" asp-controller="UsersClient" asp-area="Masters">Users-Clint list</a>
-        </li>
+	<ol class="breadcrumb">
+		<li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
+		<li class="breadcrumb-item "><a asp-action="UserIndex" asp-controller="Home" asp-area="Masters">User Management</a></li>
+		<li class="breadcrumb-item ">
+			<a asp-action="Index" asp-controller="UsersClient" asp-area="Masters">Users-Clint list</a>
+		</li>
 
-        <li class="breadcrumb-item active" aria-current="page">Update User Registration </li>
-    </ol>
+		<li class="breadcrumb-item active" aria-current="page">Update User Registration </li>
+	</ol>
 
 }
 
 <div class="container-fluid ">
-    @* <div class="row d-flex justify-content-center align-items-center h-100"> *@
+	@* <div class="row d-flex justify-content-center align-items-center h-100"> *@
 
-    <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
-        <div class="app-h4 app-card-header mb-2">
-            <p>Users-Client Details</p>
+	<div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
+		<div class="app-h4 app-card-header mb-2">
+			<p>Users-Client Details</p>
 
-        </div>
-        <div class="card-toolbar">
-            <div role="toolbar">
-                <div class="card rounded-3">
-                    <div class="card-body">
-                        <form method="post" class="px-md-2" asp-action="UpdateClientUser"
-                              asp-controller="UsersClient"
-                              asp-area="Masters"
-                              enctype="multipart/form-data">
-                            @Html.AntiForgeryToken()
-                            @Html.HiddenFor(m => m.Id)
-                            @Html.HiddenFor(m => m.UploadProfilePic)
-                            <div class="text-center">
-                                <div class="col-6 p-0 m-0">
-                                    <div class=" col-12  p-0 m-0">
-                                        <div class="text-center">
+		</div>
+		<div class="card-toolbar">
+			<div role="toolbar">
+				<div class="card rounded-3">
+					<div class="card-body">
+						<form method="post" class="px-md-2" asp-action="UpdateClientUser"
+							  asp-controller="UsersClient"
+							  asp-area="Masters"
+							  enctype="multipart/form-data">
+							@Html.AntiForgeryToken()
+							@Html.HiddenFor(m => m.Id)
+							@Html.HiddenFor(m => m.UploadProfilePic)
+							<div class="text-center">
+								<div class="col-6 p-0 m-0">
+									<div class=" col-12  p-0 m-0">
+										<div class="text-center">
 
-                                            <img id="preview"
-                                                 style="width:150px!important;
+											<img id="preview"
+												 style="width:150px!important;
                                                 max-width:150px!important;
                                                 max-height:150px!important;
                                                 min-width:150px!important;
                                                 min-height:150px!important;"
-                                                 src="@img.ToString()" alt="User Avatar"
-                                                 class="profile-user-img img-fluid img-square">
-                                            <div class="form-group">
-                                                <div class="col-12  p-0 m-0">
-                                                    <div class="input-group">
+												 src="@img.ToString()" alt="User Avatar"
+												 class="profile-user-img img-fluid img-square">
+											<div class="form-group">
+												<div class="col-12  p-0 m-0">
+													<div class="input-group">
 
-                                                        <input type="file" name="file" accept="image/*"
-                                                               id="UploadProfilePic"
-                                                               onchange="loadFile(event)"
-                                                               class="form-control capitalize " />
-                                                        <span asp-validation-for="UploadProfilePic" class="text-danger"></span>
+														<input type="file" name="file" accept="image/*"
+															   id="UploadProfilePic"
+															   onchange="loadFile(event)"
+															   class="form-control capitalize " />
+														<span asp-validation-for="UploadProfilePic" class="text-danger"></span>
 
-                                                    </div>
+													</div>
 
-                                                </div>
-                                            </div>
-                                        </div>
+												</div>
+											</div>
+										</div>
 
-                                    </div>
-                                </div>
-                                <hr />
-                            </div>
-                            <div class="row">
+									</div>
+								</div>
+								<hr />
+							</div>
+							<div class="row">
 
-                                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-                                    <div class="col-12">
-                                        <div class="card card-tpl border shadow">
-                                            <div class="card-header bg-info ">
-                                                <h5>Users Info</h5>
-                                            </div>
-                                            <div class="card-block card-tile">
-                                                <div class="row p-2 m-1">
-                                                    <div class=" col-xl-6 col-lg-6 col-md-12 col-sm-12 ">
-                                                        <div class="form-group">
-                                                            <label asp-for="FirstName" class="col-12 control-label"></label>
-                                                            <div class="col-12">
-                                                                <input asp-for="FirstName" class="form-control capitalize" required />
-                                                                <span asp-validation-for="FirstName" class="text-danger"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                        <div class="form-group">
-                                                            <label asp-for="MiddleName" class="col-12 control-label"></label>
-                                                            <div class="col-12">
-                                                                <input asp-for="MiddleName" class="form-control capitalize" required />
-                                                                <span asp-validation-for="MiddleName" class="text-danger"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                        <div class="form-group">
-                                                            <label asp-for="LastName" class="col-12 control-label"></label>
-                                                            <div class="col-12">
-                                                                <input asp-for="LastName" class="form-control capitalize" required />
-                                                                <span asp-validation-for="LastName" class="text-danger"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                        <div class="form-group">
-                                                            <label asp-for="ParentOrg" class="col-12 control-label"></label>
-                                                            <div class="col-12">
-                                                                <select asp-for="ParentOrg" class="form-control chosen-select-required"
-                                                                        data-placeholder="Please select..."
-                                                                        asp-items="ViewBag.ParentOrg" required>
-                                                                    <option selected></option>
-                                                                </select>
+								<div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+									<div class="col-12">
+										<div class="card card-tpl border shadow">
+											<div class="card-header bg-info ">
+												<h5>Users Info</h5>
+											</div>
+											<div class="card-block card-tile">
+												<div class="row p-2 m-1">
+													<div class=" col-xl-6 col-lg-6 col-md-12 col-sm-12 ">
+														<div class="form-group">
+															<label asp-for="FirstName" class="col-12 control-label"></label>
+															<div class="col-12">
+																<input asp-for="FirstName" class="form-control capitalize" required />
+																<span asp-validation-for="FirstName" class="text-danger"></span>
+															</div>
+														</div>
+													</div>
+													<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+														<div class="form-group">
+															<label asp-for="MiddleName" class="col-12 control-label"></label>
+															<div class="col-12">
+																<input asp-for="MiddleName" class="form-control capitalize" required />
+																<span asp-validation-for="MiddleName" class="text-danger"></span>
+															</div>
+														</div>
+													</div>
+													<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+														<div class="form-group">
+															<label asp-for="LastName" class="col-12 control-label"></label>
+															<div class="col-12">
+																<input asp-for="LastName" class="form-control capitalize" required />
+																<span asp-validation-for="LastName" class="text-danger"></span>
+															</div>
+														</div>
+													</div>
+													<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+														<div class="form-group">
+															<label asp-for="ParentOrg" class="col-12 control-label"></label>
+															<div class="col-12">
+																<select asp-for="ParentOrg" class="form-control chosen-select-required"
+																		data-placeholder="Please select..."
+																		asp-items="ViewBag.ParentOrg" required>
+																	<option selected></option>
+																</select>
 
-                                                                <span asp-validation-for="ParentOrg" class="text-danger"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                        <div class="form-group">
-                                                            <label asp-for="ContactNo" class="col-12 control-label"></label>
-                                                            <div class="col-12">
-                                                                <input asp-for="ContactNo" type="number"
-                                                                       onkeypress="limitKeypress(event,this.value,10)"
-                                                                       class="form-control capitalize text__input"
-                                                                       required />
-                                                                <span asp-validation-for="ContactNo" class="text-danger"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 ">
-                                                        <div class="form-group">
-                                                            <label asp-for="EmailId" class="col-12 control-label"></label>
-                                                            <div class="col-12">
-                                                                <input asp-for="EmailId" class="form-control capitalize" required />
-                                                                <span asp-validation-for="EmailId" class="text-danger"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-                                    <div class="col-12">
-                                        <div class="card card-tpl border shadow">
-                                            <div class="card-header bg-info ">
-                                                <h5>Login details</h5>
-                                            </div>
-                                            <div class="card-block card-tile">
-                                                <div class="row p-2 m-1">
-                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                        <div class="form-group">
-                                                            <label asp-for="Username" class="col-12 control-label"></label>
-                                                            <div class="col-12">
-                                                                <input asp-for="Username" value="@Model.ContactNo" class="form-control text__input" readonly />
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                        <div class="form-group">
-                                                            <label asp-for="ValidFromDate" class="col-12 control-label"></label>
-                                                            <div class="col-12">
-                                                                <input asp-for="ValidFromDate"
-                                                                       value="@Model.ValidFromDate?.ToString("dd-MMM-yyyy")"
-                                                                       type="text" placeholder="DD-MMM-YYYY"
-                                                                       class="form-control DateTimePickerInit" required />
-                                                                <span asp-validation-for="ValidFromDate" class="text-danger"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                        <div class="form-group">
-                                                            <label asp-for="ValidToDate" class="col-12 control-label"></label>
-                                                            <div class="col-12">
-                                                                <input asp-for="ValidToDate"
-                                                                       value="@Model.ValidToDate?.ToString("dd-MMM-yyyy")"
-                                                                       type="text" placeholder="DD-MMM-YYYY"
-                                                                       type="text"
-                                                                       class="form-control  DateTimePickerInit" placeholder="DD-MMM-YYYY"
-                                                                       required />
-                                                                <span asp-validation-for="ValidToDate" class="text-danger"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
-                                                        <div class="form-group">
-                                                            <label asp-for="UserType" class="col-12 control-label"></label>
-                                                            <div class="col-12">
-                                                                <select asp-for="UserType" class="form-control chosen-select-required"
-                                                                        data-placeholder="Please select..."
-                                                                        asp-items="ViewBag.UserType" required>
-                                                                    <option selected></option>
-                                                                </select>
-                                                                <span asp-validation-for="UserType" class="text-danger"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
+																<span asp-validation-for="ParentOrg" class="text-danger"></span>
+															</div>
+														</div>
+													</div>
+													<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+														<div class="form-group">
+															<label asp-for="ContactNo" class="col-12 control-label"></label>
+															<div class="col-12">
+																<input asp-for="ContactNo" type="number"
+																	   onkeypress="limitKeypress(event,this.value,10)"
+																	   class="form-control capitalize text__input"
+																	   required />
+																<span asp-validation-for="ContactNo" class="text-danger"></span>
+															</div>
+														</div>
+													</div>
+													<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12 ">
+														<div class="form-group">
+															<label asp-for="EmailId" class="col-12 control-label"></label>
+															<div class="col-12">
+																<input asp-for="EmailId" class="form-control capitalize" required />
+																<span asp-validation-for="EmailId" class="text-danger"></span>
+															</div>
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+									<div class="col-12">
+										<div class="card card-tpl border shadow">
+											<div class="card-header bg-info ">
+												<h5>Login details</h5>
+											</div>
+											<div class="card-block card-tile">
+												<div class="row p-2 m-1">
+													<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+														<div class="form-group">
+															<label asp-for="Username" class="col-12 control-label"></label>
+															<div class="col-12">
+																<input asp-for="Username" value="@Model.ContactNo" class="form-control text__input" readonly />
+															</div>
+														</div>
+													</div>
+													<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+														<div class="form-group">
+															<label asp-for="ValidFromDate" class="col-12 control-label"></label>
+															<div class="col-12">
+																<input asp-for="ValidFromDate"
+																	   value="@Model.ValidFromDate?.ToString("dd-MMM-yyyy")"
+																	   type="text" placeholder="DD-MMM-YYYY"
+																	   class="form-control DateTimePickerInit" required />
+																<span asp-validation-for="ValidFromDate" class="text-danger"></span>
+															</div>
+														</div>
+													</div>
+													<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+														<div class="form-group">
+															<label asp-for="ValidToDate" class="col-12 control-label"></label>
+															<div class="col-12">
+																<input asp-for="ValidToDate"
+																	   value="@Model.ValidToDate?.ToString("dd-MMM-yyyy")"
+																	   type="text" placeholder="DD-MMM-YYYY"
+																	   type="text"
+																	   class="form-control  DateTimePickerInit" placeholder="DD-MMM-YYYY"
+																	   required />
+																<span asp-validation-for="ValidToDate" class="text-danger"></span>
+															</div>
+														</div>
+													</div>
+													<div class="col-xl-6 col-lg-6 col-md-12 col-sm-12">
+														<div class="form-group">
+															<label asp-for="UserType" class="col-12 control-label"></label>
+															<div class="col-12">
+																<select asp-for="UserType" class="form-control chosen-select-required"
+																		data-placeholder="Please select..."
+																		asp-items="ViewBag.UserType" required>
+																	<option selected></option>
+																</select>
+																<span asp-validation-for="UserType" class="text-danger"></span>
+															</div>
+														</div>
+													</div>
 
-                                                    <div class="col-xl-6 col-lg-6 col-12-6 col-sm-12">
-                                                        <div class="form-group">
-                                                            <label asp-for="Password" class="col-12 control-label"></label>
-                                                            <div class="col-12">
-                                                                <input asp-for="Password" class="form-control capitalize" />
-                                                                <span asp-validation-for="Password" class="text-danger"></span>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="col-xl-6 col-lg-6 col-12-6 col-sm-12">
-                                                    </div>
+													<div class="col-xl-6 col-lg-6 col-12-6 col-sm-12">
+														<div class="form-group">
+															<label asp-for="Password" class="col-12 control-label"></label>
+															<div class="col-12">
+																<input asp-for="Password" class="form-control capitalize" />
+																<span asp-validation-for="Password" class="text-danger"></span>
+															</div>
+														</div>
+													</div>
+													<div class="col-xl-6 col-lg-6 col-12-6 col-sm-12">
+														<div class="form-group" style=" padding-left: 10px;">
+															<div class="switch d-inline font-weight-bold">
+																Status
+																<br />
+																<input type="checkbox" asp-for="ActiveStatus" />
+																<label for="ActiveStatus" class="cr"></label>
+															</div>
+														</div>
+													</div>
 
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
+												</div>
+											</div>
+										</div>
+									</div>
 
-                                </div>
-                            </div>
-                            <hr />
-                            <div class="row p-1 ">
-                                <div class="col-8 col-lg-6 col-12-6 col-sm-12">
-                                </div>
-                                <div class="col-2 d-flex flex-row col-lg-6 col-12-6 col-sm-12">
+								</div>
+							</div>
+							<hr />
+							<div class="row p-1 ">
+								<div class="col-8 col-lg-6 col-12-6 col-sm-12">
+								</div>
+								<div class="col-2 d-flex flex-row col-lg-6 col-12-6 col-sm-12">
 
-                                    <a asp-area="Masters"
-                                       asp-controller="UsersClient"
-                                       asp-action="CreateClientUser"
-                                       data-mdb-button-init
-                                       data-mdb-ripple-init
-                                       class="btn btn-primary mb-1 mx-3 ml-auto">
-                                        <i class="fas fa-plus "
-                                           aria-hidden="true"></i>&nbsp;
-                                    </a>
-                                    @*  <button type="submit"
-                                    data-mdb-button-init
-                                    data-mdb-ripple-init
-                                    class="btn btn-primary mb-1 mx-3 ml-auto">
-                                    <i class="fas fa-save"></i>
-                                    </button>
-                                    *@
-                                    @*  <button type="submit"
-                                    data-mdb-button-init
-                                    data-mdb-ripple-init
-                                    class="btn btn-warning mb-1  mx-3 ml-auto">
-                                    <i class="fas fa-unlock-alt"></i>
-                                    </button> *@
+									<a asp-area="Masters"
+									   asp-controller="UsersClient"
+									   asp-action="CreateClientUser"
+									   data-mdb-button-init
+									   data-mdb-ripple-init
+									   class="btn btn-primary mb-1 mx-3 ml-auto">
+										<i class="fas fa-plus "
+										   aria-hidden="true"></i>&nbsp;
+									</a>
+									@*  <button type="submit"
+									data-mdb-button-init
+									data-mdb-ripple-init
+									class="btn btn-primary mb-1 mx-3 ml-auto">
+									<i class="fas fa-save"></i>
+									</button>
+									*@
+									@*  <button type="submit"
+									data-mdb-button-init
+									data-mdb-ripple-init
+									class="btn btn-warning mb-1  mx-3 ml-auto">
+									<i class="fas fa-unlock-alt"></i>
+									</button> *@
 
-                                    <button type="submit"
-                                            data-mdb-button-init
-                                            data-mdb-ripple-init
-                                            class="btn btn-info mb-1 mx-3 ml-auto">
-                                        <i class="fas fa-user-edit"></i>
-                                    </button>
-
-
-                                    <button type="button" class="btn btn-danger mb-1 mx-3 ml-auto"
-                                            onclick="return functionConfirm(this)">
-                                        <i class="fas fa-trash"></i>
-                                    </button>
+									<button type="submit"
+											data-mdb-button-init
+											data-mdb-ripple-init
+											class="btn btn-info mb-1 mx-3 ml-auto">
+										<i class="fas fa-user-edit"></i>
+									</button>
 
 
+									<button type="button" class="btn btn-danger mb-1 mx-3 ml-auto"
+											onclick="return functionConfirm(this)">
+										<i class="fas fa-trash"></i>
+									</button>
 
-                                    @*    <input class="btn btn-danger mb-1 mx-3 ml-auto"
-                                    type="submit" value="Delete" asp-action="Delete" /> *@
 
-                                    <div class="col-6 mx-3 ml-auto">
-                                        <div class="switch d-inline font-weight-bold">
-                                            <input type="checkbox" asp-for="ActiveStatus" />
-                                            Status
-                                            <label for="ActiveStatus" class="cr"></label>
-                                        </div>
-                                    </div>
-                                </div>
 
-                            </div>
-                        </form>
-                        <form id="frmDelete" asp-action="Delete" hidden method="post"
-                              asp-controller="UsersClient"
-                              asp-area="Masters">
-                            @Html.HiddenFor(m => m.Id)
+									@*    <input class="btn btn-danger mb-1 mx-3 ml-auto"
+									type="submit" value="Delete" asp-action="Delete" /> *@
 
-                        </form>
 
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+								</div>
+
+							</div>
+						</form>
+						<form id="frmDelete" asp-action="Delete" hidden method="post"
+							  asp-controller="UsersClient"
+							  asp-area="Masters">
+							@Html.HiddenFor(m => m.Id)
+
+						</form>
+
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
 </div>
 @* </div> *@
 @section Scripts {
-    <partial name="_ValidationScriptsPartial" />
-    <script>
+	<partial name="_ValidationScriptsPartial" />
+	<script>
 
-        $(document).ready(function () {
-            DateTimePickerInit();
-        });
+		$(document).ready(function () {
+			DateTimePickerInit();
+		});
 
-        function DateTimePickerInit() {
-            $('.DateTimePickerInit').bootstrapMaterialDatePicker({
-                format: 'DD-MMM-YYYY',
-                time: false
-            });
-        }
-        $('.text__input').on('input', function () {
-            $('.text__input').val($(this).val())
-        });
+		function DateTimePickerInit() {
+			$('.DateTimePickerInit').bootstrapMaterialDatePicker({
+				format: 'DD-MMM-YYYY',
+				time: false
+			});
+		}
+		$('.text__input').on('input', function () {
+			$('.text__input').val($(this).val())
+		});
 
-        function limitKeypress(event, value, maxLength) {
-            if (value != undefined && value.toString().length >= maxLength) {
-                event.preventDefault();
-            }
-        }
+		function limitKeypress(event, value, maxLength) {
+			if (value != undefined && value.toString().length >= maxLength) {
+				event.preventDefault();
+			}
+		}
 
-        var loadFile = function (event) {
-            var output = document.getElementById('preview');
-            output.src = URL.createObjectURL(event.target.files[0]);
-            output.onload = function () {
-                URL.revokeObjectURL(output.src) // free memory
-            };
-        };
+		var loadFile = function (event) {
+			var output = document.getElementById('preview');
+			output.src = URL.createObjectURL(event.target.files[0]);
+			output.onload = function () {
+				URL.revokeObjectURL(output.src) // free memory
+			};
+		};
 
 
-        function functionConfirm(event) {
-            swal({
-                title: 'are you sur?',
-                text: "You will not be able to recover this item",
-                type: 'warning',
-                showCancelButton: true,
-                cancelButtonText: 'No',
-                cancelButtonClass: 'btn btn-danger mr-2 ml-2',
-                showConfirmButton: true,
-                confirmButtonText: 'Yes',
-                confirmButtonClass: 'btn btn-success mr-2 ml-2'
-            }, function (isConfirm) {
-                if (isConfirm) {
-                    $('#frmDelete').submit();
-                    return true;
-                } else {
-                    return false;
-                }
-            });
-            return false;
-        }
-    </script>
+		function functionConfirm(event) {
+			swal({
+				title: 'are you sur?',
+				text: "You will not be able to recover this item",
+				type: 'warning',
+				showCancelButton: true,
+				cancelButtonText: 'No',
+				cancelButtonClass: 'btn btn-danger mr-2 ml-2',
+				showConfirmButton: true,
+				confirmButtonText: 'Yes',
+				confirmButtonClass: 'btn btn-success mr-2 ml-2'
+			}, function (isConfirm) {
+				if (isConfirm) {
+					$('#frmDelete').submit();
+					return true;
+				} else {
+					return false;
+				}
+			});
+			return false;
+		}
+	</script>
 
 }
