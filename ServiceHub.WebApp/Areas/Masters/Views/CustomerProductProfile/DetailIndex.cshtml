@@ -1,0 +1,510 @@
+﻿@model ServiceHub.WebApp.Models.CustomerProductProfileDetailViewModel
+
+@Html.AntiForgeryToken()
+
+@{
+    ViewData["Title"] = "Customer Product Profile Detail";
+
+}
+@section styles
+{
+                            <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
+
+}
+<input type="hidden" asp-for="CustomerID" />
+
+
+@section BreadCrumbs
+{
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
+                                <li class="breadcrumb-item "><a asp-action="UserIndex" asp-controller="Home" asp-area="Masters">User Management</a></li>
+                                <li class="breadcrumb-item "><a asp-action="Index" asp-controller="CustomerProductProfile" asp-area="Masters">Customer Product Profile list</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Customer company ID</li>
+                            </ol>
+}
+<div class="container-fluid bg-white border card rounded shadow m-auto col-xl-12 p-2 ">
+    <partial name="_CreateCustomerCompanyPartial" model="@Model" />
+    <div class="card-pill" style="margin-top: 20px">
+        <ul class="nav nav-tabs" id="tabs-tab" role="tablist">
+
+            <li class="nav-item">
+                <a class="nav-link active" id="tabs-ProductDetails-tab" data-toggle="pill" href="#tabs-ProductDetails" role="tab" aria-controls="tabs-ProductDetails" aria-selected="true"
+                   data-url="@Url.Action("ProductDetailIndex", " ", new { empno = "4444" })"
+                   data-id="@Model.CustomerID"
+                   data-divid="pw-ProductDetails"
+                   data-callback="validateTabs()"
+                   data-area=" "
+                   data-controller=" "
+                   data-action="ProductDetailIndex">
+                    <b> Product Details</b>
+                    <i id="imgDescriptionPrimaryStatus" class="fas fa-info-circle text-danger" style="display:none"></i>
+                </a>
+            </li>
+
+            <li class="nav-item">
+                <a class="nav-link" id="tabs-UserDetails-tab" data-toggle="pill" href="#tabs-UserDetails" role="tab" aria-controls="tabs-UserDetails" aria-selected="false"
+                   data-url="@Url.Action("UsersDetails", " ", new { id = Model.CustomerID })"
+                   data-id="@Model.CustomerID"
+                   data-divid="pw-UserDetails"
+                   data-callback="validateTabs()"
+                   data-area=" "
+                   data-controller=" "
+                   data-action="UsersDetailsEdit">
+                    <b> Users Details</b>
+                    <i id="imgDescriptionSecondaryStatus" class="fas fa-info-circle text-danger" style="display:none"></i>
+                </a>
+            </li>
+
+
+            <li class="nav-item">
+                <a class="nav-link" id="tabs-PMRDetails-tab" data-toggle="pill" href="#tabs-PMRDetails" role="tab" aria-controls="tabs-PMRDetails" aria-selected="false"
+                   data-url="@Url.Action("PMRDetailsIndex", " ", new { id = Model.CustomerID })"
+                   data-id="@Model.CustomerID"
+                   data-divid="pw-PMRDetails"
+                   data-area=" "
+                   data-controller=" "
+                   data-callback="activateGratuityTab();"
+                   data-action="PMRDetailsIndex">
+                    <b> PMR Details</b>
+                    <i id="imgDescriptionPMRStatus" class="fas fa-info-circle text-danger" style="display:none"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tabs-CMRDetails-tab" data-toggle="pill" href="#tabs-CMRDetails" role="tab" aria-controls="tabs-CMRDetails" aria-selected="false"
+                   data-url="@Url.Action("CMRDetailsIndex", " ", new { id = Model.CustomerID })"
+                   data-id="@Model.CustomerID"
+                   data-divid="pw-CMRDetails"
+                   data-area=" "
+                   data-controller=" "
+                   data-callback="loadEmpCMRListDataTable();"
+                   data-action="CMRDetailsIndex">
+                    <b> CMR Details</b>
+                    <i id="imgDescriptionCMRStatus" class="fas fa-info-circle text-danger" style="display:none"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" id="tabs-WMRDetails-tab" data-toggle="pill" href="#tabs-WMRDetails" role="tab" aria-controls="tabs-WMRDetails" aria-selected="false"
+                   data-url="@Url.Action("WMRDetails", " ", new { id = Model.CustomerID })"
+                   data-id="@Model.CustomerID"
+                   data-divid="pw-WMRDetails"
+                   data-callback="validateTabs()"
+                   data-area=" "
+                   data-controller=" "
+                   data-action="EmployeeWMRDetails">
+                    <b> WMR Details</b>
+                    <i id="imgDescriptionPpAaStatus" class="fas fa-info-circle text-danger" style="display:none"></i>
+                </a>
+            </li>
+        </ul>
+        <div class="tab-content">
+            @*  @await Html.PartialAsync("_LoaderPartial")
+            *@
+
+            <div class="tab-pane fade show active" id="tabs-ProductDetails" role="tabpanel" aria-labelledby="tabs-ProductDetails-tab">
+                <div id="pw-ProductDetails">
+                    <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-12 p-1 ">
+                        <div class="app-h4 app-card-header mb-2">
+                            <p>Product list</p>
+                        </div>
+                        <div class="card-toolbar">
+                            <div role="toolbar">
+                                @*  @if (CurrentUserIdentity.ProfileActions.Any(p => p.ActionId == TCMPLApp.Domain.Models.LC.LCHelper.ActionCreateMasters))
+                                { *@
+
+                                <a class="btn btn-outline-primary btn-sm border-white"
+                                   asp-action="CreateCustomerUser"
+                                   asp-area="Masters"
+                                   asp-controller="UsersCustomer">
+                                    <i class="fas fa-plus"></i>&nbsp; New
+                                </a>
+
+                            </div>
+                        </div>
+                        <div class="m-1"></div>
+                        <div class="bg-gray-active rounded ">
+
+                            <table id="tbGrid" class="table table-hover table-bordered  " style="width:100%">
+                                <thead class="bg-info text-white">
+                                    <tr role="row">
+                                        <th>@Html.DisplayNameFor(model => model.productViewModel.CreateModel.ProductId)</th>
+                                        <th>@Html.DisplayNameFor(model => model.productViewModel.CreateModel.ProductCode)</th>
+                                        <th>@Html.DisplayNameFor(model => model.productViewModel.CreateModel.ProductName)</th>
+                                        <th>@Html.DisplayNameFor(model => model.productViewModel.CreateModel.ServiceDate)</th>
+                                        <th>@Html.DisplayNameFor(model => model.productViewModel.CreateModel.WarrantyDate)</th>
+                                        <th>@Html.DisplayNameFor(model => model.productViewModel.CreateModel.Status)</th>
+
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>1001</td>
+                                        <td>PROD-1</td>
+                                        <td>Product 1</td>
+                                        <td>01-Jan-2024</td>
+                                        <td>29-Aug-2024</td>
+                                        <td>Active</td>
+
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tabs-UserDetails" role="tabpanel" aria-labelledby="tabs-UserDetails-tab">
+                <div id="pw-UserDetails">
+
+                    <div class="container-fluid bg-white border card rounded shadow m-auto  col-xl-12 p-1 ">
+                        <div class="app-h4 app-card-header mb-2">
+                            <p>Users-Customer</p>
+                        </div>
+                        <div class="card-toolbar">
+                            <div role="toolbar">
+                                <div class="d-flex flex-row">
+                                    <a asp-area="Masters"
+                                       asp-controller="UsersCustomer"
+                                       asp-action="CreateCustomerUser"
+                                       class="nav-link">
+                                        <i class="fas fa-plus " aria-hidden="true"></i>&nbsp;
+                                        New User
+                                    </a>
+                                    <button name="ExcelDownload" id="idExcelDownload"
+                                            title="Excel Download"
+                                            class="btn btn-outline-success btn-sm border-white  mx-2 ml-auto">
+                                        <i class="fas fa-file-excel green-color "> &nbsp;Excel</i>
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-block">
+                            <div class="row">
+                                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
+                                    <div class="form-group">
+                                        <select asp-for="@Model.userCustomerViewModel.SearchByFirstLastName" class="form-control Select2 "
+                                                asp-items="ViewBag.FirstNameLastNameList" data-placeholder="First/Last Name">
+                                            <option selected></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
+                                    <div class="form-group">
+                                        <select asp-for="@Model.userCustomerViewModel.SearchByUsername" class="form-control Select2 "
+                                                asp-items="ViewBag.UsernameList" data-placeholder="Username">
+                                            <option selected></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
+                                    <div class="form-group">
+                                        <select asp-for="@Model.userCustomerViewModel.SearchByParentOrg" class="form-control Select2 "
+                                                asp-items="ViewBag.ParentOrgList" data-placeholder="Parent Org">
+                                            <option selected></option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
+                                    <div class="form-group">
+                                        <select asp-for="@Model.userCustomerViewModel.SearchByStatus" class="form-control chosen-select" data-placeholder="Status">
+                                            <option selected></option>
+                                            <option value="N">Active</option>
+                                            <option value="Y">De-Active</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
+                                    <div class="form-group">
+                                        <select asp-for="@Model.userCustomerViewModel.SearchByUserType" class="form-control chosen-select" data-placeholder="UserType">
+                                            <option selected></option>
+                                            <option>Supervisor </option>
+                                            <option>End-User</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col">
+                                    <button type="submit" class="btn btn-outline-primary btn-sm  btn-block mx-2 ml-auto ">Go </button>
+                                </div>
+                                <div class="col">
+                                    <a asp-action="Index" class="btn btn-outline-danger btn-sm border-white mx-2 ml-auto "> Clear Filter </a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="m-1"></div>
+                        <div class="bg-gray-active rounded ">
+                            <div class="table-responsive" style="overflow:auto;">
+                                <table id="tbGrid" class="table table-hover table-bordered  " style="width:100%">
+                                    <thead class="bg-info text-white">
+                                        <tr role="row">
+
+                                            <th>@Html.DisplayNameFor(model => model.userCustomerViewModel.Username)</th>
+                                            <th>@Html.DisplayNameFor(model => model.userCustomerViewModel.FirstName)</th>
+                                            <th>@Html.DisplayNameFor(model => model.userCustomerViewModel.LastName)</th>
+                                            <th>@Html.DisplayNameFor(model => model.userCustomerViewModel.ActiveStatus)</th>
+                                            <th>@Html.DisplayNameFor(model => model.userCustomerViewModel.ParentOrg)</th>
+                                            <th>@Html.DisplayNameFor(model => model.userCustomerViewModel.UserType)</th>
+                                            <th>@Html.DisplayNameFor(model => model.userCustomerViewModel.SupervisorName)</th>
+                                            <th>@Html.DisplayNameFor(model => model.userCustomerViewModel.ContactNo)</th>
+                                            <th>@Html.DisplayNameFor(model => model.userCustomerViewModel.ValidToDate)</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <a href="/Admin/CourseMaster/Upsert/${data.id}"
+                                                   class=' '
+                                                   style='cursor:pointer;  '>
+                                                    PradeepMahor001
+                                                </a>
+                                            </td>
+                                            <td>Pradeepkumar</td>
+                                            <td>Mahor</td>
+                                            <td>Active</td>
+                                            <td>Dell</td>
+                                            <td>Tech</td>
+                                            <td>Sandeep</td>
+                                            <td>8424037919</td>
+                                            <td>29-Aug-2014</td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tabs-PMRDetails" role="tabpanel" aria-labelledby="tabs-PMRDetails-tab">
+                <div id="pw-PMRDetails">
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tabs-CMRDetails" role="tabpanel" aria-labelledby="tabs-CMRDetails-tab">
+                <div id="pw-CMRDetails">
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tabs-WMRDetails" role="tabpanel" aria-labelledby="tabs-WMRDetails-tab">
+                <div id="pw-WMRDetails">
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tabs-AadhaarDetails" role="tabpanel" aria-labelledby="tabs-AadhaarDetails-tab">
+                <div id="pw-AadhaarDetails">
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tabs-WMRAndAadhaarDetails" role="tabpanel" aria-labelledby="tabs-WMRAndAadhaarDetails-tab">
+                <div id="pw-WMRAndAadhaarDetails">
+                </div>
+            </div>
+            <div class="tab-pane fade" id="tabs-GTLIDetails" role="tabpanel" aria-labelledby="tabs-GTLIDetails-tab">
+                <div id="pw-GTLIDetails">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+        // await Html.RenderPartialAsync("_EmpGenInfoDataTableColumnsPartial", Model.LockStatusDetailViewModel, new ViewDataDictionary(ViewData) { { "IsOnBehalf", NotOk } });
+
+    }
+                            <script src="~/lib/dropzone/dropzone.js" asp-append-version="true"></script>
+    @*  <script src="~/js/EmployeeGenInfo.js" asp-append-version="true"></script> *@
+
+                            <script>
+                                $(document).ready(function () {
+                                    DateTimePickerInit();
+                                });
+
+                                function DateTimePickerInit() {
+                                    $('.DateTimePickerInit').bootstrapMaterialDatePicker({
+                                        format: 'DD-MMM-YYYY',
+                                        time: false
+                                    });
+                                }
+
+
+                                function flagUnflagTabsCallback(jsonData) {
+                                    flagUnflagTabs(jsonData.headerData);
+                                }
+
+                                function flagUnflagTabs(data) {
+                                    if (data.primaryStatus == 'KO') {
+                                        $('#imgDescriptionPrimaryStatus').show();
+                                        $('#imgDescriptionSecondaryStatus').show();
+                                        $("#imgDescriptionPrimaryStatus").attr("title", data.primaryText);
+                                        $("#imgDescriptionSecondaryStatus").attr("title", data.primaryText);
+                                        $("#spanDescriptionPrimaryStatus").text(data.primaryText);
+                                        $("#spanDescriptionSecondaryStatus").text(data.primaryText);
+                                    }
+                                    else {
+                                        $('#imgDescriptionPrimaryStatus').hide();
+                                        $('#imgDescriptionSecondaryStatus').hide();
+                                        $('#spanDescriptionPrimaryStatus').hide();
+                                        $('#spanDescriptionSecondaryStatus').hide();
+                                    }
+
+                                    if (data.PMRStatus == 'KO') {
+                                        $('#imgDescriptionPMRStatus').show();
+                                        $("#imgDescriptionPMRStatus").attr("title", data.PMRText);
+                                        $("#spanDescriptionGratuityStatus").text(data.PMRText);
+                                    }
+                                    else {
+                                        $('#imgDescriptionPMRStatus').hide();
+                                        $('#spanDescriptionGratuityStatus').hide();
+                                    }
+
+                                    if (data.CMRStatus == 'KO') {
+                                        $('#imgDescriptionCMRStatus').show();
+                                        $("#imgDescriptionCMRStatus").attr("title", data.CMRText);
+                                        $("#spanDescriptionCMRStatus").text(data.CMRText);
+                                    }
+                                    else {
+                                        $('#imgDescriptionCMRStatus').hide();
+                                        $('#spanDescriptionCMRStatus').hide();
+                                    }
+
+                                    if (data.ppAaStatus == 'KO') {
+                                        $('#imgDescriptionPpAaStatus').show();
+                                        $("#imgDescriptionPpAaStatus").attr("title", data.ppAaText);
+                                        $("#spanDescriptionPpAaStatus").text(data.ppAaText);
+                                    }
+                                    else {
+                                        $('#imgDescriptionPpAaStatus').hide();
+                                        $('#spanDescriptionPpAaStatus').hide();
+                                    }
+
+                                    if (data.aaStatus == 'KO') {
+                                        $('#imgDescriptionAaStatus').show();
+                                        $("#imgDescriptionAaStatus").attr("title", data.aaText);
+                                        $("#spanDescriptionAaStatus").text(data.aaText);
+                                    }
+                                    else {
+                                        $('#imgDescriptionAaStatus').hide();
+                                        $('#spanDescriptionAaStatus').hide();
+                                    }
+
+                                    if (data.gtliStatus == 'KO') {
+                                        $('#imgDescriptionGtliStatus').show();
+                                        $("#imgDescriptionGtliStatus").attr("title", data.gtliText);
+                                        $("#spanDescriptionGtliStatus").text(data.gtliText);
+                                    }
+                                    else {
+                                        $('#imgDescriptionGtliStatus').hide();
+                                        $('#spanDescriptionGtliStatus').hide();
+                                    }
+
+                                    if (data.gratuityStatus == 'KO') {
+                                        $('#imgDescriptionGratuityStatus').show();
+                                        $("#imgDescriptionGratuityStatus").attr("title", data.gratuityText);
+                                        $("#spanDescriptionGratuityStatus").text(data.gratuityText);
+                                    }
+                                    else {
+                                        $('#imgDescriptionGratuityStatus').hide();
+                                        $('#spanDescriptionGratuityStatus').hide();
+                                    }
+
+                                    if (data.supAnnuStatus == 'KO') {
+                                        $('#imgDescriptionSupStatus').show();
+                                        $("#imgDescriptionSupStatus").attr("title", data.supAnnuText);
+                                        $("#spanDescriptionSupStatus").text(data.supAnnuText);
+                                    }
+                                    else {
+                                        $('#imgDescriptionSupStatus').hide();
+                                        $('#spanDescriptionSupStatus').hide();
+                                    }
+
+                                    if (data.epfStatus == 'KO') {
+                                        $('#imgDescriptionEpfStatus').show();
+                                        $("#imgDescriptionEpfStatus").attr("title", data.epfText);
+                                        $("#spanDescriptionEpfStatus").text(data.epfText);
+                                    }
+                                    else {
+                                        $('#imgDescriptionEpfStatus').hide();
+                                        $('#spanDescriptionEpfStatus').hide();
+                                    }
+                                    if (data.epsaStatus == 'KO') {
+                                        $('#imgDescriptionEpsaStatus').show();
+                                        $("#imgDescriptionEpsaStatus").attr("title", data.epsaText);
+                                        $("#spanDescriptionEpsaStatus").text(data.epsaText);
+                                    }
+                                    else {
+                                        $('#imgDescriptionEpsaStatus').hide();
+                                        $('#spanDescriptionEpsaStatus').hide();
+                                    }
+                                    if (data.epsmStatus == 'KO') {
+                                        $('#imgDescriptionEpsmStatus').show();
+                                        $("#imgDescriptionEpsmStatus").attr("title", data.epsmText);
+                                        $("#spanDescriptionEpsmStatus").text(data.epsmText);
+                                    }
+                                    else {
+                                        $('#imgDescriptionEpsmStatus').hide();
+                                        $('#spanDescriptionEpsmStatus').hide();
+                                    }
+                                }
+
+                                function downloadInstructions() {
+
+
+                                    $.ajax({
+                                        headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+                                        url: '@Url.Action("DownloadEGIInstructions", "EmpGenInfoDetails", new { Area = "EmpGenInfo" })',
+                                        type: "POST",
+                                        data: {
+                                        },
+                                        cache: false,
+                                        xhr: function () {
+                                            var xhr = new XMLHttpRequest();
+                                            xhr.onreadystatechange = function () {
+                                                if (xhr.readyState == 2) {
+                                                    if (xhr.status == 200) {
+                                                        xhr.responseType = "blob";
+                                                    }
+                                                }
+                                            };
+                                            return xhr;
+                                        },
+                                        beforeSend: function () {
+                                            showLoader();
+                                        },
+
+                                        success: function (blob, status, xhr) {
+
+                                            var filename = "";
+                                            var disposition = xhr.getResponseHeader('Content-Disposition');
+                                            if (disposition && disposition.indexOf('attachment') !== -1) {
+                                                var filenameRegex = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/;
+                                                var matches = filenameRegex.exec(disposition);
+                                                if (matches != null && matches[1]) filename = matches[1].replace(/['"]/g, '');
+                                            }
+                                            var link = document.createElement('a');
+                                            var url = window.URL.createObjectURL(blob);
+
+                                            link.href = window.URL.createObjectURL(blob);
+                                            link.download = filename;
+                                            link.click();
+                                            link.remove();
+                                            window.URL.revokeObjectURL(url);
+                                            toastr.success("File downloaded successfully.");
+                                            hideLoader();
+                                        },
+                                        error: function (xhr) {
+                                            showError(xhr);
+                                            hideLoader();
+                                        }
+                                    });
+                                }
+
+                                function UpdateSelfRecord() {
+
+                                    var formAction = "UpdateSelfRecord";
+                                    $("#formCMRDetails").attr("action", formAction);
+
+                                    var frm = $('#formCMRDetails');
+                                    frm.submit();
+
+                                }
+                            </script>
+}

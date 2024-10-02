@@ -1,0 +1,791 @@
+﻿@model ServiceHub.WebApp.Models.CMRCreateViewModel
+@{
+    ViewData["Title"] = "MobileApp Home";
+}
+@Html.AntiForgeryToken()
+
+@section BreadCrumbs
+{
+    <ol class="breadcrumb mb-0 ">
+        <li class="breadcrumb-item ">
+            <a asp-action="DashboardIndex" asp-controller="Technician" asp-area="MobileApp">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+
+        <li class="breadcrumb-item active  font-weight-bold" aria-current="page">Create Service Request</li>
+    </ol>
+}
+
+@section Styles {
+    <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
+    <style>
+
+        .step-container {
+            position: relative;
+            text-align: center;
+            transform: translateY(-43%);
+        }
+
+        .step-circle {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: #fff;
+            border: 2px solid #007bff;
+            line-height: 30px;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 10px;
+            cursor: pointer; /* Added cursor pointer */
+        }
+
+        .step-circle-backcolor {
+            background-color: #cbf2fff2;
+        }
+
+        .step-line {
+            position: absolute;
+            top: 16px;
+            left: 50px;
+            width: calc(100% - 100px);
+            height: 2px;
+            background-color: #007bff;
+            z-index: -1;
+        }
+
+        #multi-step-form {
+            overflow-x: hidden;
+        }
+    </style>
+}
+
+@if ((bool)@Context.Items["isMobile"] == true)
+{
+    <div class="container-fluid p-0 m-0 ">
+        <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-12 p-2 ">
+            @* <div class="app-h4 app-card-header mb-2">
+
+        <h4 style="font-weight: bold;color: #035d7b!important;"> New Request</h4>
+
+        </div> *@
+            <div id="container" class="mt-5 " style="font-size:14px!important;">
+                <div class="container">
+                    <div class="progress px-1" style="height: 3px;">
+                        <div class="progress-bar" role="progressbar" style="width: 0%;" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div class="step-container d-flex justify-content-between" style="font-size:10px!important;">
+                        <div class="step-circle circle1" onclick="displayStep(1)">Create</div>
+                        <div class="step-circle circle2" onclick="displayStep(2)">Resolve</div>
+                        <div class="step-circle circle3" onclick="displayStep(3)">Log</div>
+                    </div>
+                </div>
+
+                <form id="multi-step-form">
+                    <hr class="p-1 m-1" />
+                    <div class="step step-1" style="transform: translateY(-1%)!important; margin-top: -10px; background-color:#d8efff">
+
+                        <div class="card-toolbar">
+                            <div role="toolbar">
+                                <div class="card rounded-3">
+                                    <div class="card-body mt-2 p-0">
+                                        <form asp-controller="Technician"
+                                              asp-area="MobileApp"
+                                              asp-action="CreateServiceRequest"
+                                              id="formServiceRequests">
+                                            <input type="hidden" asp-for="SrResolutionUploadPhoto1">
+                                            <input type="hidden" asp-for="SrResolutionUploadPhoto2">
+                                            <input type="hidden" asp-for="SrResolutionUploadPhoto3">
+                                            <input type="hidden" asp-for="SrResolutionUploadPhoto4">
+                                            <input type="hidden" asp-for="SrUploadPhoto1">
+                                            <input type="hidden" asp-for="SrUploadPhoto2">
+                                            <input type="hidden" asp-for="SrUploadPhoto3">
+                                            <input type="hidden" asp-for="SrUploadPhoto4">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <div class="col-xl-4 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label asp-for="CustomerName" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <select asp-for="CustomerName" class="form-control Select2 "
+                                                                        required>
+                                                                    <option> </option>
+                                                                    <option>Customer Name 1</option>
+                                                                    <option>Customer Name 2</option>
+                                                                    <option>Customer Name 3</option>
+                                                                    <option>Customer Name 4</option>
+                                                                    <option>Customer Name 5</option>
+                                                                </select>
+                                                                <span asp-validation-for="CustomerName" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-4 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            @* <label asp-for="SerialNo" class="col-12 control-label"></label> *@                                                            <div class="col-12">
+                                                                <input asp-for="SerialNo" class="form-control capitalize" placeholder="SerialNo" required />
+                                                                <span asp-validation-for="SerialNo" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-4 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label asp-for="Product" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+
+                                                                <select asp-for="Product" class="form-control Select2"
+                                                                        required>
+                                                                    <option> </option>
+                                                                    <option>10001 - Product 1</option>
+                                                                    <option>10002 - Product 2</option>
+                                                                    <option>10003 - Product 3</option>
+                                                                    <option>10004 - Product 4</option>
+                                                                </select>
+                                                                <span asp-validation-for="Product" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-12 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label asp-for="ServiceCause" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <select asp-for="ServiceCause" class="chosen-select-multiple form-control"
+                                                                        multiple="multiple" required>
+                                                                    <option> </option>
+                                                                    <option>ServiceCause 1</option>
+                                                                    <option>ServiceCause 2</option>
+                                                                    <option>ServiceCause 3</option>
+                                                                    <option>ServiceCause 4</option>
+                                                                </select>
+                                                                <span asp-validation-for="ServiceCause" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-12 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            @* <label asp-for="OtherUserComments" class="col-12 control-label"></label> *@
+                                                            <div class="col-12">
+                                                                <textarea asp-for="OtherUserComments" rows="3" class="form-control capitalize" required placeholder="Other User Comments">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                <span asp-validation-for="OtherUserComments" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                                <div class="row  p-1">
+
+                                                    <div class="col-6 center">
+                                                        <div class="form-group">
+                                                            <label asp-for="SrUploadPhoto1" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <img id="SrUploadPhoto1"
+                                                                     style=" "
+                                                                     src="~/images\UploadImg.png" alt="UploadPhoto"
+                                                                     class="profile-user-img img-fluid img-squar">
+                                                                <span asp-validation-for="SrUploadPhoto1" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 center">
+                                                        <div class="form-group">
+                                                            <label asp-for="SrUploadPhoto2" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <img id="SrUploadPhoto2"
+                                                                     style=" "
+                                                                     src="~/images\UploadImg.png" alt="UploadPhoto"
+                                                                     class="profile-user-img img-fluid img-squar">
+                                                                <span asp-validation-for="SrUploadPhoto2" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 center">
+                                                        <div class="form-group">
+                                                            <label asp-for="SrUploadPhoto3" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <img id="SrUploadPhoto3"
+                                                                     style=" "
+                                                                     src="~/images\UploadImg.png" alt="UploadPhoto"
+                                                                     class="profile-user-img img-fluid img-squar">
+                                                                <span asp-validation-for="SrUploadPhoto3" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 center">
+                                                        <div class="form-group">
+                                                            <label asp-for="SrUploadPhoto4" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <img id="SrUploadPhoto4"
+                                                                     style=" "
+                                                                     src="~/images\UploadImg.png" alt="UploadPhoto"
+                                                                     class="profile-user-img img-fluid img-squar">
+                                                                <span asp-validation-for="SrUploadPhoto4" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-4 col-md-6 col-sm-12">
+                                                    <div class="form-group">
+                                                        @* <label asp-for="Priority" class="col-12 control-label"></label> *@
+                                                        <div class="col-12">
+                                                            <select asp-for="Priority" class="form-control" required placeholder="Priority">
+                                                                <option> </option>
+                                                                <option>High</option>
+                                                                <option>Medium</option>
+                                                                <option>Low</option>
+                                                                <option>Critical</option>
+                                                            </select>
+                                                            <span asp-validation-for="Priority" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="from-group m-2 pb-2">
+
+                                                    <div class="col-12 center">
+                                                        <button type="submit" class="btn btn-primary btn-md  mb-1 " style="margin-right:auto;margin-left:auto;">Submit</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary next-step" style="display:none;">Next</button>
+                    </div>
+
+                    <div class="step step-2" style="transform: translateY(-5%)!important; display:none;">
+
+                        <div class="card-toolbar">
+                            <div role="toolbar">
+                                <div class="card rounded-3">
+                                    <div class="card-body mt-2 p-0 ">
+                                        <form asp-controller="Technician"
+                                              asp-area="MobileApp"
+                                              asp-action="CreateServiceRequest"
+                                              id="formServiceRequests">
+                                            <input type="hidden" asp-for="SrResolutionUploadPhoto1">
+                                            <input type="hidden" asp-for="SrResolutionUploadPhoto2">
+                                            <input type="hidden" asp-for="SrResolutionUploadPhoto3">
+                                            <input type="hidden" asp-for="SrResolutionUploadPhoto4">
+                                            <input type="hidden" asp-for="SrUploadPhoto1">
+                                            <input type="hidden" asp-for="SrUploadPhoto2">
+                                            <input type="hidden" asp-for="SrUploadPhoto3">
+                                            <input type="hidden" asp-for="SrUploadPhoto4">
+                                            <div class="col-12">
+                                                <div class="row">
+                                                    <div class="col-xl-4 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            @*   <label asp-for="ETR" class="col-12 control-label"></label> *@
+                                                            <div class="col-12">
+                                                                <input asp-for="ETR" type="text" placeholder="ETR DD-MMM-YYYY"
+                                                                       class="form-control DateTimePickerInit" required />
+                                                                @*                                                                 <input asp-for="ETR" class="form-control capitalize" required />
+                                                            *@                                                                <span asp-validation-for="ETR" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-xl-4 col-md-6 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label asp-for="RCA" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+
+                                                                <select asp-for="RCA" class="chosen-select-multiple form-control"
+                                                                        multiple="multiple" required>
+                                                                    <option> </option>
+                                                                    <option>RCA 1</option>
+                                                                    <option>RCA 2</option>
+                                                                    <option>RCA 3</option>
+                                                                    <option>RCA 4</option>
+                                                                    <option>RCA 5</option>
+                                                                </select>
+                                                                <span asp-validation-for="RCA" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-xl-12 col-md-12 col-sm-12">
+                                                        <div class="form-group">
+                                                            <label asp-for="TechnicianRemarks" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <textarea asp-for="TechnicianRemarks" rows="3" class="form-control capitalize" required>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        </textarea>
+                                                                <span asp-validation-for="TechnicianRemarks" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row p-1">
+
+                                                    <div class="col-6 center">
+                                                        <div class="form-group">
+                                                            <label asp-for="SrResolutionUploadPhoto1" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <img id="SrResolutionUploadPhoto1"
+                                                                     style=" "
+                                                                     src="~/images\UploadImg.png" alt="UploadPhoto"
+                                                                     class="profile-user-img img-fluid img-squar">
+                                                                <span asp-validation-for="SrResolutionUploadPhoto1" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-6 center">
+                                                        <div class="form-group">
+                                                            <label asp-for="SrResolutionUploadPhoto2" class="col-12 control-label"></label>
+                                                            <div class="col-12">
+                                                                <img id="SrResolutionUploadPhoto2"
+                                                                     style=" "
+                                                                     src="~/images\UploadImg.png" alt="UploadPhoto"
+                                                                     class="profile-user-img img-fluid img-squar">
+                                                                <span asp-validation-for="SrResolutionUploadPhoto2" class="text-danger"></span>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="col-xl-12 col-md-12 col-sm-12">
+                                                    <div class="form-group">
+                                                        <label asp-for="Parts" class="col-12 control-label"></label>
+                                                        <div class="col-12">
+                                                            <select asp-for="Parts" class="chosen-select-multiple form-control"
+                                                                    multiple="multiple" required>
+                                                                <option> </option>
+                                                                <option>Parts 1</option>
+                                                                <option>Parts 2</option>
+                                                                <option>Parts 3</option>
+                                                                <option>Parts 4</option>
+                                                            </select>
+
+                                                            <span asp-validation-for="Parts" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="from-group m-2 pb-2">
+
+                                                    <div class="col-12 center">
+                                                        <button type="submit" class="btn btn-primary btn-md  mb-1 " style="margin-right:auto;margin-left:auto;">Submit</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <button type="button" class="btn btn-primary prev-step" style="display:none;">Previous</button>
+                        <button type="button" class="btn btn-primary next-step" style="display:none;">Next</button>
+                    </div>
+
+                    <div class="step step-3" style="transform: translateY(-5%)!important; display:none;">
+
+                        @*  <div class="mb-3">
+                    <label for="field3" class="form-label">Field 3:</label>
+                    <input type="text" class="form-control" id="field3" name="field3">
+                    </div> *@
+                        <div class="card-toolbar">
+                            <div role="toolbar">
+                                <div class="card rounded-3">
+                                    <div class="card-body mt-2 p-0 ">
+                                        <form asp-controller="Technician"
+                                              asp-area="MobileApp"
+                                              asp-action="CreateServiceRequest"
+                                              id="formServiceRequests">
+                                            <input type="hidden" asp-for="SrResolutionUploadPhoto1">
+                                            <input type="hidden" asp-for="SrResolutionUploadPhoto2">
+                                            <input type="hidden" asp-for="SrResolutionUploadPhoto3">
+                                            <input type="hidden" asp-for="SrResolutionUploadPhoto4">
+                                            <input type="hidden" asp-for="SrUploadPhoto1">
+                                            <input type="hidden" asp-for="SrUploadPhoto2">
+                                            <input type="hidden" asp-for="SrUploadPhoto3">
+                                            <input type="hidden" asp-for="SrUploadPhoto4">
+                                            <div class="col-12">
+                                                <div class="bg-gray-active rounded ">
+                                                    <div class="table-responsive" style="overflow:auto;">
+
+                                                        <div class="datatable-td-mobile">
+                                                            <div class="card">
+                                                                <div class="card-mobiledatatable ">
+                                                                    <div class="row ">
+                                                                        <div class="col-12 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    @Html.DisplayNameFor(model => model.ServiceRequestNo)
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    CMR00001
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                        <div class="col-6 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    @Html.DisplayNameFor(model => model.RequestedDate)
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    01-Mar-2024
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                        <div class="col-6 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    @Html.DisplayNameFor(model => model.AssignedDate)
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    01-Mar-2024
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                        <div class="col-6 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    @Html.DisplayNameFor(model => model.CompletedDate)
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    02-Mar-2024
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                        <div class="col-6 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    @Html.DisplayNameFor(model => model.RequestedBy)
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    Requested By Name
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="row ">
+                                                                        <div class="col-6 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-6">
+                                                                                    @Html.DisplayNameFor(model => model.AssignTo)
+                                                                                </dt>
+                                                                                <dd class="col-lg-6">
+                                                                                    Assign To Name
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+
+                                                                        <div class="col-6 " style="">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-6">
+                                                                                    @Html.DisplayNameFor(model => model.Product)
+                                                                                </dt>
+                                                                                <dd class="col-lg-6">
+                                                                                    PSNSL00001
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-mobiledatatable ">
+                                                                    <div class="row ">
+                                                                        <div class="col-12 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    @Html.DisplayNameFor(model => model.CustomerAddress)
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    Customer
+                                                                                    Address
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+
+                                                                    </div>
+                                                                    <div class="row ">
+                                                                        <div class="col-6 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-6">
+                                                                                    @Html.DisplayNameFor(model => model.RequestedByContact)
+                                                                                </dt>
+                                                                                <dd class="col-lg-6">
+                                                                                    +91-9763221882
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                        <div class="col-6 " style="">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-6">
+                                                                                    @Html.DisplayNameFor(model => model.AlternateContact)
+                                                                                </dt>
+                                                                                <dd class="col-lg-6">
+                                                                                    +91-9763221882
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-mobiledatatable ">
+                                                                    <div class="row ">
+                                                                        <div class="col-12 ">
+                                                                            <h4 style="font-weight: 503!important;text-align: center;">
+                                                                                Work History
+                                                                            </h4>
+                                                                            <hr class="p-1 m-1" />
+                                                                        </div>
+                                                                        <div class="col-4 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    Date
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    Corrective Request is completed
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                        <div class="col-4 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    Date
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    MobileApp is assgined
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                        <div class="col-4 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    Date
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    Corrective Request  is created
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-mobiledatatable ">
+                                                                    <div class="row ">
+                                                                        <div class="col-12 ">
+                                                                            <h4 style="font-weight: 503!important;text-align: center;">
+                                                                                RCA Details
+                                                                            </h4>
+                                                                            <hr class="p-1 m-1" />
+                                                                        </div>
+                                                                        <div class="col-6 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    RCA1  Date
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    RCA1  Accepted
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                        <div class="col-6 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    RCA2 Date
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    RCA2 Accepted
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-mobiledatatable ">
+                                                                    <div class="row ">
+                                                                        <div class="col-12 ">
+                                                                            <h4 style="font-weight: 503!important;text-align: center;">
+                                                                                Parts Details
+                                                                            </h4>
+                                                                            <hr class="p-1 m-1" />
+                                                                        </div>
+                                                                        <div class="col-6 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    Part1
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    Part1
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                        <div class="col-6 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    Part2
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    Part2
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                                <div class="card-mobiledatatable ">
+                                                                    <div class="row ">
+                                                                        <div class="col-12 ">
+                                                                            <h4 style="font-weight: 503!important;text-align: center;">
+                                                                                Technician  Details
+                                                                            </h4>
+                                                                            <hr class="p-1 m-1" />
+                                                                        </div>
+                                                                        <div class="col-6 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    Technician is assigned
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    Technician Name
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+                                                                        <div class="col-6 ">
+                                                                            <dl class="row margin-bottom-0">
+                                                                                <dt class="col-lg-4">
+                                                                                    Corrective Request is created
+                                                                                </dt>
+                                                                                <dd class="col-lg-8">
+                                                                                    Created On/ By
+                                                                                </dd>
+                                                                            </dl>
+                                                                        </div>
+
+                                                                    </div>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="from-group m-2 pb-2">
+
+                                                    <div class="col-12 center">
+                                                        <button type="submit" class="btn btn-primary btn-md  mb-1 " style="margin-right:auto;margin-left:auto;">Submit</button>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        @*  <button type="button" class="btn btn-primary prev-step">Previous</button>
+                    <button type="submit" class="btn btn-primary">Submit</button> *@
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+}
+else
+{
+    <h1>This screen only for Mobile</h1>
+}
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        var currentStep = 1;
+        var updateProgressBar;
+
+        function displayStep(stepNumber) {
+
+            if (stepNumber == 1) {
+                $(".circle1").css('background-color', 'rgb(205 240 255 / 73%)');
+                $(".circle2").css('background-color', 'white');
+                $(".circle3").css('background-color', 'white');
+            }
+            if (stepNumber == 2) {
+                $(".circle1").css('background-color', 'rgb(205 240 255 / 73%)');
+                $(".circle2").css('background-color', 'rgb(205 240 255 / 73%)');
+
+                $(".circle3").css('background-color', 'white');
+            }
+            if (stepNumber == 3) {
+                $(".circle1").css('background-color', 'rgb(205 240 255 / 73%)');
+                $(".circle2").css('background-color', 'rgb(205 240 255 / 73%)');
+                $(".circle3").css('background-color', 'rgb(205 240 255 / 73%)');
+            }
+
+            if (stepNumber >= 1 && stepNumber <= 3) {
+                $(".step-" + currentStep).hide();
+                $(".step-" + stepNumber).show();
+                currentStep = stepNumber;
+                updateProgressBar();
+            }
+        }
+
+
+        $(document).ready(function () {
+            DateTimePickerInit();
+
+            $('#multi-step-form').find('.step').slice(1).hide();
+
+            $(".next-step").click(function () {
+                if (currentStep < 3) {
+                    $(".step-" + currentStep).addClass("animate__animated animate__fadeOutLeft step-circle-backcolor");
+                    currentStep++;
+                    setTimeout(function () {
+                        $(".step").removeClass("animate__animated animate__fadeOutLeft").hide();
+                        $(".step-" + currentStep).show().addClass("animate__animated animate__fadeInRight");
+                        updateProgressBar();
+                    }, 500);
+                }
+            });
+
+            $(".prev-step").click(function () {
+                if (currentStep > 1) {
+                    $(".step-" + currentStep).addClass("animate__animated animate__fadeOutRight");
+                    currentStep--;
+                    setTimeout(function () {
+                        $(".step").removeClass("animate__animated animate__fadeOutRight").hide();
+                        $(".step-" + currentStep).show().addClass("animate__animated animate__fadeInLeft");
+                        updateProgressBar();
+                    }, 500);
+                }
+            });
+
+            updateProgressBar = function () {
+                var progressPercentage = ((currentStep - 1) / 2) * 100;
+                $(".progress-bar").css("width", progressPercentage + "%");
+            }
+        });
+        function DateTimePickerInit() {
+            $('.DateTimePickerInit').bootstrapMaterialDatePicker({
+                format: 'DD-MMM-YYYY',
+                time: false
+            });
+        }
+        // $(document).ready(function () {
+        //     // var fileTag = document.getElementById("UploadProfilePic"),
+        //     //     preview = document.getElementById("preview");
+
+        //     // fileTag.addEventListener("change", function () {
+        //     //     changeImage(this);
+        //     // });
+
+        //     // function changeImage(input) {
+        //     //     var reader;
+
+        //     //     if (input.files && input.files[0]) {
+        //     //         reader = new FileReader();
+
+        //     //         reader.onload = function (e) {
+        //     //             preview.setAttribute('src', e.target.result);
+        //     //         }
+
+        //     //         reader.readAsDataURL(input.files[0]);
+        //     //     }
+        //     // }
+        // });
+    </script>
+
+}

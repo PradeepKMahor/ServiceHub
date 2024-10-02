@@ -1,0 +1,256 @@
+﻿@model ServiceHub.WebApp.Models.UserCustomerViewModel
+@{
+    ViewData["Title"] = "Users Customer";
+}
+@Html.AntiForgeryToken()
+
+@section BreadCrumbs
+{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
+        <li class="breadcrumb-item "><a asp-action="UserIndex" asp-controller="Home" asp-area="Masters">User Management</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">Users-Customer list</li>
+    </ol>
+
+}
+
+@section Styles {
+    <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
+}
+
+<div style="display:none">
+    <input type="hidden" asp-for="@Model.FilterDataModel.IsActive" />
+</div>
+
+<div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
+    <div class="app-h4 app-card-header mb-2">
+        <p>Users-Customer</p>
+    </div>
+    <div class="card-toolbar">
+        <div role="toolbar">
+            <div class="d-flex flex-row">
+                <a asp-area="Masters"
+                   asp-controller="UsersCustomer"
+                   asp-action="CreateCustomerUser"
+                   class="nav-link">
+                    <i class="fas fa-plus " aria-hidden="true"></i>&nbsp;
+                    New User
+                </a>
+                <button name="ExcelDownload" id="idExcelDownload"
+                        title="Excel Download"
+                        class="btn btn-outline-success btn-sm border-white  mx-2 ml-auto">
+                    <i class="fas fa-file-excel green-color "> &nbsp;Excel</i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="row">
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
+                <div class="form-group">
+                    <select asp-for="SearchByFirstLastName" class="form-control Select2 "
+                            asp-items="ViewBag.FirstNameLastNameList" data-placeholder="First/Last Name">
+                        <option selected></option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
+                <div class="form-group">
+                    <select asp-for="SearchByUsername" class="form-control Select2 "
+                            asp-items="ViewBag.UsernameList" data-placeholder="Username">
+                        <option selected></option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
+                <div class="form-group">
+                    <select asp-for="SearchByParentOrg" class="form-control Select2 "
+                            asp-items="ViewBag.ParentOrgList" data-placeholder="Parent Org">
+                        <option selected></option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
+                <div class="form-group">
+                    <select asp-for="SearchByStatus" class="form-control chosen-select" data-placeholder="Status">
+                        <option selected></option>
+                        <option value="N">Active</option>
+                        <option value="Y">De-Active</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
+                <div class="form-group">
+                    <select asp-for="SearchByUserType" class="form-control chosen-select" data-placeholder="UserType">
+                        <option selected></option>
+                        <option>Supervisor </option>
+                        <option>End-User</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-outline-primary btn-sm  btn-block mx-2 ml-auto ">Go </button>
+            </div>
+
+            <div class="col">
+                <a asp-action="Index" class="btn btn-outline-danger btn-sm border-white mx-2 ml-auto "> Clear Filter </a>
+            </div>
+        </div>
+    </div>
+    <div class="m-1"></div>
+    <div class="bg-gray-active rounded ">
+        <div class="table-responsive" style="overflow:auto;">
+            <table id="tbGrid" class="table table-hover table-bordered  " style="width:100%">
+                <thead class="bg-info text-white">
+                    <tr role="row">
+                        @*                     <th>@Html.DisplayNameFor(model => model.UserId)</th>
+                        *@
+                        <th>@Html.DisplayNameFor(model => model.Username)</th>
+                        <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+                        <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                        <th>@Html.DisplayNameFor(model => model.ActiveStatus)</th>
+                        <th>@Html.DisplayNameFor(model => model.ParentOrg)</th>
+                        <th>@Html.DisplayNameFor(model => model.UserType)</th>
+                        <th>@Html.DisplayNameFor(model => model.SupervisorName)</th>
+                        <th>@Html.DisplayNameFor(model => model.ContactNo)</th>
+                        <th>@Html.DisplayNameFor(model => model.ValidToDate)</th>
+                    </tr>
+                </thead>
+            </table>
+        </div>
+    </div>
+</div>
+<form id="frmDetails"
+      asp-action="DetailsCustomerUser" hidden method="post"
+      asp-controller="UsersCustomer"
+      asp-area="Masters">
+    @Html.AntiForgeryToken()
+
+    <input hidden id="Id" name="Id" />
+
+</form>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+
+            initSelect2();
+            localLoadDataTable();
+        });
+
+        function localScript() {
+            initSelect2();
+        }
+
+        $('.text__input').on('input', function () {
+            $('.text__input').val($(this).val())
+        });
+
+        function localLoadDataTable() {
+
+            var table = $('#tbGrid').DataTable({
+                drawCallback: function (settings) {
+                    loadScript();
+                },
+                destroy: true,
+                pageLength: 25,
+                lengthMenu: [25, 50],
+                processing: true,
+                serverSide: true,
+                stateSave: true,
+                info: false,
+                filter: false,
+                dom: 'rt<"row"<"col-1"l><"col"p>><"clear">',
+                ordering: true,
+                order: [1, "asc"],
+                columns: [
+                    {
+                        data: null,
+                        render: function (data, type, row) {
+                            return '<a class="" onclick="return functionConfirm(' + data.id + ')" href="#" title="username"]"> ' + data.username + ' </a>';
+                        }
+                    },
+                    { data: "firstName" },
+                    { data: "lastName" },
+                    { data: "activeStatus" },
+                    { data: "parentOrg" },
+                    { data: "userType" },
+                    { data: "supervisorName" },
+                    { data: "contactNo" },
+                    {
+                        data: "validToDate",
+                        width: '10.0rem',
+                        render: function (data, type, row) {
+                            if (data) {
+                                return moment(data).format("DD-MMM-YYYY");
+                            }
+                            else {
+                                return "";
+                            }
+                        }
+                    }
+                ], ajax: {
+                    headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+                    url: '@Url.Action("GetListsUsersCustomer", "UsersCustomer")',
+                    type: 'GET',
+                    cache: true,
+                    dataType: "json",
+                    data: function (d) {
+                        d.columns = null;
+                        d.order = null;
+                        d.search = null;
+                        d.genericSearch = null; // $('#FilterDataModel_GenericSearch').val();
+                        d.businessEntityId = null; // $('#FilterDataModel_BusinessEntityId').val();
+                        d.startDateTime = null; // $('#FilterDataModel_StartDateTime').val();
+                        d.endDateTime = null; // $('#FilterDataModel_EndDateTime').val();
+                        d.statusTypeId = null; // $('#FilterDataModel_StatusTypeId').val();
+                        d.isActive = $('#FilterDataModel_IsActive').val();
+                        //d.endDate = $('#FilterDataModel_EndDate').val();
+                        return { "paramJson": JSON.stringify(d) };
+                    },
+                    error: function (request, status, error) {
+                        notify('error', request.responseText, 'danger');
+                    }
+                }
+            });
+
+            //dataTableSearch();
+        }
+
+        function PostFilterReLoadDataTable(data) {
+            $("#modalcontainer").modal('hide');
+
+            $("#FilterDataModel_IsActive").val(data.isActive);
+
+            localLoadDataTable();
+
+            hideLoader();
+        }
+
+        function PostSaveReLoadDataTable(data) {
+            if (data.success) {
+                $("#modalcontainer").modal('hide');
+                localLoadDataTable();
+                hideLoader();
+                notify('success', data.response, 'Success');
+            }
+        }
+
+        function functionConfirm(id) {
+
+            $('#Id').val(id);
+
+            $('#frmDetails').submit();
+
+
+            return false;
+        }
+
+    </script>
+}

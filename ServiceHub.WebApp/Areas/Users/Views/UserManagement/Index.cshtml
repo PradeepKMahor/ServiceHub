@@ -1,0 +1,256 @@
+﻿@model ServiceHub.WebApp.Areas.Users.Models.UserManagement.UserViewModel
+@{
+    ViewData["Title"] = "User Management";
+}
+@Html.AntiForgeryToken()
+
+@section BreadCrumbs
+{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
+        <li class="breadcrumb-item "><a asp-action="UserIndex" asp-controller="Home" asp-area="Masters">User Management</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">User Management</li>k
+    </ol>
+
+}
+
+@section Styles {
+    <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
+}
+
+<div style="display:none">
+    <input type="hidden" asp-for="@Model.FilterDataModel.IsActive" />
+</div>
+
+<div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
+    <div class="app-h4 app-card-header mb-2">
+        <p>User Access</p>
+    </div>
+    <div class="card-toolbar">
+        <div role="toolbar">
+            @*  @if (CurrentUserIdentity.ProfileActions.Any(p => p.ActionId == TCMPLApp.Domain.Models.LC.LCHelper.ActionCreateMasters))
+            { *@
+
+            <a class="btn btn-outline-primary btn-sm border-white"
+               asp-action="CreateUser"
+               asp-area="Users"
+               asp-controller="UserManagement">
+                <i class="fas fa-plus"></i>&nbsp; New
+            </a>
+
+            <a class="btn btn-outline-primary btn-sm filteredmarker-border border-white"
+               data-jqueryselector="openmodal"
+               data-modalcontainer="modalcontainer"
+               data-modalpopupwidth="rightw35"
+               data-url='@Url.Action("BankFilterGet", "Masters", new { Area = "LC" })'
+               data-modaltitle="Filters - Bank"
+               data-modalheader="Filters - Bank">
+                <i class="fas fa-filter"></i>&nbsp;Filters
+            </a>
+            <a class="btn btn-outline-danger btn-sm border-white filteredmarker-visibility m-l-5"
+               data-actionid="BankIndex"
+               data-url='@Url.Action("ResetFilter", "Masters", new { Area = "LC" })'
+               href="#"
+               onclick="resetFilter(event, this);"
+               style="display: none;">
+                <i class="fas fa-filter"></i> Reset
+            </a>
+
+        </div>
+    </div>
+    <div class="m-1"></div>
+    <div class="bg-gray-active rounded ">
+
+        <table id="tbGrid" class="table table-hover table-bordered  " style="width:100%">
+            <thead class="bg-info text-white">
+                <tr role="row">
+                    <th>@Html.DisplayNameFor(model => model.UserId)</th>
+                    <th>@Html.DisplayNameFor(model => model.Username)</th>
+                    <th>@Html.DisplayNameFor(model => model.ActiveStatus)</th>
+                    <th>@Html.DisplayNameFor(model => model.ParentOrg)</th>
+                    <th>@Html.DisplayNameFor(model => model.UserType)</th>
+                    <th>@Html.DisplayNameFor(model => model.SupervisorName)</th>
+                    <th>@Html.DisplayNameFor(model => model.AdminName)</th>
+                    <th>@Html.DisplayNameFor(model => model.ContactNo)</th>
+                    <th>@Html.DisplayNameFor(model => model.ValidToDate)</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1001</td>
+                    <td>PradeepMahor</td>
+                    <td>Active</td>
+                    <td>Wipro</td>
+                    <td>Technion</td>
+                    <td>Avinash</td>
+                    <td>Sandeep</td>
+                    <td>8424037919</td>
+                    <td>29-Aug-2014</td>
+                    <td class="center">
+                        <div class="row text-center pl-1 ml-1 pr-1 mr-1">
+
+                            <a href="/Admin/CourseMaster/Upsert/${data.id}"
+                               class='btn btn-success btn-sm text-white  m-2'
+                               style='cursor:pointer;  '>
+                                <i class='far fa-edit'></i>
+
+                            </a>
+
+                            <a onclick=Delete("/Admin/CourseMaster/Delete/${data.id}")
+                               class='btn btn-danger btn-sm text-white m-2'
+                               style='cursor:pointer;  '>
+                                <i class='far fa-trash-alt'></i>
+                            </a>
+
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script type="text/javascript">
+        function localScript() {
+            initSelect2();
+        }
+
+
+        $(document).ready(function () {
+            // localLoadDataTable();
+            $('#tbGrid').DataTable({
+                // "dom": 'Bfrtip',
+                "lengthChange": false,
+                // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                "buttons": {
+                    buttons: [
+                        { extend: 'excel', className: 'btn shadow m-1 btn-info' },
+                        { extend: 'print', className: 'btn shadow m-1 btn-info' },
+                        { extend: 'colvis', className: 'btn shadow m-1 btn-info' }
+                    ]
+                },
+                // "dom": 'Qfrtip', for advance Search
+                "autoWidth": false,
+                "responsive": true,
+                "searching": true,
+                "processing": true,
+                "stateSave": true,
+                'columnDefs': [
+                    {
+                        "targets": 0,
+                        "className": "text-center",
+                        "className": "align-middle"
+                    }
+                ],
+            });
+
+
+        });
+        function localLoadDataTable() {
+
+            var table = $('#tbGrid').DataTable({
+                drawCallback: function (settings) {
+                    loadScript();
+                },
+                destroy: true,
+                pageLength: 25,
+                lengthMenu: [25, 50],
+                processing: true,
+                serverSide: true,
+                stateSave: true,
+                info: false,
+                filter: false,
+                dom: 'rt<"row"<"col-1"l><"col"p>><"clear">',
+                ordering: false,
+                columns: [
+                    { data: "userName" },
+                    { data: "email" },
+                    { data: "clintName" },
+                    { data: "roleName" },
+                    {
+                        data: null,
+                        render: function (data, type, row) {
+                            if (data.isActive == 1 || data.isActive == "1") {
+                                return 'Yes';
+                            }
+                            else {
+                                return 'No';
+                            }
+                        }
+                    },
+                    {
+                        data: null,
+                        render: function (data, type, row) {
+                            if (isActionCreateMasters == "True") {
+                                return '<button class="btn btn-outline-primary btn-sm border-none" ' +
+                                    ' data-jqueryselector="openmodal" ' +
+                                    ' data-modalcontainer="modalcontainer" ' +
+                                    ' data-url="@Url.Action("BankUpdate", "Masters", new { Area = "LC" })"' +
+                                    ' data-modalpopupwidth="rightw35" ' +
+                                    ' data-applicationid="' + data.userId + '"' +
+                                    ' data-modaltitle="Edit details" ' +
+                                    ' data-modalheader="Edit details" ' +
+                                    ' > ' +
+                                    ' <i class="fas fa-edit" aria-hidden="true"></i> ' +
+                                    ' </button>'
+                            }
+                            else {
+                                return '';
+                            }
+                        },
+                        'className': "td-icon",
+                    }
+                ], ajax: {
+                    headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+                    url: '@Url.Action("GetListsBank", "Masters")',
+                    type: 'GET',
+                    cache: true,
+                    dataType: "json",
+                    data: function (d) {
+                        d.columns = null;
+                        d.order = null;
+                        d.search = null;
+                        d.genericSearch = null; // $('#FilterDataModel_GenericSearch').val();
+                        d.businessEntityId = null; // $('#FilterDataModel_BusinessEntityId').val();
+                        d.startDateTime = null; // $('#FilterDataModel_StartDateTime').val();
+                        d.endDateTime = null; // $('#FilterDataModel_EndDateTime').val();
+                        d.statusTypeId = null; // $('#FilterDataModel_StatusTypeId').val();
+                        d.isActive = $('#FilterDataModel_IsActive').val();
+                        //d.endDate = $('#FilterDataModel_EndDate').val();
+                    },
+                    error: function (request, status, error) {
+                        notify('error', request.responseText, 'danger');
+                    }
+                }
+            });
+
+            //dataTableSearch();
+        }
+
+        function PostFilterReLoadDataTable(data) {
+            $("#modalcontainer").modal('hide');
+
+            $("#FilterDataModel_IsActive").val(data.isActive);
+
+            localLoadDataTable();
+
+            hideLoader();
+        }
+
+        function PostSaveReLoadDataTable(data) {
+            if (data.success) {
+                $("#modalcontainer").modal('hide');
+                localLoadDataTable();
+                hideLoader();
+                notify('success', data.response, 'Success');
+            }
+        }
+    </script>
+}

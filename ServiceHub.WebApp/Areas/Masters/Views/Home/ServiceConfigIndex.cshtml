@@ -1,0 +1,70 @@
+﻿@{
+    ViewData["Title"] = "Assesses Page";
+}
+
+@section BreadCrumbs
+{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">Service Configuration </li>
+    </ol>
+
+}
+
+@section Styles {
+    <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
+    <style>
+        #tbGrid.table td, #tbGrid.table th {
+            padding: 0.2rem !important;
+        }
+    </style>
+}
+
+<div class="col-sm-12">
+    <div class="row">
+
+        <div class="col-md-3 col-xl-3">
+            <div class="card card-tpl">
+                <div class="card-header">
+                    <h5>RCA - Service Cause</h5>
+                </div>
+                <div class="card-block card-tile">
+                    <a asp-area="Masters" asp-controller="Home" asp-action="ServiceCauseIndex">
+                        <div class="row align-items-center justify-content-center stretched-link">
+                            <div class="col">
+                                <h3 class="mb-2 f-w-300"></h3>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-user-tie f-20 text-white theme-dark-green"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-xl-3">
+            <div class="card card-tpl">
+                <div class="card-header">
+                    <h5>SOPs</h5>
+                </div>
+                <div class="card-block card-tile">
+                    <a asp-area="Masters" asp-controller="Home" asp-action="SOPsIndex">
+                        <div class="row align-items-center justify-content-center stretched-link">
+                            <div class="col">
+                                <h3 class="mb-2 f-w-300"></h3>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-user-tie f-20 text-white theme-dark-green"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+

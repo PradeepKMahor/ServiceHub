@@ -1,0 +1,131 @@
+﻿@* @model ServiceHub.Models.ViewModels.ApplicationDashBored;
+@using ServiceHub.Utility *@
+@{
+    ViewData["Title"] = "Index";
+
+}
+
+@section Styles {
+    <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
+    <style>
+        #tbGrid.table td, #tbGrid.table th {
+            padding: 0.2rem !important;
+        }
+    </style>
+}
+
+<section>
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Dashboard</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li class="breadcrumb-item active">Dashboard v1</li>
+                </ol>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3 col-6">
+
+            <div class="small-box bg-info">
+                <div class="inner">
+                    <h3>102</h3>
+                    <p><h4>CMRs</h4></p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-bag"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <!-- ./col -->
+        <div class="col-lg-3 col-6">
+
+            <div class="small-box bg-success">
+                <div class="inner">
+                    <h3>102</h3>
+                    <p><h4>PMRs</h4></p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-stats-bars"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+        <div class="col-lg-3 col-6">
+
+            <div class="small-box bg-warning text-white">
+                <div class="inner">
+                    <h3>50</h3>
+                    <p><h4>Customers</h4></p>
+                </div>
+                <div class="icon">
+                    <i class="ion ion-person-add"></i>
+                </div>
+                <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+            </div>
+        </div>
+
+
+
+        <!-- ./col -->
+    </div>
+</section>
+<hr />
+<div class="col-sm-12">
+    <div class="row">
+        <div class="col-md-4 col-xl-3">
+            <div class="card card-tpl">
+                <div class="card-header header-flex">
+                    <h5>Masters</h5>
+                    @*                     <span class="f-14 f-w-700"> &#10148; </span>
+                    *@
+                </div>
+                <div class="card-block card-tile">
+                    <a href="@Url.Action("Index", "Home", new { Area = "Masters" })">
+                        <div class="row align-items-center justify-content-center stretched-link">
+                            <div class="col">
+                                <h7 class="mb-2 f-w-300"> </h7>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-chart-bar f-20 text-white theme-teal"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="col-md-4 col-xl-3">
+            <div class="card card-tpl">
+                <div class="card-header header-flex">
+                    <h5>Service Requests</h5>
+                    @*                     <span class="f-14 f-w-700"> &#10148; </span>
+                    *@
+                </div>
+                <div class="card-block card-tile">
+                    <a href="@Url.Action("Index", "CMR", new { Area = "ServiceRequests" })">
+                        <div class="row align-items-center justify-content-center stretched-link">
+                            <div class="col">
+                                <h7 class="mb-2 f-w-300"> </h7>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-chart-bar f-20 text-white theme-teal"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+<div class="grey-bg container-fluid shadow border">
+</div>
+

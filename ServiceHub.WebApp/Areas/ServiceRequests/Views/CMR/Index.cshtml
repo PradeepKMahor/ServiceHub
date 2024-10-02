@@ -1,0 +1,355 @@
+﻿@model ServiceHub.WebApp.Models.CMRViewModel
+@{
+    ViewData["Title"] = "Corrective Maint Requests";
+}
+@Html.AntiForgeryToken()
+
+@section BreadCrumbs
+{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="ServiceRequest">Dashboard</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Corrective Maint Request List</li>
+    </ol>
+
+}
+
+@section Styles {
+    @*     <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
+ *@
+}
+
+<div style="display:none">
+    <input type="hidden" asp-for="@Model.FilterDataModel.IsActive" />
+</div>
+
+<div class="container-fluid bg-white border card rounded shadow m-auto col-xl-12 p-2 ">
+    <div class="app-h4 app-card-header mb-2">
+        <p>
+            <a class="btn btn-primary ">CMR </a>&nbsp; &nbsp;
+            <a asp-action="Index" class="btn btn-light border" asp-controller="PMR"> PMR  </a>&nbsp; &nbsp;
+            <a asp-action="Index" class="btn btn-light border" asp-controller="WMR"> WMR  </a>
+        </p>
+    </div>
+    <div class="card-toolbar">
+        <div role="toolbar">
+            <div class="d-flex flex-row">
+                @*  @if (CurrentUserIdentity.ProfileActions.Any(p => p.ActionId == TCMPLApp.Domain.Models.LC.LCHelper.ActionCreateMasters))
+                { *@
+
+                <a class="btn btn-outline-primary btn-sm border-white"
+                   asp-action="CreateCMR"
+                   asp-area="ServiceRequests"
+                   asp-controller="CMR">
+                    <i class="fas fa-plus"></i>&nbsp; New
+                </a>
+                <button name="ExcelDownload" id="idExcelDownload"
+                        title="Excel Download"
+                        class="btn btn-outline-success btn-sm border-white  mx-2 ml-auto">
+                    <i class="fas fa-file-excel green-color "> &nbsp;Excel</i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <hr class="mb-1 pb-1" />
+    <div class="card-block">
+        <div class="row">
+            <div class="col-xl-1 col-lg-1 col-md-3 col-sm-12">
+                <div class="form-group">
+                    <input asp-for="SearchByFromDate" type="text" placeholder="From Date "
+                           class="form-control DateTimePickerInit" />
+                </div>
+            </div>
+            <div class="col-xl-1 col-lg-1 col-md-3 col-sm-12">
+                <div class="form-group">
+                    <input asp-for="SearchByToDate" type="text" placeholder="To Date "
+                           class="form-control DateTimePickerInit" />
+                </div>
+            </div>
+
+            <div class="col-xl-2 col-lg-1 col-md-3 col-sm-12">
+                <div class="form-group">
+                    <input asp-for="SearchByProduct" class="form-control capitalize" placeholder=" Product" />
+                </div>
+            </div>
+            <div class="col-xl-1 col-lg-1 col-md-3 col-sm-12">
+                <div class="form-group">
+                    <input asp-for="SearchByCustomer" class="form-control capitalize" placeholder=" Customer" />
+                </div>
+            </div>
+            <div class="col-xl-1 col-lg-1 col-md-2 col-sm-12">
+                <div class="form-group">
+                    <select class="form-control " asp-for="SearchByStatus">
+                        <option value="">Status</option>
+                        <option value="Active">Active</option>
+                        <option value="DeActive">DeActive</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xl-1 col-lg-1 col-md-2 col-sm-12">
+                <div class="form-group">
+                    <select class="form-control " asp-for="SearchByPriority">
+                        <option value="">Priority</option>
+                        <option value="High">High</option>
+                        <option value="Low">Low</option>
+                    </select>
+
+                </div>
+            </div>
+
+            <div class="col-xl-1 col-lg-1 col-md-3 col-sm-12">
+                <div class="form-group">
+                    <input asp-for="SearchByAssignedTo" class="form-control capitalize" placeholder=" Assigned To" />
+                </div>
+            </div>
+            <div class="col-xl-1 col-lg-1 col-md-2 col-sm-12">
+                <div class="form-group">
+                    <select class="form-control " asp-for="SearchBySLAStatus">
+                        <option value="">SLA Status</option>
+                        <option value="Active">Active</option>
+                        <option value="DeActive">DeActive</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-xl-1 col-lg-1 col-md-2 col-sm-12">
+                <button type="submit" class="btn btn-outline-primary btn-sm  btn-block mx-2 ml-auto ">Go </button>
+            </div>
+
+            <div class="col-xl-1 col-lg-1 col-md-2 col-sm-12">
+                <a asp-action="Index" class="btn btn-outline-danger btn-sm border-white mx-2 ml-auto "> Clear Filter </a>
+            </div>
+        </div>
+
+    </div>
+    <hr class="m-0 p-0" />
+    <div class="bg-gray-active rounded ">
+
+        <table id="tbGrid" class="table table-hover table-bordered  " style="width:100%">
+            <thead class="bg-info text-white">
+                <tr role="row">
+                    <th>@Html.DisplayNameFor(model => model.SRN)</th>
+                    <th>@Html.DisplayNameFor(model => model.SerialNo)</th>
+                    <th>@Html.DisplayNameFor(model => model.Product)</th>
+                    <th>@Html.DisplayNameFor(model => model.Customer)</th>
+                    <th>@Html.DisplayNameFor(model => model.Priority)</th>
+                    <th>@Html.DisplayNameFor(model => model.RequestedDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.RequestedByContact)</th>
+                    <th>@Html.DisplayNameFor(model => model.AssignedTo)</th>
+                    <th>@Html.DisplayNameFor(model => model.SerialNo)</th>
+                    <th>@Html.DisplayNameFor(model => model.ClosureDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.ResolutionTimeTaken)</th>
+                    <th>@Html.DisplayNameFor(model => model.SLAStatus)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <a href="/Admin/CourseMaster/Upsert/${data.id}"
+                           class=' '
+                           style='cursor:pointer;  '>
+                            CMR-P000001
+                        </a>
+                    </td>
+                    <td>1001</td>
+                    <td>Scissor</td>
+                    <td>ABC Pvt. LTD</td>
+                    <td>Critical</td>
+                    <td>05/May/2024</td>
+                    <td>John Doe</td>
+                    <td>Ranjit</td>
+                    <td>Oil Leakage</td>
+                    <td>05/May/2024</td>
+                    <td>1 Day</td>
+                    <td>Met</td>
+                </tr>
+                <tr>
+                    <td>
+                        <a href="/Admin/CourseMaster/Upsert/${data.id}"
+                           class=' '
+                           style='cursor:pointer;  '>
+                            CMR-P000002
+                        </a>
+                    </td>
+                    <td>1002</td>
+                    <td>Scissor</td>
+                    <td>ABC Pvt. LTD</td>
+                    <td>High</td>
+                    <td>05/May/2024</td>
+                    <td>John Doe</td>
+                    <td>Ranjit</td>
+                    <td>Oil Leakage</td>
+                    <td>05/May/2024</td>
+                    <td>1 Day</td>
+                    <td>Met</td>
+
+                </tr>
+                <tr>
+                    <td>
+                        <a href="/Admin/CourseMaster/Upsert/${data.id}"
+                           class=' '
+                           style='cursor:pointer;  '>
+                            CMR-P000003
+                        </a>
+                    </td>
+                    <td>1003</td>
+                    <td>Scissor</td>
+                    <td>ABC Pvt. LTD</td>
+                    <td>Medum</td>
+                    <td>05/May/2024</td>
+                    <td>Jack</td>
+                    <td>Ranjit</td>
+                    <td>Oil Leakage</td>
+                    <td>05/May/2024</td>
+                    <td>2 Day</td>
+                    <td>Breached</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+
+    }
+
+    <script type="text/javascript">
+        function localScript() {
+            // initSelect2();
+
+        }
+
+
+        $(document).ready(function () {
+            // localLoadDataTable();
+            $('#tbGrid').DataTable({
+                // "dom": 'Bfrtip',
+                "lengthChange": false,
+                // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                "buttons": {
+                    buttons: [
+                        { extend: 'excel', className: 'btn shadow m-1 btn-info' },
+                        { extend: 'print', className: 'btn shadow m-1 btn-info' },
+                        { extend: 'colvis', className: 'btn shadow m-1 btn-info' }
+                    ]
+                },
+                // "dom": 'Qfrtip', for advance Search
+                "autoWidth": false,
+                "responsive": true,
+                "searching": true,
+                "processing": true,
+                "stateSave": true,
+                'columnDefs': [
+                    {
+                        "targets": 0,
+                        "className": "text-center",
+                        "className": "align-middle"
+                    }
+                ],
+            });
+
+
+        });
+        function localLoadDataTable() {
+
+            var table = $('#tbGrid').DataTable({
+                drawCallback: function (settings) {
+                    loadScript();
+                },
+                destroy: true,
+                pageLength: 25,
+                lengthMenu: [25, 50],
+                processing: true,
+                serverSide: true,
+                stateSave: true,
+                info: false,
+                filter: false,
+                dom: 'rt<"row"<"col-1"l><"col"p>><"clear">',
+                ordering: false,
+                columns: [
+                    { data: "userName" },
+                    { data: "email" },
+                    { data: "clintName" },
+                    { data: "roleName" },
+                    {
+                        data: null,
+                        render: function (data, type, row) {
+                            if (data.isActive == 1 || data.isActive == "1") {
+                                return 'Yes';
+                            }
+                            else {
+                                return 'No';
+                            }
+                        }
+                    },
+                    {
+                        data: null,
+                        render: function (data, type, row) {
+                            if (isActionCreateMasters == "True") {
+                                return '<button class="btn btn-outline-primary btn-sm border-none" ' +
+                                    ' data-jqueryselector="openmodal" ' +
+                                    ' data-modalcontainer="modalcontainer" ' +
+                                    ' data-url="@Url.Action("BankUpdate", "Masters", new { Area = "LC" })"' +
+                                    ' data-modalpopupwidth="rightw35" ' +
+                                    ' data-applicationid="' + data.userId + '"' +
+                                    ' data-modaltitle="Edit details" ' +
+                                    ' data-modalheader="Edit details" ' +
+                                    ' > ' +
+                                    ' <i class="fas fa-edit" aria-hidden="true"></i> ' +
+                                    ' </button>'
+                            }
+                            else {
+                                return '';
+                            }
+                        },
+                        'className': "td-icon",
+                    }
+                ], ajax: {
+                    headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+                    url: '@Url.Action("GetListsBank", "Masters")',
+                    type: 'GET',
+                    cache: true,
+                    dataType: "json",
+                    data: function (d) {
+                        d.columns = null;
+                        d.order = null;
+                        d.search = null;
+                        d.genericSearch = null; // $('#FilterDataModel_GenericSearch').val();
+                        d.businessEntityId = null; // $('#FilterDataModel_BusinessEntityId').val();
+                        d.startDateTime = null; // $('#FilterDataModel_StartDateTime').val();
+                        d.endDateTime = null; // $('#FilterDataModel_EndDateTime').val();
+                        d.statusTypeId = null; // $('#FilterDataModel_StatusTypeId').val();
+                        d.isActive = $('#FilterDataModel_IsActive').val();
+                        //d.endDate = $('#FilterDataModel_EndDate').val();
+                    },
+                    error: function (request, status, error) {
+                        notify('error', request.responseText, 'danger');
+                    }
+                }
+            });
+
+            //dataTableSearch();
+        }
+
+        function PostFilterReLoadDataTable(data) {
+            $("#modalcontainer").modal('hide');
+
+            $("#FilterDataModel_IsActive").val(data.isActive);
+
+            localLoadDataTable();
+
+            hideLoader();
+        }
+
+        function PostSaveReLoadDataTable(data) {
+            if (data.success) {
+                $("#modalcontainer").modal('hide');
+                localLoadDataTable();
+                hideLoader();
+                notify('success', data.response, 'Success');
+            }
+        }
+    </script>
+}

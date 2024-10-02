@@ -1,0 +1,96 @@
+﻿@model ServiceHub.WebApp.Models.NotificationsViewModel
+@{
+    ViewData["Title"] = "MobileApp Home";
+}
+@Html.AntiForgeryToken()
+
+@section BreadCrumbs
+{
+    <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item ">
+            <a asp-action="DashboardIndex" asp-controller="Technician" asp-area="MobileApp">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+
+        <li class="breadcrumb-item active  font-weight-bold" aria-current="page">Notifications</li>
+    </ol>
+
+}
+
+@section Styles {
+    <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
+}
+
+@if ((bool)@Context.Items["isMobile"] == true)
+{
+    <div style="display:none">
+    </div>
+
+    <div class="container-fluid bg-white border card rounded shadow  m-auto col-xl-12 pt-2  ">
+        <div class="row" style="font-size:large;">
+            <div class="col-12">
+                <div class="alert alert-info shadow alert-dismissible fade show  " role="alert">
+                    <i class="fa fa-info-circle"></i>&nbsp;&nbsp;
+                    <b>Note: </b> Frequency PMR for Product name is assigned to you  ETR Date
+
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="opacity:.60;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="alert alert-info shadow alert-dismissible fade show  " role="alert">
+                    <i class="fa fa-info-circle"></i>&nbsp;&nbsp;
+                    <b>Note: </b> Frequency PMR for Product name is assigned to you  ETR Date
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="opacity:.60;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+            </div>
+
+            <div class="col-12">
+                <div class="alert alert-success shadow alert-dismissible fade show  " role="alert">
+                    <i class="fa fa-check" aria-hidden="true"></i> &nbsp;&nbsp;
+                    <b>Tip: </b> CMR completed for Product name by Date
+                    <b>Click Here to view </b>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="opacity:.60;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="alert alert-warning shadow alert-dismissible fade show  " role="alert">
+                    <i class="fa fa-exclamation-triangle"></i>&nbsp;&nbsp;
+                    <b>Important: </b> CMR for Product name is assigned to you by ETR Date
+                    <b>Click Here to view </b>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="opacity:.60;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+            </div>
+            <div class="col-12">
+                <div class="alert alert-danger shadow alert-dismissible fade show  " role="alert">
+                    <i class="fa fa-exclamation-circle"></i>&nbsp;&nbsp;
+                    <b>Warning: </b> CMR for Product name is assigned to you by ETR Date
+                    <b>Click Here to view </b>
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close" style="opacity:.60;">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+}
+else
+{
+    <h1>This screen only for Mobile</h1>
+}

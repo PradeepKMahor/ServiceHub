@@ -1,0 +1,284 @@
+﻿@model ServiceHub.WebApp.Models.ProductViewModel
+@{
+    ViewData["Title"] = "Product";
+}
+@Html.AntiForgeryToken()
+
+@section BreadCrumbs
+{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
+        <li class="breadcrumb-item "><a asp-action="ProductIndex" asp-controller="Home" asp-area="Masters">Products</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">Product list</li>
+    </ol>
+
+}
+
+<div style="display:none">
+    <input type="hidden" asp-for="@Model.FilterDataModel.IsActive" />
+</div>
+
+<div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
+    <div class="app-h4 app-card-header mb-2">
+        <p>Product list</p>
+    </div>
+    <div class="card-toolbar">
+        <div role="toolbar">
+            @*  @if (CurrentUserIdentity.ProfileActions.Any(p => p.ActionId == TCMPLApp.Domain.Models.LC.LCHelper.ActionCreateMasters))
+            { *@
+                <form id="frmDetails"
+                  asp-action="ProductDetails" hidden method="post"
+                  asp-controller="Products"
+                  asp-area="Masters">
+                 <input hidden id="Id" name="Id" />
+                </form>
+            <form method="post" class="px-md-2"
+                  asp-action="ProductCreate"
+                  asp-controller="Products"
+                  asp-area="Masters"
+                  enctype="multipart/form-data">
+
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-8">
+                        <div class="card-block p-0 m-0 ">
+                            <div class="card-deck">
+                                <div class="card col-md-12 col-xl-12">
+                                    <div class="card-body m-0 p-0 ">
+                                        <div id="divPrimaryDetails">
+                                            <div class="row p-1">
+                                                <div class="col-xl-6 col-lg-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="CreateModel.ProductName" class="col-12 control-label"></label>
+                                                        <div class="col-12">
+                                                            <input asp-for="CreateModel.ProductName" name="ProductName" class="form-control capitalize" required />
+                                                            <span asp-validation-for="CreateModel.ProductName" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="CreateModel.ProductCode" class="col-12 control-label"></label>
+                                                        <div class="col-12">
+                                                            <input asp-for="CreateModel.ProductCode" name="ProductCode" class="form-control capitalize" required />
+                                                            <span asp-validation-for="CreateModel.ProductCode" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="CreateModel.ServiceDate" class="col-12 control-label"></label>
+                                                        <div class="col-12">
+                                                            <input asp-for="CreateModel.ServiceDate" name="ServiceDate" type="text" placeholder="DD-MMM-YYYY"
+                                                                   class="form-control DateTimePickerInit" required />
+                                                            <span asp-validation-for="CreateModel.ServiceDate" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="col-xl-6 col-lg-6 col-md-6">
+                                                    <div class="form-group">
+                                                        <label asp-for="CreateModel.WarrantyDate" class="col-12 control-label"></label>
+                                                        <div class="col-12">
+                                                            <input asp-for="CreateModel.WarrantyDate" name="WarrantyDate" type="text" placeholder="DD-MMM-YYYY"
+                                                                   class="form-control DateTimePickerInit" required />
+                                                            <span asp-validation-for="CreateModel.WarrantyDate" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-xl-12 col-lg-12 col-md-12">
+                                                    <div class="form-group">
+                                                        <label asp-for="CreateModel.ProductDescription" class="col-12 control-label"></label>
+                                                        <div class="col-12">
+                                                            <textarea asp-for="CreateModel.ProductDescription"
+                                                                      name="ProductDescription"
+                                                                      rows="1" class="form-control capitalize" required></textarea>
+                                                            <span asp-validation-for="CreateModel.ProductDescription" class="text-danger"></span>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                            </div>
+                                            <hr class="m-0 p-1" />
+                                            <div class="row p-1 ">
+
+                                                <div class="col-2 d-flex flex-row col-lg-6 col-12-6 col-sm-12">
+
+                                                    <button type="submit"
+                                                            data-mdb-button-init
+                                                            data-mdb-ripple-init
+                                                            class="btn btn-primary mb-1 mx-3 ml-auto">
+                                                        <i class="fas fa-plus"></i>
+                                                    </button>
+
+                                                    <button type="submit"
+                                                            data-mdb-button-init
+                                                            data-mdb-ripple-init
+                                                            class="btn btn-primary mb-1 mx-3 ml-auto">
+                                                        <i class="fas fa-save"></i>
+                                                    </button>
+
+                                                    <button type="submit"
+                                                            data-mdb-button-init
+                                                            data-mdb-ripple-init
+                                                            class="btn btn-danger mb-1 mx-3 ml-auto">
+                                                        <i class="fas fa-trash-alt"></i>
+
+                                                    </button>
+
+                                                    <div class="col-6 mx-3 ml-auto">
+                                                        <div class="switch d-inline  font-weight-bold">
+                                                            <input type="checkbox" asp-for="CreateModel.Status"
+                                                                   name="Status"
+                                                                   id="Status" />
+                                                            Status
+                                                            <label for="Status" class="cr"></label>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                            </div>
+
+                                        </div>
+                                    </div>
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <div class="card-block p-0 m-0 ">
+                            <div class="card-deck  ">
+                                <div class="card col-md-12 col-xl-12">
+                                    <div class="card-body m-0 p-0 " style="height:310px;">
+                                        <div class="text-center" style="height:250px;">
+                                            <img id="preview" height="150px" style="width:150px!important; max-width:150px!important;min-width:150px!important;" src="~/images\Product.png" alt="User Avatar"
+                                                 class="profile-user-img img-fluid img-square">
+                                            <hr />
+                                        </div>
+                                        <input type="file" name="file" accept="image/*"
+                                               id="UploadPhoto"
+                                               onchange="loadFile(event)"
+                                               class="form-control capitalize " />
+
+                                        <span asp-validation-for="CreateModel.UploadPhoto" class="text-danger"></span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+    <hr />
+    <div class="m-1"></div>
+    <div class="bg-gray-active rounded ">
+
+        <table id="tbGrid" class="table table-hover table-bordered  " style="width:100%">
+            <thead class="bg-info text-white">
+                <tr role="row">
+                    @*                     <th>@Html.DisplayNameFor(model => model.CreateModel.ProductId)</th>
+                    *@
+                    <th>@Html.DisplayNameFor(model => model.CreateModel.ProductCode)</th>
+                    <th>@Html.DisplayNameFor(model => model.CreateModel.ProductName)</th>
+                    <th>@Html.DisplayNameFor(model => model.CreateModel.ServiceDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.CreateModel.WarrantyDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.CreateModel.Status)</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var item in Model.Products)
+                    {
+                        <tr>
+                            <td>
+                            <a class="" onclick="return functionConfirm(@item.Id)"
+                                href="#" title="@item.ProductCode">
+                                @item.ProductCode
+                                </a>
+                            </td>
+                            <td>@item.ProductName </td>
+                            <td>@item.ServiceDate </td>
+                            <td>@item.WarrantyDate </td>
+                            <td>@item.Status </td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+    <script type="text/javascript">
+        function localScript() {
+            initSelect2();
+        }
+
+
+        $(document).ready(function () {
+            // localLoadDataTable();
+            DateTimePickerInit();
+            $('#tbGrid').DataTable({
+                // "dom": 'Bfrtip',
+                "lengthChange": false,
+                // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                "buttons": {
+
+                    buttons: [
+                        { extend: 'excel', className: 'btn shadow m-1 btn-info' },
+                        { extend: 'print', className: 'btn shadow m-1 btn-info' },
+                        { extend: 'colvis', className: 'btn shadow m-1 btn-info' }
+                    ]
+                },
+                // "dom": 'Qfrtip', for advance Search
+                "autoWidth": false,
+                "responsive": true,
+                "searching": true,
+                "processing": true,
+                "stateSave": true,
+                'columnDefs': [
+                    {
+                        "targets": 0,
+                        "className": "text-center",
+                        "className": "align-middle"
+                    }
+                ],
+            });
+
+
+        });
+        function DateTimePickerInit() {
+            $('.DateTimePickerInit').bootstrapMaterialDatePicker({
+                format: 'DD-MMM-YYYY',
+                time: false
+            });
+        };
+
+        var loadFile = function (event) {
+            var output = document.getElementById('preview');
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function () {
+                URL.revokeObjectURL(output.src) // free memory
+            };
+        };
+
+         function functionConfirm(id) {
+
+            $('#Id').val(id);
+
+            $('#frmDetails').submit();
+
+
+            return false;
+        }
+
+
+    </script>
+}

@@ -1,0 +1,271 @@
+﻿@model ServiceHub.WebApp.Models.CustomerProductProfileViewModel
+@{
+    ViewData["Title"] = "Customer Product Profile list";
+}
+@Html.AntiForgeryToken()
+
+@section BreadCrumbs
+{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
+        <li class="breadcrumb-item "><a asp-action="UserIndex" asp-controller="Home" asp-area="Masters">User Management</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">Customer Product Profile list</li>
+    </ol>
+
+}
+
+@section Styles {
+    <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
+}
+
+<div style="display:none">
+    <input type="hidden" asp-for="@Model.FilterDataModel.IsActive" />
+</div>
+
+<div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
+    <div class="app-h4 app-card-header mb-2">
+        <p>Customer Product Profile list </p>
+    </div>
+    <div class="card-toolbar">
+        <div role="toolbar">
+            <div class="d-flex flex-row">
+                <a asp-area="Masters"
+                   asp-controller="CustomerProductProfile"
+                   asp-action="DetailIndex"
+                   class="nav-link">
+                    <i class="fas fa-plus " aria-hidden="true"></i>&nbsp;
+                    New Customer
+                </a>
+                <button name="ExcelDownload" id="idExcelDownload"
+                        title="Excel Download"
+                        class="btn btn-outline-success btn-sm border-white  mx-2 ml-auto">
+                    <i class="fas fa-file-excel green-color "> &nbsp;Excel</i>
+                </button>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+        <div class="row">
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
+                <div class="form-group">
+                    <select asp-for="SearchByCustomerID" class="form-control Select2 "
+                            asp-items="ViewBag.CustomerIDList" data-placeholder="Customer ID">
+                        <option selected></option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
+                <div class="form-group">
+                    <select asp-for="SearchByCustomerName" class="form-control Select2 "
+                            asp-items="ViewBag.CustomerNameList" data-placeholder="Customer name">
+                        <option selected></option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
+                <div class="form-group">
+                    <select asp-for="SearchByStatus" class="form-control chosen-select" data-placeholder="Status">
+                        <option selected></option>
+                        <option value="D">Draft</option>
+                        <option value="N">Active</option>
+                        <option value="Y">De-Active</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
+            </div>
+            <div class="col-xl-2 col-lg-3 col-md-3 col-sm-12">
+            </div>
+            <div class="col">
+                <button type="submit" class="btn btn-outline-primary btn-sm  btn-block mx-2 ml-auto ">Go </button>
+            </div>
+
+            <div class="col">
+                <a asp-action="Index" class="btn btn-outline-danger btn-sm border-white mx-2 ml-auto "> Clear Filter </a>
+            </div>
+        </div>
+
+    </div>
+    <div class="m-1"></div>
+    <div class="bg-gray-active rounded ">
+
+        <table id="tbGrid" class="table table-hover table-bordered  " style="width:100%">
+            <thead class="bg-info text-white">
+                <tr role="row">
+
+                    <th>@Html.DisplayNameFor(model => model.CustomerID)</th>
+                    <th>@Html.DisplayNameFor(model => model.CustomerName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Status)</th>
+                    <th>@Html.DisplayNameFor(model => model.SupervisorName)</th>
+                    <th>@Html.DisplayNameFor(model => model.Contact)</th>
+                    <th>@Html.DisplayNameFor(model => model.ValidEndDate)</th>
+                    <th>@Html.DisplayNameFor(model => model.Email)</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>
+                        <a href="@Url.Action("DetailIndex", "CustomerProductProfile", new { id = "1001" })"
+                           class=' '
+                           style='cursor:pointer;'>
+                            1001
+                        </a>
+
+                    </td>
+                    <td>Customer Name</td>
+                    <td>Active</td>
+                    <td>Supervisor Name</td>
+                    <td>Contact</td>
+                    <td>29-Aug-2024</td>
+                    <td>Email</td>
+
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script type="text/javascript">
+        function localScript() {
+            initSelect2();
+        }
+
+
+        $(document).ready(function () {
+            // localLoadDataTable();
+            $('#tbGrid').DataTable({
+                "dom": 'rt<"row"<"col-1"l><"col"p>><"clear">',
+                "lengthChange": false,
+                // "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+                "buttons": {
+                    buttons: [
+                        { extend: 'excel', className: 'btn shadow m-1 btn-info' },
+                        { extend: 'print', className: 'btn shadow m-1 btn-info' },
+                        { extend: 'colvis', className: 'btn shadow m-1 btn-info' }
+                    ]
+                },
+                "autoWidth": false,
+                "responsive": true,
+                "searching": true,
+                "processing": true,
+                "stateSave": true,
+                'columnDefs': [
+                    {
+                        "targets": 0,
+                        "className": "text-center",
+                        "className": "align-middle"
+                    }
+                ],
+            });
+
+
+        });
+        function localLoadDataTable() {
+
+            var table = $('#tbGrid').DataTable({
+                drawCallback: function (settings) {
+                    loadScript();
+                },
+                destroy: true,
+                pageLength: 25,
+                lengthMenu: [25, 50],
+                processing: true,
+                serverSide: true,
+                stateSave: true,
+                info: false,
+                filter: false,
+                dom: 'rt<"row"<"col-1"l><"col"p>><"clear">',
+                ordering: false,
+                columns: [
+                    { data: "userName" },
+                    { data: "email" },
+                    { data: "clintName" },
+                    { data: "roleName" },
+                    {
+                        data: null,
+                        render: function (data, type, row) {
+                            if (data.isActive == 1 || data.isActive == "1") {
+                                return 'Yes';
+                            }
+                            else {
+                                return 'No';
+                            }
+                        }
+                    },
+                    {
+                        data: null,
+                        render: function (data, type, row) {
+                            if (isActionCreateMasters == "True") {
+                                return '<button class="btn btn-outline-primary btn-sm border-none" ' +
+                                    ' data-jqueryselector="openmodal" ' +
+                                    ' data-modalcontainer="modalcontainer" ' +
+                                    ' data-url="@Url.Action("BankUpdate", "Masters", new { Area = "LC" })"' +
+                                    ' data-modalpopupwidth="rightw35" ' +
+                                    ' data-applicationid="' + data.userId + '"' +
+                                    ' data-modaltitle="Edit details" ' +
+                                    ' data-modalheader="Edit details" ' +
+                                    ' > ' +
+                                    ' <i class="fas fa-edit" aria-hidden="true"></i> ' +
+                                    ' </button>'
+                            }
+                            else {
+                                return '';
+                            }
+                        },
+                        'className': "td-icon",
+                    }
+                ], ajax: {
+                    headers: { "RequestVerificationToken": $('input[name="__RequestVerificationToken"]').val() },
+                    url: '@Url.Action("GetListsBank", "Masters")',
+                    type: 'GET',
+                    cache: true,
+                    dataType: "json",
+                    data: function (d) {
+                        d.columns = null;
+                        d.order = null;
+                        d.search = null;
+                        d.genericSearch = null; // $('#FilterDataModel_GenericSearch').val();
+                        d.businessEntityId = null; // $('#FilterDataModel_BusinessEntityId').val();
+                        d.startDateTime = null; // $('#FilterDataModel_StartDateTime').val();
+                        d.endDateTime = null; // $('#FilterDataModel_EndDateTime').val();
+                        d.statusTypeId = null; // $('#FilterDataModel_StatusTypeId').val();
+                        d.isActive = $('#FilterDataModel_IsActive').val();
+                        //d.endDate = $('#FilterDataModel_EndDate').val();
+                    },
+                    error: function (request, status, error) {
+                        notify('error', request.responseText, 'danger');
+                    }
+                }
+            });
+
+            //dataTableSearch();
+        }
+
+        function PostFilterReLoadDataTable(data) {
+            $("#modalcontainer").modal('hide');
+
+            $("#FilterDataModel_IsActive").val(data.isActive);
+
+            localLoadDataTable();
+
+            hideLoader();
+        }
+
+        function PostSaveReLoadDataTable(data) {
+            if (data.success) {
+                $("#modalcontainer").modal('hide');
+                localLoadDataTable();
+                hideLoader();
+                notify('success', data.response, 'Success');
+            }
+        }
+    </script>
+}

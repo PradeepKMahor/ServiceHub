@@ -1,0 +1,86 @@
+﻿@{
+    ViewData["Title"] = "Users Page";
+}
+
+@section BreadCrumbs
+{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Masters">Masters</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">User Management</li>
+    </ol>
+
+}
+
+@section Styles {
+    <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
+
+}
+
+<div class="col-sm-12">
+    <div class="row">
+
+        <div class="col-md-3 col-xl-3">
+            <div class="card card-tpl">
+                <div class="card-header">
+                    <h5>Users-Customer</h5>
+                </div>
+                <div class="card-block card-tile">
+                    <a asp-area="Masters" asp-controller="UsersCustomer" asp-action="Index">
+                        <div class="row align-items-center justify-content-center stretched-link">
+                            <div class="col">
+                                <h3 class="mb-2 f-w-300"></h3>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-user-tie f-20 text-white theme-dark-green"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-xl-3">
+            <div class="card card-tpl">
+                <div class="card-header">
+                    <h5>Customer Product Profile</h5>
+                </div>
+                <div class="card-block card-tile">
+                    <a asp-area="Masters" asp-controller="CustomerProductProfile" asp-action="Index">
+                        <div class="row align-items-center justify-content-center stretched-link">
+                            <div class="col">
+                                <h3 class="mb-2 f-w-300"></h3>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-user-tie f-20 text-white theme-dark-green"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3 col-xl-3">
+            <div class="card card-tpl">
+                <div class="card-header">
+                    <h5>Users-Client</h5>
+                </div>
+                <div class="card-block card-tile">
+                    <a asp-area="Masters" asp-controller="UsersClient" asp-action="Index">
+                        <div class="row align-items-center justify-content-center stretched-link">
+                            <div class="col">
+                                <h3 class="mb-2 f-w-300"></h3>
+                            </div>
+                            <div class="col-auto">
+                                <i class="fas fa-user-tie f-20 text-white theme-dark-green"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+
+</div>
+
+

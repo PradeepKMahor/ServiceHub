@@ -1,0 +1,130 @@
+﻿@model ServiceHub.WebApp.Models.WorkReviewViewModel
+@{
+    ViewData["Title"] = "MobileApp Home";
+}
+@Html.AntiForgeryToken()
+
+@section BreadCrumbs
+{
+    <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item ">
+            <a asp-action="DashboardIndex" asp-controller="Customer" asp-area="MobileApp">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+
+        <li class="breadcrumb-item active  font-weight-bold" aria-current="page">Customer Dashboard</li>
+    </ol>
+
+}
+
+@section Styles {
+    <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
+}
+
+@if ((bool)@Context.Items["isMobile"] == true)
+{
+    <div style="display:none">
+    </div>
+
+    <div class="container-fluid bg-white border card rounded shadow  m-auto col-xl-12 pt-2  ">
+        <div class="row" style="font-size:large;">
+
+            <div class="col-xl-4 col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="RCA1" class="col-12 control-label"></label>
+                    <div class="col-12">
+                        <input asp-for="RCA1" class="form-control capitalize" required />
+                        <span asp-validation-for="RCA1" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="RCA2" class="col-12 control-label"></label>
+                    <div class="col-12">
+                        <input asp-for="RCA2" class="form-control capitalize" required />
+                        <span asp-validation-for="RCA2" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="RCA3" class="col-12 control-label"></label>
+                    <div class="col-12">
+                        <input asp-for="RCA3" class="form-control capitalize" required />
+                        <span asp-validation-for="RCA3" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="RCA4" class="col-12 control-label"></label>
+                    <div class="col-12">
+                        <input asp-for="RCA4" class="form-control capitalize" required />
+                        <span asp-validation-for="RCA4" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-4 col-md-6 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="RCA5" class="col-12 control-label"></label>
+                    <div class="col-12">
+                        <input asp-for="RCA5" class="form-control capitalize" required />
+                        <span asp-validation-for="RCA5" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12 col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="RCAComments" class="col-12 control-label"></label>
+                    <div class="col-12">
+                        <input asp-for="RCAComments" class="form-control capitalize" required />
+                        <span asp-validation-for="RCAComments" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12 col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="Part1" class="col-12 control-label"></label>
+                    <div class="col-12">
+                        <input asp-for="Part1" class="form-control capitalize" required />
+                        <span asp-validation-for="Part1" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12 col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="Part2" class="col-12 control-label"></label>
+                    <div class="col-12">
+                        <input asp-for="Part2" class="form-control capitalize" required />
+                        <span asp-validation-for="Part2" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12 col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="Part3" class="col-12 control-label"></label>
+                    <div class="col-12">
+                        <input asp-for="Part3" class="form-control capitalize" required />
+                        <span asp-validation-for="Part3" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-12 col-md-12 col-sm-12">
+                <div class="form-group">
+                    <label asp-for="Part4" class="col-12 control-label"></label>
+                    <div class="col-12">
+                        <input asp-for="Part4" class="form-control capitalize" required />
+                        <span asp-validation-for="Part4" class="text-danger"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button type="submit" class="btn btn-success btn-md  mb-1 " style="float:right">Submit</button>
+    </div>
+}
+else
+{
+    <h1>This screen only for Mobile</h1>
+}

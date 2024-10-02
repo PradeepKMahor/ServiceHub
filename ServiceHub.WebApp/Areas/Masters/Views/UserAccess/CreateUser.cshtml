@@ -1,0 +1,123 @@
+﻿@model ServiceHub.WebApp.Models.UserAccessCreateModel
+@{
+    ViewData["Title"] = "UserAccess Modification";
+    var title = "Add UserAccess";
+    var Varid = "";
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@Html.AntiForgeryToken()
+
+<div class="container-fluid " style="max-width:800px;">
+
+    <form method="post" asp-action="CreateUser" asp-area="Masters" id="Upsertform" class="needs-validation  " novalidate="">
+
+        <div class="backgroundWhite bg-white border shadow">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            @*  @if (Model.StudentInquiry.Id != 0)
+            {
+            <input type="hidden" style="display:none" asp-for="StudentInquiry.Id" />
+
+            Varid = Model.StudentInquiry.Id.ToString();
+            title = "Edit Inquiry Details";
+            }
+            *@
+            <div class=" ">
+                <h2 class="text-primary bg-primary text-center p-2  font-weight-bold" style="color:white !important">@title</h2>
+            </div>
+
+            <div class="col-12">
+
+                <div class="row">
+                    <div class=" col-12 col-md-6  ">
+                        <div class="form-group">
+                            <label asp-for="UserName" class="col-12 control-label"></label>
+                            <div class="col-12">
+                                <input asp-for="UserName" class="form-control capitalize" required />
+                                <span asp-validation-for="UserName" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-12 col-md-6  ">
+                        <div class="form-group">
+                            <label asp-for="Email" class="col-12 control-label"></label>
+                            <div class="col-12">
+                                <input asp-for="Email" class="form-control capitalize" required />
+                                <span asp-validation-for="Email" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    @* <div class="  col-12 col-md-6  ">
+                    <div class="form-group">
+                    <label asp-for="StudentInquiry.Gender" class="col-12 control-label"></label>
+                    <div class="col-12">
+
+                    <select class="form-control Select2" asp-for="StudentInquiry.Gender" required>
+                    <option value="">Select an option</option>
+                    <option value="Male">Male</option>
+                    <option value="Female">Female</option>
+                    </select>
+
+                    <span asp-validation-for="StudentInquiry.Gender" class="text-danger"></span>
+                    </div>
+                    </div>
+                    </div> *@
+                </div>
+                <div class="row">
+                    <div class=" col-12 col-md-6 ">
+                        <div class="form-group">
+                            <label asp-for="ClintName" class="col-12 control-label"></label>
+                            <div class="col-12">
+                                <input asp-for="ClintName" required class="form-control" />
+                                <span asp-validation-for="ClintName" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class=" col-12 col-md-6 ">
+                        <div class="form-group">
+                            <label asp-for="RoleName" class="col-12 control-label"></label>
+                            <div class="col-12">
+                                <input asp-for="RoleName" required class="form-control" />
+                                <span asp-validation-for="RoleName" class="text-danger"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="from-group m-2 pb-2">
+
+                    <div class="col-12 ">
+                        @*                         Edit   : <partial name="_EditAndBackToListBtn" model="@Convert.ToInt32(1)" />
+                        *@                        Create :<partial name="_CreateAndBackToListBtn" />
+
+                        @* @if (Model.StudentInquiry.Id != 0)
+                        {
+
+                        //Edit btn and back to list
+                        <partial name="_EditAndBackToListBtn" model="@Convert.ToInt32(Varid)" />
+                        }
+                        else
+                        {
+
+                        // Create btn and back to list
+                        <partial name="_CreateAndBackToListBtn" />
+                        } *@
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+
+        $(document).ready(function () {
+
+        });
+    </script>
+
+}

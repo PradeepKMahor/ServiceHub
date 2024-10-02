@@ -1,0 +1,822 @@
+﻿@model ServiceHub.WebApp.Models.CMRViewModel
+@{
+    ViewData["Title"] = "Technician Home";
+}
+@Html.AntiForgeryToken()
+
+@section BreadCrumbs
+{
+    <ol class="breadcrumb mb-0">
+        <li class="breadcrumb-item ">
+            <a asp-action="CMRDashboardIndex" asp-controller="Home" asp-area="Technician">
+                <i class="fas fa-home"></i>
+            </a>
+        </li>
+
+        <li class="breadcrumb-item active" aria-current="page">Technician Dashboard</li>
+    </ol>
+
+}
+
+@section Styles {
+    <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
+}
+
+@if ((bool)@Context.Items["isMobile"] == true)
+{
+    <div style="display:none">
+    </div>
+
+    <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-12  pt-2">
+
+        <section>
+            <div class="row">
+                @* <div class="col-lg-4 col-4">
+            <div class="small-box bg-info  m-2">
+            <div class="inner p-1">
+            <p><h4>CMR</h4></p>
+            </div>
+            <div class="icon">
+            <i class="ion ion-bag"></i>
+            </div>
+            </div>
+            </div> *@
+                <div class="col-lg-4 col-4">
+                    <div class="small-box bg-success  m-2">
+                        <div class="inner p-1">
+                            <p><h4>PMR</h4></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-4">
+                    <div class="small-box bg-warning text-white  m-2">
+                        <div class="inner p-1">
+                            <p><h4>WMR</h4></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <hr class="m-0" />
+        <div class="app-h4 app-card-header mt-3 mb-3">
+
+            <div class="row">
+                <div class="col-8">
+                    <h4 style="font-weight: bold;color: #035d7b!important;">  Service Requests <b>[CMR]</b></h4>
+                </div>
+                <div class="col-4 h4">
+                    @*  <a asp-area="Technician" style="float: right;"
+                asp-controller="UsersClient"
+                asp-action="CreateClientUserIndex"
+                class=" pl-2 pr-2">
+                <i class="far fa-bell" aria-hidden="true"></i>&nbsp;
+                </a> *@
+                    <a asp-area="Technician" style="float: right;"
+                       asp-controller="ServiceRequest"
+                       asp-action="CreateSR"
+                       class=" pr-2 ">
+                        <i class="fas fa-plus " aria-hidden="true"></i>&nbsp;
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-3">
+                <button type="button" class="btn btn-outline-info">Open</button>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-outline-info">Today</button>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-outline-info">Week</button>
+            </div>
+            <div class="col-3">
+                <button type="button" class="btn btn-outline-info">Month</button>
+            </div>
+        </div>
+        <hr class="p-0 m-1" />
+        <div class="row">
+            <div class="col-12">
+                <div class="input-group">
+                    <input class="form-control border-end-0 border rounded-pill" type="search" value="search" id="example-search-input">
+                    <span class="input-group-append">
+                        <button class="btn btn-outline-secondary bg-white border-bottom-0 border rounded-pill ms-n5" type="button">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </span>
+                </div>
+            </div>
+        </div>
+        <hr class="p-0 m-1" />
+
+        <div class="bg-gray-active rounded ">
+            <div class="table-responsive" style="overflow:auto;">
+
+                <div class="datatable-td-mobile">
+                    <div class="card">
+                        <div class="card-mobiledatatable ">
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.SRN)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            CMR-P000001
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.RequestedDate)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            05/May/2024
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            Critical
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-6 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Product)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            Scissor
+                                        </dd>
+                                    </dl>
+                                </div>
+
+                                <div class="col-6 " style="text-align:center;">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Customer)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            ABC Pvt. LTD
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-mobiledatatable ">
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.SRN)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            CMR-P000002
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.RequestedDate)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            05/May/2024
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            Critical
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-6 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Product)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            Scissor
+                                        </dd>
+                                    </dl>
+                                </div>
+
+                                <div class="col-6 " style="text-align:center;">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Customer)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            ABC Pvt. LTD
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-mobiledatatable ">
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.SRN)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            CMR-P000003
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.RequestedDate)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            05/May/2024
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            Critical
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-6 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Product)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            Scissor
+                                        </dd>
+                                    </dl>
+                                </div>
+
+                                <div class="col-6 " style="text-align:center;">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Customer)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            ABC Pvt. LTD
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card-mobiledatatable ">
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.SRN)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            CMR-P000004
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.RequestedDate)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            05/May/2024
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            Critical
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-6 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Product)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            Scissor
+                                        </dd>
+                                    </dl>
+                                </div>
+
+                                <div class="col-6 " style="text-align:center;">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Customer)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            ABC Pvt. LTD
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-mobiledatatable ">
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.SRN)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            CMR-P000004
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.RequestedDate)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            05/May/2024
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            Critical
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-6 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Product)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            Scissor
+                                        </dd>
+                                    </dl>
+                                </div>
+
+                                <div class="col-6 " style="text-align:center;">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Customer)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            ABC Pvt. LTD
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-mobiledatatable ">
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.SRN)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            CMR-P000004
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.RequestedDate)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            05/May/2024
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            Critical
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-6 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Product)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            Scissor
+                                        </dd>
+                                    </dl>
+                                </div>
+
+                                <div class="col-6 " style="text-align:center;">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Customer)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            ABC Pvt. LTD
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-mobiledatatable ">
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.SRN)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            CMR-P000004
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.RequestedDate)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            05/May/2024
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            Critical
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-6 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Product)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            Scissor
+                                        </dd>
+                                    </dl>
+                                </div>
+
+                                <div class="col-6 " style="text-align:center;">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Customer)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            ABC Pvt. LTD
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-mobiledatatable ">
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.SRN)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            CMR-P000004
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.RequestedDate)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            05/May/2024
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            Critical
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-6 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Product)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            Scissor
+                                        </dd>
+                                    </dl>
+                                </div>
+
+                                <div class="col-6 " style="text-align:center;">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Customer)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            ABC Pvt. LTD
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-mobiledatatable ">
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.SRN)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            CMR-P000004
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.RequestedDate)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            05/May/2024
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            Critical
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-6 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Product)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            Scissor
+                                        </dd>
+                                    </dl>
+                                </div>
+
+                                <div class="col-6 " style="text-align:center;">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Customer)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            ABC Pvt. LTD
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-mobiledatatable ">
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.SRN)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            CMR-P000004
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.RequestedDate)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            05/May/2024
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            Critical
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-6 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Product)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            Scissor
+                                        </dd>
+                                    </dl>
+                                </div>
+
+                                <div class="col-6 " style="text-align:center;">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Customer)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            ABC Pvt. LTD
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-mobiledatatable ">
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.SRN)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            CMR-P000004
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.RequestedDate)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            05/May/2024
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            Critical
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-6 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Product)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            Scissor
+                                        </dd>
+                                    </dl>
+                                </div>
+
+                                <div class="col-6 " style="text-align:center;">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Customer)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            ABC Pvt. LTD
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-mobiledatatable ">
+                            <div class="row ">
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.SRN)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            CMR-P000004
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.RequestedDate)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            05/May/2024
+                                        </dd>
+                                    </dl>
+                                </div>
+                                <div class="col-4 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-4">
+                                            @Html.DisplayNameFor(model => model.Status)
+                                        </dt>
+                                        <dd class="col-lg-8">
+                                            Critical
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row ">
+                                <div class="col-6 ">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Product)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            Scissor
+                                        </dd>
+                                    </dl>
+                                </div>
+
+                                <div class="col-6 " style="text-align:center;">
+                                    <dl class="row margin-bottom-0">
+                                        <dt class="col-lg-6">
+                                            @Html.DisplayNameFor(model => model.Customer)
+                                        </dt>
+                                        <dd class="col-lg-6">
+                                            ABC Pvt. LTD
+                                        </dd>
+                                    </dl>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <h1>This screen only for Mobile</h1>
+}
