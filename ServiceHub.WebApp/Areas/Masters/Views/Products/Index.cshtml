@@ -1,6 +1,15 @@
 ﻿@model ServiceHub.WebApp.Models.ProductViewModel
 @{
     ViewData["Title"] = "Product";
+    string img = "";
+    if (string.IsNullOrEmpty(Model.CreateModel.UploadPhoto))
+    {
+        img = "~/images\\Product.png";
+    }
+    else
+    {
+        img = Model.CreateModel.UploadPhoto;
+    }
 }
 @Html.AntiForgeryToken()
 
@@ -27,18 +36,19 @@
         <div role="toolbar">
             @*  @if (CurrentUserIdentity.ProfileActions.Any(p => p.ActionId == TCMPLApp.Domain.Models.LC.LCHelper.ActionCreateMasters))
             { *@
-                <form id="frmDetails"
+            <form id="frmDetails"
                   asp-action="ProductDetails" hidden method="post"
                   asp-controller="Products"
                   asp-area="Masters">
-                 <input hidden id="Id" name="Id" />
-                </form>
+                <input hidden id="Id" name="Id" />
+            </form>
             <form method="post" class="px-md-2"
                   asp-action="ProductCreate"
                   asp-controller="Products"
                   asp-area="Masters"
                   enctype="multipart/form-data">
-
+                <input hidden id="Id" name="Id" value="@Model.CreateModel.Id" />
+                <input hidden id="UploadPhoto" name="UploadPhoto" value="@Model.CreateModel.UploadPhoto" />
                 @Html.AntiForgeryToken()
                 <div class="row">
                     <div class="col-8">
@@ -71,6 +81,7 @@
                                                         <label asp-for="CreateModel.ServiceDate" class="col-12 control-label"></label>
                                                         <div class="col-12">
                                                             <input asp-for="CreateModel.ServiceDate" name="ServiceDate" type="text" placeholder="DD-MMM-YYYY"
+                                                                   value="@Model.CreateModel.ServiceDate?.ToString("dd-MMM-yyyy")"
                                                                    class="form-control DateTimePickerInit" required />
                                                             <span asp-validation-for="CreateModel.ServiceDate" class="text-danger"></span>
                                                         </div>
@@ -80,7 +91,9 @@
                                                     <div class="form-group">
                                                         <label asp-for="CreateModel.WarrantyDate" class="col-12 control-label"></label>
                                                         <div class="col-12">
-                                                            <input asp-for="CreateModel.WarrantyDate" name="WarrantyDate" type="text" placeholder="DD-MMM-YYYY"
+                                                            <input asp-for="CreateModel.WarrantyDate"
+                                                                   value="@Model.CreateModel.WarrantyDate?.ToString("dd-MMM-yyyy")"
+                                                                   name="WarrantyDate" type="text" placeholder="DD-MMM-YYYY"
                                                                    class="form-control DateTimePickerInit" required />
                                                             <span asp-validation-for="CreateModel.WarrantyDate" class="text-danger"></span>
                                                         </div>
@@ -153,7 +166,10 @@
                                 <div class="card col-md-12 col-xl-12">
                                     <div class="card-body m-0 p-0 " style="height:310px;">
                                         <div class="text-center" style="height:250px;">
-                                            <img id="preview" height="150px" style="width:150px!important; max-width:150px!important;min-width:150px!important;" src="~/images\Product.png" alt="User Avatar"
+                                            <img id="preview" src="@img.ToString()"
+                                                 height="150px"
+                                                 style="width:150px!important; max-width:150px!important;min-width:150px!important;"
+                                                 alt="Product Pic"
                                                  class="profile-user-img img-fluid img-square">
                                             <hr />
                                         </div>
@@ -194,14 +210,14 @@
                     {
                         <tr>
                             <td>
-                            <a class="" onclick="return functionConfirm(@item.Id)"
-                                href="#" title="@item.ProductCode">
-                                @item.ProductCode
+                                <a class="" onclick="return functionConfirm(@item.Id)"
+                                   href="#" title="@item.ProductCode">
+                                    @item.ProductCode
                                 </a>
                             </td>
                             <td>@item.ProductName </td>
-                            <td>@item.ServiceDate </td>
-                            <td>@item.WarrantyDate </td>
+                            <td>@item.ServiceDate?.ToString("dd-MMM-yyyy")" </td>
+                            <td>@item.WarrantyDate?.ToString("dd-MMM-yyyy")" </td>
                             <td>@item.Status </td>
                         </tr>
                     }
@@ -269,7 +285,7 @@
             };
         };
 
-         function functionConfirm(id) {
+        function functionConfirm(id) {
 
             $('#Id').val(id);
 

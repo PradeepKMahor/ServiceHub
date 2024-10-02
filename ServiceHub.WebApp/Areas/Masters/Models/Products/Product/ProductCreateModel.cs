@@ -5,6 +5,7 @@ namespace ServiceHub.WebApp.Models
     public class ProductCreateModel
     {
         [Display(Name = "Product Id")]
+        public int Id { get; set; }
         public int ProductId { get; set; }
 
         [Required]
