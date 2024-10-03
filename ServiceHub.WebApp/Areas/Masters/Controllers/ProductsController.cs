@@ -130,7 +130,7 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
 
                     string fileName = Guid.NewGuid().ToString();
                     TblProduct tblProduct = new();
-                    if (viewModel.Id != null)
+                    if (viewModel.Id != 0)
                     {
                         tblProduct = await _productRepository.GetAsync(m => m.Id == viewModel.Id);
                     }
@@ -141,12 +141,14 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
                         if (viewModel.Id != 0)
                         {
                             var extention_new = Path.GetExtension(files[0].FileName);
-
-                            var imagePath = Path.Combine(webRootPath, tblProduct.UploadPhoto.TrimStart('\\'));
-
-                            if (System.IO.File.Exists(imagePath))
+                            if (tblProduct.UploadPhoto is not null)
                             {
-                                System.IO.File.Delete(imagePath);
+                                var imagePath = Path.Combine(webRootPath, tblProduct.UploadPhoto.TrimStart('\\'));
+
+                                if (System.IO.File.Exists(imagePath))
+                                {
+                                    System.IO.File.Delete(imagePath);
+                                }
                             }
 
                             using (var fileStream = new FileStream(Path.Combine(upload, fileName + extention_new), FileMode.Create))

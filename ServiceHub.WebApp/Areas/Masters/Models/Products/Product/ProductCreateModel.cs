@@ -6,6 +6,7 @@ namespace ServiceHub.WebApp.Models
     {
         [Display(Name = "Product Id")]
         public int Id { get; set; }
+
         public int ProductId { get; set; }
 
         [Required]
@@ -29,7 +30,7 @@ namespace ServiceHub.WebApp.Models
         public string ProductDescription { get; set; } = string.Empty;
 
         [Display(Name = "Upload Photo")]
-        public string UploadPhoto { get; set; } = string.Empty;
+        public string? UploadPhoto { get; set; } = string.Empty;
 
         [Required]
         [Display(Name = "Status")]
