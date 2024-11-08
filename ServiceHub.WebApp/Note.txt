@@ -11,3 +11,11 @@ git push -u origin main
 git add .
 git commit -m”2nd try”
 git push -u origin main
+
+PMahor
+qvwz5@kPFC*ic@4
+
+
+vmhix27aa4
+
+workstation id=ServiceHubDb.mssql.somee.com;packet size=4096;user id=PMahor_SQLLogin_1;pwd=vmhix27aa4;data source=ServiceHubDb.mssql.somee.com;persist security info=False;initial catalog=ServiceHubDb;TrustServerCertificate=True

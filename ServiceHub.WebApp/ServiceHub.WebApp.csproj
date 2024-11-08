@@ -10,12 +10,20 @@
 	<ItemGroup>
 		<Compile Remove="Areas\Identity\Data\**" />
 		<Compile Remove="Areas\Users\**" />
+		<Compile Remove="wwwroot\AdminLTEv3_2_0\plugins\**" />
+		<Compile Remove="wwwroot\assets\vendor\**" />
 		<Content Remove="Areas\Identity\Data\**" />
 		<Content Remove="Areas\Users\**" />
+		<Content Remove="wwwroot\AdminLTEv3_2_0\plugins\**" />
+		<Content Remove="wwwroot\assets\vendor\**" />
 		<EmbeddedResource Remove="Areas\Identity\Data\**" />
 		<EmbeddedResource Remove="Areas\Users\**" />
+		<EmbeddedResource Remove="wwwroot\AdminLTEv3_2_0\plugins\**" />
+		<EmbeddedResource Remove="wwwroot\assets\vendor\**" />
 		<None Remove="Areas\Identity\Data\**" />
 		<None Remove="Areas\Users\**" />
+		<None Remove="wwwroot\AdminLTEv3_2_0\plugins\**" />
+		<None Remove="wwwroot\assets\vendor\**" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -60,6 +68,7 @@
 		<Folder Include="Views\Shared\AdminLTE\" />
 		<Folder Include="wwwroot\Imgs\Product\" />
 		<Folder Include="wwwroot\Imgs\UsersClient\" />
+		<Folder Include="wwwroot\Imgs\UsersCustomer\" />
 	</ItemGroup>
 
 	<ItemGroup>
@@ -86,84 +95,84 @@
 			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Customer\CMRIndex.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Customer\CreateSR.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Customer\DashboardIndex.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Customer\Feedback.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Customer\Index.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Customer\Notifications.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Customer\PMRDashboardIndex.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Customer\PMRIndex.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Customer\WMRDashboardIndex.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Customer\WMRIndex.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Customer\WorkReview.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Home\CMRDashboardIndex.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Home\CMRIndex.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Home\Index.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Home\PMRDashboardIndex.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Home\PMRIndex.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Home\WMRDashboardIndex.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Home\WMRIndex.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Technician\CreateSR.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Areas\MobileApp\Views\Technician\Feedback.cshtml">
-		  <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
-		  <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+			<CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
 		</Content>
 		<Content Update="Views\Shared\_ViewImports.cshtml">
 			<ExcludeFromSingleFile>true</ExcludeFromSingleFile>
@@ -172,15 +181,15 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <UpToDateCheckInput Remove="Areas\MobileApp\Views\Customer\CMRDashboardIndex.cshtml" />
+		<UpToDateCheckInput Remove="Areas\MobileApp\Views\Customer\CMRDashboardIndex.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <_ContentIncludedByDefault Remove="Areas\MobileApp\Views\Customer\CMRDashboardIndex.cshtml" />
-	  <_ContentIncludedByDefault Remove="Areas\MobileApp\Views\Customer\CMRIndex.cshtml" />
+		<_ContentIncludedByDefault Remove="Areas\MobileApp\Views\Customer\CMRDashboardIndex.cshtml" />
+		<_ContentIncludedByDefault Remove="Areas\MobileApp\Views\Customer\CMRIndex.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>
-	  <UpToDateCheckInput Remove="Areas\MobileApp\Views\Customer\CMRIndex.cshtml" />
+		<UpToDateCheckInput Remove="Areas\MobileApp\Views\Customer\CMRIndex.cshtml" />
 	</ItemGroup>
 </Project>
