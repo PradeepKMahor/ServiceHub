@@ -1,0 +1,100 @@
+﻿@using Microsoft.AspNetCore.Identity
+@model IEnumerable<IdentityRole>
+@{
+    ViewData["Title"] = "ROLES";
+    int i = 1;
+}
+
+@Html.AntiForgeryToken()
+
+@section BreadCrumbs
+{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Admin">Admin</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">Role list</li>
+    </ol>
+
+}
+
+@section Styles {
+    <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
+}
+
+<div style="display:none">
+</div>
+
+<div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
+    <div class="app-h4 app-card-header mb-2">
+        <p>All Roles</p>
+    </div>
+    <div class="card-toolbar">
+        <div role="toolbar">
+            <div class="d-flex flex-row">
+                <a asp-area="Admin"
+                   asp-controller="Roles"
+                   asp-action="CreateRole"
+                   class="nav-link">
+                    <i class="fas fa-plus " aria-hidden="true"></i>&nbsp;
+                    New Role
+                </a>
+            </div>
+        </div>
+    </div>
+    <div class="card-block">
+    </div>
+    <div class="m-1"></div>
+    <div class="bg-gray-active rounded ">
+        <div class="table-responsive" style="overflow:auto;">
+            <table class="table table-hover table-bordered" style="width:100%">
+                <thead class="bg-info text-white">
+                    <tr role="row">
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Update</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var role in Model)
+                    {
+                        <tr>
+                            <td>@i</td>
+                            <td>@role.Name</td>
+                            <td>
+                                <a class="btn btn-sm btn-primary" asp-action="Update" asp-route-id="@role.Id">Update</a>
+                            </td>
+                            <td>
+                                <form asp-action="Delete" asp-route-id="@role.Id" method="post">
+                                    <button type="submit" class="btn btn-sm btn-danger">
+                                        Delete
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                        i++;
+                    }
+                </tbody>
+            </table>
+
+        </div>
+    </div>
+</div>
+<form id="frmDetails"
+      asp-action="DetailsClientUser" hidden method="post"
+      asp-controller="UsersClient"
+      asp-area="Masters">
+    @Html.AntiForgeryToken()
+
+    <input hidden id="Id" name="Id" />
+
+</form>
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+
+    <script type="text/javascript">
+
+    </script>
+}

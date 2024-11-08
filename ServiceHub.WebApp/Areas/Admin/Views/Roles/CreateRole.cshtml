@@ -1,0 +1,77 @@
+﻿@model string
+@{
+    ViewData["Title"] = "CREATE ROLE";
+}
+@section BreadCrumbs
+{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Admin">Admin</a></li>
+
+        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Roles" asp-area="Admin">Role List</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">Create Role</li>
+    </ol>
+
+}
+
+<div class="container-fluid ">
+    @* <div class="row d-flex justify-content-center align-items-center h-100"> *@
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
+        <div class="app-h4 app-card-header mb-2">
+            <p>New Role</p>
+        </div>
+        <div class="card-toolbar">
+            <div role="toolbar">
+                <div class="card rounded-3">
+                    <div class="card-body">
+                        <form method="post" class="px-md-2"
+                              asp-action="CreateRole"
+                              asp-controller="Roles"
+                              asp-area="Admin"
+                              enctype="multipart/form-data">
+                            @Html.AntiForgeryToken()
+                            <div class="row">
+                                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="col-12">
+                                        <div class="card card-tpl border shadow">
+                                            <div class="card-header bg-info ">
+                                                <h5>Users Info</h5>
+                                            </div>
+                                            <div class="card-block card-tile">
+                                                <div class="row p-2 m-1">
+                                                    <div class=" col-xl-6 col-lg-6 col-md-12 col-sm-12 ">
+                                                        <div class="form-group">
+                                                            <label for="name">Name:</label>
+                                                            <input name="name" class="form-control" />
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <hr />
+                            <div class="row p-1 ">
+                                <div class="col-8 col-lg-6 col-12-6 col-sm-12">
+                                    <button type="submit"
+                                            data-mdb-button-init
+                                            data-mdb-ripple-init
+                                            class="btn btn-success mb-1 mx-2 ml-auto">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@* </div> *@
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+
+}
