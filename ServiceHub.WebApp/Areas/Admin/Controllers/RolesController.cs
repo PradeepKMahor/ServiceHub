@@ -2,7 +2,9 @@
 using Microsoft.AspNetCore.Mvc;
 using ServiceHub.WebApp.Controllers;
 using ServiceHub.WebApp.Models;
+using StackExchange.Redis;
 using System.ComponentModel.DataAnnotations;
+using System.Drawing;
 
 namespace ServiceHub.WebApp.Areas.Admin.Controllers
 {
@@ -28,13 +30,22 @@ namespace ServiceHub.WebApp.Areas.Admin.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> CreateRole([Required] string name)
+        public async Task<IActionResult> CreateRole(RoleViewModel model)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    IdentityResult result = await roleManager.CreateAsync(new IdentityRole(name));
+                    model.RoleName = model.RoleName.ToString();
+
+                    var IsRoleExist = await roleManager.FindByIdAsync(model.RoleName);
+
+                    if (await roleManager.RoleExistsAsync(model.RoleName))
+                    {
+                        Notify("Error", "Role Already exist", "toaster", notificationType: NotificationType.error);
+                        return View(model);
+                    }
+                    IdentityResult result = await roleManager.CreateAsync(new IdentityRole(model.RoleName));
                     if (result.Succeeded)
                     {
                         Notify("Success", "Data saved successfully", "toaster", notificationType: NotificationType.success);
@@ -43,13 +54,13 @@ namespace ServiceHub.WebApp.Areas.Admin.Controllers
                     else
                     {
                         Notify("Error", result.Errors.ToString(), "toaster", notificationType: NotificationType.error);
-                        return View(name);
+                        return View(model);
                     }
                 }
                 else
                 {
                     Notify("Error", "Role name not found", "toaster", notificationType: NotificationType.error);
-                    return View(name);
+                    return View(model);
                 }
             }
             catch (Exception ex)
@@ -57,7 +68,26 @@ namespace ServiceHub.WebApp.Areas.Admin.Controllers
                 Notify("Error", ex.Message, "toaster", notificationType: NotificationType.error);
             }
 
-            return View(name);
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Delete(string id)
+        {
+            IdentityRole role = await roleManager.FindByIdAsync(id);
+            if (role != null)
+            {
+                IdentityResult result = await roleManager.DeleteAsync(role);
+                if (result.Succeeded)
+                {
+                    Notify("Success", "Record Deleted successfully.", "toaster", notificationType: NotificationType.success);
+                    return Json(new { success = true, message = "Record Deleted successfully." });
+                }
+                else
+                    return Json(new { success = false, message = "Error while deleting.." });
+                //Errors(result);
+            }
+            return Json(new { success = false, message = "Error while deleting.." });
         }
     }
 }

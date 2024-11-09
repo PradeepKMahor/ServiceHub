@@ -373,7 +373,7 @@ function showDeleteConfirmation(jsonString) {
                 } else {
                     hideLoader();
                     notify("error", data.message, "Error")
-                }
+                 }
             },
             error: function (xhr) {
                 hideLoader();

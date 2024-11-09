@@ -62,14 +62,31 @@
                             <td>@i</td>
                             <td>@role.Name</td>
                             <td>
-                                <a class="btn btn-sm btn-primary" asp-action="Update" asp-route-id="@role.Id">Update</a>
+                                <a class="btn btn-sm btn-primary" asp-action="Update" asp-route-id="@role.Id">
+                                    <i class="fas fa-user-edit"></i>
+                                </a>
                             </td>
                             <td>
-                                <form asp-action="Delete" asp-route-id="@role.Id" method="post">
-                                    <button type="submit" class="btn btn-sm btn-danger">
-                                        Delete
-                                    </button>
-                                </form>
+                                @*   <form asp-action="Delete" asp-route-id="@role.Id" method="post">
+                            <button type="button" class="btn btn-danger mb-1 mx-3 ml-auto"
+                            onclick="return functionConfirm(this)">
+                            <i class="fas fa-trash"></i>
+                            </button>
+                            </form>
+                            *@
+                                <button title="Delete" class="btn btn-danger btn-sm border-none "
+                                        onclick="showDeleteConfirmationPopup(event,this);"
+                                        data-jqueryselector="showconfirmationmodal"
+                                        data-url="@Url.Action("Delete", "Roles", new { Area = "Admin" })"
+                                        data-id="@role.Id"
+                                        data-redirecturl="@Url.Action("Index", "Roles", new { Area = "Admin" })"
+                                        data-modaltitle="Please Confirm!"
+                                        data-confirmationtext="Do you want to delete '@role.Name' "
+                                        data-confirmationtype="warning"
+                                        title="Delete"
+                                        data-confirmbuttontext="Yes">
+                                    <i class="fas fa-trash" aria-hidden="true"></i>
+                                </button>
                             </td>
                         </tr>
                         i++;
@@ -80,21 +97,34 @@
         </div>
     </div>
 </div>
-<form id="frmDetails"
-      asp-action="DetailsClientUser" hidden method="post"
-      asp-controller="UsersClient"
-      asp-area="Masters">
-    @Html.AntiForgeryToken()
-
-    <input hidden id="Id" name="Id" />
-
-</form>
 @section Scripts {
-    @{
-        await Html.RenderPartialAsync("_ValidationScriptsPartial");
-    }
+    <partial name="_ValidationScriptsPartial" />
+    <script>
 
-    <script type="text/javascript">
+        $(document).ready(function () {
+        });
 
+        function functionConfirm(event) {
+            swal({
+                title: 'are you sure?',
+                text: "You will not be able to recover this item",
+                type: 'warning',
+                showCancelButton: true,
+                cancelButtonText: 'No',
+                cancelButtonClass: 'btn btn-danger mr-2 ml-2',
+                showConfirmButton: true,
+                confirmButtonText: 'Yes',
+                confirmButtonClass: 'btn btn-success mr-2 ml-2'
+            }, function (isConfirm) {
+                if (isConfirm) {
+                    this.submit();
+                    return true;
+                } else {
+                    return false;
+                }
+            });
+            return false;
+        }
     </script>
+
 }
