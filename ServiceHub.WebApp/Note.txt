@@ -1,5 +1,7 @@
 Add-migration MigrationName -context DataContext
 
+Add-migration AppUsers -context DataContext
+
 update-database -context DataContext
 
 git init

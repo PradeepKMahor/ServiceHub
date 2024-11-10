@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace ServiceHub.Domain.Migrations
 {
     /// <inheritdoc />
-    public partial class Init : Migration
+    public partial class AppUsers : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -30,6 +30,21 @@ namespace ServiceHub.Domain.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    FirstName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LastName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    MiddleName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ContactNo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    EmailId = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ValidFromDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ValidToDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    UploadProfilePic = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ParentOrg = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UserType = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    SupervisorName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    AdminName = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ActiveStatus = table.Column<bool>(type: "bit", nullable: false),
+                    Password = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
@@ -61,7 +76,7 @@ namespace ServiceHub.Domain.Migrations
                     ServiceDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     WarrantyDate = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ProductDescription = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    UploadPhoto = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    UploadPhoto = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Status = table.Column<string>(type: "nvarchar(max)", nullable: false)
                 },
                 constraints: table =>

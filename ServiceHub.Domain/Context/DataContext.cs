@@ -4,7 +4,7 @@ using ServiceHub.Domain.Models.Data;
 
 namespace ServiceHub.Domain.Context
 {
-    public class DataContext : IdentityDbContext
+    public class DataContext : IdentityDbContext<AppUser>
     {
         public DataContext()
         {

@@ -12,6 +12,7 @@ using DeviceDetectorNET.Parser.Device;
 using System.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using ServiceHub.WebApp.Classes;
+using ServiceHub.Domain;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -22,7 +23,7 @@ builder.Services.AddDbContext<DataContext>(options =>
 
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
-builder.Services.AddIdentity<IdentityUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
+builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<DataContext>()
     .AddDefaultTokenProviders();
 

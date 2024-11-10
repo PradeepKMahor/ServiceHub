@@ -33,7 +33,7 @@
 	<ItemGroup>
 		<PackageReference Include="DeviceDetector.NET" Version="6.3.3" />
 		<PackageReference Include="Dapper" Version="2.1.35" />
-		<PackageReference Include="Microsoft.AspNet.Identity.Owin" Version="2.2.4" />
+		<!--<PackageReference Include="Microsoft.AspNet.Identity.Owin" Version="2.2.4" />-->
 		<PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="8.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="8.0.7" />
 		<PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="8.0.7" />
@@ -55,7 +55,6 @@
 
 	<ItemGroup>
 		<Folder Include="Areas\Admin\Data\" />
-		<Folder Include="Areas\Admin\Models\" />
 		<Folder Include="Areas\MobileApp\Data\" />
 		<Folder Include="Areas\MobileApp\Models\Customer\" />
 		<Folder Include="Areas\Reports\Data\" />
@@ -66,6 +65,7 @@
 		<Folder Include="Areas\SystemAdmin\Data\" />
 		<Folder Include="Areas\MobileApp\Data\" />
 		<Folder Include="Views\Shared\AdminLTE\" />
+		<Folder Include="wwwroot\Imgs\AppUsers\" />
 		<Folder Include="wwwroot\Imgs\Product\" />
 		<Folder Include="wwwroot\Imgs\UsersClient\" />
 		<Folder Include="wwwroot\Imgs\UsersCustomer\" />
