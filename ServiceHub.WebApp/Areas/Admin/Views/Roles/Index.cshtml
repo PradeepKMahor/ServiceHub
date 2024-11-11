@@ -67,13 +67,6 @@
                                 </a>
                             </td>
                             <td>
-                                @*   <form asp-action="Delete" asp-route-id="@role.Id" method="post">
-                            <button type="button" class="btn btn-danger mb-1 mx-3 ml-auto"
-                            onclick="return functionConfirm(this)">
-                            <i class="fas fa-trash"></i>
-                            </button>
-                            </form>
-                            *@
                                 <button title="Delete" class="btn btn-danger btn-sm border-none "
                                         onclick="showDeleteConfirmationPopup(event,this);"
                                         data-jqueryselector="showconfirmationmodal"
@@ -93,7 +86,6 @@
                     }
                 </tbody>
             </table>
-
         </div>
     </div>
 </div>

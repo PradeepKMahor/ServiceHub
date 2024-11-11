@@ -5,7 +5,7 @@ namespace ServiceHub.WebApp.Models
 {
     public class UserViewModel
     {
-        public string Id { get; set; }
+        public string? Id { get; set; } = string.Empty;
 
         [Required]
         [Display(Name = "First Name")]

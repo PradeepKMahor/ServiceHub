@@ -1,0 +1,78 @@
+﻿@model List<ManageUserRolesViewModel>
+@{
+    ViewData["Title"] = "Manage";
+}
+
+@{
+    ViewData["Title"] = "Manage User Role";
+    int i = 1;
+}
+
+@Html.AntiForgeryToken()
+
+@section BreadCrumbs
+{
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="Home" asp-area="Admin">Admin</a></li>
+        <li class="breadcrumb-item "><a asp-action="Index" asp-controller="UserRoles" asp-area="Admin">User Roles</a></li>
+
+        <li class="breadcrumb-item active" aria-current="page">User Roles Management</li>
+    </ol>
+
+}
+
+@section Styles {
+    <link href="@Url.Content("~/css/drome-style.css")" rel="stylesheet" type="text/css" asp-append-version="true" />
+}
+
+<div style="display:none">
+</div>
+
+<div class="container-fluid bg-white border card rounded shadow m-auto col-xl-11 p-2 ">
+    <div class="app-h4 app-card-header mb-2">
+        <h4>Manage User Roles : @ViewBag.UserName.</h4>
+    </div>
+    <div class="card-toolbar">
+        <div role="toolbar">
+        </div>
+    </div>
+    <div class="card-block">
+    </div>
+    <div class="m-1"></div>
+    <div class="bg-gray-active rounded ">
+
+        <form method="post">
+            <div class="card">
+
+                <div class="card-body">
+                    @for (int i = 0; i < Model.Count; i++)
+                    {
+                        <div class="form-check m-1">
+                            <input type="hidden" asp-for="@Model[i].RoleId" />
+                            <input type="hidden" asp-for="@Model[i].RoleName" />
+                            <input asp-for="@Model[i].Selected" class="form-check-input" />
+                            <label class="form-check-label" asp-for="@Model[i].Selected">
+                                @Model[i].RoleName
+                            </label>
+                        </div>
+                    }
+                    <div asp-validation-summary="All" class="text-danger"></div>
+                </div>
+                <div class="card-footer">
+                    <input type="submit" value="Update" class="btn btn-primary"
+                           style="width:auto" />
+                    <a asp-action="EditUser" asp-route-id="@ViewBag.userId"
+                       class="btn btn-primary" style="width:auto">Cancel</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        $(document).ready(function () {
+        });
+    </script>
+
+}

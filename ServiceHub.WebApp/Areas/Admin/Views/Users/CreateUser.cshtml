@@ -38,6 +38,7 @@
                               enctype="multipart/form-data">
 
                             @Html.AntiForgeryToken()
+                            @Html.HiddenFor(m => m.Id)
                             <div asp-validation-summary="ModelOnly"
                                  class="alert alert-danger p-1 m-1" role="alert"></div>
 
