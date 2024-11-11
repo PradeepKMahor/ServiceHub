@@ -10,19 +10,15 @@
 	<ItemGroup>
 		<Compile Remove="Areas\Identity\Data\**" />
 		<Compile Remove="Areas\Users\**" />
-		<Compile Remove="wwwroot\AdminLTEv3_2_0\plugins\**" />
 		<Compile Remove="wwwroot\assets\vendor\**" />
 		<Content Remove="Areas\Identity\Data\**" />
 		<Content Remove="Areas\Users\**" />
-		<Content Remove="wwwroot\AdminLTEv3_2_0\plugins\**" />
 		<Content Remove="wwwroot\assets\vendor\**" />
 		<EmbeddedResource Remove="Areas\Identity\Data\**" />
 		<EmbeddedResource Remove="Areas\Users\**" />
-		<EmbeddedResource Remove="wwwroot\AdminLTEv3_2_0\plugins\**" />
 		<EmbeddedResource Remove="wwwroot\assets\vendor\**" />
 		<None Remove="Areas\Identity\Data\**" />
 		<None Remove="Areas\Users\**" />
-		<None Remove="wwwroot\AdminLTEv3_2_0\plugins\**" />
 		<None Remove="wwwroot\assets\vendor\**" />
 	</ItemGroup>
 

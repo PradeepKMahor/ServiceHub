@@ -113,7 +113,7 @@
                             <th>@Html.DisplayNameFor(model => model.FirstName)</th>
                             <th>@Html.DisplayNameFor(model => model.LastName)</th>
                             <th>@Html.DisplayNameFor(model => model.ActiveStatus)</th>
-                             <th>@Html.DisplayNameFor(model => model.ActiveStatus)</th>
+                            <th>@Html.DisplayNameFor(model => model.ActiveStatus)</th>
                             <th>@Html.DisplayNameFor(model => model.UserType)</th>
                             <th>@Html.DisplayNameFor(model => model.SupervisorName)</th>
                             <th>@Html.DisplayNameFor(model => model.ContactNo)</th>
@@ -416,9 +416,9 @@
     </div>
 </div>
 <form id="frmDetails"
-      asp-action="DetailsClientUser" hidden method="post"
-      asp-controller="UsersClient"
-      asp-area="Masters">
+      asp-action="UserDetails" hidden method="post"
+      asp-controller="Users"
+      asp-area="Admin">
     @Html.AntiForgeryToken()
 
     <input hidden id="Id" name="Id" />
@@ -450,6 +450,10 @@
                 pageLength: 25,
                 lengthMenu: [25, 50],
                 processing: true,
+                language: {
+                    loadingRecords: '&nbsp;',
+                    processing: '<div class="loader"></div>'
+                },
                 serverSide: true,
                 stateSave: true,
                 info: false,
@@ -461,16 +465,17 @@
                     {
                         data: null,
                         render: function (data, type, row) {
-                            return '<a class="" onclick="return functionConfirm(' + data.id + ')" href="#" title="userName"]"> ' + data.userName + ' </a>';
+                            var id = "'" + data.id + "'";
+                            return '<a class="" onclick="return functionConfirm(' + id + ')" href="#" title="userName"]"> ' + data.userName + ' </a>';
                         }
                     },
                     { data: "firstName" },
                     { data: "lastName" },
                     { data: "activeStatus" },
-                     {
+                    {
                         data: null,
                         render: function (data, type, row) {
-                            if (data.lockoutEnabled == 1){
+                            if (data.lockoutEnabled == 1) {
                                 return "True";
                             }
                             return "False";
@@ -544,7 +549,6 @@
             $('#Id').val(id);
 
             $('#frmDetails').submit();
-
 
             return false;
         }

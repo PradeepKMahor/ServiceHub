@@ -142,6 +142,8 @@ namespace ServiceHub.WebApp.Areas.Admin.Controllers
         }
 
         [HttpPost]
+        [ValidateAntiForgeryToken]
+
         public async Task<IActionResult> CreateUser(UserViewModel model)
         {
             try
@@ -161,7 +163,7 @@ namespace ServiceHub.WebApp.Areas.Admin.Controllers
 
                     string fileName = Guid.NewGuid().ToString();
 
-                    if (files != null)
+                    if (files.Count > 0)
                     {
                         var upload = Path.Combine(webRootPath, strFilePath);
                         var extention = Path.GetExtension(files[0].FileName);
@@ -175,19 +177,30 @@ namespace ServiceHub.WebApp.Areas.Admin.Controllers
                     }
 
                     appUser.ActiveStatus = model.ActiveStatus;
+
+                    if (appUser.ActiveStatus)
+                    {
+                        appUser.LockoutEnabled = false;
+                        appUser.LockoutEnd = DateTime.Now;
+                    }
+                    else
+                    {
+                        appUser.LockoutEnabled = true;
+                        appUser.LockoutEnd = DateTime.Now.AddYears(1);
+                    }
+
                     appUser.UserId = model.Username;
                     appUser.FirstName = model.FirstName;
                     appUser.MiddleName = model.MiddleName;
                     appUser.LastName = model.LastName;
                     appUser.ContactNo = model.ContactNo;
                     appUser.EmailId = model.EmailId;
-                    //appUser.AdminName = viewModel.AdminName;
                     appUser.UploadProfilePic = model.UploadProfilePic;
                     appUser.ValidFromDate = model.ValidFromDate;
                     appUser.ValidToDate = model.ValidToDate;
                     appUser.ParentOrg = model.ParentOrg;
                     appUser.UserType = model.UserType;
-
+                    appUser.EmailConfirmed = true;
                     appUser.Password = model.Password;
                     appUser.SupervisorName = "AvinashK";
 
@@ -209,7 +222,10 @@ namespace ServiceHub.WebApp.Areas.Admin.Controllers
                     }*/
 
                     if (result.Succeeded)
+                    {
+                        await userManager.AddToRoleAsync(appUser, model.UserType);
                         return RedirectToAction("Index");
+                    }
                     else
                     {
                         foreach (IdentityError error in result.Errors)
@@ -245,6 +261,66 @@ namespace ServiceHub.WebApp.Areas.Admin.Controllers
             }
 
             ViewData["UserType"] = new SelectList(userTypeList, "DataValueField", "DataTextField", model.UserType);
+            return View(model);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> UserDetails(string id)
+        {
+            if (id == null)
+            {
+                return NotFound();
+            }
+
+            var result = await userManager.FindByIdAsync(id);
+
+            if (result == null)
+            {
+                return NotFound();
+            }
+
+            var model = new UserViewModel
+            {
+                AdminName = result.AdminName,
+                ContactNo = result.ContactNo,
+                EmailId = result.EmailId,
+                FirstName = result.FirstName,
+                MiddleName = result.MiddleName,
+                LastName = result.LastName,
+                Password = result.Password,
+                Id = result.Id,
+                ParentOrg = result.ParentOrg,
+                SupervisorName = result.SupervisorName,
+                UploadProfilePic = result.UploadProfilePic,
+                Username = result.UserName,
+                UserType = result.UserType,
+                ValidFromDate = result.ValidFromDate,
+                ValidToDate = result.ValidToDate
+            };
+
+            model.ActiveStatus = true;
+
+            List<DataField> parentOrgList = new()
+            {
+                new DataField { DataTextField = "ParentOrg - 1", DataValueField ="ParentOrg - 1"},
+                new DataField { DataTextField = "ParentOrg - 2", DataValueField ="ParentOrg - 2"},
+                new DataField { DataTextField = "ParentOrg - 3", DataValueField ="ParentOrg - 3"},
+                new DataField { DataTextField = "ParentOrg - 4", DataValueField ="ParentOrg - 4"}
+            };
+
+            ViewData["ParentOrg"] = new SelectList(parentOrgList, "DataValueField", "DataTextField", result.ParentOrg);
+
+            List<DataField> userTypeList = new();
+            foreach (var item in roleManager.Roles)
+            {
+                var ddlItem = new DataField { DataTextField = item.Name, DataValueField = item.Name };
+
+                userTypeList.Add(ddlItem);
+            }
+
+            ViewData["UserType"] = new SelectList(userTypeList, "DataValueField", "DataTextField", model.UserType);
+
             return View(model);
         }
 
