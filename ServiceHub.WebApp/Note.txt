@@ -21,3 +21,54 @@ qvwz5@kPFC*ic@4
 vmhix27aa4
 
 workstation id=ServiceHubDb.mssql.somee.com;packet size=4096;user id=PMahor_SQLLogin_1;pwd=vmhix27aa4;data source=ServiceHubDb.mssql.somee.com;persist security info=False;initial catalog=ServiceHubDb;TrustServerCertificate=True
+
+
+----AspNetRoles----
+
+Id	Name	NormalizedName
+5a01da06-13fb-45fe-8300-67e29e0511ab	ClientUser	CLIENTUSER
+60990169-994c-4f39-872c-f64187cc5254	Administrator	ADMINISTRATOR
+687ad3d0-b32e-4109-8c72-23c98ec67924	Technion	TECHNION
+9463f396-0162-44d5-a8ef-83f4a3699138	Supervisor	SUPERVISOR
+
+INSERT INTO [dbo].[AspNetRoles]
+			([Id]
+           ,[Name]
+           ,[NormalizedName])
+     VALUES
+           ('5a01da06-13fb-45fe-8300-67e29e0511ab',
+           'ClientUser',
+           'CLIENTUSER'
+		   )
+
+INSERT INTO [dbo].[AspNetRoles]
+			([Id]
+           ,[Name]
+           ,[NormalizedName])
+     VALUES
+           ('60990169-994c-4f39-872c-f64187cc5254',
+           'Administrator',
+           'ADMINISTRATOR'
+		   )
+
+INSERT INTO [dbo].[AspNetRoles]
+			([Id]
+           ,[Name]
+           ,[NormalizedName])
+     VALUES
+           ('687ad3d0-b32e-4109-8c72-23c98ec67924',
+           'Technion',
+           'TECHNION'
+		   )
+
+INSERT INTO [dbo].[AspNetRoles]
+			([Id]
+           ,[Name]
+           ,[NormalizedName])
+     VALUES
+           ('9463f396-0162-44d5-a8ef-83f4a3699138',
+           'Supervisor',
+           'SUPERVISOR'
+		   )
+
+----------------------------------------------------------------------------
