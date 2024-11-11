@@ -113,7 +113,7 @@
                             <th>@Html.DisplayNameFor(model => model.FirstName)</th>
                             <th>@Html.DisplayNameFor(model => model.LastName)</th>
                             <th>@Html.DisplayNameFor(model => model.ActiveStatus)</th>
-                            @* <th>@Html.DisplayNameFor(model => model.ParentOrg)</th> *@
+                             <th>@Html.DisplayNameFor(model => model.ActiveStatus)</th>
                             <th>@Html.DisplayNameFor(model => model.UserType)</th>
                             <th>@Html.DisplayNameFor(model => model.SupervisorName)</th>
                             <th>@Html.DisplayNameFor(model => model.ContactNo)</th>
@@ -461,13 +461,21 @@
                     {
                         data: null,
                         render: function (data, type, row) {
-                            return '<a class="" onclick="return functionConfirm(' + data.id + ')" href="#" title="username"]"> ' + data.username + ' </a>';
+                            return '<a class="" onclick="return functionConfirm(' + data.id + ')" href="#" title="userName"]"> ' + data.userName + ' </a>';
                         }
                     },
                     { data: "firstName" },
                     { data: "lastName" },
                     { data: "activeStatus" },
-                    // { data: "parentOrg" },
+                     {
+                        data: null,
+                        render: function (data, type, row) {
+                            if (data.lockoutEnabled == 1){
+                                return "True";
+                            }
+                            return "False";
+                        }
+                    },
                     { data: "userType" },
                     { data: "supervisorName" },
                     { data: "contactNo" },

@@ -36,6 +36,14 @@ builder.Services.AddIdentity<AppUser, IdentityRole>(options => options.SignIn.Re
 //          .AddEntityFrameworkStores<DataContext>()
 //          .AddDefaultTokenProviders();
 
+builder.Services.Configure<IdentityOptions>(opts =>
+{
+    opts.SignIn.RequireConfirmedEmail = false;
+    opts.Lockout.AllowedForNewUsers = true;
+    opts.Lockout.DefaultLockoutTimeSpan = TimeSpan.FromMinutes(10);
+    opts.Lockout.MaxFailedAccessAttempts = 3;
+});
+
 builder.Services.AddSession(options =>
 {
     options.IdleTimeout = TimeSpan.FromMinutes(30);

@@ -150,7 +150,7 @@ namespace ServiceHub.WebApp.Areas.Admin.Controllers
                 {
                     AppUser appUser = new AppUser();
 
-                    appUser.UserName = appUser.UserId.Trim() + "_" + appUser.LastName.Trim();
+                    appUser.UserName = model.EmailId;
                     appUser.Email = model.EmailId;
                     //TwoFactorEnabled = true
 
@@ -354,6 +354,48 @@ namespace ServiceHub.WebApp.Areas.Admin.Controllers
             else
                 ModelState.AddModelError("", "User Not Found");
             return View("Index", userManager.Users);
+        }
+
+        public async Task<IActionResult> LockAsync(string id)
+        {
+            try
+            {
+                if (id == null)
+                {
+                    Notify("Error", "NotFound", "toaster", notificationType: Models.NotificationType.error);
+                }
+                else
+                {
+                    AppUser user = await userManager.FindByIdAsync(id);
+                    userManager.SetLockoutEndDateAsync(user, DateTime.Now.AddYears(1));
+                }
+            }
+            catch (Exception ex)
+            {
+                Notify("Error", ex.Message, "toaster", notificationType: Models.NotificationType.error);
+            }
+            return RedirectToAction(nameof(Index));
+        }
+
+        public async Task<IActionResult> UnLockAsync(string id)
+        {
+            try
+            {
+                if (id == null)
+                {
+                    Notify("Error", "NotFound", "toaster", notificationType: Models.NotificationType.error);
+                }
+                else
+                {
+                    AppUser user = await userManager.FindByIdAsync(id);
+                    userManager.SetLockoutEndDateAsync(user, DateTime.Now);
+                }
+            }
+            catch (Exception ex)
+            {
+                Notify("Error", ex.Message, "toaster", notificationType: Models.NotificationType.error);
+            }
+            return RedirectToAction(nameof(Index));
         }
     }
 }
