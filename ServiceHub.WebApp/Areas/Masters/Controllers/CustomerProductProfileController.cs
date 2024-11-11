@@ -1,10 +1,12 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using ServiceHub.WebApp.Controllers;
 using ServiceHub.WebApp.Models;
 
 namespace ServiceHub.WebApp.Areas.Masters.Controllers
 {
     [Area("Masters")]
+    [Authorize]
     public class CustomerProductProfileController : BaseController
     {
         public IActionResult Index()

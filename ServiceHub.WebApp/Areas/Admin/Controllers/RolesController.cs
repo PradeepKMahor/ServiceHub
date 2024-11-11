@@ -1,32 +1,34 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using ServiceHub.Domain;
 using ServiceHub.WebApp.Controllers;
 using ServiceHub.WebApp.Models;
-using StackExchange.Redis;
-using System.ComponentModel.DataAnnotations;
-using System.Drawing;
 
 namespace ServiceHub.WebApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Administrator)]
     public class RolesController : BaseController
     {
-        private RoleManager<IdentityRole> roleManager;
+        private readonly RoleManager<IdentityRole> roleManager;
+        private readonly UserManager<AppUser> userManager;
 
-        public RolesController(RoleManager<IdentityRole> roleMgr)
+        public RolesController(RoleManager<IdentityRole> roleMgr, UserManager<AppUser> userManager)
         {
             roleManager = roleMgr;
+            this.userManager = userManager;
         }
 
-        public ViewResult Index() => View(roleManager.Roles);
-
-        private void Errors(IdentityResult result)
+        public ViewResult Index()
         {
-            foreach (IdentityError error in result.Errors)
-                ModelState.AddModelError("", error.Description);
+            return View(roleManager.Roles);
         }
 
-        public IActionResult CreateRole() => View();
+        public IActionResult CreateRole()
+        {
+            return View();
+        }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
@@ -38,7 +40,7 @@ namespace ServiceHub.WebApp.Areas.Admin.Controllers
                 {
                     model.RoleName = model.RoleName.ToString();
 
-                    var IsRoleExist = await roleManager.FindByIdAsync(model.RoleName);
+                    IdentityRole? IsRoleExist = await roleManager.FindByIdAsync(model.RoleName);
 
                     if (await roleManager.RoleExistsAsync(model.RoleName))
                     {
@@ -71,6 +73,55 @@ namespace ServiceHub.WebApp.Areas.Admin.Controllers
             return View(model);
         }
 
+        public async Task<IActionResult> UpdateRole(string id)
+        {
+            IdentityRole role = await roleManager.FindByIdAsync(id);
+            List<AppUser> members = new();
+            List<AppUser> nonMembers = new();
+            foreach (AppUser user in userManager.Users)
+            {
+                List<AppUser> list = await userManager.IsInRoleAsync(user, role.Name) ? members : nonMembers;
+                list.Add(user);
+            }
+            return View(new RoleEdit
+            {
+                Role = role,
+                Members = members,
+                NonMembers = nonMembers
+            });
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateRole(RoleModification model)
+        {
+            IdentityResult result;
+            if (ModelState.IsValid)
+            {
+                foreach (string userId in model.AddIds ?? new string[] { })
+                {
+                    AppUser user = await userManager.FindByIdAsync(userId);
+                    if (user != null)
+                    {
+                        result = await userManager.AddToRoleAsync(user, model.RoleName);
+                        if (!result.Succeeded)
+                            Errors(result);
+                    }
+                }
+                foreach (string userId in model.DeleteIds ?? new string[] { })
+                {
+                    AppUser user = await userManager.FindByIdAsync(userId);
+                    if (user != null)
+                    {
+                        result = await userManager.RemoveFromRoleAsync(user, model.RoleName);
+                        if (!result.Succeeded)
+                            Errors(result);
+                    }
+                }
+            }
+
+            return ModelState.IsValid ? (IActionResult)RedirectToAction(nameof(Index)) : await UpdateRole(model.RoleId);
+        }
+
         [HttpPost]
         public async Task<IActionResult> Delete(string id)
         {
@@ -88,6 +139,12 @@ namespace ServiceHub.WebApp.Areas.Admin.Controllers
                 //Errors(result);
             }
             return Json(new { success = false, message = "Error while deleting.." });
+        }
+
+        private void Errors(IdentityResult result)
+        {
+            foreach (IdentityError error in result.Errors)
+                ModelState.AddModelError("", error.Description);
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ServiceHub.Domain;
@@ -7,6 +8,7 @@ using ServiceHub.WebApp.Models;
 namespace ServiceHub.WebApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
+    [Authorize(Roles = SD.Administrator)]
     public class UserRolesController : Controller
     {
         private readonly RoleManager<IdentityRole> roleManager;

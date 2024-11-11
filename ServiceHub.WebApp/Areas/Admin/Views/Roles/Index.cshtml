@@ -46,13 +46,13 @@
     <div class="m-1"></div>
     <div class="bg-gray-active rounded ">
         <div class="table-responsive" style="overflow:auto;">
-            <table class="table table-hover table-bordered" style="width:100%">
+            <table id="tbGrid" class="table table-hover table-bordered" style="width:100%">
                 <thead class="bg-info text-white">
                     <tr role="row">
                         <th>ID</th>
                         <th>Name</th>
-                        <th>Update</th>
-                        <th>Delete</th>
+                        <th style="width:70px">Update</th>
+                        <th style="width:70px">Delete</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -62,12 +62,13 @@
                             <td>@i</td>
                             <td>@role.Name</td>
                             <td>
-                                <a class="btn btn-sm btn-primary" asp-action="Update" asp-route-id="@role.Id">
+                                <a class="btn btn-sm btn btn-outline-primary border-none"
+                                   asp-action="UpdateRole" asp-route-id="@role.Id">
                                     <i class="fas fa-user-edit"></i>
                                 </a>
                             </td>
                             <td>
-                                <button title="Delete" class="btn btn-danger btn-sm border-none "
+                                <button title="Delete" class="btn btn-outline-danger btn-sm border-none "
                                         onclick="showDeleteConfirmationPopup(event,this);"
                                         data-jqueryselector="showconfirmationmodal"
                                         data-url="@Url.Action("Delete", "Roles", new { Area = "Admin" })"
@@ -94,6 +95,20 @@
     <script>
 
         $(document).ready(function () {
+
+             $('#tbGrid').DataTable({
+                pageLength: 25,
+                lengthMenu: [25, 50],
+                processing: true,
+                language: {
+                    loadingRecords: '&nbsp;',
+                    processing: '<div class="loader"></div>'
+                },
+                serverSide: false,
+                info: true,
+                filter: true,
+                ordering: true
+             });
         });
 
         function functionConfirm(event) {

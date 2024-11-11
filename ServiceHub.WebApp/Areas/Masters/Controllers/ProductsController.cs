@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using ServiceHub.DataAccess.Interface.Core;
 using ServiceHub.DataAccess.Models;
@@ -10,6 +11,7 @@ using ServiceHub.WebApp.Models;
 namespace ServiceHub.WebApp.Areas.Masters.Controllers
 {
     [Area("Masters")]
+    [Authorize]
     public class ProductsController : BaseController
     {
         private readonly IProductRepository _productRepository;

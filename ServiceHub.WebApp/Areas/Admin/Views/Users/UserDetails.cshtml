@@ -7,7 +7,7 @@
     string img = "";
     if (string.IsNullOrEmpty(Model.UploadProfilePic))
     {
-        img = "~/images\\avatar5.png";
+       img = "/images\\avatar5.png";
     }
     else
     {
@@ -57,7 +57,7 @@
                                                         max-height:150px!important;
                                                         min-width:150px!important;
                                                         min-height:150px!important;"
-                                                     src="@img.ToString()" alt="User Avatar"
+                                                      src="@img.ToString()" alt="User Avatar"
                                                      class="profile-user-img img-fluid img-square">
                                                 <div class="form-group">
                                                     <div class="col-12  p-0 m-0">

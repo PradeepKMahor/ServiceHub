@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
@@ -13,6 +14,7 @@ using static ServiceHub.WebApp.Models.DTModel;
 namespace ServiceHub.WebApp.Areas.Masters.Controllers
 {
     [Area("Masters")]
+    [Authorize]
     public class UsersClientController : BaseController
     {
         private readonly IUserClintRepository _userClintRepository;

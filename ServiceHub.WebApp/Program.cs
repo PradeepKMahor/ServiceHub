@@ -177,10 +177,10 @@ app.UseEndpoints(endpoints =>
             name: "areas",
             pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
           );
-    endpoints.MapGet("/", context =>
-    {
-        return Task.Run(() => context.Response.Redirect("/Account/Login"));
-    });
+    //endpoints.MapGet("/", context =>
+    //{
+    //    return Task.Run(() => context.Response.Redirect("/Account/Login"));
+    //});
     endpoints.MapRazorPages();
 });
 app.Run();
