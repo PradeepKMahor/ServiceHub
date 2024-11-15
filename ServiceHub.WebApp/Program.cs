@@ -88,7 +88,7 @@ builder.Services.AddSession(options =>
 
 //#endregion Session
 
-builder.Services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_3_0)
+builder.Services.AddMvc()
               .AddRazorPagesOptions(options =>
               {
                   options.Conventions.AuthorizeAreaFolder("Identity", $"/Account/Manage");
