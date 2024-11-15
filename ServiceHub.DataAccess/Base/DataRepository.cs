@@ -14,7 +14,7 @@ namespace ServiceHub.DataAccess.Base
         public DataRepository(DataContext context)
         {
             Context = context;
-            this.dbSet = context.Set<T>();
+            dbSet = context.Set<T>();
         }
 
         public virtual T Get(Expression<Func<T, bool>> predicate)

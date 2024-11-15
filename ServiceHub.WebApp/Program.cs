@@ -1,23 +1,18 @@
-using DeviceDetectorNET.Cache;
 using DeviceDetectorNET;
+using DeviceDetectorNET.Cache;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using ServiceHub.Domain;
 using ServiceHub.Domain.Context;
-using ServiceHub.WebApp.Data;
+using ServiceHub.WebApp.Classes;
 using ServiceHub.WebApp.Interfaces;
 using ServiceHub.WebApp.Repositories;
-using WebEssentials.AspNetCore.Pwa;
-using DeviceDetectorNET.Parser.Device;
-using System.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using ServiceHub.WebApp.Classes;
-using ServiceHub.Domain;
 
-var builder = WebApplication.CreateBuilder(args);
+WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-var connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
+string connectionString = builder.Configuration.GetConnectionString("DefaultConnection") ?? throw new InvalidOperationException("Connection string 'DefaultConnection' not found.");
 builder.Services.AddDbContext<DataContext>(options =>
     options.UseSqlServer(connectionString));
 
@@ -91,8 +86,8 @@ builder.Services.AddSession(options =>
 builder.Services.AddMvc()
               .AddRazorPagesOptions(options =>
               {
-                  options.Conventions.AuthorizeAreaFolder("Identity", $"/Account/Manage");
-                  options.Conventions.AuthorizeAreaPage("Identity", $"/Account/Logout");
+                  _ = options.Conventions.AuthorizeAreaFolder("Identity", $"/Account/Manage");
+                  _ = options.Conventions.AuthorizeAreaPage("Identity", $"/Account/Logout");
               });
 
 builder.Services.ConfigureApplicationCookie(options =>
@@ -106,8 +101,8 @@ builder.Services.ConfigureApplicationCookie(options =>
 
 builder.Services.AddMvc().AddRazorPagesOptions(options =>
 {
-    options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "/Account/Login");
-}).SetCompatibilityVersion(CompatibilityVersion.Version_3_0);
+    _ = options.Conventions.AddAreaPageRoute("Identity", "/Account/Login", "/Account/Login");
+});
 
 builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 
@@ -115,38 +110,38 @@ builder.Services.AddTransient<ICategories, CategoriesRepository>();
 builder.Services.AddDataAccessService();
 //builder.Services.AddTransient<IUnitOfWork, UnitOfWork>();
 
-var app = builder.Build();
+WebApplication app = builder.Build();
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
-    app.UseMigrationsEndPoint();
+    _ = app.UseMigrationsEndPoint();
 }
 else
 {
-    app.UseExceptionHandler("/Home/Error");
+    _ = app.UseExceptionHandler("/Home/Error");
     // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-    app.UseHsts();
+    _ = app.UseHsts();
 }
 
 app.Use(async (context, next) =>
 {
-    var detector = new DeviceDetector(context.Request.Headers["User-Agent"].ToString());
+    DeviceDetector detector = new(context.Request.Headers["User-Agent"].ToString());
     detector.SetCache(new DictionaryCache());
     detector.Parse();
 
     if (detector.IsMobile())
     {
-        context.Items.Remove("isMobile");
+        _ = context.Items.Remove("isMobile");
         context.Items.Add("isMobile", true);
     }
     else
     {
-        context.Items.Remove("isMobile");
+        _ = context.Items.Remove("isMobile");
         context.Items.Add("isMobile", false);
     }
 
-    context.Items.Remove("DeviceName");
+    _ = context.Items.Remove("DeviceName");
     context.Items.Add("DeviceName", detector.GetDeviceName());
 
     await next();
@@ -163,17 +158,17 @@ app.UseAuthorization();
 
 app.UseEndpoints(endpoints =>
 {
-    endpoints.MapAreaControllerRoute(name: "Admin", areaName: "Admin", pattern: "Admin/{controller=Admin}/{action=Index}/{id?}");
-    endpoints.MapAreaControllerRoute(name: "Reports", areaName: "Reports", pattern: "Reports/{controller=Admin}/{action=Index}/{id?}");
-    endpoints.MapAreaControllerRoute(name: "Masters", areaName: "Masters", pattern: "Masters/{controller=Masters}/{action=Index}/{id?}");
-    endpoints.MapAreaControllerRoute(name: "SystemAdmin", areaName: "SystemAdmin", pattern: "SystemAdmin/{controller=SystemAdmin}/{action=Index}/{id?}");
-    endpoints.MapAreaControllerRoute(name: "Users", areaName: "Users", pattern: "Users/{controller=Users}/{action=Index}/{id?}");
-    endpoints.MapAreaControllerRoute(name: "ServiceRequests", areaName: "ServiceRequests", pattern: "ServiceRequests/{controller=ServiceRequests}/{action=Index}/{id?}");
-    endpoints.MapAreaControllerRoute(name: "MobileApp", areaName: "MobileApp", pattern: "MobileApp/{controller=MobileApp}/{action=Index}/{id?}");
+    _ = endpoints.MapAreaControllerRoute(name: "Admin", areaName: "Admin", pattern: "Admin/{controller=Admin}/{action=Index}/{id?}");
+    _ = endpoints.MapAreaControllerRoute(name: "Reports", areaName: "Reports", pattern: "Reports/{controller=Admin}/{action=Index}/{id?}");
+    _ = endpoints.MapAreaControllerRoute(name: "Masters", areaName: "Masters", pattern: "Masters/{controller=Masters}/{action=Index}/{id?}");
+    _ = endpoints.MapAreaControllerRoute(name: "SystemAdmin", areaName: "SystemAdmin", pattern: "SystemAdmin/{controller=SystemAdmin}/{action=Index}/{id?}");
+    _ = endpoints.MapAreaControllerRoute(name: "Users", areaName: "Users", pattern: "Users/{controller=Users}/{action=Index}/{id?}");
+    _ = endpoints.MapAreaControllerRoute(name: "ServiceRequests", areaName: "ServiceRequests", pattern: "ServiceRequests/{controller=ServiceRequests}/{action=Index}/{id?}");
+    _ = endpoints.MapAreaControllerRoute(name: "MobileApp", areaName: "MobileApp", pattern: "MobileApp/{controller=MobileApp}/{action=Index}/{id?}");
 
-    endpoints.MapControllerRoute(name: "Home", pattern: "{controller=Home}/{action=CMRIndex}/{id?}");
-    endpoints.MapAreaControllerRoute(name: "default", areaName: "Identity", pattern: "Identity/{action=Login}/{id?}");
-    endpoints.MapControllerRoute(
+    _ = endpoints.MapControllerRoute(name: "Home", pattern: "{controller=Home}/{action=CMRIndex}/{id?}");
+    _ = endpoints.MapAreaControllerRoute(name: "default", areaName: "Identity", pattern: "Identity/{action=Login}/{id?}");
+    _ = endpoints.MapControllerRoute(
             name: "areas",
             pattern: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
           );
@@ -181,6 +176,6 @@ app.UseEndpoints(endpoints =>
     //{
     //    return Task.Run(() => context.Response.Redirect("/Account/Login"));
     //});
-    endpoints.MapRazorPages();
+    _ = endpoints.MapRazorPages();
 });
 app.Run();

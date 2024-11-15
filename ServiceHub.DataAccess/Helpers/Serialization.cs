@@ -1,9 +1,5 @@
 ﻿using Newtonsoft.Json;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace ServiceHub.DataAccess.Helpers
 {
@@ -38,25 +34,25 @@ namespace ServiceHub.DataAccess.Helpers
         //    }
         //}
 
-        public static byte[] ToByteArray(this object obj)
+        public static byte[]? ToByteArray(this object obj)
         {
             if (obj == null)
             {
                 return null;
             }
 
-            var jsonData = JsonConvert.SerializeObject(obj);
+            string jsonData = JsonConvert.SerializeObject(obj);
             return Encoding.UTF8.GetBytes(jsonData);
         }
 
-        public static T FromByteArray<T>(this byte[] byteArray) where T : class
+        public static T? FromByteArray<T>(this byte[] byteArray) where T : class
         {
             if (byteArray == null)
             {
-                return default(T);
+                return default;
             }
 
-            var bytesAsString = Encoding.UTF8.GetString(byteArray);
+            string bytesAsString = Encoding.UTF8.GetString(byteArray);
             return JsonConvert.DeserializeObject<T>(bytesAsString);
         }
     }
