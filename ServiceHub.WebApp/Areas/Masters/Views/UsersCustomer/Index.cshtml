@@ -97,6 +97,7 @@
             <div class="col">
                 <a asp-action="Index" class="btn btn-outline-danger btn-sm border-white mx-2 ml-auto "> Clear Filter </a>
             </div>
+
         </div>
     </div>
     <div class="m-1"></div>
@@ -177,12 +178,23 @@
                     {
                         data: null,
                         render: function (data, type, row) {
-                            return '<a class="" onclick="return functionConfirm(' + data.id + ')" href="#" title="username"]"> ' + data.username + ' </a>';
+
+                            return '<a class="" onclick="return functionConfirm(' + data.id + ')" href="#" title="username"]"> ' + data.username +  ' </a>';
                         }
                     },
                     { data: "firstName" },
                     { data: "lastName" },
-                    { data: "activeStatus" },
+                    {
+                        data: null,
+                        render: function (data, type, row) {
+                            if(data.activeStatus != 'Active'){
+
+                                return '<span style="color:red; font-weight:bold">' + data.activeStatus + '</span>';
+                            }else{
+                                return '<span style="color:darkgreen; font-weight:bold">' + data.activeStatus + '</span>';
+                            }
+                        }
+                    },
                     { data: "parentOrg" },
                     { data: "userType" },
                     { data: "supervisorName" },

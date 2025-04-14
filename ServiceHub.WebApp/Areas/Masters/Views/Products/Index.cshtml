@@ -215,7 +215,16 @@
                             <td>@item.ProductName </td>
                             <td>@item.ServiceDate?.ToString("dd-MMM-yyyy") </td>
                             <td>@item.WarrantyDate?.ToString("dd-MMM-yyyy") </td>
-                            <td>@item.Status </td>
+                            <td>
+                                @if (@item.Status != "Active")
+                                {
+                                    <span style="color:red; font-weight:bold"> @item.Status</span>
+                                }
+                                else
+                                {
+                                    <span style="color:darkgreen; font-weight:bold"> @item.Status</span>
+                                }
+                            </td>
                         </tr>
                     }
                 }
@@ -233,8 +242,6 @@
         function localScript() {
             initSelect2();
         }
-
-
         $(document).ready(function () {
             // localLoadDataTable();
             DateTimePickerInit();

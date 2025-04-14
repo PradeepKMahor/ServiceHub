@@ -137,7 +137,7 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
 
                     string fileName = Guid.NewGuid().ToString();
                     TblUserCustomer tblUserCustomer = new TblUserCustomer();
-                    if (files != null)
+                    if (files != null && files.Count is not 0)
                     {
                         var upload = Path.Combine(webRootPath, strFilePath);
                         var extention = Path.GetExtension(files[0].FileName);
