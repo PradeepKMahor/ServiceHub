@@ -54,7 +54,7 @@
                     <div class="col-8">
                         <div class="card-block p-0 m-0 ">
                             <div class="card-deck">
-                                <div class="card col-md-12 col-xl-12">
+                                <div class="card col-md-12 col-xl-12" style="height: 340px;">
                                     <div class="card-body m-0 p-0 ">
                                         <div id="divPrimaryDetails">
                                             <div class="row p-1">
@@ -161,20 +161,19 @@
                         <div class="card-block p-0 m-0 ">
                             <div class="card-deck  ">
                                 <div class="card col-md-12 col-xl-12">
-                                    <div class="card-body m-0 p-0 " style="height:310px;">
-                                        <div class="text-center" style="height:250px;">
+                                    <div class="card-body m-0 p-0 " style="height:340px;">
+                                        <div class="text-center" style="height:300px;">
                                             <img id="preview" src="@img.ToString()"
-                                                 height="150px"
-                                                 style="width:150px!important; max-width:150px!important;min-width:150px!important;"
-                                                 alt="Product Pic"
+                                                 style="width: 250px!important;max-width: 280px!important;min-width: 320px!important;height: 300px;"
+                                                 alt="Product image"
                                                  class="profile-user-img img-fluid img-square">
-                                            <hr />
+
                                         </div>
+
                                         <input type="file" name="file" accept="image/*"
                                                id="UploadPhoto"
                                                onchange="loadFile(event)"
                                                class="form-control capitalize " />
-
                                         <span asp-validation-for="CreateModel.UploadPhoto" class="text-danger"></span>
                                     </div>
                                 </div>
