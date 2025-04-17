@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using ServiceHub.DataAccess.Interface.Core;
 using ServiceHub.WebApp.Controllers;
 using ServiceHub.WebApp.Models;
 
@@ -9,6 +10,17 @@ namespace ServiceHub.WebApp.Areas.Masters.Controllers
     [Authorize]
     public class CustomerProductProfileController : BaseController
     {
+        private readonly ICustomerProductProfileRepository _customerProductProfileRepository;
+
+        private readonly IWebHostEnvironment _WebHostEnvironment;
+
+        public CustomerProductProfileController(ICustomerProductProfileRepository customerProductProfileRepository,
+                            IWebHostEnvironment webHostEnvironment)
+        {
+            _customerProductProfileRepository = customerProductProfileRepository;
+            _WebHostEnvironment = webHostEnvironment;
+        }
+
         public IActionResult Index()
         {
             CustomerProductProfileViewModel customerProductProfileViewModel = new CustomerProductProfileViewModel();
