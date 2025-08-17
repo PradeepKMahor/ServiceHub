@@ -15,7 +15,7 @@ using static ServiceHub.WebApp.Models.DTModel;
 namespace ServiceHub.WebApp.Areas.Admin.Controllers
 {
     [Area("Admin")]
-    [Authorize(Roles = SD.Administrator)]
+    //[Authorize(Roles = SD.Administrator)]
     public class UsersController : BaseController
     {
         private UserManager<AppUser> userManager;
